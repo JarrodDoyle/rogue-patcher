@@ -1,7 +1,7 @@
-GoalMaster 1.0 by R Soul
+GoalMaster 1.01 by R Soul
 
 **** Introduction ****
-Goals in Dromed can be set up with various commands (e.g. quest_create_mis goal_visible_3, 1). This is very tedious, and error prone, so many years ago William The Taffer realsed Thief Objective Wizard, which uses an easy-to-use GUI program to save the commands in a text file (.cmd) that Dromed can run.
+Goals in Dromed can be set up with various commands (e.g. quest_create_mis goal_visible_3, 1). This is very tedious, and error prone. Many years ago William The Taffer realsed Thief Objective Wizard, which uses an easy-to-use GUI program to save the commands in a text file (.cmd) that Dromed can run.
 
 GoalMaster takes this idea even further. As well as generating the .cmd file, it also generates goals.str. For each goal you can enter in the 'fiction' and 'text' strings. You can also set the mission number so goals.str is placed in the correct folder.
 
