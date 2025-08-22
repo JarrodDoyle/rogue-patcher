@@ -1,3 +1,0 @@
-hilight_by_prop DeathStage
-hilight_rem_prop DeathStage
-hilight_clear

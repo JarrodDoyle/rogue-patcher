@@ -1,4 +1,0 @@
-compress_br_ids
-clear_surface_cache
-optimize
-play_schema dinner_bell

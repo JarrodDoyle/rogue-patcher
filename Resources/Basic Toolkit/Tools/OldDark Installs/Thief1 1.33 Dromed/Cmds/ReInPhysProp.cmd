@@ -1,2 +1,0 @@
-hilight_rem_prop PhysType
-hilight_add_prop PhysType
