@@ -1,0 +1,12 @@
+DML1
+
+#script "squirrel"
+
+CreateArch "MetaProperty" "VictoryCheck_Script"
+{
+}
++ObjProp "VictoryCheck_Script" "Scripts"
+{
+	"Script 0" VictoryCheckAux
+}
++MetaProp "Garrett" "VictoryCheck_Script"

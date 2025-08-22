@@ -1,0 +1,1 @@
+Adds a Thief 2 style objective notification. Based on the objective notifications from TFix.
