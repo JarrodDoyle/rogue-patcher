@@ -15,6 +15,119 @@ FINGERPRINT
 }
 
 //final goal
++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 12
+	Agent -1284
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 16
+	Agent -1284
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 34
+	Agent -162
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 40
+	Agent -162
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 67
+	Agent -162
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 69
+	Agent -162
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 83
+	Agent -162
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 85
+	Agent -162
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 17 "Stench"
+{
+	Max None
+
+	Target 94
+	Agent -1284
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
++StimSource 17 "Stench"
+{
+	Intensity 1
+	Propagator "Radius"
+}
 +ObjProp 17 "DiffTurnOn"
 {
 	"quest var values" 0, 1, 2
@@ -31,24 +144,53 @@ FINGERPRINT
 //doors
 ObjProp 12 "Scale"
 {
-	"" 1.143, 1.143, 1.143
+	"" 1.1429, 1.1429, 1.1429
 }
 ObjProp 16 "Scale"
 {
-	"" 1.143, 1.143, 1
+	"" 1.1429, 1.1429, 1
 }
 ObjProp 67 "RotDoor"
 {
 	"Open Angle" 90
 	"Clockwise?" false
 }
+ObjProp 85 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 85 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 85 "PhysType"
++ObjProp 85 "PhysType"
+{
+	"Type" OBB
+}
 +ObjProp 89 "BlockFrob"
 {
 	"" true
 }
+ObjProp 94 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 94 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 94 "PhysType"
++ObjProp 94 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 97 "Scripts"
 +ObjProp 135 "Scale"
 {
-	"" 1, 1.01, 1
+	"" 1, 1.005, 1
 }
 -ObjProp 135 "PhysType"
 +ObjProp 135 "PhysType"
@@ -72,7 +214,34 @@ ObjProp 175 "Position"
 	"Type" OBB
 }
 
-//jar
+//chest
++ObjProp 139 "AI_Converation"
+{
+	"Actor" ActorOne
+	"Conversation: Action 0" Remove link(Flavor,Destination(s),Source(s))
+	"   Argument 1" ControlDevice
+	"   Argument 2" 139
+	"   Argument 3" 174
+}
++ObjProp 139 "AI_SaveConverse"
+{
+	"" true
+}
++Link 139 140 "AIConversationActor"
+{
+	"Actor ID" 1
+}
++ObjProp 139 "Scripts"
+{
+	"Script 0" TrapConverse
+}
+-ObjProp 174 "Scripts"
++ObjProp 174 "PickDist"
+{
+	"" 4.50
+}
+
+//misplaced objects
 +ObjProp 143 "PickDist"
 {
 	"" 5.00
@@ -82,7 +251,7 @@ ObjProp 143 "Position"
 	"Location" -6.5, 114, -65.1
 }
 
-//scroll of n'lahotep
+//quest item
 +ObjProp 173 "NoDrop"
 {
 	"" true
@@ -90,10 +259,4 @@ ObjProp 143 "Position"
 +ObjProp 173 "GameName"
 {
 	"" Name_son: "Scroll of N'lahotep"
-}
-
-//chest
-+ObjProp 174 "PickDist"
-{
-	"" 4.00
 }

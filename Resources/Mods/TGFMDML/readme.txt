@@ -39,6 +39,7 @@ Out for a Walk
 Prisoner's Revenge
 Prodigal Corpse
 Returning a Favor
+Rose Garden
 The Rose of Bantry
 Saving Private Rye Anne
 A Secret Affair
@@ -53,6 +54,8 @@ Treachery
 The Treasury
 Trial By Night
 The Trickster's Return
+TSR-1000
+The Unseen
 The Varyx Obelisk
 The Vigil
 WoodKey Resthouse

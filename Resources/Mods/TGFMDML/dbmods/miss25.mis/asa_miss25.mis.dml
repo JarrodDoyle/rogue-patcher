@@ -14,7 +14,17 @@ FINGERPRINT
 	QVAR "goal_target_1" == 136
 }
 
-//final goal
+//starting point
++ObjProp 40 "Position"
+{
+	"Location" 98, 0, -1
+}
+
+//goals / quest items
++ObjProp 136 "DiffDestroy"
+{
+	"quest var values" 0
+}
 +ObjProp 280 "DiffTurnOn"
 {
 	"quest var values" 0, 1, 2
@@ -39,12 +49,6 @@ FINGERPRINT
 {
 	"" =1:goal_irreversible_6
 }
-
-//quest items
-+ObjProp 136 "DiffDestroy"
-{
-	"quest var values" 0
-}
 +ObjProp 371 "NoDrop"
 {
 	"" true
@@ -61,49 +65,93 @@ ObjProp 371 "Position"
 }
 
 //doors
-Create -2045 "SD"
+ObjProp 28 "Position"
 {
-	-ObjProp "TransDoor"
-	+ObjProp "RotDoor"
-	{
-		"Open Angle" 90.00
-		"Base Speed" 2.00
-	}
-	+ObjProp "FrobInfo"
-	{
-		"World Action" None
-	}
-	+ObjProp "BlockFrob"
-	{
-		"" true
-	}
-	+ObjProp "Position"
-	{
-		"Location" -21.2475, -25.748, 7.9
-		"Heading" 4000
-		"Bank" 4000
-	}
-	+ObjProp "Scale"
-	{
-		"" 0.375, 0.4, 0.375
-	}
-	+ObjProp "OTxtRepr0"
-	{
-		"" fam\core\Ftile1
-	}
+	"Location" -4, 6.5, 0
 }
--ObjProp "SD" "PhysType"
-+ObjProp "SD" "PhysType"
+-ObjProp 28 "PhysType"
++ObjProp 28 "PhysType"
 {
 	"Type" OBB
 }
-+Link 108 112 "ScriptParams"
+ObjProp 36 "Position"
 {
-	"" Double
+	"Location" 10, 19.5, 0
 }
-+Receptron 108 "EarthStim"
+-ObjProp 36 "PhysType"
++ObjProp 36 "PhysType"
 {
-	Min 9
+	"Type" OBB
+}
+ObjProp 50 "Position"
+{
+	"Location" 1.5, 3, 0
+}
+-ObjProp 50 "PhysType"
++ObjProp 50 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 54 "Position"
+{
+	"Location" -22.5, -10, 0
+}
+-ObjProp 54 "PhysType"
++ObjProp 54 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 55 "BlockFrob"
+{
+	"" true
+}
+ObjProp 55 "Position"
+{
+	"Location" 10, -7.5, 0
+}
+-ObjProp 55 "PhysType"
++ObjProp 55 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 56 "Position"
+{
+	"Location" -4, -0.46, 0
+}
+-ObjProp 56 "PhysType"
++ObjProp 56 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 71 "TransDoor"
+{
+	"Open Position" -1.75
+}
++ObjProp 71 "BlockFrob"
+{
+	"" true
+}
+ObjProp 71 "Scripts"
+{
+	"Script 1" TrigDoorOpen
+}
+-ObjProp 71 "PhysType"
++ObjProp 71 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 95 "Position"
+{
+	"Location" 1.75, -3, 12
+}
+-ObjProp 95 "PhysType"
++ObjProp 95 "PhysType"
+{
+	"Type" OBB
+}
++Receptron 108 "Stench"
+{
+	Min None
 	Max None
 
 	Target 112
@@ -114,9 +162,24 @@ Create -2045 "SD"
 		"Prop Name" Locked
 	}
 }
-+Receptron 112 "EarthStim"
++Link 108 112 "ScriptParams"
 {
-	Min 9
+	"" Double
+}
++ObjProp 108 "Position"
+{
+	"Location" -35.5, -12, 0
+}
+-ObjProp 108 "PhysType"
++ObjProp 108 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 108 "Scale"
+-ObjProp 112 "Scale"
++Receptron 112 "Stench"
+{
+	Min None
 	Max None
 
 	Target 108
@@ -127,9 +190,88 @@ Create -2045 "SD"
 		"Prop Name" Locked
 	}
 }
-ObjProp 234 "TransDoor"
++ObjProp 112 "Position"
 {
-	"Closed Position" 1.75
+	"Location" -35.5, -8, 0
+}
+-ObjProp 112 "PhysType"
++ObjProp 112 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 164 "Scale"
++ObjProp 164 "Position"
+{
+	"Location" 32.75, 30, 0
+}
+-ObjProp 164 "PhysType"
++ObjProp 164 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 188 "Position"
+{
+	"Location" -8.25, 10, 12
+}
+-ObjProp 188 "PhysType"
++ObjProp 188 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 195 "Position"
+{
+	"Location" 0.75, 7.5, 12
+}
+-ObjProp 195 "PhysType"
++ObjProp 195 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 205 "Position"
+{
+	"Location" -23.5, -16.5, 12
+}
+-ObjProp 205 "PhysType"
++ObjProp 205 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 221 "Position"
+{
+	"Location" -17.25, 4, 12
+}
+-ObjProp 221 "PhysType"
++ObjProp 221 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 228 "Position"
+{
+	"Location" -31.5, 21, 12
+}
+-ObjProp 228 "PhysType"
++ObjProp 228 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 233 "Position"
+{
+	"Location" -20.5, 4.825, 13.5
+}
+-ObjProp 233 "PhysType"
++ObjProp 233 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 234 "RotDoor"
+{
+	"Open Angle" 90
+	"Base Speed" 2.00
+}
+-ObjProp 234 "TransDoor"
+ObjProp 234 "Position"
+{
+	"Location" -26.25, 20.54, 10.5
 }
 -ObjProp 234 "PhysType"
 +ObjProp 234 "PhysType"
@@ -137,21 +279,83 @@ ObjProp 234 "TransDoor"
 	"Type" OBB
 }
 +MetaProp 234 -2420
+ObjProp 253 "Position"
+{
+	"Location" 0.75, 24.25, 12
+}
+-ObjProp 253 "PhysType"
++ObjProp 253 "PhysType"
+{
+	"Type" OBB
+}
 ObjProp 260 "StTweqLock"
 {
 	"AnimS" None
 }
-+ObjProp 385 "DiffDestroy"
+ObjProp 260 "RotDoor"
 {
-	"quest var values" 0, 1, 2
+	"Open Angle" 90
+	"Clockwise?" false
 }
-+Link 387 "SD" "ControlDevice"
+ObjProp 260 "Position"
 {
+	"Location" 15.5, 19.5, 12
+	"Heading" 8000
 }
-+StimSource 390 "EarthStim"
+-ObjProp 260 "PhysType"
++ObjProp 260 "PhysType"
 {
-	Intensity 10
-
+	"Type" OBB
+}
+ObjProp 321 "Position"
+{
+	"Location" 19.5, 23.5, 0
+}
+-ObjProp 321 "PhysType"
++ObjProp 321 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 327 "Position"
+{
+	"Location" 15.5, -27.5, 0
+}
+-ObjProp 327 "PhysType"
++ObjProp 327 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 375 "Position"
+{
+	"Location" 19.5, -1.5, 12
+}
+-ObjProp 375 "PhysType"
++ObjProp 375 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 385 "RotDoor"
+{
+	"Open Angle" 90
+	"Base Speed" 2.00
+}
+-ObjProp 385 "TransDoor"
++ObjProp 385 "BlockFrob"
+{
+	"" true
+}
+ObjProp 385 "Position"
+{
+	"Location" -21.25, -25.75, 7.9
+	"Heading" 4000
+}
+-ObjProp 385 "PhysType"
++ObjProp 385 "PhysType"
+{
+	"Type" OBB
+}
++StimSource 390 "Stench"
+{
 	Propagator "Contact"
 	{
 		Shape
@@ -160,19 +364,120 @@ ObjProp 260 "StTweqLock"
 		}
 	}
 }
-
-//chests
-+ObjProp 48 "JointPos"
+ObjProp 406 "Position"
 {
-	"Joint 1" 90.00
+	"Location" 19.5, 2.5, 12
 }
-+ObjProp 163 "JointPos"
+-ObjProp 406 "PhysType"
++ObjProp 406 "PhysType"
 {
-	"Joint 1" 90.00
+	"Type" OBB
+}
+ObjProp 417 "Position"
+{
+	"Location" -17.25, -3, 12
+}
+-ObjProp 417 "PhysType"
++ObjProp 417 "PhysType"
+{
+	"Type" OBB
 }
 
-//bed
-+Receptron 204 "EarthStim"
+//misplaced objects / physdims
+ObjProp 18 "Position"
+{
+	"Location" 2.25, 12.2275, 2.3
+}
+-ObjProp 18 "PhysType"
++ObjProp 18 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 27 "PhysType"
++ObjProp 27 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 30 "PhysType"
++ObjProp 30 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 32 "PhysType"
++ObjProp 32 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 33 "PhysType"
++ObjProp 33 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 76 "PhysType"
++ObjProp 76 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 77 "PhysType"
++ObjProp 77 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 78 "PhysType"
++ObjProp 78 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 79 "PhysType"
++ObjProp 79 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 85 "PhysType"
++ObjProp 85 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 86 "PhysType"
++ObjProp 86 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 88 "PhysType"
++ObjProp 88 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 120 "PhysType"
++ObjProp 120 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 156 "PhysType"
++ObjProp 156 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 173 "Position"
+{
+	"Location" -34.7, -16.3675, 11.06
+}
+-ObjProp 177 "PhysType"
++ObjProp 177 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 192 "PhysType"
++ObjProp 192 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 193 "PhysType"
++ObjProp 193 "PhysType"
+{
+	"Type" OBB
+}
++Receptron 204 "Stench"
 {
 	Max None
 
@@ -184,15 +489,143 @@ ObjProp 260 "StTweqLock"
 		"Prop Name" PhysDims
 	}
 }
-+StimSource 204 "EarthStim"
+++Receptron 204 "Stench"
+{
+	Max None
+
+	Target Me
+	Agent 207
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysAttr
+	}
+}
++StimSource 204 "Stench"
 {
 	Intensity 1
 	Propagator "Radius"
 }
--ObjProp 204 "PhysType"
-+ObjProp 204 "PhysType"
+-ObjProp 207 "PhysType"
++ObjProp 207 "PhysType"
 {
 	"Type" OBB
+}
+-ObjProp 208 "PhysType"
++ObjProp 208 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 219 "PhysType"
++ObjProp 219 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 222 "PhysType"
++ObjProp 222 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 223 "PhysType"
++ObjProp 223 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 246 "PhysType"
++ObjProp 246 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 252 "PhysType"
++ObjProp 252 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 285 "PhysType"
++ObjProp 285 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 372 "PhysType"
++ObjProp 372 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 386 "PhysType"
++ObjProp 386 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 400 "PhysType"
++ObjProp 400 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 402 "PhysType"
++ObjProp 402 "PhysType"
+{
+	"Type" OBB
+}
+
+//chests
+ObjProp 48 "JointPos"
+{
+	"Joint 1" 90.00
+}
++ObjProp 163 "JointPos"
+{
+	"Joint 1" 90.00
+}
+
+//banners
++ObjProp 117 "SlayResult"
+{
+	"Effect" Destroy
+}
+-ObjProp 117 "PhysType"
++ObjProp 117 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 121 "Position"
+{
+	"Location" 10, -6.875, 2.5
+}
+-ObjProp 121 "PhysType"
++ObjProp 121 "PhysType"
+{
+	"Type" OBB
+}
+
+//AIs
+Link 168 8 "AIWatchObj"
+{
+	"   Argument 1" ""
+	"   Argument 2" 8
+	"   Argument 2"[1] IdleGesture 0
+}
+Link 172 303 "AIWatchObj"
+{
+	"   Argument 1" ""
+	"   Argument 2" 304
+	"   Argument 1"[2] ""
+	"   Argument 2"[2] 164
+	"   Argument 1"[4] ""
+}
+ObjProp 256 "AI_AlrtRsp"
+{
+	"Priority" Very high
+}
+Link 344 175 "AIWatchObj"
+{
+	"   Argument 1" ""
+	"   Argument 2" 175
+}
+Link 348 114 "AIWatchObj"
+{
+	"   Argument 1" ""
+	"   Argument 2" 114
+	"   Argument 2"[1] ""
 }
 
 //fireplace
@@ -204,10 +637,4 @@ ObjProp 216 "PGLaunchInfo"
 ObjProp 218 "PGLaunchInfo"
 {
 	"Max time" 2.00
-}
-
-//AI
-ObjProp 256 "AI_AlrtRsp"
-{
-	"Priority" Very high
 }

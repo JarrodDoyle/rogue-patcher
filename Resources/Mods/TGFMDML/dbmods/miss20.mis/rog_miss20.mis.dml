@@ -1,0 +1,37 @@
+DML1
+//TG FM: Rose Garden (TDP20AC) by Gabor Lux (Melan) / Fixes: miss20.mis.dml
+
+FINGERPRINT
+{
+	1929 [10 212 207]
+	1392 [76 345 214]
+	1590 [210 193 205]
+	349 [230 542 178]
+	1384 [-42 266 247]
+	274 [89 498 243]
+	2229 [229 387 221]
+	1758 [225 381 201]
+	QVAR "goal_target_8" == 4045
+}
+
+//fix hanging arrows
+-ObjProp 3719 "PhysType"
++ObjProp 3719 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 3720 "PhysType"
++ObjProp 3720 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 3721 "PhysType"
++ObjProp 3721 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 3996 "PhysType"
++ObjProp 3996 "PhysType"
+{
+	"Type" OBB
+}

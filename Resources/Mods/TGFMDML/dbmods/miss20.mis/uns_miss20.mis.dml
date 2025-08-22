@@ -1,0 +1,210 @@
+DML1
+//TG FM: The Unseen (NewDark 64 Cubed Contest) by Romain Barrilliot (skacky) / Fixes: miss20.mis.dml
+
+FINGERPRINT
+{
+	265 [74 78 20]
+	215 [42 56 -13]
+	283 [51 77 1]
+	37 [50 55 17]
+	395 [49 63 -10]
+	411 [86 38 2]
+	339 [64 88 -20]
+	115 [55 80 -20]
+	QVAR "goal_target_0" == 343
+}
+
+//goals
+-Link 342 357 "ControlDevice"
+-Link 343 354 "ControlDevice"
++Receptron 44 "Stench"
+{
+	Min None
+	Max None
+
+	Target 213
+	Agent -1284
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
++StimSource 44 "Stench"
+{
+	Propagator "Radius"
+}
++ObjProp 44 "DiffTurnOn"
+{
+	"quest var values" 0, 1, 2
+}
++ObjProp 44 "Scripts"
+{
+	"Script 0" TrapSetQVar
+}
++ObjProp 44 "TrapQVar"
+{
+	"" =1:goal_irreversible_4
+}
+
+//doors
++Receptron 15 "WeaponStim"
+{
+	Min None
+	Max None
+	Effect "Abort"
+}
++ObjProp 175 "Scripts"
+{
+	"Script 0" StdDoor
+	"Don't Inherit" true
+}
++MetaProp 175 -2420
+-ObjProp 213 "Scale"
+ObjProp 213 "RotDoor"
+{
+	"Open Angle" 271
+}
++ObjProp 213 "BlockFrob"
+{
+	"" true
+}
+
+//quest items, keys
++Receptron 33 "HolyStim"
+{
+	Max None
+
+	Target Me
+	Agent -2124
+
+	Effect "add_prop"
+	{
+		"Prop Name" Locked
+	}
+}
+++Receptron 33 "HolyStim"
+{
+	Max None
+
+	Target Me
+	Agent -1629
+
+	Effect "add_prop"
+	{
+		"Prop Name" FrobInfo
+	}
+}
+-ObjProp 33 "KeyDst"
+ObjProp 33 "Scripts"
+{
+	"Script 0" TrigUnlock
+	"Script 1" ""
+}
++ObjProp 164 "StackCount"
+{
+}
++ObjProp 165 "StackCount"
+{
+}
++ObjProp 169 "StackCount"
+{
+}
++ObjProp 232 "StackCount"
+{
+}
++ObjProp 330 "StackCount"
+{
+}
++StimSource 330 "HolyStim"
+{
+	Intensity 1
+
+	Propagator "Contact"
+	{
+		Shape
+		{
+			"Contact Types" Frob Inv -> World
+		}
+	}
+}
+-ObjProp 330 "FrobInfo"
+-ObjProp 330 "KeySrc"
++ObjProp 330 "NoDrop"
+{
+	"" true
+}
++ObjProp 330 "Scripts"
+{
+	"Script 0" LootSounds
+	"Don't Inherit" true
+}
++StimSource 338 "HolyStim"
+{
+	Intensity 1
+
+	Propagator "Contact"
+	{
+		Shape
+		{
+			"Contact Types" Frob Inv -> World
+		}
+	}
+}
+-ObjProp 338 "FrobInfo"
+-ObjProp 338 "KeySrc"
++ObjProp 338 "StackCount"
+{
+}
++ObjProp 338 "NoDrop"
+{
+	"" true
+}
++ObjProp 338 "Scripts"
+{
+	"Script 0" LootSounds
+	"Don't Inherit" true
+}
++ObjProp 339 "Scripts"
+{
+	"Script 0" AmbientSounds
+	"Don't Inherit" true
+}
++StimSource 341 "HolyStim"
+{
+	Intensity 1
+
+	Propagator "Contact"
+	{
+		Shape
+		{
+			"Contact Types" Frob Inv -> World
+		}
+	}
+}
+-ObjProp 341 "FrobInfo"
+-ObjProp 341 "KeySrc"
++ObjProp 341 "StackCount"
+{
+}
++ObjProp 341 "NoDrop"
+{
+	"" true
+}
++ObjProp 341 "Scripts"
+{
+	"Script 0" LootSounds
+	"Don't Inherit" true
+}
+
+//arrows
+-ObjProp 25 "PhysType"
+-ObjProp 309 "PhysType"
+-ObjProp 310 "PhysType"
+-ObjProp 353 "PhysType"
+
+//misplaced objects
+ObjProp 326 "Position"
+{
+	"Location" 91.475, 62.575, -28.85
+}

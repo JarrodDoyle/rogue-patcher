@@ -14,35 +14,14 @@ FINGERPRINT
 	QVAR "goal_target_0" == 403
 }
 
-//final goal
-+ObjProp 78 "Scripts"
+//starting point
+ObjProp 56 "Position"
 {
-	"Script 0" TrigContained
-}
-+Link 78 270 "ControlDevice"
-{
-}
-+Link 78 271 "ControlDevice"
-{
-}
-+ObjProp 270 "Scripts"
-{
-	"Script 0" TrapSetQVar
-}
-+ObjProp 270 "TrapQVar"
-{
-	"" =1:goal_irreversible_5
-}
-+ObjProp 271 "Scripts"
-{
-	"Script 0" TrapSetQVar
-}
-+ObjProp 271 "TrapQVar"
-{
-	"" =137:goal_target_5
+	"Location" -17, -72, -24
+	"Heading" 0
 }
 
-//skull of gilder (expert only)
+//goals / quest item
 +ObjProp 173 "DiffPermit"
 {
 	"quest var values" 2
@@ -59,9 +38,223 @@ FINGERPRINT
 {
 	"" Name_sog: "Skull of Gilder"
 }
-+ObjProp 186 "DiffPermit"
++ObjProp 270 "DiffTurnOn"
 {
-	"quest var values" 2
+	"quest var values" 0, 1, 2
+}
++ObjProp 270 "Scripts"
+{
+	"Script 0" TrapSetQVar
+}
++ObjProp 270 "TrapQVar"
+{
+	"" =1:goal_irreversible_5
+}
++ObjProp 271 "DiffTurnOn"
+{
+	"quest var values" 0, 1, 2
+}
++ObjProp 271 "Scripts"
+{
+	"Script 0" TrapSetQVar
+}
++ObjProp 271 "TrapQVar"
+{
+	"" =137:goal_target_5
+}
+
+//doors
+-ObjProp 3 "Scale"
+-ObjProp 4 "Scale"
+-ObjProp 5 "Scale"
+-ObjProp 6 "Scale"
+-ObjProp 22 "Scale"
+-ObjProp 23 "Scale"
+-ObjProp 30 "Scale"
+-ObjProp 50 "Scale"
+-ObjProp 54 "Scale"
+-ObjProp 55 "Scale"
+-ObjProp 3 "PhysType"
++ObjProp 3 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 4 "PhysType"
++ObjProp 4 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 5 "PhysType"
++ObjProp 5 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 6 "PhysType"
++ObjProp 6 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 22 "RotDoor"
+{
+	"Open Angle" 275
+}
+-ObjProp 22 "PhysType"
++ObjProp 22 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 23 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 23 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 23 "PhysType"
++ObjProp 23 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 30 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 30 "Position"
+{
+	"Heading" c000
+}
+-ObjProp 30 "PhysType"
++ObjProp 30 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 50 "PhysType"
++ObjProp 50 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 54 "PhysType"
++ObjProp 54 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 55 "PhysType"
++ObjProp 55 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 101 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 101 "PhysType"
++ObjProp 101 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 103 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 103 "Position"
+{
+	"Heading" 0
+}
+-ObjProp 103 "PhysType"
++ObjProp 103 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 110 "RotDoor"
+{
+	"Open Angle" 271
+}
+ObjProp 125 "RotDoor"
+{
+	"Open Angle" 271
+}
++ObjProp 157 "DeathStage"
+{
+	"" -1
+}
++ObjProp 157 "Scripts"
+{
+	"Script 0" ToggleDoor
+	"Don't Inherit" true
+}
+ObjProp 185 "RotDoor"
+{
+	"Open Angle" 271
+}
+ObjProp 218 "RotDoor"
+{
+	"Open Angle" 89
+	"Clockwise?" false
+}
+ObjProp 232 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 232 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 232 "PhysType"
++ObjProp 232 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 273 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 273 "Position"
+{
+	"Heading" c000
+}
+-ObjProp 273 "PhysType"
++ObjProp 273 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 290 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 290 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 290 "PhysType"
++ObjProp 290 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 299 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 299 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 299 "PhysType"
++ObjProp 299 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 408 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
 }
 
 //beds
@@ -81,25 +274,110 @@ FINGERPRINT
 	"Type" OBB
 }
 
-//secret door
-+Receptron 157 "WeaponStim"
+//chests
++ObjProp 80 "JointPos"
 {
-	Min None
-	Max None
-	Effect "Abort"
+	"Joint 1" 90.00
 }
-+Receptron 157 "FireStim"
+ObjProp 154 "Position"
 {
-	Min None
-	Max None
-	Effect "Abort"
+	"Heading" 4000
+}
+-ObjProp 154 "PhysType"
++ObjProp 154 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 155 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 155 "PhysType"
++ObjProp 155 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 155 "JointPos"
+{
+	"Joint 1" 90.00
+}
+ObjProp 156 "JointPos"
+{
+	"Joint 1" 90.00
+}
+ObjProp 156 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 156 "PhysType"
++ObjProp 156 "PhysType"
+{
+	"Type" OBB
+}
+
+//banners
++ObjProp 84 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 85 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 92 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 261 "SlayResult"
+{
+	"Effect" Destroy
+}
+
+//misplaced objects
+ObjProp 113 "Position"
+{
+	"Location" -61.075, 50.64, -5.25
+}
+-ObjProp 113 "PhysType"
++ObjProp 113 "PhysType"
+{
+	"Type" OBB
 }
 
 //scrolls
++ObjProp 186 "DiffPermit"
+{
+	"quest var values" 2
+}
++ObjProp 221 "FrobInfo"
+{
+	"World Action" Script
+}
++ObjProp 221 "Scripts"
+{
+	"Script 0" StdBook
+}
 -ObjProp 221 "PhysType"
+ObjProp 223 "Position"
+{
+	"Heading" 9c70
+}
+-ObjProp 223 "PhysType"
++ObjProp 223 "PhysType"
+{
+	"Type" OBB
+}
 -ObjProp 472 "PhysType"
++ObjProp 472 "FrobInfo"
+{
+	"World Action" Script
+}
++ObjProp 472 "Scripts"
+{
+	"Script 0" StdBook
+}
 
-//plates (junk)
+//junk
 +ObjProp 222 "InvType"
 {
 }
@@ -120,4 +398,20 @@ FINGERPRINT
 }
 +ObjProp 259 "InvType"
 {
+}
+
+//keys
++ObjProp 327 "GameName"
+{
+	"" Name_srkey
+}
++ObjProp 328 "GameName"
+{
+	"" Name_srkey
+}
+
+//AI
++ObjProp 403 "GameName"
+{
+	"" Name_LG: "Lady Gilder"
 }

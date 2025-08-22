@@ -1,0 +1,38 @@
+DML1
+//TG FM: TSR-1000 by Spoonman / Fixes: miss20.mis.dml
+
+FINGERPRINT
+{
+	791 [90 -10 219]
+	1650 [-57 20 212]
+	827 [50 -82 238]
+	1910 [-106 -50 210]
+	432 [16 -46 113]
+	1600 [21 -64 212]
+	1468 [-66 -68 20]
+	1401 [-84 -31 44]
+	QVAR "goal_target_2" == 2695
+}
+
+//Loot count
++ObjProp 1960 "Loot"
+{
+}
+//Prevent crash
++ObjProp 2422 "Scripts"
+{
+    "Script 0" NVDeleteTrap
+}
+//Prevent unlocking through doors
++ObjProp 2649 "BlockFrob"
+{
+    "" true
+}
++ObjProp 2668 "BlockFrob"
+{
+    "" true
+}
++ObjProp 2771 "BlockFrob"
+{
+    "" true
+}

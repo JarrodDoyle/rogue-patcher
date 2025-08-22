@@ -1,5 +1,5 @@
 DML1
-//T1 FM: Amida by JIS / Fixes: miss20.mis.dml
+//TG FM: Amida by JIS / Fixes: miss20.mis.dml
 
 FINGERPRINT
 {
@@ -14,56 +14,163 @@ FINGERPRINT
 	QVAR "goal_target_2" == 185
 }
 
-//the house key has two key scripts due to inheritance, not allowed under NewDark
-ObjProp 355 "Scripts"
+//loot
++ObjProp 32 "Loot"
 {
-	"Don't Inherit" True
 }
-//set goals 2, 3, 4 to complete once 185, 201 and 197 are slain
-+ObjProp 381 "Scripts"
++ObjProp 33 "Loot"
+{
+}
+
+//goals
++ObjProp 300 "DiffTurnOn"
+{
+	"quest var values" 0, 1, 2
+}
++ObjProp 300 "Scripts"
 {
 	"Script 0" TrapSetQVar
 }
-+ObjProp 381 "TrapQVar"
++ObjProp 300 "TrapQVar"
 {
-	"" =1:goal_state_2
+	"" =1:goal_final_5
+}
++ObjProp 301 "DiffTurnOn"
+{
+	"quest var values" 0, 1, 2
+}
++ObjProp 301 "Scripts"
+{
+	"Script 0" TrapSetQVar
+}
++ObjProp 301 "TrapQVar"
+{
+	"" =1:goal_irreversible_5
+}
++Link 185 302 "ControlDevice"
+{
 }
 +ObjProp 185 "Scripts"
 {
 	"Script 0" TrigSlain
 }
-+Link 185 381 "ControlDevice"
++Link 197 304 "ControlDevice"
 {
-}
-
-+ObjProp 70 "Scripts"
-{
-	"Script 0" TrapSetQVar
-}
-+ObjProp 70 "TrapQVar"
-{
-	"" =1:goal_state_3
-}
-+ObjProp 201 "Scripts"
-{
-	"Script 0" TrigSlain
-}
-+Link 201 70 "ControlDevice"
-{
-}
-
-+ObjProp 4 "Scripts"
-{
-	"Script 0" TrapSetQVar
-}
-+ObjProp 4 "TrapQVar"
-{
-	"" =1:goal_state_4
 }
 +ObjProp 197 "Scripts"
 {
 	"Script 0" TrigSlain
 }
-+Link 197 4 "ControlDevice"
++Link 201 303 "ControlDevice"
 {
+}
++ObjProp 201 "Scripts"
+{
+	"Script 0" TrigSlain
+}
++ObjProp 302 "Scripts"
+{
+	"Script 0" TrapSetQVar
+}
++ObjProp 302 "TrapQVar"
+{
+	"" =1:goal_state_2
+}
++ObjProp 303 "Scripts"
+{
+	"Script 0" TrapSetQVar
+}
++ObjProp 303 "TrapQVar"
+{
+	"" =1:goal_state_3
+}
++ObjProp 304 "Scripts"
+{
+	"Script 0" TrapSetQVar
+}
++ObjProp 304 "TrapQVar"
+{
+	"" =1:goal_state_4
+}
++ObjProp 311 "NoDrop"
+{
+	"" true
+}
+
+//banners
++ObjProp 70 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 247 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 314 "SlayResult"
+{
+	"Effect" Destroy
+}
+
+//doors
++ObjProp 88 "Scale"
+{
+	"" 1.05, 1, 1
+}
++ObjProp 90 "Scale"
+{
+	"" 1.05, 1, 1
+}
+ObjProp 170 "TransDoor"
+{
+	"Open Position" -3.58
+}
+Link 170 173 "ScriptParams"
+{
+	"" Double
+}
++ObjProp 170 "JointPos"
+{
+	"Joint 1" 90.00
+}
++ObjProp 173 "JointPos"
+{
+	"Joint 1" 90.00
+}
+ObjProp 173 "TransDoor"
+{
+	"Open Position" -3.58
+}
+
+//mantling
++ObjProp 148 "PhysCanMant"
+{
+}
++ObjProp 149 "PhysCanMant"
+{
+}
++ObjProp 183 "PhysCanMant"
+{
+}
+
+//invalid scaling
+-ObjProp 209 "Scale"
+-ObjProp 364 "Scale"
+-ObjProp 370 "Scale"
+-ObjProp 377 "Scale"
+
+//keys
++ObjProp 333 "StackCount"
+{
+}
++ObjProp 355 "StackCount"
+{
+}
++ObjProp 355 "NoDrop"
+{
+	"" true
+}
+ObjProp 355 "Scripts"
+{
+	"Script 0" TrigWorldFrob
+	"Script 1" ""
 }

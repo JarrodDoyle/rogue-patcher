@@ -68,66 +68,94 @@ ObjProp 264 "Scripts"
 	"" =1:goal_irreversible_4
 }
 -ObjProp 681 "NoDrop"
--ObjProp 836 "DesignNote"
++Link 836 1160 "ControlDevice"
+{
+}
+ObjProp 836 "Scripts"
+{
+	"Script 0" TrapRelay
+	"Script 1" TrapSetQVar
+}
 +ObjProp 836 "TrapQVar"
 {
 	"" =1:goal_visible_2
 }
+-ObjProp 836 "DesignNote"
 -ObjProp 975 "DesignNote"
 +ObjProp 975 "TrapQVar"
 {
 	"" =1:goal_visible_4
 }
--ObjProp 1091 "DesignNote"
-+Link 1091 1160 "ControlDevice"
-{
-}
-+ObjProp 1091 "Scripts"
-{
-	"Script 1" TrapRelay
-}
 +ObjProp 1091 "TrapQVar"
 {
 	"" =1:goal_state_0
 }
+-ObjProp 1091 "DesignNote"
 -ObjProp 1160 "DesignNote"
 +ObjProp 1160 "TrapQVar"
 {
 	"" =1:goal_visible_3
 }
 
-//mantling
-+ObjProp 82 "PhysCanMant"
+//scepter
+-ObjProp 600 "PickDist"
++ObjProp 595 "BlockFrob"
 {
-}
-
-//footlockers
-ObjProp 201 "Locked"
-{
-	"" false
-}
-+ObjProp 202 "JointPos"
-{
-	"Joint 1" 90.00
-}
-+ObjProp 214 "JointPos"
-{
-	"Joint 1" 90.00
-}
-+ObjProp 215 "JointPos"
-{
-	"Joint 1" 90.00
-}
-+ObjProp 224 "JointPos"
-{
-	"Joint 1" 90.00
-}
-+ObjProp 225 "JointPos"
-{
-	"Joint 1" 90.00
+	"" true
 }
 
 //doors
+-ObjProp 11 "PhysType"
++ObjProp 11 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 26 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 26 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 26 "PhysType"
++ObjProp 26 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 29 "PhysType"
++ObjProp 29 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 157 "Position"
+{
+	"Heading" c000
+}
+-ObjProp 157 "PhysType"
++ObjProp 157 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 158 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+-ObjProp 158 "PhysType"
++ObjProp 158 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 160 "Position"
+{
+	"Location" 120.45, 428, -30.25
+}
+ObjProp 161 "Position"
+{
+	"Location" 60.55, 428, -30.25
+}
 ObjProp 241 "RotDoor"
 {
 	"Open Angle" 270
@@ -157,6 +185,357 @@ ObjProp 259 "Position"
 {
 	"Type" OBB
 }
+-ObjProp 260 "PhysType"
++ObjProp 260 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 262 "PhysType"
++ObjProp 262 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 263 "PhysType"
++ObjProp 263 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 393 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 395 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
++ObjProp 395 "PhysCanMant"
+{
+}
++ObjProp 396 "PhysCanMant"
+{
+}
++ObjProp 396 "FrobInfo"
+{
+}
++ObjProp 396 "DeathStage"
+{
+	"" -1
+}
+ObjProp 423 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 423 "Position"
+{
+	"Heading" 0
+}
+-ObjProp 423 "PhysType"
++ObjProp 423 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 494 "PhysType"
++ObjProp 494 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 540 "PhysType"
++ObjProp 540 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 544 "PhysType"
++ObjProp 544 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 598 "PhysCanMant"
+{
+}
+ObjProp 608 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 608 "Position"
+{
+	"Heading" c000
+}
+-ObjProp 608 "PhysType"
++ObjProp 608 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 608 "PhysCanMant"
+{
+}
++ObjProp 609 "PhysCanMant"
+{
+}
++ObjProp 610 "PhysCanMant"
+{
+}
+ObjProp 610 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 610 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 610 "PhysType"
++ObjProp 610 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 663 "RotDoor"
+{
+	"Open Angle" 270
+	"Clockwise?" true
+}
+ObjProp 663 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 663 "PhysType"
++ObjProp 663 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 665 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 665 "Position"
+{
+	"Heading" c000
+}
+-ObjProp 665 "PhysType"
++ObjProp 665 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 680 "PhysType"
++ObjProp 680 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 729 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 729 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 729 "PhysType"
++ObjProp 729 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 734 "RotDoor"
+{
+	"Open Angle" 270
+	"Clockwise?" true
+}
+ObjProp 734 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 734 "PhysType"
++ObjProp 734 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 735 "PhysType"
++ObjProp 735 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 869 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 871 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 871 "Position"
+{
+	"Heading" 0
+}
++ObjProp 979 "DeathStage"
+{
+	"" -1
+}
++ObjProp 980 "DeathStage"
+{
+	"" -1
+}
++ObjProp 981 "DeathStage"
+{
+	"" -1
+}
++ObjProp 982 "DeathStage"
+{
+	"" -1
+}
+
+//mantling
++Receptron 81 "Stench"
+{
+	Max None
+
+	Target 869
+	Agent -162
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 81 "Stench"
+{
+	Max None
+
+	Target 871
+	Agent -162
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 81 "Stench"
+{
+	Max None
+
+	Target 871
+	Agent -2124
+
+	Effect "add_prop"
+	{
+		"Prop Name" Locked
+	}
+}
+++Receptron 81 "Stench"
+{
+	Max None
+
+	Target 871
+	Agent -4587
+
+	Effect "add_prop"
+	{
+		"Prop Name" Locked
+	}
+}
++StimSource 81 "Stench"
+{
+	Intensity 1
+	Propagator "Radius"
+}
+-ObjProp 81 "PhysType"
++ObjProp 81 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 82 "PhysType"
++ObjProp 82 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 82 "PhysCanMant"
+{
+}
++ObjProp 106 "PhysCanMant"
+{
+}
+-ObjProp 106 "PhysType"
++ObjProp 106 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 107 "PhysType"
++ObjProp 107 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 107 "PhysCanMant"
+{
+}
++ObjProp 1087 "PhysCanMant"
+{
+}
+
+//banners
+-ObjProp 152 "PhysType"
++ObjProp 152 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 152 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 159 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 162 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 657 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 658 "SlayResult"
+{
+	"Effect" Destroy
+}
+
+//footlockers
+ObjProp 201 "Locked"
+{
+	"" false
+}
+ObjProp 201 "StTweqLock"
+{
+	"AnimS" None
+}
++ObjProp 201 "JointPos"
+{
+	"Joint 1" 90.00
+}
++ObjProp 202 "JointPos"
+{
+	"Joint 1" 90.00
+}
++ObjProp 214 "JointPos"
+{
+	"Joint 1" 90.00
+}
++ObjProp 215 "JointPos"
+{
+	"Joint 1" 90.00
+}
++ObjProp 224 "JointPos"
+{
+	"Joint 1" 90.00
+}
++ObjProp 225 "JointPos"
+{
+	"Joint 1" 90.00
+}
 
 //switches
 -Link 248 250 "ControlDevice"
@@ -167,12 +546,13 @@ ObjProp 259 "Position"
 }
 ObjProp 887 "RotDoor"
 {
-	"Open Angle" 345.00
+	"Open Angle" 350
+	"Axis" X-Axis
 	"Clockwise?" true
 }
 +ObjProp 887 "PickDist"
 {
-	"" 3.00
+	"" 4.00
 }
 ObjProp 887 "Position"
 {
@@ -197,6 +577,21 @@ ObjProp 887 "Position"
 }
 
 //AIs
++Receptron 750 "FireStim"
+{
+	Min None
+	Max None
+	Effect "Abort"
+}
++ObjProp 750 "NonPhysCreature"
+{
+	"" true
+}
++ObjProp 750 "NoFlash"
+{
+	"" true
+}
+-ObjProp 750 "Scripts"
 Link 750 751 "AIWatchObj"
 {
 	"   Argument 1"[1] ""
@@ -232,6 +627,51 @@ Link 1029 1025 "AIWatchObj"
 {
 	"Amount (-1..1)" 0.10
 	"Additive?" true
+}
++ObjProp 675 "FrobInfo"
+{
+}
++ObjProp 898 "FrobInfo"
+{
+}
++ObjProp 899 "FrobInfo"
+{
+}
++ObjProp 902 "FrobInfo"
+{
+}
++ObjProp 905 "FrobInfo"
+{
+}
++ObjProp 906 "FrobInfo"
+{
+}
++ObjProp 908 "FrobInfo"
+{
+}
++ObjProp 912 "FrobInfo"
+{
+}
++ObjProp 913 "FrobInfo"
+{
+}
++ObjProp 915 "FrobInfo"
+{
+}
++ObjProp 919 "FrobInfo"
+{
+}
++ObjProp 921 "FrobInfo"
+{
+}
++ObjProp 923 "FrobInfo"
+{
+}
++ObjProp 976 "FrobInfo"
+{
+}
++ObjProp 977 "FrobInfo"
+{
 }
 +ObjProp 1164 "FrobInfo"
 {

@@ -1,5 +1,5 @@
 DML1
-//T1 FM: The Gem by Wes Morrison / Fixes: miss15.mis.dml
+//T1 FM: The Gem by Wes Morrison (Datoyminaytah) / Fixes: miss15.mis.dml
 
 FINGERPRINT
 {
@@ -14,26 +14,82 @@ FINGERPRINT
 	QVAR "goal_target_2" == 496
 }
 
+#script "squirrel"
+
 //goals
++Receptron 48 "Stench"
+{
+	Max None
+
+	Target 229
+	Agent Me
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 48 "Stench"
+{
+	Max None
+
+	Target 227
+	Agent 418
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 48 "Stench"
+{
+	Max None
+
+	Target 646
+	Agent 418
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
+++Receptron 48 "Stench"
+{
+	Max None
+
+	Target 996
+	Agent 418
+
+	Effect "add_prop"
+	{
+		"Prop Name" PhysDims
+	}
+}
++StimSource 48 "Stench"
+{
+	Intensity 1
+	Propagator "Radius"
+}
++ObjProp 48 "DiffTurnOn"
+{
+	"quest var values" 0, 1, 2
+}
++ObjProp 48 "Scripts"
+{
+	"Script 0" TrapSetQVar
+}
++ObjProp 48 "TrapQVar"
+{
+	"" =1:goal_irreversible_2
+}
+-ObjProp 386 "DesignNote"
 +ObjProp 386 "TrapQVar"
 {
 	"" =1:goal_state_0
 }
-+ObjProp 426 "DiffTurnOn"
-{
-	"quest var values" 0, 1, 2
-}
-+ObjProp 426 "Scripts"
-{
-	"Script 0" TrapSetQVar
-}
-+ObjProp 426 "TrapQVar"
-{
-	"" =1:goal_irreversible_2
-}
 
 //doors
-Create -1312 "SD"
+Create -158 "SD"
 {
 	+ObjProp "TransDoor"
 	{
@@ -45,61 +101,36 @@ Create -1312 "SD"
 	{
 		"" true
 	}
-	+ObjProp "PickDist"
-	{
-		"" -10.00
-	}
 	+ObjProp "Position"
 	{
-		"Location" 6.04, -153.73, 46.75
+		"Location" 6, -153.73, 46.75
 		"Heading" 8000
 	}
 	+ObjProp "Scripts"
 	{
-		"Script 0" TrigDoorOpen
+		"Script 0" ToggleDoor
 	}
 	+ObjProp "ModelName"
 	{
 		"" paint17
 	}
+	-ObjProp "PhysType"
+	+ObjProp "PhysType"
+	{
+		"Type" OBB
+	}
 }
-+Link "SD" 57 "ControlDevice"
-{
-}
-+Link "SD" 50 "ControlDevice"
-{
-}
-+Link "SD" 47 "ControlDevice"
-{
-}
-+Link "SD" 44 "ControlDevice"
-{
-}
-+Link "SD" 43 "ControlDevice"
-{
-}
--ObjProp "SD" "PhysType"
-+ObjProp "SD" "PhysType"
-{
-	"Type" OBB
-}
-+MetaProp "SD" -2425
-+MetaProp 191 -2425
 +ObjProp 191 "DiffTurnOn"
 {
 	"quest var values" 0, 1, 2
 }
--Link 191 44 "ControlDevice"
--Link 191 43 "ControlDevice"
--Link 191 57 "ControlDevice"
--Link 191 50 "ControlDevice"
--Link 191 47 "ControlDevice"
 ObjProp 191 "CollisionType"
 {
 	"" None
 }
-+ObjProp 191 "HasRefs"
++ObjProp 191 "RenderType"
 {
+	"" Not Rendered
 }
 +ObjProp 191 "Scale"
 {
@@ -110,13 +141,68 @@ ObjProp 191 "CollisionType"
 {
 	"Type" OBB
 }
++MetaProp 191 -2425
+ObjProp 36 "Position"
+{
+	"Heading" 0
+}
+-ObjProp 36 "PhysType"
++ObjProp 36 "PhysType"
+{
+	"Type" OBB
+}
 +Link 226 236 "ScriptParams"
 {
 	"" Double
 }
-+ObjProp 227 "PickDist"
++ObjProp 226 "Scale"
 {
-	"" -7.00
+	"" 1.1429, 1.1429, 1.1429
+}
++ObjProp 236 "Scale"
+{
+	"" 1.1429, 1.1429, 1.1429
+}
++Receptron 227 "WeaponStim"
+{
+	Min None
+	Max None
+	Effect "Abort"
+}
+ObjProp 227 "RotDoor"
+{
+	"Open Angle" 5
+	"Base Speed" 2.00
+	"Clockwise?" false
+}
++ObjProp 227 "FrobInfo"
+{
+}
+ObjProp 227 "Position"
+{
+	"Heading" 4000
+}
+-ObjProp 227 "PhysType"
++ObjProp 227 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 349 "JointPos"
+{
+	"Joint 1" 90.00
+}
++ObjProp 375 "Scale"
+{
+	"" 1.1429, 1.1429, 1.07143
+}
+ObjProp 375 "Position"
+{
+	"Location" 13.25, -133, 34.75
+}
+-ObjProp 375 "PhysType"
++ObjProp 375 "PhysType"
+{
+	"Type" OBB
 }
 +Receptron 418 "WeaponStim"
 {
@@ -124,17 +210,64 @@ ObjProp 191 "CollisionType"
 	Max None
 	Effect "Abort"
 }
++ObjProp 418 "Scale"
+{
+	"" 1.1429, 1.1429, 1.1429
+}
+ObjProp 464 "Position"
+{
+	"Heading" 0
+}
+-ObjProp 464 "PhysType"
++ObjProp 464 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 510 "FrobInfo"
+{
+}
 +ObjProp 510 "BlockFrob"
 {
 	"" true
 }
-+ObjProp 510 "PickDist"
+-ObjProp 510 "Scripts"
++ObjProp 510 "Scripts"
 {
-	"" -2.00
+	"Script 0" TrigDoorOpen
+}
+-ObjProp 510 "PhysType"
++ObjProp 510 "PhysType"
+{
+	"Type" OBB
 }
 -Link 650 191 "FrobProxy"
-+Link 650 "SD" "FrobProxy"
++Link 650 "SD" "ControlDevice"
 {
+}
+-ObjProp 918 "CfgTweqRotate"
+-ObjProp 918 "StTweqRotate"
++ObjProp 918 "JointPos"
+{
+	"Joint 1" 90.00
+}
+ObjProp 996 "Position"
+{
+	"Heading" c000
+}
+-ObjProp 996 "PhysType"
++ObjProp 996 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 996 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 1078 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
 }
 +ObjProp 1078 "JointPos"
 {
@@ -152,11 +285,16 @@ Link 58 88 "AIWatchObj"
 	"   Argument 1"[1] ""
 	"   Argument 2"[1] 88
 }
++ObjProp 300 "AI_Team"
+{
+	"" Neutral
+}
 +ObjProp 300 "InvRendType"
 {
 	"Type" Alternate Bitmap
 	"Resource" frakusca
 }
+-Link 300 284 "AIWatchObj"
 Link 300 300 "AIWatchObj"
 {
 	"   Argument 1"[2] ""
@@ -204,6 +342,12 @@ ObjProp 342 "AI_Converation"
 {
 	"   Argument 1"[1] ""
 	"   Argument 2"[1] 311
+}
+ObjProp 344 "AI_Converation"
+{
+	"Actor"[2] Unused
+	"Conversation: Action 2" Nothing()
+	"   Argument 1"[2] ""
 }
 ObjProp 346 "AI_Converation"
 {
@@ -265,12 +409,58 @@ ObjProp 614 "AI_Converation"
 	"   Argument 1"[21] ""
 	"   Argument 2"[21] 311
 }
++ObjProp 721 "InvRendType"
+{
+	"Type" Alternate Bitmap
+	"Resource" opgesmca
+}
 Link 721 120 "AIWatchObj"
 {
+	"Trigger: Radius" 4
 	"         Line requirement" None
 }
 
-//candlestick
+//various objects
++ObjProp 32 "AI_ObjPathable"
+{
+	"" true
+}
++ObjProp 32 "DesignNote"
+{
+	"" SetVectorPropProperty="PhysDims"; SetVectorPropSubProperty="Size"; SetVectorPropValue=5.25,7,1.5; SetVectorPropSubProperty2="Offset 1"; SetVectorPropValue2=0,0,-2.25
+}
+ObjProp 32 "PhysAIColl"
+{
+	"" true
+}
++ObjProp 32 "Scripts"
+{
+	"Script 0" SetVectorProp
+}
++MetaProp 32 -2425
+ObjProp 53 "Position"
+{
+	"Location" 238.5, 28.1, -31
+}
+-ObjProp 53 "PhysType"
++ObjProp 53 "PhysType"
+{
+	"Type" Sphere Hat
+}
+-Link 64 64 "ControlDevice"
 +ObjProp 254 "FrobInfo"
 {
+}
++ObjProp 1380 "SlayResult"
+{
+	"Effect" Destroy
+}
+ObjProp 1420 "Position"
+{
+	"Location" 81.75, -14.25, -16.1
+}
+-ObjProp 1420 "PhysType"
++ObjProp 1420 "PhysType"
+{
+	"Type" OBB
 }

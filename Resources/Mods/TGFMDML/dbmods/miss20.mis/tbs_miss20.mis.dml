@@ -15,34 +15,27 @@ FINGERPRINT
 }
 
 //goals
-+ObjProp 802 "Scripts"
++ObjProp 357 "DiffTurnOn"
 {
-	"Script 0" TrigContained
+	"quest var values" 0, 1, 2
 }
-+Link 802 357 "ControlDevice"
-{
-}
-+Link 802 358 "ControlDevice"
++Link 357 358 "ControlDevice"
 {
 }
-+Link 802 422 "ControlDevice"
++Link 357 422 "ControlDevice"
 {
 }
-+Link 802 437 "ControlDevice"
++Link 357 437 "ControlDevice"
 {
 }
-+Link 802 466 "ControlDevice"
-{
-}
-
-//goal 4 (after starting)
 +ObjProp 357 "Scripts"
 {
-	"Script 0" TrapSetQVar
+	"Script 0" TrapRelay
+	"Script 1" TrapSetQVar
 }
 +ObjProp 357 "TrapQVar"
 {
-	"" =1:goal_reverse_4
+	"" =1:goal_final_5
 }
 +ObjProp 358 "Scripts"
 {
@@ -50,17 +43,15 @@ FINGERPRINT
 }
 +ObjProp 358 "TrapQVar"
 {
-	"" =0:goal_state_4
+	"" =1:goal_irreversible_5
 }
-
-//goal 5
 +ObjProp 422 "Scripts"
 {
 	"Script 0" TrapSetQVar
 }
 +ObjProp 422 "TrapQVar"
 {
-	"" =1:goal_final_5
+	"" =1:goal_reverse_4
 }
 +ObjProp 437 "Scripts"
 {
@@ -68,15 +59,7 @@ FINGERPRINT
 }
 +ObjProp 437 "TrapQVar"
 {
-	"" =1:goal_irreversible_5
-}
-+ObjProp 466 "Scripts"
-{
-	"Script 0" TrapSetQVar
-}
-+ObjProp 466 "TrapQVar"
-{
-	"" =0:goal_state_5
+	"" =0:goal_state_4
 }
 
 //mantling
@@ -104,31 +87,210 @@ FINGERPRINT
 +ObjProp 1010 "PhysCanMant"
 {
 }
++ObjProp 1010 "Material Tags"
+{
+}
++ObjProp 1011 "Material Tags"
+{
+}
+ObjProp 1011 "Position"
+{
+	"Location" 73.7, 13.75, -5
+}
+-ObjProp 1011 "PhysType"
++ObjProp 1011 "PhysType"
+{
+	"Type" OBB
+}
 +ObjProp 1011 "PhysCanMant"
 {
 }
 +ObjProp 1012 "PhysCanMant"
 {
 }
++ObjProp 1012 "Material Tags"
+{
+}
+
+//invalid scaling
+-ObjProp 8 "Scale"
+-ObjProp 60 "Scale"
 
 //doors
 +MetaProp 12 -2420
+ObjProp 25 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+-ObjProp 25 "Scale"
+-ObjProp 37 "Scale"
+-ObjProp 45 "Scale"
+-ObjProp 46 "Scale"
+ObjProp 50 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 126 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 252 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 252 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 252 "PhysType"
++ObjProp 252 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 260 "PhysType"
++ObjProp 260 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 261 "TransDoor"
+{
+	"Closed Position" 4.00
+}
 +ObjProp 261 "BlockFrob"
 {
 	"" true
 }
++ObjProp 261 "Scale"
+{
+	"" 1, 1.5, 1
+}
+ObjProp 261 "Position"
+{
+	"Location" -33.5, 23.25, -3.5
+}
+-ObjProp 261 "PhysType"
++ObjProp 261 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 274 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 274 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 274 "PhysType"
++ObjProp 274 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 308 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 308 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 308 "PhysType"
++ObjProp 308 "PhysType"
+{
+	"Type" OBB
+}
++Receptron 387 "WeaponStim"
+{
+	Min None
+	Max None
+	Effect "Abort"
+}
 -ObjProp 387 "JointPos"
 -ObjProp 388 "JointPos"
+-ObjProp 388 "Scale"
 -ObjProp 479 "JointPos"
 -ObjProp 953 "JointPos"
-
-//shutters
+ObjProp 461 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 461 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 461 "PhysType"
++ObjProp 461 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 485 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 643 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 643 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 643 "PhysType"
++ObjProp 643 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 772 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 772 "Position"
+{
+	"Heading" 8000
+}
+-ObjProp 772 "PhysType"
++ObjProp 772 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 798 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 798 "Position"
+{
+	"Heading" c000
+}
+-ObjProp 798 "PhysType"
++ObjProp 798 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 799 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
+ObjProp 806 "RotDoor"
+{
+	"Open Angle" 90
+	"Clockwise?" false
+}
 +Link 886 918 "ScriptParams"
 {
 	"" Double
 }
-
-//portcullis
 +ObjProp 916 "FrobInfo"
 {
 }
@@ -142,12 +304,223 @@ FINGERPRINT
 {
 }
 
-//haunts / keys
+//AIs
++ObjProp 97 "AI_ObjPathable"
+{
+	"" true
+}
++ObjProp 734 "AI_Hearing"
+{
+	"" Average
+}
++ObjProp 734 "AI_AlrtRsp"
+{
+	"Alert level" (1) Low
+	"Priority" Absolute
+	"Response: Step 1" Add/Remove Meta-property(Add/Remove,Mprop name,Target Objects)
+	"   Argument 1" Remove
+	"   Argument 2" M-Sleeping Servant
+}
+-Link 734 559 "AIWatchObj"
++ObjProp 625 "PhysType"
+{
+	"Type" Sphere
+}
 +Link 625 291 "Contains"
 {
-	"" Generic Contents
 }
 +Link 628 149 "Contains"
 {
-	"" Generic Contents
+}
++ObjProp 628 "PhysType"
+{
+	"Type" Sphere
+}
++ObjProp 727 "PhysType"
+{
+	"Type" Sphere
+}
++ObjProp 739 "PhysType"
+{
+	"Type" Sphere
+}
++ObjProp 912 "PhysType"
+{
+	"Type" Sphere
+}
++ObjProp 913 "PhysType"
+{
+	"Type" Sphere
+}
+
+//footlockers
++ObjProp 103 "JointPos"
+{
+	"Joint 1" 90.00
+}
+ObjProp 103 "StTweqLock"
+{
+	"AnimS" None
+}
++ObjProp 508 "JointPos"
+{
+	"Joint 1" 90.00
+}
+ObjProp 508 "StTweqLock"
+{
+	"AnimS" None
+}
++ObjProp 596 "JointPos"
+{
+	"Joint 1" 90.00
+}
+ObjProp 596 "StTweqLock"
+{
+	"AnimS" None
+}
++ObjProp 740 "JointPos"
+{
+	"Joint 1" 90.00
+}
+
+//misplaced objects
+ObjProp 111 "Position"
+{
+	"Location" -15, 31.85, -34
+}
+-ObjProp 290 "PhysType"
++ObjProp 290 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 504 "PhysType"
++ObjProp 504 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 537 "Position"
+{
+	"Location" -54.6, -46.19, -22.1
+}
+ObjProp 687 "Position"
+{
+	"Location" 44.6, -41, -21
+}
+-ObjProp 975 "PhysType"
++ObjProp 975 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 977 "PhysType"
++ObjProp 977 "PhysType"
+{
+	"Type" OBB
+}
+-ObjProp 989 "PhysType"
++ObjProp 989 "PhysType"
+{
+	"Type" OBB
+}
+
+//keys
++ObjProp 159 "StackCount"
+{
+}
++ObjProp 521 "StackCount"
+{
+}
++ObjProp 682 "StackCount"
+{
+}
++ObjProp 694 "StackCount"
+{
+}
++ObjProp 925 "StackCount"
+{
+}
+
+//banners
++ObjProp 169 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 472 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 535 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 535 "BlockFrob"
+{
+	"" true
+}
+-ObjProp 535 "PhysType"
++ObjProp 535 "PhysType"
+{
+	"Type" OBB
+}
++ObjProp 661 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 753 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 760 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 762 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 829 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 830 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 954 "SlayResult"
+{
+	"Effect" Destroy
+}
++ObjProp 955 "SlayResult"
+{
+	"Effect" Destroy
+}
+
+//switches
+ObjProp 603 "Position"
+{
+	"Location" 37.5, 11.175, -30.5
+}
+-ObjProp 603 "PhysType"
++ObjProp 603 "PhysType"
+{
+	"Type" OBB
+}
+ObjProp 698 "StTweqJoints"
+{
+	"AnimS" None
+	"Joint1AnimS" None
+}
+-Link 966 261 "ControlDevice"
+-Link 698 966 "ControlDevice"
++Link 698 261 "ControlDevice"
+{
+}
+-Link 873 12 "ControlDevice"
+-Link 749 873 "ControlDevice"
++Link 749 12 "ControlDevice"
+{
+}
+ObjProp 749 "StTweqJoints"
+{
+	"AnimS" None
+	"Joint1AnimS" None
 }
