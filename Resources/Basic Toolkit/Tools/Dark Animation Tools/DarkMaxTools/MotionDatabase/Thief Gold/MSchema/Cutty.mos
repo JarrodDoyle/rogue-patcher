@@ -1,0 +1,50 @@
+
+global Cutty 0
+torso  Biped
+
+schema Stand 0
+MType  GroundAction
+TimeScale 1.7
+XYZScale  0
+motion cutty2     4  500
+
+schema IdleGesture 0
+MType  GroundAction
+TimeScale 1.7
+XYZScale  0
+motion cutty2     4  500
+motion cutty     4  500
+
+schema Crumple 0
+MType  GroundAction
+TimeScale 1.7
+XYZScale  0
+motion cutty3     4  500
+
+schema Discover 0
+MType  GroundAction
+TimeScale 1.7
+XYZScale  0
+motion cutty2     4  500
+motion cutty     4  500
+
+schema Discover 0, Thwarted 0
+MType  GroundAction
+TimeScale 1.7
+XYZScale  0
+motion cutty2     4  500
+motion cutty     4  500
+
+schema Locomote 0
+MType  GroundAction
+TimeScale 1.7
+XYZScale  0
+motion cutty2     4  500
+motion cutty     4  500
+
+schema Search 0
+MType  GroundAction
+TimeScale 1.7
+XYZScale  0
+motion cutty2     4  500
+motion cutty     4  500

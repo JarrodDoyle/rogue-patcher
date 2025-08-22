@@ -1,0 +1,51 @@
+
+torso  Biped
+
+schema AdvBow 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH313001     4  500              // Bow pull from pointing down to aiming, nice
+
+schema AdvBow 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH313002     4  500              // Same motion, but aims across body to left
+
+schema AdvBow 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH313005     4  500              // Pulls arrow from quiver, loads bow
+
+schema AdvBow 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH313007     4  500              // After a shot, reaches back for another arrow
+
+schema AdvBow 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH313010     4  500              // Stand with bow
+
+schema AdvBow 5
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH313011     4  500              // Draws bow back, no motion tags
+
+schema AdvBow 6
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH313012     4  500              // Releases arrow
+
+schema AdvBow 7
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH313013     4  500              // In released arrow pose, feet move funny
+

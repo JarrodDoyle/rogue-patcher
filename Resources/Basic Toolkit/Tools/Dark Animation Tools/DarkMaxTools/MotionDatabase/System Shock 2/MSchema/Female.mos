@@ -1,0 +1,75 @@
+
+global Female 0
+torso  Biped
+
+schema PlaySpecMotion 0, Female 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion fembakup     0  500
+motion femdichr     0  500
+motion femtalk1a     0  500
+motion femtalk1b     0  500
+motion femtalk1c     0  500
+motion femtalk2a     0  500
+motion femtalk2b     0  500
+motion femtalk2c     0  500
+motion femturnh     0  500
+motion fembound     0  500
+
+schema Crumple 0, Female 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femdief1     0  500
+motion femdie2     0  500
+
+schema IdleGesture 0, Female 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femidle1a     4  500
+motion bh111048     4  500
+motion bh111048     4  500
+motion humidl5a     4  500
+motion femidle1a     4  500
+motion bh111048     4  500
+motion humidl5a     4  500
+motion bh111048     4  500
+motion humidl5a     4  500
+motion humidl5a     4  500
+motion bh111048     4  500
+motion humidlka     4  500
+motion humidl5d     4  500
+motion bb111000     4  500
+motion bh111048     4  500
+motion bh111001     4  500
+motion bh111048     4  500
+motion bh111005     4  500
+motion bh111048     4  500
+motion bh111048     4  500
+motion bh112020     4  500
+motion bh112502     4  500
+motion bh114001     4  500
+motion bh114003     4  500
+motion bh114004     4  500
+motion bh114005     4  500
+motion bh114006     4  500
+motion bh114007     4  500
+motion bh114008     4  500
+motion bh114009     4  500
+motion bh111048     4  500
+
+schema Locomote 0, Female 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion humunwlkl     0  70
+motion humunwlkr     0  70
+
+schema Locomote 0, LocoUrgent 0, Female 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion femrsclt     0  500
+motion femrscrt     0  500

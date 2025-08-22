@@ -1,0 +1,121 @@
+
+torso  PlayerArm
+
+schema Test 0
+MType  PlayerMelee
+TimeScale 0
+XYZScale  0
+motion camSynch     0  0
+
+schema PlyrMelee 0
+MType  PlayerMelee
+TimeScale -4.0
+XYZScale  0
+motion camSynch     0  0
+motion ph212203     0  500
+
+schema PlyrMelee 3
+MType  PlayerMelee
+TimeScale 2
+XYZScale  0
+motion camSynch     0  0
+motion GBMID     0  500
+
+schema Direction 6, PlyrMelee 6
+MType  PlayerMelee
+TimeScale 0
+XYZScale  0
+motion camSynch     0  0
+motion GBLO     0  500
+
+schema Direction 5, PlyrMelee 6
+MType  PlayerMelee
+TimeScale 0
+XYZScale  0
+motion camSynch     0  0
+motion GBHI     0  500
+
+
+schema Direction 1, PlyrMelee 6
+MType  PlayerMelee
+TimeScale 0
+XYZScale  0
+motion camSynch     0  0
+motion GBLF     0  500
+
+schema Direction 2, PlyrMelee 6
+MType  PlayerMelee
+TimeScale 0
+XYZScale  0
+motion camSynch     0  0
+motion GBRT     0  500
+
+schema PlyrMelee 1, PlyrMeleeSwing 0
+MType  PlayerMelee
+TimeScale 5
+XYZScale  0
+motion camSynch     0  0
+motion midwup     0  800
+
+schema PlyrMelee 2, PlyrMeleeSwing 0
+MType  PlayerMelee
+TimeScale 0.2
+XYZScale  0
+motion camSynch     0  0
+motion GASLLSW     0  500
+
+schema Direction 1, PlyrMelee 1, PlyrMeleeSwing 1
+MType  PlayerMelee
+TimeScale 1
+XYZScale  0
+motion camSynch     0  0
+motion lefthold     0  1000
+
+schema Direction 2, PlyrMelee 1, PlyrMeleeSwing 1
+MType  PlayerMelee
+TimeScale 1
+XYZScale  0
+motion camSynch     0  0
+motion righthold     0  1000
+
+schema Direction 1, PlyrMelee 2, PlyrMeleeSwing 1
+MType  PlayerMelee
+TimeScale 0.8
+XYZScale  0
+motion camSynch     0  0
+motion leftswing     0  500
+
+schema Direction 2, PlyrMelee 2, PlyrMeleeSwing 1
+MType  PlayerMelee
+TimeScale 0.55
+XYZScale  0
+motion camSynch     0  0
+motion rightswing     0  500
+
+schema PlyrMelee 1, PlyrMeleeSwing 2
+MType  PlayerMelee
+TimeScale 1
+XYZScale  0
+motion camSynch     0  0
+motion highhold     0  800
+
+schema PlyrMelee 2, PlyrMeleeSwing 2
+MType  PlayerMelee
+TimeScale 0.7
+XYZScale  0
+motion camSynch     0  0
+motion highswing     0  500
+
+schema PlyrMelee 4
+MType  PlayerMelee
+TimeScale 0.6
+XYZScale  0
+motion camSynch     0  0
+motion ph212202     0  500
+
+schema PlyrMelee 5
+MType  PlayerMelee
+TimeScale 0.6
+XYZScale  0
+motion camSynch     0  0
+motion ph212205     0  500

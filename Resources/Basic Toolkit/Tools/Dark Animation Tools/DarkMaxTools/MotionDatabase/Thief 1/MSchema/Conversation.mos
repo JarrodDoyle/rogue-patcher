@@ -1,0 +1,75 @@
+
+global Conversation 0
+torso  Biped
+
+schema Foo 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH414737     0  500
+
+schema Bar 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113501     0  500
+
+schema Stand 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH414155     0  500
+
+schema Baz 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114730     0  500
+
+schema Foo 0, Bar 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112027     0  500
+
+schema Foo 0, Baz 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114012     0  500
+
+schema Bar 0, Baz 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114010     0  500
+
+schema Foo 0, Bar 0, Baz 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112015     4  500
+
+schema Quux 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114004     0  500
+
+schema Foo 0, Quux 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114001     0  500
+
+schema Bar 0, Quux 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114003     0  500
+
+schema Baz 0, Quux 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH214157     0  500

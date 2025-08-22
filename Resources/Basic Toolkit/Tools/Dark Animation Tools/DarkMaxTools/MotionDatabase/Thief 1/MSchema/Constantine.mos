@@ -1,0 +1,62 @@
+
+global Constantine 0
+torso  Constantine
+
+schema Locomote 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion CN111010     0  0
+motion CN111011     0  0
+
+schema RangedCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion CN113001     0  500
+
+schema Stand 0
+MType  StandWithTurns
+TimeScale 0
+XYZScale  0
+motion CN111001     4  500
+motion CN111210     2  500
+motion CN111211     2  500
+motion CN111213     2  500
+
+schema Stand 0, Wheel 0
+MType  StandWithTurns
+TimeScale 0.7
+XYZScale  0
+motion CN111001     4  500
+motion CN111210     2  500
+motion CN111211     2  500
+motion CN111213     2  500
+
+schema IdleGesture 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion CN111002     4  500
+motion CN111003     4  500
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion CN114100     0  500
+motion CN114110     0  500
+motion CN114120     0  500
+motion CN1141oo     0  0
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion CN114200     4  500
+
+schema Crumple 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion CN113700     0  500

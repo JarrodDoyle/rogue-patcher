@@ -1,0 +1,43 @@
+
+torso  Biped
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion cpsldw1     0  500
+motion cpsldw2     0  500
+motion cpsldw3     0  500
+motion cpsldw4     0  500
+motion cpsldw5     0  500
+motion cpsldw6     0  500
+motion cpsldw7     0  500
+motion cpsldw8     0  500
+motion humdieup1     0  500
+motion humcpsu1     0  500
+motion humdie3     0  500
+motion humdie3a     0  500
+motion humdie3b     0  500
+motion humdie3c     0  500
+motion humcrytups     0  500
+motion humcpssit     0  500
+motion humdie01ps     0  500
+motion humdiedn1     0  500
+motion humdiedn2     0  500
+motion humdiedn3     0  500
+motion humdiedn4     0  500
+motion humdiedn5     0  500
+motion humdieup1     0  500
+motion humdieup2     0  500
+motion humdieup3     0  500
+motion humdieup4     0  500
+motion humdieup5     0  500
+motion humcpsschr     0  500
+motion cpssit2     0  500
+motion cpssit3     0  500
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion rmbleapf     0  500

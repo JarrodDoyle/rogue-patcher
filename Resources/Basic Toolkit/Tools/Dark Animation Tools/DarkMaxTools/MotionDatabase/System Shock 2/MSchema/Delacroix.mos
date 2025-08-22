@@ -1,0 +1,47 @@
+
+global Delacroix 0
+torso  Biped
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delmlstd     0  500
+
+schema Stand 0, MeleeCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delmlstd     0  500
+
+schema MeleeCombat 0, Attack 0
+MType  MeleeCombat
+TimeScale 0
+XYZScale  0
+motion delmlstd     0  500
+motion delmelat     0  500
+
+schema MeleeCombat 0, SpecialAttack 0
+MType  MeleeCombat
+TimeScale 0
+XYZScale  0
+motion delmlstd     0  500
+motion delmelat     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delmelsl     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delmelsr     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 4
+MType  GroundAction
+TimeScale 0.7
+XYZScale  2.9
+motion delmelbu     0  500

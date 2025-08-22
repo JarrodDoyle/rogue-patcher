@@ -1,0 +1,211 @@
+
+torso  Biped
+
+//     Throwing motions
+
+schema Throw 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114700     4  500
+
+schema Throw 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114701     4  500
+
+schema Throw 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion oggshot2     4  500
+
+schema Throw 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion oggshot3     4  500
+
+//     Crouch down and up
+
+schema Crouching 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plycrchd     0  500        // Crouch down in place, mapped as Conv 42
+
+schema Crouching 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plycrchu     0  500        // Comes up out of crouch
+
+//     Kicks
+
+schema Kick 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgdob1    4 500         // Kicks trash (or small animal) with right foot
+
+schema Kick 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgdob2    4 500         // Harder kick with right foot, more wind up
+
+schema Kick 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgdob3    4 500         // Big kick with right foot, nice wind up
+
+schema Kick 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgdob4    4 500         // Really big kick. Going for the extra point!
+
+schema Kick 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgrob    4 500         // Short, vicious kick
+
+//     Directing (a boat, or unloading cargo)
+
+schema Direct 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humairpt1   4 500         // Directing an airplane, or unloading a crate
+
+schema Direct 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humairpt2   4 500         // Raises both arms, like the boat lined up
+
+schema Direct 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humairpt3   4 500         // Directing to the left
+
+schema Direct 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humairpt4   4 500         // Directing to right
+
+//     GetUp - from floor. Additional ones added to Zombie
+
+schema GetUp 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogggetup    0  500        // From lying down, goes to hands and knees, then knees, then stands
+
+schema GetUp 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpgetup    0  500        // Gets up from lying down, quicker than ogggetup
+
+schema GetUp 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BZ113801    0  500        // Gets up off floor (nice) into standard position (humans)
+
+//     Various Salutes
+
+schema Salute 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114736     4  500
+
+schema Salute 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114737     4  500
+
+schema Salute 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114738     4  500
+
+schema Salute 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114739     4  500
+
+schema Salute 5
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute1     4  500            // Big, rotating salute with right hand
+
+schema Salute 6
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute2     4  500            // Slow, funny sort of bow
+
+schema Salute 7
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute3     4  500            // Fancy bow / salute
+
+schema Salute 8
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute4     4  500            // Dance humping
+
+schema Salute 9
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute5     4  500            // Slow, military salute
+
+//     Knocking at a door
+
+schema Knock 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion oggchlng       4  500
+
+schema Knock 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114722       4  500            // Raises left hand, knock on door twice
+
+schema Knock 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114723       4  500            // Same, but knocks 5 times, faster
+
+schema Knock 1, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH214722       4  500            // Raises left hand, knock on door twice
+
+schema Knock 2, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH214723       4  500            // Same, but knocks 5 times, faster
+
+
+

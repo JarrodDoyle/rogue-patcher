@@ -1,0 +1,71 @@
+
+torso  Biped
+
+schema Stalled 0, Blinded 0
+MType  GroundAction
+TimeScale 0
+XYZScale  3.25
+motion BH113600     0  500
+
+schema Stalled 0, Blinded 0, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH213600     0  500
+
+schema Stalled 0, Flail 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113601     0  500
+motion BH113610     0  500
+
+schema Stalled 0, Stunned 0, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH213602     0  500
+
+schema Stalled 0, Stunned 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH213605     0  500
+motion BH113670     0  500
+
+schema Stalled 0, Rebalance 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113611     0  500
+
+schema Stalled 0, Flail 0, InWater 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113612     0  500
+
+schema Stalled 0, Poisoned 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113650     0  500
+motion BH113651     0  500
+
+schema Stalled 0, Stunned 0, Long 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113671     0  500
+
+schema Stalled 0, Blinded 0, Foo 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113602     0  500
+
+schema Stalled 0, Blinded 0, Bar 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113603     0  500

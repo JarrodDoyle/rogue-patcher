@@ -1,0 +1,135 @@
+
+torso  Biped
+
+schema Jumping 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plyjmpup1    0  500
+
+schema Jumping 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plyjmpbk     0  500
+
+schema Jumping 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plyjmpfw     0  500
+
+schema Jumping 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plyrjmpf     0  500
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion rmbleapf     0  500
+
+schema Jumping 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion rmbleapf     0  500
+
+//  Sort of a forward leap dance step
+
+schema Jumping 5
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humjumpf     0  500
+
+//  From a crouch, jump up and dodge right
+
+schema Jumping 6
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkleap     0  500
+
+//  More natural looking jumps
+
+schema Jumping 7
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH111400    0  500             // Human leap, lands low, returns to standing
+
+schema Jumping 8
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH111401    0  500             // Human leap, doesn't land as low
+
+schema Jumping 9
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH111403    0  500             // Human leap, mostly upright
+
+schema Jumping 10
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH111404    0  500             // Human leap, mostly upright
+
+//  More natural looking jumps, meant to be with a sword in hand
+
+schema Jumping 7, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH211400    0  500             // Human leap, lands low, returns to standing
+
+schema Jumping 8, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH211401    0  500             // Human leap, doesn't land as low
+
+schema Jumping 9, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH211403    0  500             // Human leap, mostly upright
+
+schema Jumping 10, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH211404    0  500             // Human leap, mostly upright
+
+
+//     Landings, or getting up from crouches
+
+schema Landing 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH111405    0  500
+
+schema Landing 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH111402    0  500
+
+schema Landing 0, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH211405    0  500
+
+schema Landing 1, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion  BH211402    0  500
+
+

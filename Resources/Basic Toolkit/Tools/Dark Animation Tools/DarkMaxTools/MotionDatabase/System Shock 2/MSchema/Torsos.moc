@@ -1,0 +1,9 @@
+//  Torsos. Each motion belongs to a torso set. I believe the order
+//  of these is important.
+
+
+torso Biped
+torso PlayerArm
+torso Droid
+torso Overlord
+torso Spider

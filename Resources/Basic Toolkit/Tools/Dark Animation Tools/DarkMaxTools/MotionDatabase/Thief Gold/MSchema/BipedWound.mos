@@ -1,0 +1,39 @@
+
+torso  Biped
+
+schema ReceiveWound 0, Direction 8
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113550     0  500
+
+schema ReceiveWound 0, Direction 7
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113501     0  500
+motion BH113502     0  500
+motion BH113503     0  500
+
+schema ReceiveWound 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113501     0  500
+
+schema ReceiveWound 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113520     0  500
+motion BH113521     0  500
+motion BH113522     0  500
+
+schema ReceiveWound 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113510     0  500
+motion BH113511     0  500
+motion BH113512     0  500
+motion BH113540     0  500

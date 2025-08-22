@@ -1,0 +1,143 @@
+
+global Ninja 0
+torso Biped
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njamelstd     4  500
+motion njadodge     0  500
+
+schema Locomote 0, LocoUrgent 0
+MType  GroundLocoPair
+TimeScale 0.4
+XYZScale  1.6
+motion njarunlt     0  0
+motion njarunrt     0  0
+
+schema Locomote 0
+MType  GroundLocoPair
+TimeScale 0.8
+XYZScale  0
+motion njawlklt     0  0
+motion njawlkrt     0  0
+
+schema Stalled 0, Stun 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njastun     0  500
+
+schema Crumple 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njadie2     0  500
+motion njadie3     0  500
+
+schema MeleeCombat 0, Attack 0
+MType  MeleeCombat
+TimeScale 0
+XYZScale  0
+motion njamelstd     4  500
+motion njamelat     0  500
+
+schema Stand 0, MeleeCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njamelstd     4  500
+
+schema Stand 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njamelstd     4  500
+
+schema ReceiveWound 0, MeleeCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njarewdf     0  500
+motion njarewnd2     0  500
+
+schema ReceiveWound 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njarewdf     0  500
+motion njarewnd2     0  500
+
+schema RangedCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njarngat1     0  500
+motion njarngat3     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelad     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelsl     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelsr     0  500
+
+schema Discover 0, Challenge 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njachlng     0  500
+
+schema Search 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njaserch     0  500
+
+schema Locomote 0, Search 0
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  0
+motion njaswalk     0  500
+
+schema Locomote 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelsl     0  500
+
+schema Locomote 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelsr     0  500
+
+schema Locomote 0, Direction 4
+MType  GroundAction
+TimeScale 0.5
+XYZScale  2.5
+motion mdwmelbu     0  0
+
+schema Locomote 0, MeleeCombat 0, Direction 4
+MType  GroundAction
+TimeScale 0.5
+XYZScale  2.5
+motion mdwmelbu     0  0
+
+schema IdleGesture 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njaidle     4  500

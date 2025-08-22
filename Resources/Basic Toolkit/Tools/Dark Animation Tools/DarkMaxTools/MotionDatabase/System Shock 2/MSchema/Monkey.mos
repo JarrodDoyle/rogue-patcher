@@ -1,0 +1,136 @@
+
+global Monkey 0
+torso  Biped
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkystd2     4  500
+
+schema Discover 0, Challenge 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkychlng     0  500
+motion zkychlng2     0  500
+
+schema Crumple 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkydie1     0  500
+motion zkydie3     0  500
+
+schema Stand 0, MeleeCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkystd2     4  500
+
+schema MeleeCombat 0, Attack 0
+MType  MeleeCombat
+TimeScale 0
+XYZScale  0
+motion zkystd2     4  500
+motion zkymela1     0  500
+motion zkymel2     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkymelbu     0  500
+
+schema Locomote 0, Direction 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkymelbu     0  500
+
+schema RangedCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyrngat1     4  500
+motion zkyrngat2     4  500
+motion zkyrgat3     4  500
+
+schema Search 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyserch     0  500
+
+schema Stalled 0, Stun 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkystun     0  500
+
+schema Stand 0
+MType  StandWithTurns
+TimeScale 0
+XYZScale  0
+motion zkylong     0  100
+motion zkytu90l     2  100
+motion zkytu90r     2  100
+motion zkytu180     2  100
+
+schema Locomote 0, LocoUrgent 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  1.6
+motion zkyrunlt     0  0
+motion zkyrunrt     0  500
+
+schema Locomote 0
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  1.6
+motion zkywlk     0  0
+
+schema Locomote 0, MeleeCombat 0, Direction 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkymelad     0  500
+
+schema Discover 0, Thwarted 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkythwtd     0  500
+
+schema Locomote 0, Search 0
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  0
+motion zkyswalk     0  500
+
+schema IdleGesture 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyidle1     4  100
+motion zkyidle2     4  100
+
+schema ReceiveWound 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyrwd1     0  500
+motion zkyrwd2     0  500
+motion zkyrwd3     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyhopr     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyhopl     0  500

@@ -1,0 +1,54 @@
+
+torso  Biped
+
+schema Locomote 0, WithSword 0, Nothing 0
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  5
+motion float     0  500
+
+schema Locomote 0, MeleeCombat 0, WithSword 0, Nothing 0
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  5
+
+schema Locomote 0, WithBow 0, Nothing 0
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  5
+motion float     0  500
+
+schema Locomote 0, MeleeCombat 0, WithBow 0, Nothing 0
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  5
+
+schema Locomote 0, MeleeCombat 0, Direction 4, Doof 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion advanceback     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 4, WithSword 0, Doof 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion advanceback     0  500
+
+schema Crumple 0, Ballerina 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion twirl2     0  500
+
+schema Locomote 0, GoNowhere 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion BKskid2     0  500
+motion BKskid1     0  500
+
+schema Crumple 0, NoFall 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0

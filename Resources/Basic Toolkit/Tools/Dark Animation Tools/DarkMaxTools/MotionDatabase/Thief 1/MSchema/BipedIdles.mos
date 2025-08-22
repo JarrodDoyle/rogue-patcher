@@ -1,0 +1,27 @@
+
+torso  Biped
+
+schema IdleGesture 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112001     4  500
+motion BH114153     4  500
+motion BH114201     4  500
+motion BH111001     4  500
+motion BH114152     4  500
+motion BH114155     4  500
+motion BH112015     4  500
+motion BH112502     4  500
+motion BH111005     4  500
+
+schema IdleGesture 0, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH111001     4  500
+motion BH114152     4  500
+motion BH114155     4  500
+motion BH112015     4  500
+motion BH112502     4  500
+motion BH111005     4  500

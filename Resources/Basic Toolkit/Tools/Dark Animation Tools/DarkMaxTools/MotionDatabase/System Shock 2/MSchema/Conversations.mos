@@ -1,0 +1,1266 @@
+
+torso  Biped
+
+schema CS 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion s42c6x     0  500
+
+schema CS 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion rmbleapf     0  500
+
+schema CS 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion pdrtalk2c     4  500
+
+schema CS 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion pdrtalk2b     4  500
+
+schema CS 5
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion pdrtalk2a     4  500
+
+schema CS 6
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion pdrtalk1     4  500
+
+schema CS 7
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpwlkrt     0  500
+
+schema CS 8
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpwlklt     0  500
+
+schema CS 9
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpturn     6  500
+
+schema CS 11
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmelrc     0  500
+
+schema CS 12
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmeloh     0  500
+
+schema CS 13
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmellc     0  500
+
+schema CS 14
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmela2     0  500
+
+schema CS 15
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmela1     0  500
+
+schema CS 16
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwwlkrt     0  500
+
+schema CS 17
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwwlklt     0  500
+
+schema CS 18
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwtu180     6  500
+
+schema CS 19
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwpttrn     0  500
+
+schema CS 20
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelad     0  500
+
+schema CS 21
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwidle2     4  500
+
+schema CS 22
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion hung     0  500
+
+schema CS 23
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwlkgn     0  500
+
+schema CS 24
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtlkem     0  500
+
+schema CS 25
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtalk3a     0  500
+
+schema CS 26
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtalk2f     0  500
+
+schema CS 27
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtalk2e     0  500
+
+schema CS 28
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtalk2d     0  500
+
+schema CS 29
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema CS 30
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humswich     0  500
+
+schema CS 31
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsick5     0  500
+
+schema CS 32
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsick4     0  500
+
+schema CS 33
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsick3     0  500
+
+schema CS 34
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsick2     0  500
+
+schema CS 35
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humshtsh     0  500
+
+schema CS 36
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humshthp     0  500
+
+schema CS 37
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humshake     0  500
+
+schema CS 38
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humrunbl     0  500
+
+schema CS 39
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humpoint     0  500
+
+schema CS 40
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkleap     0  500
+
+schema CS 41
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humidl02     4  500
+
+schema CS 42
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humhtpsi     0  500
+
+schema CS 43
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdthtk     0  500
+
+schema CS 44
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdie1     0  500
+
+schema CS 45
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcstrl     0  500
+
+schema CS 46
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcs22     0  500
+
+schema CS 47
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbakup     0  500
+
+schema CS 48
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humunwlkr     0  70
+
+schema CS 49
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humunwlkl     0  70
+
+schema CS 50
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femturnh     0  500
+
+schema CS 51
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femtalk2c     0  500
+
+schema CS 52
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femtalk2b     0  500
+
+schema CS 53
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femtalk2a     0  500
+
+schema CS 54
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femtalk1c     0  500
+
+schema CS 55
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femtalk1b     0  500
+
+schema CS 56
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femtalk1a     0  500
+
+schema CS 57
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femrscrt     0  500
+
+schema CS 58
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femrsclt     0  500
+
+schema CS 59
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humidl02     4  500
+
+schema CS 60
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humidl5b     4  500
+
+schema CS 61
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femidle1a     4  500
+
+schema CS 62
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femdief1     0  500
+
+schema CS 63
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femdie2     0  500
+
+schema CS 64
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femdichr     0  500
+
+schema CS 65
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion fembound     0  500
+
+schema CS 66
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion fembakup     0  500
+
+schema CS 67
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delmelsr     0  500
+
+schema CS 68
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delmelsl     0  500
+
+schema CS 69
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delmelbu     0  500
+
+schema CS 70
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delmelat     0  500
+
+schema CS 71
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion cpssitc1     0  500
+
+schema CS 72
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion cpsreach     0  500
+
+schema CS 73
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion cpsldw2     0  500
+
+schema CS 74
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion cpsldw1     0  500
+
+schema CS 75
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delcurse     0  500
+
+schema CS 76
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delrelnt     0  500
+
+schema CS 77
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbaby     0  500
+
+schema CS 78
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcpsch     0  500
+
+schema CS 79
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcraps     0  500
+
+schema CS 80
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcrawl     0  500
+
+schema CS 81
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdrink     0  500
+
+schema CS 82
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsrprs     0  500
+
+schema CS 83
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humstslf     0  500
+
+schema CS 84
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtears     0  500
+
+schema CS 85
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwratvr     0  500
+
+schema CS 86
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrbegg     0  500
+
+schema CS 87
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion pdrtalk2     4  500
+
+schema CS 88
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion pdrtalk3     4  500
+
+schema CS 89
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  0
+motion valwlk     0  500
+
+schema CS 90
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humraarm     0  500
+
+schema CS 91
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk     0  500
+
+schema CS 92
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwwlklt     0  500
+
+schema CS 93
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema CS 94
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humswlk     0  500
+
+schema CS 95
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humctwl     0  500
+
+schema CS 96
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwlkwy     0  500
+
+schema CS 97
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humfreak     0  500
+
+schema CS 98
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion deldial     0  500
+
+schema CS 99
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humstocytb     0  500
+
+schema CS 100
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrunlt     0  0
+
+schema CS 101
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrunrt     0  0
+
+schema CS 102
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsing     0  500
+
+schema CS 103
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humstslfps     0  500
+
+schema CS 104
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femrscream     0  500
+
+schema CS 105
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humhitblt     0  500
+
+schema CS 106
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humhitshtgn     0  500
+
+schema CS 107
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbball     0  500
+
+schema CS 108
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humshower     0  500
+
+schema CS 109
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humboogie     0  500
+
+schema CS 110
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humhithipnl     0  500
+
+schema CS 111
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humhithipnl     0  500
+
+schema CS 112
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcryh2o     0  500
+
+schema CS 113
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsupstbk     0  500
+
+schema CS 114
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion cpsldw8     0  500
+
+schema CS 115
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humblkt     0  500
+
+schema CS 116
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtypew     0  500
+
+schema CS 117
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humidl5b     4  500
+
+schema CS 118
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humidl5c     4  500
+
+schema CS 119
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtalk2a     0  500
+
+schema CS 120
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humfeel     0  500
+
+schema CS 121
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion macarena     0  500
+
+schema CS 122
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdthtkps     0  500
+
+schema CS 123
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdrnkst     0  500
+
+schema CS 124
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mbdthch     0  500
+
+schema CS 125
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humunwlk     0  0
+
+schema CS 126
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humunrun     0  0
+
+schema CS 127
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH413004     0  500
+
+schema CS 128
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humctdie     0  500
+
+schema CS 129
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdrkbr     0  500
+
+schema CS 130
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humswarm     0  500
+
+schema CS 131
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion rmbplace     0  0
+
+schema CS 132
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humuntu180     6  500
+
+schema CS 133
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgdob1     0  500
+
+schema CS 134
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgdob2     0  500
+
+schema CS 135
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgdob3     0  500
+
+schema CS 136
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgdob4     0  500
+
+schema CS 137
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwshct1     0  500
+
+schema CS 138
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwshct2     0  500
+
+schema CS 139
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk1     0  500
+
+schema CS 140
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk1a     0  500
+
+schema CS 141
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk1b     0  500
+
+schema CS 142
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk1c     0  500
+
+schema CS 143
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk2a     0  500
+
+schema CS 144
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk2b     0  500
+
+schema CS 145
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk2c     0  500
+
+schema CS 146
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk2c     0  500
+
+schema CS 147
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shotalk2     0  500
+
+schema CS 148
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plybreth     0  500
+
+schema CS 149
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogphlpme1     4  500
+
+schema CS 150
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogphlpme2     0  500
+
+schema CS 151
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion rmbdie1     0  500
+
+schema CS 152
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion cortez     0  500
+
+schema CS 153
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion fembar     0  500
+
+schema CS 154
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humairpt1     0  500
+
+schema CS 155
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbar     0  500
+
+schema CS 156
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbbl     0  500
+
+schema CS 157
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbrav     0  500
+
+schema CS 158
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humexpd     0  500
+
+schema CS 159
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion rmbpaw     0  500
+
+schema CS 160
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delbeam     0  500
+
+schema CS 161
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion deldie     0  500
+
+schema CS 162
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion digdie     0  500
+
+schema CS 163
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion digtalk     0  500
+
+schema CS 164
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbakst     0  500
+
+schema CS 165
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbuts     0  500
+
+schema CS 166
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcpsschr     0  500
+
+schema CS 167
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humlbut     0  500
+
+schema CS 168
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humrepl     0  500
+
+schema CS 169
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humairpt2     0  500
+
+schema CS 170
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humairpt3     0  500
+
+schema CS 171
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humairpt4     0  500
+
+schema CS 172
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtyp1     0  500
+
+schema CS 173
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtyp2     0  500
+
+schema CS 174
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtyp3     0  500
+
+schema CS 175
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtyp4     0  500
+
+schema CS 176
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcpssit     0  500
+
+schema CS 177
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtu180     6  500
+
+schema CS 178
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtul     6  500
+
+schema CS 179
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtur     6  500
+
+schema CS 180
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwach     0  500
+
+schema CS 181
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmelat1     0  500
+
+schema CS 182
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwcareg     0  500
+
+schema CS 183
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion sholaf     0  500
+
+schema CS 184
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcov     0  500
+
+schema CS 185
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  0
+motion humflee     0  0
+
+schema CS 186
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humkgrob     0  500
+
+schema CS 187
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyspin     0  500
+
+schema CS 188
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyspncg     0  500
+
+schema CS 189
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyidle1     4  100
+
+schema CS 190
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zkyidle2     4  100
+
+schema CS 191
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogphtgd2     0  500
+
+schema CS 192
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humfetal     0  500
+
+schema CS 193
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  0
+motion mdwstalk     0  500
+
+schema CS 194
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  0
+motion ogpsmwlk     0  50
+
+schema CS 195
+MType  GroundLocoSngle
+TimeScale 0
+XYZScale  0
+motion ogpbzwlk     0  50
+
+schema CS 196
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plyscare     0  500
+
+schema CS 197
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmelbu     0  500
+
+schema CS 198
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plystand     4  500
+
+schema CS 199
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute1     0  500
+
+schema CS 200
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute2     0  500
+
+schema CS 201
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute3     0  500
+
+schema CS 202
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute4     0  500
+
+schema CS 203
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsalute5     0  500
+
+schema CS 204
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdierun     0  500
+
+schema CS 205
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdcard     0  500
+
+schema CS 206
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humidlka     4  500
+
+schema CS 207
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdie01     0  500
+
+schema CS 208
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdie2     0  500
+
+schema CS 209
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdieup1     0  500
+
+schema CS 210
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdie3     0  500
+
+schema CS 211
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femb2     0  500
+
+schema CS 212
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femb3     0  500

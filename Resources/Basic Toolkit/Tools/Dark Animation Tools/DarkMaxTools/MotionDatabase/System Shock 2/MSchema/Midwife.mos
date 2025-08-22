@@ -1,0 +1,180 @@
+
+global Midwife 0
+torso  Biped
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwaltbh     0  500
+motion mdwpwrup     0  500
+motion mdwpttrn     0  500
+
+schema Stand 0
+MType  StandWithTurns
+TimeScale 0
+XYZScale  0
+motion mdwstd     4  500
+motion humuntu90l     6  500
+motion humuntu90r     6  500
+motion humuntu180     6  500
+
+schema Search 0, Scan 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwserch     0  500
+
+schema Discover 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwfrob     0  500
+
+schema Discover 0, Thwarted 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114730     0  500
+
+schema ReceiveWound 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrewdo     0  500
+motion mdwrewdb     0  500
+motion mdwrewdf     0  500
+motion mdwrwnd1     0  500
+motion mdwrwnd2     0  500
+motion mdwrwnd3     0  500
+
+schema ReceiveWound 0, MeleeCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrewdo     0  500
+motion mdwrewdb     0  500
+motion mdwrewdf     0  500
+motion mdwrwnd1     0  500
+motion mdwrwnd2     0  500
+motion mdwrwnd3     0  500
+
+schema MeleeCombat 0, Attack 0
+MType  MeleeCombat
+TimeScale 0
+XYZScale  0
+motion mdwmelstd     0  500
+motion mdwmelat1     0  500
+motion mdwmelat2     0  500
+motion mdwmelat3     0  500
+motion mdwmelat4     0  500
+motion mdwmelat5     0  500
+
+schema Stand 0, MeleeCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwstand     0  500
+
+schema RangedCombat 0
+MType  GroundAction
+TimeScale 0.33
+XYZScale  0
+motion mdw1shts     0  500
+motion mdwrngat3     0  500
+motion mdwrngat4     0  500
+
+schema Locomote 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion showlklt     0  0
+motion showlkrt     0  0
+
+schema IdleGesture 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwidle2     4  500
+
+schema Locomote 0, MeleeCombat 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelsl     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelsr     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelbu     0  0
+
+schema Locomote 0, MeleeCombat 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  4
+motion mdwmeld1     0  500
+motion mdwmeld2     0  500
+
+schema Locomote 0, LocoUrgent 0, MeleeCombat 0, Direction 3
+MType  GroundAction
+TimeScale 0
+XYZScale  3.5
+motion mdwmelad     0  500
+
+schema Stalled 0, Stun 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwstun     0  500
+
+schema Locomote 0, LocoUrgent 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion mdwrunlt     0  0
+motion mdwrunrt     0  0
+
+schema Crumple 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwdie2     0  500
+motion humdie1     0  500
+motion humdie3     0  500
+
+schema Discover 0, Challenge 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Locomote 0, Search 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion mdwswalklt     0  0
+motion mdwswalkrt     0  0
+
+schema Locomote 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelsl     0  500
+
+schema Locomote 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwmelsr     0  500
+
+schema Locomote 0, Direction 4
+MType  GroundAction
+TimeScale 0
+XYZScale  2
+motion mdwmelbu     0  0

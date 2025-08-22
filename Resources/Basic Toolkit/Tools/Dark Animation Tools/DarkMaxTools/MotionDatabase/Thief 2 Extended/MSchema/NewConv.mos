@@ -1,0 +1,915 @@
+
+torso  Biped
+
+schema Conv 50
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112203     4  500          // *Sword drawing, already mapped to Misc 3
+
+//BH114001                          // *Cups hands in front of groin, mapped to Conv 10 and Conversation 0, Foo 0, Quux 0
+
+schema Conv 51
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114002     4  500          // Starts with arms folded, slowly returns to normal standing
+
+schema Conv 52
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114011     4  500          // Stands with arms folded, nods 3 times, long sequence
+
+schema Conv 53
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114100     4  500          // Starts with arms folded, returns to normal standing (quicker than BH114002)
+
+schema Conv 54
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114150     4  500          // With arms folded, shakes head no
+
+schema Conv 55
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114007     4  500          // Starts with arms folded, goes to hands on hips
+
+//BH114003                          // *Stands with arms folded, mapped to Conv 11 and Conversation 0, Bar 0, Quux 0
+//BH114004                          // *Puts hands behind back, mapped to Conv 9 and Conversation 0, Quux 0
+
+schema Conv 56
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114005     4  500          // Starts with hands behind back, returns to normal pose
+
+schema Conv 57
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114006     4  500          // Stands with hands behind back, nods slightly
+
+schema Conv 58
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114008     4  500          // Stands with hands on hips
+
+schema Conv 59
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114151     4  500          // With hands on hips, shakes head no
+
+//BH114010                          // *Moves hands up and down, already mapped to Conv 7 and Conversation 0, Bar 0, Baz 0
+//BH114012                          // *Simply nods head. Already mapped to Conv 6 and Conversation 0, Foo 0, Baz 0
+
+schema Conv 60
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114120     4  500          // Waves with right hand, shakes head
+
+schema Conv 61
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114009     4  500          // Stands with arms out sideways, bent from elbow
+
+schema Conv 62
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH214111     4  500          // Cupping something in right hand, points with left, shakes head
+
+schema Conv 63
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH214101     4  500          // Cupping something in right hand, extends right hand (low)
+
+schema Conv 64
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH214113     4  500          // Cupping right hand, takes (key?) from belt with left hand
+
+schema Conv 65
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114720     4  500          // left hand pulls something off right hand side, belt level
+
+schema Conv 66
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114721     4  500          // Same as BH114720, but turns head to see - mapped to ReadyItem 0, ItemBow 0
+
+schema Conv 67
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH114157     4  500          // Another "I don't Know" motion
+
+schema Conv 68
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BZ114000     4  500          // Lowers arms from Zombie position to side
+
+schema Conv 69
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BZ114001     4  500          // Raises arms from side to Zombie position
+
+//     Dance floor
+
+schema Conv 70
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zomdanc2     4  500
+
+schema Conv 71
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zomdanc1     4  500
+
+schema Conv 72
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion zomdance     4  500
+
+schema Conv 73
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humboogie    0  500          // Dances while kneeling
+
+schema Conv 74
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion macarena     4  500          // Dance the macarena
+
+schema Conv 75
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion pdrdance     4  500          // Robot like dance
+
+schema Conv 76
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion fembar       4  500          // Female dancing in bar, fixes hair, looks like talking to someone
+
+//     Bar motions
+
+schema Conv 77
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdrkbr       4  500        // Dancing at bar, drinks a shot
+
+schema Conv 78
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbar       4  500          // Holding drink in bar, motions with left hand, then slowly drinks with right.
+
+schema Conv 79
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdrink       4  500        // Sitting on bar stool, eating or drinking.
+
+schema Conv 80
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdrnkst      4  500        // Staggering drunk standing
+
+//     Various backing up motions
+
+schema Conv 81
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humalsnd      4  500        // Jumps back, arms out for balance. On narrow space?
+
+schema Conv 82
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion HUMBAKUP      4  500        // Carefully steps back, arms guarding in front. On narrow space?
+
+schema Conv 83
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion HUMPOINT      4  500        // Backs up and points forward with right hand
+
+schema Conv 84
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsrprs      4  500        // Leaps back, then backs away
+
+schema Conv 85
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsupstbk    4  500        // Violently jumps back from something
+
+schema Conv 86
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion fembakup      4  500        // Steps backward, crouching, as if trying to hold back something
+
+schema Conv 87
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plyscare      4  500        // Walks forward, raises hands, cowers backward
+
+//     Lying down motions
+
+schema Conv 88
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcryh2o     0  500        // Lying on back, begging for water.
+
+schema Conv 89
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion cpsreach      0  500        // Lying on ground, reaches upward with left hand
+
+schema Conv 90
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion bh114325      0  500        // From lying on back, raises upper body on elbows, then looks right
+
+schema Conv 91
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion bh114326      0  500        // From lying on back with upper body up, lies back down (like passing out)
+
+schema Conv 92
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion bh114327      0  500        // Lying on side, raised up on left arm, move right arm around
+
+schema Conv 93
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion bh114328      0  500        // Looks like a continuation of bh114325, moves head like listening
+
+schema Conv 94
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion bh114329      0  500        // Just lying on back, short
+
+schema Conv 95
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion bh114330      0  500        // Just lying on back, short, different orientation
+
+//humdthtk       // Lying face down, begging for help, reaching, then collapses - Conv 21
+
+//    Typing motions (or playing keyboard?)
+
+schema Conv 96
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtyp1      4  500        // Sitting, both hands typing
+
+schema Conv 97
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtyp2      4  500        // Sitting, stopped typing, moves head slightly
+
+schema Conv 98
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtyp3      4  500        // Sitting, extends hands, get ready to type
+
+schema Conv 99
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtyp4      4  500        // Sitting, pulls hands away from keyboard
+
+schema Conv 100
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtypew     4  500        // Stands typing
+
+//     Additional frobbing type motions
+
+schema Conv 101
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbuts      4  500        // Pushes buttons, then pulls lever; at eye level.
+
+schema Conv 102
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcraps     4  500        // Throwing dice at craps table.
+
+schema Conv 103
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcstrl     4  500        // Moves forward, turning right, pushing at panel. Backs up to start.
+
+schema Conv 104
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humlbut      4  500        // Rears back, and taps forward, like tapping someone on the chest
+
+schema Conv 105
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humrepl      4  500        // Push buttons at head level, then reach down and pick up something
+
+schema Conv 106
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion HUMSHTSH     4  500        // Shakes right hand up high
+
+schema Conv 107
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion HUMSWICH     4  500        // Adjusts something at head level, then turns left and pushes button
+
+schema Conv 108
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdw1shts     4  500        // Puts right hand up, as if to halt someone
+
+schema Conv 109
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpchlng5    4  500        // Reaches forward with right hand, pushes buttons
+
+schema Conv 110
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmela2     4  500        // Strikes with right hand, tries to push something away, then looks partly subdued.
+
+schema Conv 111
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humstocytb   0  500        // Looks stunned, looks at right hand, pushes some buttons, then steps forward and falls to knees
+
+//     Motions that involve kneeling (or up / down)
+
+schema Conv 112
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrbegg   0  500        // Kneeling, casting spell or pouring two bottles into something
+
+schema Conv 113
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcov     0  500        // Kneeling and rising motion (shooting from cover)
+
+schema Conv 114
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humfreak   0  500        // Timid walk, kneels, freaks out, pulls hair
+
+schema Conv 115
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humshake   0  500        // Shaking, falls to his knees. (like an earthquake)
+
+schema Conv 116
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsick4   0  500        // Grabs stomach, vomiting. Falls to knees
+
+schema Conv 117
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humtears   0  500        // Crying, falls to knees
+
+schema Conv 118
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwcareg   0  500        // Bends over, looks like petting something.
+
+schema Conv 119
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion s42c6x     0  500        // Walks forward, stops suddenly, looks down and kneels, touches something on the ground, stands up shaking hand (trying to get something off of it)
+
+//     Standing and walking motions
+
+schema Conv 120
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humalert     4  500        // Attentively looking slightly down, like watching a rat
+
+schema Conv 121
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbakst     4  500        // Slides forward with right arm outstretched. Breaks off and steps back.
+
+schema Conv 122
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbrav      4  500        // Bravely pushes away twice, then cowers as looking up at something
+
+schema Conv 123
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdwstr     4  500        // Looks like walking a line quick
+
+schema Conv 124
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humfeel      4  500        // Shakes hands quickly in front of chest
+
+schema Conv 125
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humrunsk     4  500        // Jogging forward, no progress (treadmill?)
+
+schema Conv 126
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humswlk      4  500        // Turns right and left while holding right arm level with belt
+
+schema Conv 127
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion delrelnt     4  500        // Turns slightly to left, raises hands to shoulder height
+
+schema Conv 128
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femturnh     4  500        // Looks like talking, extends both arms at waist to left, then turns right and puts right hand to mouth.
+
+schema Conv 129
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwpttrn     4  500        // Slides left, right arm high and outstretched. Then walks back to start
+
+schema Conv 130
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpchlng4    4  500        // Turns right, holds hands apart (Like: "The fish was that big")
+
+schema Conv 131
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpidle1     4  500        // Looks left, returns to looking straight ahead
+
+schema Conv 132
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpidle2     4  500        // Looks a little startled, looks left and behind, returns to idle
+
+schema Conv 133
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpidle3     4  500        // Looks right and left, confused.
+
+schema Conv 134
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpsmwlk     4  500        // Walking forward slowly, uses right hand to push someone out of the way
+
+schema Conv 135
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogsidle1     4  500        // Nervously looks left
+
+schema Conv 136
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogsidle2     4  500        // Nervously moves around, looking left and right
+
+schema Conv 137
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogsidle3     4  500        // Nervously looks around
+
+schema Conv 138
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogsidle4     4  500        // More nervous idling
+
+schema Conv 139
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion plybreth     4  500        // Looks down, right hand slightly raised, wobbles
+
+schema Conv 140
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humflee     4  500        // Awkward walk, glances behind
+
+schema Conv 141
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humelect    4  500        // Electrocuted, standing
+
+schema Conv 142
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwlkwy    4  500        // Nervous walk, tip toed, defensive.
+
+schema Conv 143
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwlkgn    4  500        // Walks in defensive posture, hands up. Returns to start
+
+schema Conv 144
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpmeldh    4  500        // Reaches over right shoulder with both hands and hurls something away
+
+schema Conv 145
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion oggswalk    4  500        // Walking carefully, looking left and right
+
+schema Conv 146
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogpbzwlk    4  500        // Funny walk
+
+schema Conv 147
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogsserch    4  500        // Walks, looking left, right, and behind
+
+//     Cinematic motions
+
+schema Conv 148
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humbaby      4  500        // Hold baby out to be taken or saved. Keeps reaching out.
+
+schema Conv 149
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion HUMBBALL     0  500        // Dribbles basketball and then shoots
+
+schema Conv 150
+MType  GroundAction
+TimeScale 0.6
+XYZScale  0
+motion humbbl       0  500        // Slowly dribbles basketball, then moves left and right
+
+schema Conv 151
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humcrawl     0  500        // Crawling on hands and knees
+
+schema Conv 152
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdcard     4  500        // Looks like he's checking his pockets, then turns around and looks behind him. Right foot is turned badly.
+
+schema Conv 153
+MType  GroundAction
+TimeScale 0.6
+XYZScale  0
+motion humexpd      0  500        // Reeling from an explosion, slow
+
+schema Conv 154
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humraarm     4  500        // Reacting to attack, rats maybe?
+
+schema Conv 155
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humreothlp   4  500        // Hangs head, extends arms out forward (ok, put the chains on me), then drops them
+
+schema Conv 156
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humshower    4  500        // Taking a shower
+
+schema Conv 157
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsing      4  500        // Head and hands move as if singing
+
+schema Conv 158
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humswarm     0  500        // Bats at head like being attacked by bees
+
+schema Conv 159
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwach      4  500        // Check wrist watch (slowly)
+
+schema Conv 160
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwshct1    4  500        // Moves right hand back and forth, like wiping a counter
+
+schema Conv 161
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humwshct2    4  500        // Wipes counter, waves someone away, returns to wiping
+
+//     Hits
+
+schema Conv 162
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humblkt     0  500        // Hit in left eye, staggers back, then falls backward
+
+schema Conv 163
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humhitblt   4  500        // Hit hard in left shoulder
+
+schema Conv 164
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humhitshtgn 4  500        // Hard hit to stomach
+
+schema Conv 165
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humrewdf    4  500        // Hit hard, recoils back
+
+schema Conv 166
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humrewnd1   4  500        // Upper body sways around. (hit or a dance step)
+
+schema Conv 167
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humstun     4  500        // Stunned or bad dancing
+
+schema Conv 168
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrwnd1    4  500        // Looks like hit in head
+
+schema Conv 169
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrwnd2    4  500        // Bigger hit than mdwrwnd1
+
+schema Conv 170
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwrwnd3    4  500        // Very serious hit in head
+
+schema Conv 171
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwstun     4  500        // Big hit, wobbles around
+
+schema Conv 172
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njastun     4  500        // Looks like re-balancing?
+
+//     Sick and dying motions
+
+schema Conv 173
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humctdie     0  500        // Shivering / dying while upright
+
+schema Conv 174
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdie01     0  500        // Dying motion, looks like got hit in the chest
+
+schema Conv 175
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdie1      0  500        // Die forward, Poisoned or shot in stomach
+
+schema Conv 176
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdie2      0  500        // Death scene, reaching forward
+
+schema Conv 177
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdie3      0  500        // Quick dying, falling backward
+
+schema Conv 178
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdierun    0  500        // Die moving forward
+
+schema Conv 179
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humdieup1    0  500        // Die on back, too quick
+
+schema Conv 180
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion HUMHTPSI     0  500        // Hand goes to mouth, then crumples
+
+schema Conv 181
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsick2     0  500        // Unsteady on feet, leans head back, looks confused
+
+schema Conv 182
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion HUMSICK3     0  500        // Heaving. Coughing or vomiting. Right hip distorts
+
+schema Conv 183
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsick4     0  500        // Grabs stomach, vomiting. Falls to knees
+
+schema Conv 184
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humsick5     0  500        // Leans forward, hanging and shaking head
+
+schema Conv 185
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femdichr     0  500        // Turns around and falls over (dies). In chair
+
+schema Conv 186
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion femdie2      0  500        // Puts hand to side (like wounded), falls forward, dying
+
+schema Conv 187
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion mdwdie2      0  500        // Death scene. Shakes with arms open, falls forward, rolls onto back
+
+schema Conv 188
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njadie2      0  500        // Death scene, falls forward, arms out
+
+schema Conv 189
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion njadie3      0  500        // Takes hit, flies backward and down on back
+
+schema Conv 190
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogphlpme1    0  500        // Holds stomach, hunches over, wobbles a little
+
+schema Conv 191
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion ogphlpme2    0  500        // Holds stomach, looks dazed, turns around 180
+
+//     Poses
+
+schema Conv 192
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion tbal01     0  500        // Looks like ballerina pose and movement
+
+schema Conv 193
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion tbal01ps   0  500        // Short motion, ballerina pose
+
+schema Conv 194
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion hung       0  500        // Could be used for hung prisoner
+
+
+
+
+
+
+
+
+

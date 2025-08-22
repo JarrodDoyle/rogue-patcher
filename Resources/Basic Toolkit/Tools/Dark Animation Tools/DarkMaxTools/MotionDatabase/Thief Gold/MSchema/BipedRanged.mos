@@ -1,0 +1,10 @@
+
+torso  Biped
+
+schema RangedCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH113100     0  500
+motion BH113101     0  500
+motion BH113102     0  500

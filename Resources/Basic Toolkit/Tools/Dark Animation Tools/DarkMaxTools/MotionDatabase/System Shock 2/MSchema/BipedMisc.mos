@@ -1,0 +1,105 @@
+
+torso  Biped
+
+schema Test 0, IdleGesture 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion humidl02     4  500
+
+schema Test 0, Locomote 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion humwlklt     0  500
+motion humwlkrt     0  500
+
+schema Test 0, Locomote 0, LocoUrgent 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion BH111032     0  100
+motion BH111033     0  100
+
+schema Test 0, MeleeCombat 0, Attack 0, Direction 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion s42c6x     0  500
+
+schema PoseKind 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion s42c6x     0  500
+motion s10c1x     0  500
+motion s27c1x     0  500
+motion ogshoot1     0  500
+
+schema Action 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Action 5
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Action 6
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Action 7
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Action 1, HurtLevel 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Action 1, HurtLevel 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Action 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion dead1     0  500
+motion dead2     0  500
+motion dead3     0  500
+
+schema Action 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Action 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Facing 0, Action 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Facing 0, Action 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Facing 4, Action 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0

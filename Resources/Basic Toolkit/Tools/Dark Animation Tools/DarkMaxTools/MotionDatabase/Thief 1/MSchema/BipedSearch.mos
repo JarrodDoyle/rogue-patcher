@@ -1,0 +1,62 @@
+
+global Search 0
+torso  Biped
+
+schema Peek 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112020     0  500
+
+schema Peek 0, Direction 3, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH212020     0  500
+
+schema Peek 0, Direction 1, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH212001     0  500
+
+schema Peek 0, Direction 2, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH212002     0  500
+
+schema Scan 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112003     0  500
+motion BH112010     0  500
+motion BH112021     0  500
+motion BH112023     0  500
+
+schema Scan 0, WithSword 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH212003     0  500
+motion BH212021     0  500
+motion BH212023     0  500
+
+schema Peek 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112024     0  500
+
+schema Peek 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112025     0  500
+
+schema Peek 0, Direction 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BH112027     0  500

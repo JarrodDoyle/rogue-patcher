@@ -1,0 +1,24 @@
+
+torso  Spider
+
+schema Stand 0
+MType  StandWith90s
+TimeScale 0
+XYZScale  0
+motion BS114002     4  500
+motion BS111220     2  500
+motion BS111221     2  500
+
+schema Stand 0, Wheel 0
+MType  StandWith90s
+TimeScale 0.6
+XYZScale  0
+motion BS114002     4  500
+motion BS111220     2  500
+motion BS111221     2  500
+
+schema Stand 0, MeleeCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion BS113000     4  500

@@ -1,0 +1,57 @@
+
+torso  Overlord
+
+schema PlaySpecMotion 0, Overlord 0
+MType  Simple
+TimeScale 0
+XYZScale  0
+motion ovlidle2     0  500
+
+schema Stand 0, Overlord 0
+MType  Simple
+TimeScale 0
+XYZScale  0
+motion ovlidle2     0  500
+
+schema Locomote 0, Overlord 0
+MType  Simple
+TimeScale 0
+XYZScale  0
+motion ovlmove     0  500
+
+schema RangedCombat 0, Overlord 0
+MType  Simple
+TimeScale 0
+XYZScale  0
+motion ovlshoot     0  500
+
+schema Search 0, Overlord 0
+MType  Simple
+TimeScale 0
+XYZScale  0
+motion ovlsrch     0  500
+
+schema ReceiveWound 0, MeleeCombat 0, Overlord 0
+MType  Simple
+TimeScale 0.3
+XYZScale  0
+motion ovlrwdl     0  500
+motion ovlrwdr     0  500
+
+schema ReceiveWound 0, MeleeCombat 0, Direction 1, Overlord 0
+MType  Simple
+TimeScale 0.3
+XYZScale  0
+motion ovlrwdl     0  500
+
+schema ReceiveWound 0, MeleeCombat 0, Direction 2, Overlord 0
+MType  Simple
+TimeScale 0.3
+XYZScale  0
+motion ovlrwdr     0  500
+
+schema Stun 0
+MType  Simple
+TimeScale 0.7
+XYZScale  0
+motion ovlrwdr     0  500

@@ -1,0 +1,116 @@
+
+global Shodan 0
+torso  Biped
+
+schema PlaySpecMotion 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Stand 0
+MType  GroundAction
+TimeScale 3
+XYZScale  0
+motion shostd     4  500
+motion shostd2     4  500
+
+schema Locomote 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion showlklt     0  0
+motion showlkrt     0  0
+
+schema ReceiveWound 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shorewnd1     0  500
+motion shorewnd2     0  500
+motion shorewnd3     0  500
+motion shorewnd4     0  500
+motion shorewnd5     0  500
+motion shorewnd6     0  500
+
+schema ReceiveWound 0, MeleeCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shorewnd1     0  500
+motion shorewnd2     0  500
+motion shorewnd3     0  500
+motion shorewnd4     0  500
+motion shorewnd5     0  500
+motion shorewnd6     0  500
+
+schema Locomote 0, LocoUrgent 0
+MType  GroundLocoPair
+TimeScale 0
+XYZScale  0
+motion shorunlt     0  0
+motion shorunrt     0  0
+
+schema IdleGesture 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shoidle1     4  500
+motion shoidle2     4  500
+
+schema Locomote 0, MeleeCombat 0, Direction 3
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shomelad     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 4
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shomelbu     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 1
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shomelsl     0  500
+
+schema Locomote 0, MeleeCombat 0, Direction 2
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shomelsr     0  500
+
+schema Search 0, Scan 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shoserch     0  500
+
+schema Locomote 0, Search 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shoswalk     0  500
+
+schema RangedCombat 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion shorngat5     0  500
+motion shorngat6     0  500
+motion shorngat4     0  500
+motion shorngat2     0  500
+motion shorngat3     0  500
+motion shorngat1     0  500
+
+schema Discover 0, Thwarted 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+
+schema Crumple 0
+MType  GroundAction
+TimeScale 0
+XYZScale  0
+motion bv113700     0  500
