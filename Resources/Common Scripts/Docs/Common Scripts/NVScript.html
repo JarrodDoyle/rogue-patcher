@@ -1,0 +1,2490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Nameless Voice's Scripts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+kbd {
+	font-family: "Courier New", Courier, mono;
+	font-weight: bold;
+	color: #000066;
+	font-size: small;
+}
+
+h2
+{
+	margin-top: 3em;
+	font-family: Carleton, "Times New Roman", serif;
+	font-weight: normal;
+	text-align: center;
+	font-size: 300%;
+	text-decoration: underline;
+}
+
+h1 {
+	margin-top: 3em;
+	font-size: xx-large;
+	font-weight: bold;
+	font-variant: normal;
+}
+h1 i
+{
+	font-weight: normal;
+	font-size: medium;
+}
+
+h1 b
+{
+	color: red;
+	font-weight: normal;
+	font-size: medium;
+}
+cite {
+	color: #006600;
+	font-family: "Courier New", Courier, mono;
+	font-style: normal;
+	font-weight: bold;
+	font-size: small;
+}
+blockquote {
+	background-color: #EEEEEE;
+	border: 1px solid;
+	margin-left: 40px;
+	margin-top: 0px;
+}
+.inset {
+	left: 10px;
+	position: relative;
+}
+.inset40 {
+	left: 40px;
+	position: relative;
+	top: 0px;
+}
+.VersionInset {
+}
+
+tr .No
+{
+	color: red;
+}
+
+/* For T2 version */
+/*T2Version-Start*/
+.T2			{ }
+.T2Only		{ }
+.SS2Only	{ display:none;}
+.SS2		{ color: #884444; }
+/*T2Version-End*/
+
+/* For SS2 version */
+/*SS2Version-Start
+.T2			{  color: #884444; }
+.T2Only		{ display: none; }
+.SS2		{ }
+.SS2Only	{ }
+SS2Version-End*/
+
+-->
+</style>
+</head>
+<body> 
+<p><i>These scripts are provided &quot;As Is&quot; without warranty of any kind, either expressed or implied. Nameless Voice will not be liable for any incidental, special, consequential or any other damages that may result from the use or inability to use this software.</i></p> 
+<p><i>First of all, I would like to thank Telliamed for making this script module possible. </i></p> 
+<h2>- About the scripts -</h2>
+<p>These scripts make use of the <b class="T2Only">Editor-&gt;Design Note</b><b class="SS2Only">Script-&gt;ObjList Args</b> property in the same way as Telliamed's scripts:</p> 
+<b class="inset40">From Telliamed's documentation:</b> 
+<blockquote> The <b class="T2Only">Editor\Design Note</b><b class="SS2Only">Script\ObjList Args</b> property is used to specify most parameters for a script. The <span class="T2Only">Design Note</span><span class="SS2Only">ObjList Args</span> is a string that can be a list of parameters, or a single parameter by itself. A parameters is a keyword, followed by an equals sign (<kbd>=</kbd>), then an argument. The argument may be surrounded with single or double quotes. Multiple parameters are separated with a semi-colon (<kbd>;</kbd>). If you need to include a semi-colon in an argument, then it must be surrounded by quotes. A quote mark can be included by using the other type of quote mark to surround the argument, or escape the quote mark with a back-slash. (e.g. <kbd>'a \'quoted\' argument'</kbd>)
+</blockquote> 
+	<p>When a script looks for an integer or flag parameter, you can have it read a quest variable and use its value in place of the parameter. After the equals sign, type a dollar sign (<kbd>$</kbd>) and the name of the quest variable (there may not be space between the dollar sign and the variable name. ) <br/>For example, if you wanted to have an NVRelayTrap which fired a number of times based on the number entered into a combination lock/odometer combo using the <cite>combo</cite> quest variable, you could specify <kbd>NVRelayTrapRepeat=$combo</kbd><br/>Note that if you want to supply the name of quest variable as a script parameter, rather than use the current value of the quest variable, then the dollar sign should not be used.</p> 
+<p>For any parameter that specifies the name or number of an object for the script to affect, you can use <kbd>[me]</kbd> to use the object with the script, or <kbd>[source]</kbd> to use the object that sent the triggering message (the latter may not work in all circumstances). You can also precede the name of an archetype or metaproperty with the <kbd>^</kbd> symbol to use the nearest object that inherits from the one specified. For example, <kbd>&quot;^Marker&quot;</kbd> will affect the nearest object that descends from the <i>Marker</i> archetype, while <kbd>&quot;^FrobInert&quot;</kbd> will affect the nearest object that has the <i>FrobInert</i> metaproperty (either itself or on one of its archetypes).</p> 
+<p>In this document, script parameters which are underlined must be specified for the script to function: <kbd>NormalParameter</kbd>; <kbd><u>RequiredParameter</u></kbd></p> 
+<h1>NVTrap scripts</h1>
+<p>All the scripts labelled as <i>NVTrap</i>s (those that respond to <u>TurnOn</u> / <u>TurnOff</u> messages) inherit behaviours from a generic 'NVTrap' base script, which allows you to use parameters to imitate an independent <b>Script-&gt;Trap Control Flags</b> property for each script, even when you have several on the same object. Each 'Trap' script understands five parameters, (Where <kbd>[ScriptName]</kbd> is the name of the script as you entered it into the <b>S-&gt;Scripts</b> property.):</p> 
+<p><kbd>[ScriptName]On</kbd><br/> 
+	Use this parameter to specify which script message should activate the trap. The default is <u>TurnOn</u>.</p> 
+<p><kbd>[ScriptName]Off</kbd><br/> 
+	Use this parameter to specify which script message should deactivate the trap. The default is <u>TurnOff</u>.</p> 
+<p><kbd>[ScriptName]Count</kbd><br/> 
+	Use this parameter to specify the maximum number of times that the script will work. You can use <kbd>[ScriptName]Count=1</kbd> to emulate the <i>Once</i> <b>Trap Control Flag</b>. The default is <kbd>0</kbd> (infinite).<br/> 
+	Both <u>TurnOn</u> and <u>TurnOff</u> are counted by default. You can use <kbd>[ScriptName]CountOnly=1</kbd> to ignore <u>TurnOff</u>, and <kbd>[ScriptName]CountOnly=2</kbd> to ignore <u>TurnOn</u>. Sending the trap a <u>ResetCount</u> message will reset the counter. </p> 
+<p>You can use <kbd>[ScriptName]On=&quot;TurnOff&quot;;[ScriptName]Off=&quot;TurnOn&quot;</kbd> to simulate the <i>Invert</i> <b>Trap Control Flag</b>; <kbd>[ScriptName]On=&quot;Null&quot;</kbd> can be used to simulate <i>NoOn</i> and <kbd>[ScriptName]Off=&quot;Null&quot;</kbd> can be used to simulate <i>NoOff</i> <br/> 
+	Remember that if you specify <kbd>[ScriptName]On=&quot;TurnOff&quot;</kbd> without specifying <kbd>[ScriptName]Off</kbd>, then <u>TurnOff</u> will be specified for both values.</p> 
+	<p><kbd>[ScriptName][On/Off]Capacitor</kbd><br/> 
+	Use this parameter to specify the number of times that a trap will need to receive its triggering message before it activates.  For example, an NVRelayTrap with <kbd>NVRelayTrapCapacitor=3</kbd> will only relay every third message, while one with <kbd>NVRelayTrapOnCapacitor=4; NVRelayTrapOffCapacitor=2</kbd> will relay every second TurnOff message but only every fourth TurnOn message.  The default is <u>1</u>.<br/><kbd>[ScriptName][On/Off]CapacitorFalloff</kbd> can be used to specify the time, in milliseconds, that it takes for the trap to "lose charge", and the activation count to go back down by one activation.</p> 
+<p>The scripts that this applies to are denoted in this document by the words <i>NVTrap</i> in parentheses after their names.<br/> 
+	Please note that the standard <b>Trap Control Flags</b> property is not used or supported.</p> 
+
+<h1>NVTrigger scripts</h1>
+<p>All the scripts labelled as <i>NVTrigger</i>s (those that respond to events by sending <u>TurnOn</u> and <u>TurnOff</u> messages) inherit behaviours from a generic 'NVTrigger' base script, which allows you to use parameters to imitate an independent <b>Script-&gt;Trap Control Flags</b> property for each script, even when you have several on the same object. Each 'Trigger' script understands six parameters, (Where <kbd>[ScriptName]</kbd> is the name of the script as you entered it into the <b>S-&gt;Scripts</b> property.):</p> 
+<p><kbd>[ScriptName]TOn</kbd><br/> 
+	Use this parameter to specify which script message the trigger should send when activated. The default is <u>TurnOn</u>.</p> 
+<p><kbd>[ScriptName]TOff</kbd><br/> 
+	Use this parameter to specify which script message the trigger should send when deactivated. The default is <u>TurnOff</u>.</p> 
+<p>You can use trigger on and off parameters to specify a stim to send instead. To do this, first enter the intensity surrounded by square brackets, followed by the stim name. For example: <kbd>[ScriptName]TOn=&quot;[5.00]WaterStim&quot;</kbd>.<br />You can also specify a range of stims by specifying the minimum and maximum intensities, separated by a pipe.  For example: <kbd>[ScriptName]TOn=&quot;[5.00|10.00]WaterStim&quot;</kbd> will send a WaterStim with a random intensity between 5.00 and 10.00.  Note that the result is a floating point number anywhere inside the range, it is <b>not</b> limited to whole numbers.</p> 
+<p><kbd>[ScriptName]TCount</kbd><br/> 
+	Use this parameter to specify the maximum number of times that the script will work. You can use <kbd>[ScriptName]TCount=1</kbd> to emulate the <i>Once</i> <b>Trap Control Flag</b>. The default is <kbd>0</kbd> (infinite).<br/> 
+	Sending of both <u>TurnOn</u> and <u>TurnOff</u> messages are counted by default. You can use <kbd>[ScriptName]TCountOnly=1</kbd> to ignore <u>TurnOff</u>, and <kbd>[ScriptName]TCountOnly=2</kbd> to ignore <u>TurnOn</u>. Sending the trigger a <u>ResetTriggerCount</u> message will reset the counter. </p> 
+<p><kbd>[ScriptName]FailChance</kbd><br/> 
+	Use this parameter to specify a % chance that the trigger will fail (do nothing) when it is activated. For example: <kbd>[ScriptName]FailChance=35</kbd> will give the trigger a 35% chance to fail when activated.</p> 
+<p><kbd>[ScriptName]TDest</kbd><br/> 
+	Use this parameter to specify the object that the trigger should send messages to. Either specify a single object or archetype (see below), or use the name of a link type to broadcast the message along, preceded by an <kbd>&amp;</kbd> symbol. The default is <kbd>[ScriptName]TDest=&quot;&amp;<span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span>&quot;</kbd>. To have the message sent along a single random link of the specified type (rather than all links of that type), put a question mark (<kbd>?</kbd>) between the <kbd>&amp;</kbd> and the link type.<br/> 
+	Example: <kbd>[ScriptName]TDest=&quot;&amp;?<span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span>&quot;</kbd> will send the message down a random <span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span> link.<br/>
+	If you want the randomly chosen link to be deleted, then use <kbd>[ScriptName]KillLinks=1</kbd>.<br/>
+	You can also use weighted random links via <kbd>[ScriptName]TDest=&quot;&amp;Weighted&quot;</kbd>. This will examine <b>ScriptParams</b> links and treat their data (must be an integer) as the chance of that link being chosen. (A link with data of <b>2</b> will be chosen twice as often as one with data of <b>1</b>). Weighted random only work with <b>ScriptParams</b> links. <br/> 
+	Finally, you can use either <kbd>*</kbd> or <kbd>@</kbd> to affect <i>all </i>objects that inherit from a specific archetype: <kbd>*</kbd> will only affect objects which are direct descendants, and <kbd>@</kbd> will affect all descendants.<br/> 
+	For example: <kbd>[ScriptName]TDest=&quot;*Chest&quot;</kbd> would affect all <i>Chest (-2571)</i> objects in the mission, but will not affect objects based on its descendant archetypes of <i>Safe (-5986)</i>, <i>VicHopeChest (-5773)</i>, <i>LC_Chest (-4067)</i>, and <i>SeaChest (-2817)</i>. <kbd>[ScriptName]TDest=&quot;@Chest&quot;</kbd> would affect all of these objects. <br>
+	In addition, you can affect all objects within a specific radius.  First enter a less-than symbol (&lt;), then the radius, followed by a colon (:) and then the archetype name.  For example:   <kbd>[ScriptName]TDest=&quot;<5.00:Chest&quot;</kbd>  will affect all <i>Chest</i> objects or descendants withing a radius of 5.00 DromEd units.  Note that the radius function will affect objects in the same way as <kbd>@</kbd> - in other words, all descendant archetypes will also be affected.  By default, the radius is only calculated on the X and Y axis.  To measure distance in 3-dimensional space, use the <kbd>{</kbd> symbol instead of the less-than symbol.</p> 
+	
+	<p>Below is a table with examples of each way that objects can be targeted:<p>
+	<table width="850" border="1">
+	<tr bgcolor="#CCCCCC">  
+		<th>Parameter value</th>
+		<th>Object(s) to target</th>
+		<th width="250">Applies to</th>
+	</tr>
+	<tr>
+		<td>ObjectName</td>
+		<td>A specific object named <i>ObjectName</i>.</td>
+		<td>Any parameter specifying an object.</td>
+	</tr>
+	<tr>
+		<td>245</td>
+		<td>A specific object with ID <i>245</i>.</td>
+		<td>Any parameter specifying an object.</td>
+	</tr>
+	<tr>
+		<td>[me]</td>
+		<td>This object where the script is running.</td>
+		<td>Any parameter specifying an object.</td>
+	</tr>
+	<tr>
+		<td>[source]</td>
+		<td>The source of the message that triggered this script.</td>
+		<td>Any parameter specifying an object.</td>
+	</tr>
+	<tr>
+		<td>^Marker</td>
+		<td>The closest object (relative to the object running the script) that descends from the Marker archetype.</td>
+		<td>Any parameter specifying an object.</td>
+	</tr>
+	<tr>
+		<td>^<20:Marker</td>
+		<td>The closest object (relative to the object running the script) that descends from the Marker archetype and is within 20 units (XY axis only).</td>
+		<td>Any parameter specifying an object.</td>
+	</tr>
+	<tr>
+		<td>^{20:Marker</td>
+		<td>The closest object (relative to the object running the script) that descends from the Marker archetype and is within 20 units (3-dimensional space).</td>
+		<td>Any parameter specifying an object.</td>
+	</tr>
+	<tr>
+		<td>&amp;ControlDevice</td>
+		<td>All objects that this object has ControlDevice links to.</td>
+		<td>An NVTrigger script's TDest</td>
+	</tr>
+	<tr>
+		<td>&amp;?ControlDevice</td>
+		<td>One random object that this object has a ControlDevice link to.  The link to that object will be removed afterwards if [ScriptName]KillLinks=1</td>
+		<td>An NVTrigger script's TDest</td>
+	</tr>
+	<tr>
+		<td>&amp;Weighted</td>
+		<td>One random object that this object has a ScriptParams link to.  The link is using a weighted random using the value of the ScriptParams link, with a link with a value of 2 being twice as likely to be chosen as one with a value of 1.</td>
+		<td>An NVTrigger script's TDest</td>
+	</tr>
+	<tr>
+		<td>*Marker</td>
+		<td>Every object in the mission that is based on the Marker archetype</td>
+		<td>An NVTrigger script's TDest</td>
+	</tr>
+	<tr>
+		<td>@Marker</td>
+		<td>Every object in the mission that is based on the Marker archetype or one of its descendants.</td>
+		<td>An NVTrigger script's TDest</td>
+	</tr>
+	<tr>
+		<td>&lt;20:Marker</td>
+		<td>Every object within 20 units (horizontal distance only) that is based on the Marker archetype or one of its descendants.</td>
+		<td>An NVTrigger script's TDest</td>
+	</tr>
+	<tr>
+		<td>{20:Marker</td>
+		<td>Every object within 20 units (in all three dimensions) that is based on the Marker archetype or one of its descendants.</td>
+		<td>An NVTrigger script's TDest</td>
+	</tr>
+	</table>
+<h1>Targetting scripts</h1>
+<p>As of NVScript v1.2.0, many of the scripts allow you to specify the object(s) that they should affect, as opposed to merely affecting their own object as in previous versions of NVScript.  You can do this via the <kbd>[ScriptName]Target</kbd> parameter, which generally defaults to <b>[me]</b> in most cases.  For example, to have <a href="#NVMetaTrap">NVMetaTrap</a> add and remove its metaproperty on objects linked from its object via <b>ControlDevice</b> links, you would use <kbd>NVMetaTrapTarget=&quot;&amp;ControlDevice&quot;</kbd>.  Scripts which can be targetted in this way are marked as Targetable in their description.
+<p>&nbsp;</p> 
+<p>A description of each of the scripts follows:</p> 
+<p>
+<table width="450"> 
+	<tr bgcolor="#CCCCCC"> 
+		<td><b><u><a name="Traps"></a>Traps:</u></b></td> 
+		<td>Version required:</td> 
+	    <td width="30">T2</td>
+	    <td width="30">SS2</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVAirLock">NVAirLock</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.4</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVAITeamSetter">NVAITeamSetter</a> <i>(NVTrap)</i></td>
+        <td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVAmbientSoundTrap">NVAmbientSoundTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVCameraTrap">NVCameraTrap</a> <i>(Trap)</i></td>
+        <td><b>v1.2.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVCreateAndLink">NVCreateAndLink</a> <i>(NVLinkBuilder)</i></td>
+        <td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVCutsceneTrap">NVCutsceneTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.2.2</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVDeleteTrap">NVDeleteTrap</a> <i>(NVTrap)</i></td>
+	  <td><b>v1.0.8</b></td>
+	  <td>Yes</td>
+	  <td>?</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVDetoxTrap">NVDetoxTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVDifficultyRelay">NVDifficultyRelay</a> <i>(NVTrap)</i></td>
+	  <td><b>v1.0.8</b></td>
+	  <td>Yes</td>
+	  <td>?</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVDiminishingParticles">NVDiminishingParticles</a> <i>(NVTrap)</i></td>
+	  <td><b>v1.0.8</b></td>
+	  <td>Yes</td>
+	  <td>?</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVDoorSpeedTrap">NVDoorSpeedTrap</a> <i>(NVTrap)</i></td>
+	  <td><b>v1.1.0</b></td>
+	  <td>Yes</td>
+	  <td>?</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVEndTrap">NVEndTrap</a> <i>(NVTrap)</i> (SS2 only) </td>
+        <td><b>v1.0.5</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>	
+	<tr>
+        <td width="250"><a href="#NVGenericScalarTrap">NVGenericScalarTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.2.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVGibTrap">NVGibTrap</a> <i>(NVTrap)</i></td>
+	  <td><b>v1.1.0</b></td>
+	  <td>Yes</td>
+	  <td>Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVGlowTrap">NVGlowTrap</a> <i>(NVGenericScalarTrap)</i></td>
+        <td><b>v1.2.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVItemGiver">NVItemGiver</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.2</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVLinkBuilder">NVLinkBuilder</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVMachine">NVMachine</a> <i>(NVTrap)</i></td>
+        <td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVMapTrap">NVMapTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30" class="No">No</td>
+	</tr> 
+	<tr>
+		<td width="250"><a href="#NVMetaTrap">NVMetaTrap</a> <i>(NVTrap)</i></td>
+		<td><b>v1.0.9</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVMultiplayerTrap">NVMultiplayerTrap</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVOnscreenText">NVOnscreenText</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVParticleGroup">NVParticleGroup</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVPhantomTrap">NVPhantomTrap</a> <i>(NVGenericScalarTrap)</i></td>
+        <td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVSetPropertyTrap">NVRandomPropertyTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.1.0</b></td>
+	    <td width="30">?</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVRecalcTrap">NVRecalcTrap</a> <i>(NVTrap)</i> (SS2 only)</td>
+        <td><b>v1.0.5</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVRelayTrap">NVRelayTrap</a> <i>(NVTrap) (NVTrigger)</i></td>
+        <td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVRemovePropertyTrap">NVRemovePropertyTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.2.5</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr> 
+	<tr>
+        <td width="250"><a href="#NVScaleDims">NVScaleDims</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVSelectTrap">NVSelectTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVSetPropertyTrap">NVSetPropertyTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.2.4</b></td>
+	    <td width="30">?</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVSimpleDoor">NVSimpleDoor</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVSimpleSchemaPlayerTrap">NVSimpleSchemaPlayerTrap</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVSlayMeTrap">NVSlayMeTrap</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVSRContactTrap">NVSRContactTrap</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVStackOrDropTrap">NVStackOrDropTrap</a></td>
+		<td><b>v1..0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVStackTrap">NVStackTrap</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVSuspiciousTrap">NVSuspiciousTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30" class="No">No</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVTextureTrap">NVTextureTrap</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVTranslucentTextTrap">NVTranslucentTextTrap</a></td>
+		<td><b>v1.2.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVTrapSetQVar">NVTrapSetQVar</a></td>
+		<td><b>v1.0.7</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVTweqDevice">NVTweqDevice</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+        <td><a href="#NVTrapConverse">NVTrapConverse</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.4</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVVOTrap">NVVOTrap</a> <i>(NVTrap)</i></td>
+        <td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr> 
+	<tr>
+	  <td><a href="#NVWakePhysicsTrap">NVWakePhysicsTrap</a></td>
+	  <td><b>v1.2.4</b></td>
+	  <td>Yes</td>
+	  <td>Yes</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVWatchMeTrap">NVWatchMeTrap</a></td>
+	  <td><b>v1.2.4</b></td>
+	  <td>Yes</td>
+	  <td>Yes</td>
+	</tr>
+</table> 
+<br/>
+<table width="450">
+	<tr bgcolor="#CCCCCC">
+		<td colspan="1"><b><u><a name="Triggers"></a>Triggers:</u></b></td>
+		<td>Version required:</td>
+	    <td width="30">T2</td>
+	    <td width="30">SS2</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVFrobToggle">NVFrobToggle</a> <i>(NVTrigger)</i><br/>		</td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVHPTrigger">NVHPTrigger</a> <i>(NVTrigger)</i></td>
+		<td><b>v1.0.3</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+        <td width="250"><a href="#NVRelayTrap">NVRelayTrap</a> <i>(NVTrap) (NVTrigger)</i></td>
+        <td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVTriggeringRoom">NVTriggeringRoom</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>	<tr>
+		<td width="250"><a href="#NVTrigContained">NVTrigContained</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVTrigOBB">NVTrigOBB</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVTrigRoomPlayer">NVTrigRoomPlayer</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td><a href="#NVTrigQVar">NVTrigQVar</a></td>
+		<td><b>v1.0.7</b></td>
+		<td>Yes</td>
+		<td>Yes</td>
+	</tr> 
+</table>
+<br/>
+<table width="450">
+	<tr bgcolor="#CCCCCC">
+		<td colspan="1"><b><u><a name="AIScripts"></a>AI Scripts:</u></b></td>
+		<td>Version required:</td>
+	    <td width="30">T2</td>
+	    <td width="30">SS2</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVConvEnhancer">NVConvEnhancer</a><br/>
+		<span class="inset40">DelayedFrob<br/>
+		GiveItem<br/>
+		SendMessage<br/>
+		Follow<br/>
+		StopFollowing<br/>
+		CheckLock<br/>
+		SetQVar</span>		</td>
+		<td><p><b>v1.0.0</b><br/>
+				v1.0.0<br/>
+				v1.0.0<br/>
+			v1.0.1<br/>
+			v1.0.0<br/>
+			v1.0.0<br/>
+			v1.0.8<br/>
+			v1.2.3
+		</p>			</td>
+	    <td width="30">Yes<br/>
+	    	Yes<br/>
+	    	Yes<br/>
+	    	Yes<br/>
+	    	Yes<br/>
+	    	Yes<br/>
+	    	Yes<br/>
+	    	Yes</td>
+	    <td width="30">?<br/>
+	    	?<br/>
+	    	?<br/>
+	    	?<br/>
+	    	?<br/>
+		?<br/>
+		<span class="No">No</span><br/>
+	    	?
+			</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVGhostingMessages">NVGhostingMessages</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVIncapacitatedMessages">NVIncapacitatedMessages</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+</table>
+<br/>
+<table width="450">
+	<tr bgcolor="#CCCCCC">
+		<td colspan="1"><b><u><a name="Misc"></a>Miscellaneous Scripts:</u></b></td>
+		<td>Version required:</td>
+	    <td width="30">T2</td>
+	    <td width="30">SS2</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVAlertMessages">NVAlertMessages</a><br/>		</td>
+		<td><b>v1.2.4</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr><tr>
+		<td width="250"><a href="#NVAttachMyObj">NVAttachMyObj</a><br/>		</td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVAttackMessages">NVAttackMessages</a><br/>		</td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVBattery">NVBattery</a> (SS2 only) </td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVCloneContactFrob">NVCloneContactFrob</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">?</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVComestible">NVComestible</a> (SS2 only) </td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVCombineTypeSetter">NVCombineTypeSetter</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVContainedMessages">NVConsumeMessages</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVContainedMessages">NVContainedMessages</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVCursedObj">NVCursedObj</a></td>
+		<td><b>v1.0.7</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30" class="No">No</td>
+	</tr>
+	<tr>
+		<td><a href="#NVDeathCutscene">NVDeathCutscene</a></td>
+		<td><b>v1.0.6</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVDeathStageFix">NVDeathStageFix</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td><a href="#NVDoorStartsOpen">NVDoorStartsOpen</a></td>
+		<td><b>v1.0.4</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVEmitWhileSelected">NVEmitWhileSelected</a> <br/>            </td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30" class="No">No</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVExclusiveObject">NVExclusiveObject</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVFakeWater">NVFakeWater</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVGuaranteedLoot">NVGuaranteedLoot</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVHealingGland">NVHealingGland</a> <i>(NVMedPatchScript)</i></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVHolyH2OHack">NVHolyH2OHack</a> <i>(NVInvTransform)</i></td>
+		<td><b>v1.0.2</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVInvAssembly">NVInvAssembly</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVInvAssembly2">NVInvAssembly2</a></td>
+		<td><b>v1.0.6</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td><a href="#NVInvTransform">NVInvTransform</a></td>
+		<td><b>v1.0.2</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVInventoryMemory">NVInventoryMemory</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30" class="No">No</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVInvSound">NVInvSound</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVJointControl">NVJointControl</a></td>
+		<td><b>v1.2.3</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVKeyringKey">NVKeyringKey</a></td>
+		<td><b>v1.0.6</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30" class="No">No</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVMachineSlot">NVMachineSlot</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVMedKitScript">NVMedKitScript</a> <i>(NVMedPatchScript)</i></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVMedPatchScript">NVMedPatchScript</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVNameOnCreation">NVNameOnCreation</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVNewWeapon">NVNewWeapon</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVObjectWatcher">NVObjectWatcher</a></td>
+		<td><b>v1.1.0</b></td>
+		<td width="30">Yes</td>
+		<td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVParticleTrailProjectile">NVParticleTrailProjectile</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVPhysMessages">NVPhysMessages</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVPickyProjectile">NVPickyProjectile</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVPlayerScript">NVPlayerScript</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVPsiKitScript">NVPsiKitScript</a> <i>(NVMedPatchScript)</i></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVPutIntoContainers">NVPutIntoContainers</a></td>
+		<td><b>v1.0.5</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVQVarName">NVQVarName</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td><a href="#NVRecycler">NVRecycler</a> (SS2 only) </td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30" class="No">No</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVRotatable">NVRotatable</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVSafeDoor">NVSafeDoor</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVShakePlayer">NVShakePlayer</a></td>
+		<td><b>v1.2.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVSpy">NVSpy</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">Yes</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVStartUnrotated">NVStartUnrotated</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVSwapSword">NVSwapSword</a></td>
+		<td><b>v1.1.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30" class="No">No</td>
+	</tr>
+	<tr>
+		<td><a href="#NVTurningSquare">NVTurningSquare</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td><a href="#NVTweqMessages">NVTweqMessages</a></td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+		<td><a href="#NVTwoSpeedDoor">NVTwoSpeedDoor</a></td>
+		<td><b>v1.0.8</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVUnusableUnlessQVar">NVUnusableUnlessQVar</a></td>
+	  <td><b>v1.0.8</b></td>
+	  <td>Yes</td>
+	  <td>?</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVVisibilityToQVar"> NVVisibilityToQVar</a></td>
+	  <td><b>v1.2.0</b></td>
+	  <td>Yes</td>
+	  <td>?</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVWatchMe">NVWatchMe</a></td>
+	  <td><b>v1.2.0</b></td>
+	  <td>Yes</td>
+	  <td>?</td>
+	</tr>
+	<tr>
+	  <td><a href="#NVWhoKilledMe">NVWhoKilledMe</a></td>
+	  <td><b>v1.1.0</b></td>
+	  <td>Yes</td>
+	  <td>?</td>
+	</tr>
+</table>
+<br/>
+<table width="450">
+	<tr bgcolor="#CCCCCC">
+		<td colspan="1"><b><u><a name="Debug"></a>Debug / Mission Design Scripts:<br/>
+			</u></b><u>(NVDebug.osm)</u></td>
+		<td>Version required:</td>
+	    <td width="30">T2</td>
+	    <td width="30">SS2</td>
+	</tr>
+	<tr>
+		<td width="250"><a href="#NVDifficultyDebug">NVDifficultyDebug</a><br/>		</td>
+		<td><b>v1.0.0</b></td>
+	    <td width="30">Yes</td>
+	    <td width="30">?</td>
+	</tr>
+</table>
+<br/>
+<table width="450">
+	<tr bgcolor="#CCCCCC">
+		<td align="center"><b><u><a href="#VersionHistory">Version History</a> </u></b></td>
+	</tr>
+</table>
+<p><b><u><br/> 
+</u></b></p>
+<p><br/> 
+	<br/> 
+</p> 
+
+<h2> - Traps -</h2>
+<h1><a name="NVAirLock" id="NVAirLock"></a>NVAirLock<i> (NVTrap)</i> </h1> 
+<p>  This script controls two airlock doors, both linked from it with <b><span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span></b> <span class="T2Only">(or <b>SwitchLink</b> for SS2)</span><span class="SS2Only">(or <b>ControlDevice</b> for Thief 2)</span> links.<br/>
+	Upon being triggered, it first locks itself so that it cannot be triggered again until it is finished.<br/>
+	Second, it sends TurnOn down any <b>ScriptParam</b> links with a data  &quot;Alarm&quot;.<br/>
+	Third, it closes both of its doors.<br/>
+Once the doors are closed, it sends <u>TurnOn</u> down <b>ScriptParams</b> links with data &quot;Vent&quot;.<br/>
+It then waits for the number of milliseconds specified by <kbd>NVAirlockDelay</kbd> (the default is 5000ms), and turns the vents off again.<br/> 
+After this, it opens the door that was closed originally.<br/>
+Finally, once this door is open, TurnOff is sent to the Alarm and the trap is unlocked.<br/>
+An example setup (Thief 2):<br/>
+Create a button, two MechBlastDoors, a MechRedAlarm, and a Marker and a TrapTrig.<br/> 
+Arrange the two blast doors in a corridor with a fair space between them, and place all the other objects in that space.<br/>
+Give the TrapTrig the <a href="#NVAirlock">NVAirlock</a> script. <br/>
+Create a <b><span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span></b> link from the button to the TrapTrig, and one from the TrapTrig to each of the doors. Now, create a <b>ScriptParams</b> link from the TrapTrig to the  MechRedAlarm, data &quot;Alarm&quot;, and another from the TrapTrig to the Marker, data &quot;Vent&quot;.<br/>
+Finally, give the marker the <b>ActivateAmbient</b> script and an <b>A-&gt;AmbientHacked</b> property with a <i>Schema Name</i> of &quot;M11steam&quot; and a <i>Radius</i> of 30 or so.<br/>
+You should also give one of the doors the <a href="#NVDoorStartsOpen">NVDoorStartsOpen</a> script.</p>
+
+<h1><a name="NVAITeamSetter"></a>NVAITeamSetter <i>(NVTrap)</i></h1>
+<p>When the mission starts or its object is created (on <u>BeginScript</u>), this script sets the <b>AI->AI Core->Team</b> property of its object to the value specified by <kbd>NVAITeam</kbd>, or to a value equal to the object number if none is specified (effectively giving each AI a unique team).  This allows you to have more than the default number of AI teams in a mission.</p>
+
+<h1><a name="NVCreateAndLink"></a>NVCreateAndLink <i>(NVTrap-&gt;NVLinkBuilder)</i></h1>
+<p> A derivative of <a href="#NVLinkBuilder">NVLinkBuilder</a>.<br/> 
+	Upon receiving <u>TurnOn</u>, this script creates the object specified by <kbd><u>NVCreateAndLinkCreate</u></kbd>.<br/> 
+	It then creates a link to the new object, with the flavour specified by <kbd><u>NVCreateAndLinkLinkType</u></kbd>.<br/> 
+	By default, it links from the object with the script, but you can specify a source object via the <kbd>NVCreateAndLinkLinkSource</kbd> parameter. <br/> 
+	A <u>TurnOff</u> message will destroy the object if it still exists and is still linked. Alternatively, you can specify <kbd>NVSlayCreated=1</kbd> to have the object slain rather than destroyed.<br/>
+	You can use the <kbd>NVCreateAndLinkLoc</kbd> parameter to specify the location at which to create the object and <kbd>NVCreateAndLinkRot</kbd> to specify the rotation. (Specify both values as a string with three numbers separated by comas, eg: <kbd>NVCreateAndLinkLoc=&quot;1.0,0.0,0.0&quot;; NVCreateAndLinkRot=&quot;360,0,0&quot;</kbd>)<br/>
+	By default, this is a relative value from the location of the current object, but you can use the <kbd>NVCreateAndLinkLocObj</kbd> parameter to specify another object, or 0 for an absolute location.<br/>
+	If you do not specify a location, the object will be created at 0, 0, 0.  (Note that you cannot use <kbd>NVCreateAndLinkLocObj</kbd> if you do not also specify <kbd>NVCreateAndLinkLoc</kbd> (try a value of <kbd>0.0,0.0,0.0</kbd> if you don't want an offset.) <br/> 
+	You can specify data for the link in exactly the same way as you can with <a href="#NVLinkBuilder">NVLinkBuilder</a>, except that the parameters are <kbd>NVCreateAndLinkLinkData</kbd>#<kbd>Field</kbd> and <kbd>NVCreateAndLinkLinkData</kbd>#<kbd>Value</kbd>. The old params, that simply use 'NV' instead of 'NVCreateAndLink' will still be used as fallbacks, but as of NVScript 1.1.0, the new parameters specific to NVCreateAndLink should be used, to allow NVCreateAndLink and NVLinkBuilder to co-exist on the same object.</p>
+<p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
+<br/>Example: you can use the following scripts:  NVCreateAndLink, NVCreateAndLink2, NVCreateAndLink3, NVCreateAndLink4, NVCreateAndLink5, NVCreateAndLink6, NVCreateAndLink7, NVCreateAndLink8, NVCreateAndLink9.   In each case, replace the NVCreateAndLink in the name of each parameter with the name and number of the script you are using.  e.g. <kbd>NVCreateAndLink2Create</kbd> will specify the object to create for NVCreateAndLink2.</p>
+
+<h1><a name="NVAmbientSoundTrap"></a>NVAmbientSoundTrap <i>(NVTrap)</i></h1>
+<p> This script plays the schema that is linked to it via a SoundDescription link as an ambient sound.<br/>
+The sound can be turned on and off by <u>TurnOn</u> and <u>TurnOff</u> messages, unlike the default AmbientSounds script.</p>
+
+<h1><a name="NVLinkBuilder"></a> NVLinkBuilder <i>(NVTrap)</i></h1>
+<p> Upon receiving <u>TurnOn</u>, this script creates a link with the flavour specified by <kbd><u>NVLinkBuilderLinkType</u></kbd> between the objects specified by <kbd><u>NVLinkBuilderLinkSource</u></kbd> and <kbd><u>NVLinkBuilderLinkDest</u></kbd>. <br/>
+	A <u>TurnOff</u> message will remove the link.</p>
+<p>You can specify data for the link by using <kbd>NVLinkBuilderLinkData</kbd>#<kbd>Field</kbd> and <kbd>NVLinkBuilderLinkData</kbd>#<kbd>Value</kbd> (where # is a number between 1 and 10, maximum). To specify booleans, use <kbd>1</kbd> for <i>True</i> and <kbd>0</kbd> for <i>False</i>; to specify vectors use the format: <kbd>&quot;0.00, 0.00, 0.00&quot;</kbd>.<br/>
+	If the link you want to create has no fields (such as ScriptParams links), then you must omit <kbd>NVLinkBuilderLinkData</kbd>#<kbd>Field</kbd>.</p>
+<p>To find out the name of the field, create the appropriate flavour of link in DromEd and hit Edit Data. The field name is exactly the same as the label next to each box, <i>including spaces and other special characters</i>. If there are no labels in the Link Data window, then that link flavour has no fields (and you need to omit <kbd>NVLinkBuilderLinkData</kbd>#<kbd>Field</kbd>).<br/>
+	For example, valid fields on a Flinderize link are: &quot;Count&quot;, &quot;Impulse&quot;, &quot;Scatter?&quot;, and &quot;Offset&quot;.<br/>
+If you specify an invalid link flavour or an invalid field name, DromEd will throw up an error message and possibly crash when this script is triggered. You have been warned.</p>
+<p>As of v1.2.4, you can use <kbd>NVLinkBuilderModifyExistingLink=1</kbd> to modify the data of existing link (if it exists), instead of creating a new one.  The first matching link is used.  Note that modifying the data (instead of removing and adding a new link) allows you to avoid behaviour such as attached objects automatically being deleted when the attachment link is removed.</p>
+<p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
+<br/>Example: you can use the following scripts:  NVLinkBuilder, NVLinkBuilder2, NVLinkBuilder3, ... up to NVLinkBuilder4.   In each case, replace the NVLinkBuilder in the name of each parameter with the name and number of the script you are using.  e.g. <kbd>NVLinkBuilder2On</kbd> will specify the message to trigger NVLinkBuilder2.</p>
+
+<h1><a name="NVGenericScalarTrap" id="NVGenericScalarTrap"></a>NVGenericScalarTrap <i>(NVTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>[me]</kbd> (Note that the <kbd>[source]</kbd> target is not supported for this script.)</p>
+<p>Smoothly fades one of its object's scalar properties over time.<br/>
+<u>TurnOn</u> will make the object fade to its max setting, set via the <kbd>NVGenericScalarTrapMax</kbd> (default: 1.00) parameter, over the course of the time specified by the <kbd>NVGenericScalarTrapFadeOn</kbd> (default: 1000) parameter.<br/>
+Similarly, <u>TurnOff</u> will make the object fade to its minimum alpha (<kbd>NVGenericScalarTrapMin</kbd> - default: 0.00) over the time specified in <kbd>NVGenericScalarTrapFadeOff</kbd> (default: 1000).<br/>
+<kbd>NVGenericScalarTrapIncrement</kbd> (Default: 0.02) specifies the size of the increments by which the property will be scaled.<br/>
+The property to affect is specified via the <u><kbd>NVGenericScalarTrapPropName</kbd></u> property.  You can also specify the subproperty to affect via the <kbd>NVGenericScalarTrapSubPropName</kbd> property.  Omit this parameter if the property does not have any sub-properties. <br/>
+The script will always start from the object's <i>current</i> value, so if the script is sent <u>TurnOn</u> halfway through fading out, it will fade back in smoothly from its current level, rather than going instantly to the min value and fading to the max from that.<br/>
+If the object does not have the property, then it will be assumed to have the value specified by <kbd>NVGenericScalarTrapDefault</kbd>, which defaults to 0.00.</p>
+<p>When the fading has finished, a message will be sent to the object, specified by either <kbd>NVGenericScalarTrapOnMessage</kbd> if the fade was to the maximum value, or <kbd>NVGenericScalarTrapOffMessage</kbd> if the fade was to the minimum value.  These default to <u>FadeOn</u> and <u>FadeOff</u>, respectively.</p>
+<p>Note that this is an advanced script and requires an understanding of correct property internal names.  Using an invalid property name or subproperty name will probably cause a crash.</p>
+
+
+<div class="SS2">
+<h1><a name="NVEndTrap" id="NVEndTrap"></a>NVEndTrap <i>(NVTrap)</i><br/>
+    <b>System Shock 2 only.</b></h1>
+<p>Upon receiving <u>TurnOn</u>, this trap will instantly end the game. The <kbd>NVEndVideo</kbd> parameter can be used to specify the filename of a video to play. The filename specified must include the file extension (typically, .avi) and the file should be located in the <b>cutscenes</b> folder.</p>
+</div>
+
+<h1><a name="NVGlowTrap" id="NVGlowTrap"></a>NVGlowTrap <i>(NVGenericScalarTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>[me]</kbd> (Note that the <kbd>[source]</kbd> target is not supported for this script.)</p>
+<p>Smoothly fades its object's dynamic light over time.<br/>
+<u>TurnOn</u> will make the object fade to its max glow, set via the <kbd>NVGlowMax</kbd> parameter, over the course of the time specified by the <kbd>NVGlowFadeOn</kbd> parameter.<br/>
+Similarly, <u>TurnOff</u> will make the object fade to its minimum alpha (<kbd>NVGlowMin</kbd>) over the time specified in <kbd>NVGlowFadeOff</kbd>.<br/>
+The defaults are to go from 0 (no dynamic light) to 100 over 1000ms.<br/>
+The time is how long it would take for the object to go from the minimum glow to the maximum glow value.<br/>
+The script will always start from the object's <i>current</i> dynamic light value, so if the script is sent <u>TurnOn</u> halfway through fading out, it will fade back in smoothly from its current level of light, rather than going instantly to the min value and fading to the max from that.</p>
+<p>As of NVScript v1.2.0, you can use <kbd>NVGlowIllumMax</kbd> and <kbd>NVGlowIllumMin</kbd> to specify a maximum and minimum value for the <b>Renderer-&gt;Self Illumination</b> property, which will rise and fall with the dynamic light level on the object.  You must specify a value for <kbd>NVGlowIllumMax</kbd> to use this feature.</p>
+<p>When the fading has finished, a message will be sent to the object, specified by either <kbd>NVGlowTrapOnMessage</kbd> if the fade was to the maximum value, or <kbd>NVGlowTrapOffMessage</kbd> if the fade was to the minimum value.  These default to <u>GlowOn</u> and <u>GlowOff</u>, respectively.</p>
+<p>See the documentation for <a href="#NVGenericScalarTrap">NVGenericScalarTrap</a> for more information.</p>
+
+<h1><a name="NVCameraTrap" id="NVCameraTrap"></a>NVCameraTrap <i>(NVTrap)</i></h1>
+<p>Attaches the camera to the script's object on <u>TurnOn</u>, and returns the view to the player on <u>TurnOff</u><br/>You can use <kbd>NVCameraTrapStatic=1</kbd> to make the camera static (immovable).</p>
+<p>Note: In SS2, this script will only work if its object has a unique name.</p>
+<p>You can also have the remote camera automatically return after a set time via <kbd>NVCameraTrapReturnTime</kbd>, and disable player input while the camera is active by setting <kbd>NVCameraTrapDisableControls=1</kbd>.  Note that the Escape key is never disabled, so the player can still escape to the menu.  Also note that you must specify a return time when using the disabled controls option - if you do not, it will default to 10 seconds.</p>
+<p>This script requires NewDark to function in Thief 1/Gold.</p>
+
+<h1><a name="NVCutsceneTrap" id="NVCutsceneTrap"></a>NVCutsceneTrap <i>(NVTrap)</i></h1>
+<p>This script plays the video clip specified by <kbd>NVCutscene</kbd> when activated (<u>TurnOn</u>).<br/>
+The file extension must be included, e.g. <kbd>NVCutscene="Credits.avi"</kbd>.  The file is played from the Movies folder (Thief) or the Cutscenes folder (SS2).</p>
+
+<h1><a name="NVDeleteTrap" id="NVDeleteTrap"></a>NVDeleteTrap  <i>(NVTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>&amp;<span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span></kbd></p>
+<p>This script deletes all <b><span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span></b>-linked objects when it receives <u>TurnOn</u>.<br/>This is in contrast to the standard destroy trap script <b class="T2Only">TrapDestroy</b><b class="SS2Only">TrapDestroyer</b>, which merely slays the objects rather than deleting them.<br/>
+Note that an NVDeleteTrap will not delete itself even if it is specified as the target.  Use <kbd>NVDeleteTrapDeleteSelf=1</kbd> to have the trap delete itself after it has finished deleting other objects.</p>
+<h1><a name="NVDifficultyRelay" id="NVDifficultyRelay"></a>NVDifficultyRelay  <i>(NVTrap)</i></h1>
+<p>  This script relays TurnOn and TurnOff messages along ScriptParams links depending on the currently set difficulty.<br/>
+
+Messages are sent along those links that have their data set to <i><b>Difficulty#</b></i>, where <i><b>#</b></i> matches the currently difficulty setting.<br/> 
+Not technically an <i>NVTrigger</i>, but supports message customisation like one.</p>
+
+<div class="SS2">
+<h1><a name="NVDetoxTrap" id="NVDetoxTrap"></a>NVDetoxTrap<i> (NVTrap)</i><br/>
+    <b>System Shock 2 only.</b></h1>
+<p>When activated by <u>TurnOn</u>, this script detoxifies the player by the amount specified by <kbd>NVDetoxTrapAmount</kbd> (default is 1).</p>
+</div>
+
+<h1><a name="NVDiminishingParticles" id="NVDiminishingParticles"></a>NVDiminishingParticles  <i>(NVTrap)</i></h1>
+<p>Upon receiving <u>TurnOn</u>, slowly diminishes the number and lifespan of particles in its particle group over time, eventually slaying the object when there are no particles left.<br/>Every 250ms, the number of particles is reduced by the value specified in <kbd><u>NVDiminishAmount</u></kbd>, and the particles' lifespan is decreased by 0.01. The interval can be modified via the <kbd>NVDiminishInterval</kbd> parameter.</p>
+
+<h1><a name="NVDoorSpeedTrap" id="NVDoorSpeedTrap"></a>NVDoorSpeedTrap <i>(NVTrap)</i></h1>
+<p>Multiple speed door controller.<br/>
+Sets the speed of the door to the value specified by <kbd>NVDoorSpeedTrapOnSpeed</kbd> on <u>TurnOn</u>, and to that specified by <kbd>NVDoorSpeedTrapOffSpeed</kbd> on <u>TurnOff</u>.
+
+<h1><a name="NVGibTrap" id="NVGibTrap"></a>NVGibTrap  <i>(NVTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
+<p>Upon receiving <u>TurnOn</u>, this script sends the object's contents flying and destroys it.  The object is not slain, but destroyed / deleted.</p>
+
+<h1><a name="NVItemGiver" id="NVItemGiver"></a>NVItemGiver</h1>
+<p> Gives the object specified by the <kbd><u>NVGiveWhat</u></kbd> parameter to the object specified by the <kbd>NVGiveTo</kbd> parameter (or the Player if none is specified). If the item is an archetype, an instance of that object is created instead. Objects will stack where appropriate.</p> 
+
+<h1><a name="NVMachine" id="NVMachine"></a> NVMachine <i>(NVTrap)</i></h1>
+<p>Manufacturing machine trap, for making custom machines like the ones in Soulforge Cathedral. <br/>
+The machine can manufacture up to 99 recipes, each consisting of up to 10 parts.  The item that is created by a recipe is specified by the <kbd>NVMachineItem#</kbd> parameter (where # is a number between 0 and 99).  The parts that make up the recipe are specified by <kjbd>NVMachineItem#Part#</kbd> parameters (where the first # is machines the recipe number, and the second # is the part number, from 0-9).
+<br/>Note that the numbers must be consecutive and must start at 0.</p>
+<p>To use this script, link its object to a physical object with a <b>ScriptParams</b> link with data <b>Slot</b> for the input slot. This object must have the <a href="#NVMachineSlot">NVMachineSlot</a> script.<br/>
+Link the machine to a marker with a <b>ScriptParams</b> link with data <b>Output</b> for the output hopper.<br/>
+Sending <u>TurnOn</u> to the machine will trigger the construction. The completed item will be placed in the output hopper, along with any excess items that were thrown into the slot.  If the recipe is invalid, all the items in the slot will be returned.</p>
+
+<h1><a name="NVMapTrap" id="NVMapTrap"></a> NVMapTrap  <i>(NVTrap)</i></h1>
+<p>Upon receiving <u>TurnOn</u>, this script marks a specified automap location as having been visited.  Use the parameters <kbd><u>NVMapTrapPage</u></kbd> and <kbd><u>NVMapTrapLocation</u></kbd> to specify the map location.</p>
+<p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
+<p>This script requires NewDark to function in Thief 1/Gold.</p>
+
+<h1><a name="NVMetaTrap" id="NVMetaTrap"></a> NVMetaTrap  <i>(NVTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
+<p>Upon receiving <u>TurnOn</u>, this script adds the metaproperty specified by the <kbd><u>NVMetaTrapMeta</u></kbd> parameter to its object.<br/>
+The metaproperty is removed on <u>TurnOff</u>.</p>
+<p>You can add a delay before the metaproperty is added or removed via the <kbd><u>NVMetaTrapOnDelay</u></kbd> and <kbd><u>NVMetaTrapOffDelay</u></kbd>, both times are in milliseconds.</p>
+<p>As of NVScript v1.1.0, you can use the <kbd>NVMetaTrapOnDelay</kbd> and <kbd>NVMetaTrapOffDelay</kbd> params to specify a delay before adding and removing the metaproperty, respectively.</p>
+<p>As of NVScript v1.1.0, you can use the <kbd>NVMetaTrapQVar</kbd> parameter to specify a quest variable to append to the end of the metaproperty name.  For example, an NVMetaTrap with <kbd>NVMetaTrapQVar="Difficulty"; NVMetaTrapMeta="M-Diff"</kbd> will check the value of the "Difficulty" quest variable, and then append that number to the end of the metaproperty name, e.g. "M-Diff0", "M-Diff1", "M-Diff3", etc.</p>
+<p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
+<br/>Example: you can use the following scripts:  NVMetaTrap, NVMetaTrap2, NVMetaTrap3, ... up to NVMetaTrap10.   In each case, replace the NVMetaTrap in the name of each parameter with the name and number of the script you are using.  e.g. <kbd>NVMetaTrap2Meta</kbd> will specify the object to create for NVMetaTrap2.<br/>
+<b>Note:</b> if the metaproperty parameter for a specific NVMetaTrap is missing, it will fall back to the generic <kbd><u>NVMetaproperty</u></kbd> parameter, regardless of which NVMetaTrap script is searching for it.</p>
+
+
+<h1><a name="NVOnscreenText" id="NVOnscreenText"></a>NVOnscreenText <i>(NVTrap)</i></h1> 
+<p> Loads a book string and displays both the text and the quest variable that it specifies onscreen.<br/> 
+	This behaves slightly differently from a standard book; rather than simply displaying the value of the string &quot;page_0&quot;, it displays first the contents string &quot;page_0&quot;, then the value of the quest variable specified in the string &quot;QVar&quot;, and finally the contents of &quot;page_1&quot;.</p> 
+<p> So, for example (assuming that the quest variable TestQVar is 54), the string file:</p>
+<blockquote>Page_0: &quot;At present, the qvar is &quot;<br/> 
+	QVar: &quot;TestQVar&quot;<br/> 
+	Page_1: &quot;. Thank you for asking.&quot;</blockquote> 
+<p>would be displayed as &quot;At present, the qvar is 54. Thank you for asking.&quot;<br/> 
+You can also use <span class="T2Only">Design Note</span><span class="SS2Only">ObjList Args</span> parameters instead of a string file. Use the parameters <kbd>NVPage_0</kbd>, <kbd>NVQVar</kbd>, and <kbd>NVPage_1</kbd>. You can also use <kbd>NVText</kbd> instead of <kbd>NVPage_0</kbd> for simple onscreen texts.</p> 
+<p>As of NVScript v1.1.0, you can specify a colour via the <kbd>NVOnscreenTextColour</kbd> parameter. Colours can be specified as either basic colour names (e.g. "red" or "blue"), or as a HTML-style colour code (e.g. #ff0000 or #0000ff).<br/>
+Also as of NVScript v1.1.0, you can use the <kbd>NVOnscreenTextFocusRead=0</kbd> parameter to make the object not automatically display its text when focused.  This can be extremely useful when used in combination with <b>Script, FocusScript</b> FrobInfo, as this will make the text appear on screen when the object is frobbed, and remain there for as long as the player is looking at the object.</p>
+<h1><a name="NVParticleGroup" id="NVParticleGroup"></a> NVParticleGroup  <i>(NVTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
+<p> Upon receiving <u>TurnOn</u>, this script activates its object's particles. <u>TurnOff</u> will deactivate them.</p>
+
+<h1><a name="NVPhantomTrap" id="NVPhantomTrap"></a> NVPhantomTrap  <i>(NVGenericScalarTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>[me]</kbd> (Note that the <kbd>[source]</kbd> target is not supported for this script.)</p>
+<p>Smoothly fades its object's transparency over time.<br/>
+<u>TurnOn</u> will make the object fade to its max alpha, set via the <kbd>NVPhantomAlphaMax</kbd> parameter, over the course of the time specified by the <kbd>NVPhantomFadeOn</kbd> parameter.<br/>
+Similarly, <u>TurnOff</u> will make the object fade to its minimum alpha (<kbd>NVPhantomAlphaMin</kbd>) over the time specified in <kbd>NVPhantomFadeOff</kbd>.<br/>
+The defaults are fully invisible (0.00 alpha) to fully opaque (1.00 alpha) over 1000ms.<br/>
+The time is how long it would take for the object to go from 0.00 to 1.00, so if you are using other min or max values, you will have to adjust the rates accordingly.<br/>
+The script will always fade from the object's <i>current</i> alpha value, so if the script is sent <u>TurnOn</u> halfway through fading out, it will fade back in smoothly from its current transparency level, rather than going instantly to the min value and fading to the max from that.<br/>
+Note that an object with 0.00 alpha is normally still (faintly) visible.  To make it completely invisible, set <kbd>NVPhantomRenderInvisible=0</kbd>.  This will set the Render Type to None when the alpha reaches zero.  You can also use <kbd>NVPhantomRenderType</kbd> to specify which Render Type should be restored if the object becomes visible again.  (The default is 0 - or "Normal".)</p>
+<p>When the fading has finished, a message will be sent to the object, specified by either <kbd>NVPhantomTrapOnMessage</kbd> if the fade was to the maximum value, or <kbd>NVPhantomTrapOffMessage</kbd> if the fade was to the minimum value.  These default to <u>PhantomOn</u> and <u>PhantomOff</u>, respectively.</p>
+<p>See the documentation for <a href="#NVGenericScalarTrap">NVGenericScalarTrap</a> for more information.</p>
+
+<h1><a name="NVSetPropertyTrap" id="NVSetPropertyTrap"></a> NVSetPropertyTrap  <i>(NVTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
+<p>Assigns a value to a property upon receiving <u>TurnOn</u>.  This is a very advanced and powerful script, but it can also crash the game or editor if not used properly.<br/>
+The property to modify is specified via the <kbd><u>NVSetPropertyTrapProperty</u></kbd>.  This is the internal name of the property as used by the Set Property receptron (amongst other things).<br/>
+You must specify the subproperty to modify via the <kbd>NVSetPropertyTrapSubProperty</kbd> parameter, unless the property has no subproperties, in which case this parameter must be omitted.<br/>
+The property will be set to the value specified in <kbd>NVSetPropertyTrapValue</kbd>. <br/>
+Use the <kbd>NVSetPropertyTrapType</kbd> property to specify the type of property being set.  Valid values are <b>int</b> and <b>string</b>.  The default is <b>int</b>.  Using the wrong type will probably result in a crash.</p>
+<p>
+<h3>string</h3>
+The property value with be treated as a string.
+<h3>int</h3>
+When setting an integer-type property, the value can instead be set to a random value between <kbd>NVSetPropertyTrapMin</kbd> and <kbd>NVSetPropertyTrapMax</kbd>.  If the property is a flags value (multiple selections are possible), then use the <kbd>NVSetPropertyTrapIsFlags=1</kbd> parameter to randomly set those flags.  Note that if a single value is set (via <kbd>NVSetPropertyTrapValue</kbd>), then the Min and Max will be ignored.<br/>
+If you would like to prefix a string of text in front of the number, use the <kbd>NVSetPropertyTrapPrefix</kbd> parameter - the Type must be set to int, an the type of the property or subproperty being set must be a string.<br/>
+<b>Warning:</b> attempting to use this property to put the wrong type of data into a property will probably result in a crash, e.g. putting a string (via the prefix option) into a numeric property.</b><br/>
+The script does not currently work for floating point values or vectors. It only works for integers.<br/>
+This script has only been minimally tested.</p>
+<p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
+<br/>Example: you can use the following scripts:  NVSetPropertyTrap, NVSetPropertyTrap2, NVSetPropertyTrap4, NVSetPropertyTrap4, NVSetPropertyTrap5.   In each case, replace the NVSetPropertyTrap in the name of each parameter with the name and number of the script you are using.  e.g. <kbd>NVSetPropertyTrap2Property</kbd> will specify the property for NVSetPropertyTrap2.</p>
+<p>This script is also called NVRandomPropertyTrap, and they can be used interchangeably (albeit with different param names.)</p>
+
+<h1><a name="NVRecalcTrap" id="NVRecalcTrap"></a>NVRecalcTrap<i>(NVTrap)</i> <br/>
+    <b>System Shock 2 only.</b></h1>
+<p>Upon receiving <u>TurnOn</u>, this script will recalculate the player's derived statistics, such as Psi points, max Psi points, inventory capacity, etc., based on the player's current stats. </p>
+</div>
+<h1><a name="NVRelayTrap" id="NVRelayTrap"></a>NVRelayTrap<i>(NVTrap, NVTrigger)</i></h1> 
+<p>Relays <u>TurnOn</u> and <u>TurnOff</u> messages along its <span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span> links. Why? Because this can be used with the various options available to <i>NVTrap</i> and <i>NVTrigger</i> scripts. You can use <kbd>NVRelayTrapDelay</kbd> to delay the message by the specified number of milliseconds. If you specify <kbd>NVRelayTrapDelayMax</kbd>, then a random delay between the time specified by <kbd>NVRelayTrapDelay</kbd> and that specified by <kbd>NVRelayTrapDelayMax</kbd> will be used.  You can also use different timings for on and off messages, by using <kbd>NVRelayTrapOnDelay</kbd> and <kbd>NVRelayTrapOnDelayMax</kbd>, and <kbd>NVRelayTrapOffDelay</kbd> and <kbd>NVRelayTrapOffDelayMax</kbd>, respectively.   Specific on or off delays will supersede the generic delay parameters.<br/> 
+	If you want to abort any messages that are still waiting to be sent when the trap is triggered again, use <kbd>NVRelayTrapExclusiveDelay=1</kbd>.<br/> 
+	You can use <kbd>NVRelayTrapRepeat</kbd> to have the trap send the message a specific number of times each time it is triggerd. Only works when <kbd>NVRelayTrapDelay</kbd> is specified. The time between each repeat is randomised if you use <kbd>NVRelayTrapDelayMax</kbd>.<br/> 
+	Use <kbd>NVRelayTrapRepeat=-1</kbd> to repeat the message infinitely. An infinite repeat infers <kbd>NVRelayTrapExclusiveDelay=1</kbd>. The infinite repeat will stop if the script receives the opposite message from that which triggered it. <u>TurnOff</u> will stop an infinite-repeating <u>TurnOn</u>, and <u>TurnOn</u> an infinite-repeating <u>TurnOff</u>.<br/> 
+	If you only want to allow <u>TurnOn</u> messages to activate the repeating trigger, then use <kbd>NVRelayTrapRepeatOnly=1</kbd>. You can use <kbd>NVRelayTrapRepeatOnly=2</kbd> to only allow repeating <u>TurnOff</u> messages.</p> 
+<p>(Theoretically, this should work for both patched and unpatched versions of Thief 2, but I haven't tested it. If it does, then it could be used instead of <b>TrapTimedRelay</b>.)</p> 
+<p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
+<br/>Example: you can use the following scripts:  NVRelayTrap, NVRelayTrap2, NVRelayTrap3, ... up to NVRelayTrap10.   In each case, replace the NVRelayTrap in the name of each parameter with the name and number of the script you are using.  e.g. <kbd>NVRelayTrap2On</kbd> will specify the message to trigger NVRelayTrap2.</p>
+
+<h1><a name="NVRemovePropertyTrap" id="NVRemovePropertyTrap"></a>NVRemovePropertyTrap <i>(NVTrap)</i></h1> 
+<p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
+<p>Upon receiving <u>TurnOn</u>, this script removes the property specified by <kbd><u>NVRemovePropertyTrapProp</u></kbd> from its object target (by default, itself).<br/>If <kbd>NVRemovePropertyTrapReAdd=1</kbd>, the property will be re-added to the object with its default values (useful for properties that are not inherited.) </p>
+<p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
+<br/>Example: you can use the following scripts:  NVRemovePropertyTrap, NVRemovePropertyTrap2, NVRemovePropertyTrap3, NVRemovePropertyTrap4.   In each case, replace the NVRemovePropertyTrap in the name of each parameter with the name and number of the script you are using.  e.g. <kbd>NVRemovePropertyTrap2Prop</kbd> will specify the property for NVRemovePropertyTrap2.</p>
+
+<h1><a name="NVSelectTrap" id="NVSelectTrap"></a>NVSelectTrap <i>(NVTrap)</i></h1> 
+<p>Upon receiving <u>TurnOn</u>, this script selects (or equips) the inventory item specified by <kbd><u>NVSelectTrapItem</u></kbd>.</p>
+
+<h1><a name="NVScaleDims" id="NVScaleDims"></a>NVScaleDims <i>(NVTrap)</i></h1> 
+<p>This script is designed to be used in conjunction with the default <b>TweqOnOff</b> script and the <b>Tweq-&gt;Scale</b> property, but it can also be useful if you change the <b>Shape-&gt;Scale</b> of an object ingame using other methods. <br/> 
+	Upon receiving <u>TurnOn</u>, this script will scale the physical dimensions and offset of the object to match its current <b>Shape-&gt;Scale</b>.<br/> 
+	If the <b>Tweq-&gt;ScaleState</b> property is currently active (<b>AnimS</b> is <b>On</b>), then a timer named &quot;<i>FixDims</i>&quot; is started, which will fix the dimensions every 100ms until either a <u>TurnOff</u> or <u>TweqComplete</u> message is received (at which point the timer will be turned off to save system resources and prevent lag).<br/> 
+	The <kbd>NVBaseLock=1</kbd> parameter will anchor the lower edge of OBB objects, so that they grow/shrink upwards only. </p> 
+	
+<h1><a name="NVSimpleDoor" id="NVSimpleDoor"></a>NVSimpleDoor <i>(NVTrap)</i></h1>
+<p>This is a very simple door script. The door will open on <u>TurnOn</u> and close on <u>TurnOff</u>, and can be toggled open/closed by frobbing it. This script has none of the other functionality of the <b>StdDoor</b> script and, as such, it will open the door even if it is locked.</p>
+
+<h1><a name="NVSimpleSchemaPlayerTrap" id="NVSimpleSchemaPlayerTrap"></a>NVSimpleSchemaPlayerTrap  <i> (NVTrap)</i></h1> 
+<p>A simple script that plays the schema specified by <kbd><u>NVSchema</u></kbd> at its location upon receiving <u>TurnOn</u>, and halts the schema on <u>TurnOff</u></p> 
+
+<h1><a name="NVSlayMeTrap" id="NVSlayMeTrap"></a>NVSlayMeTrap  <i> (NVTrap)</i></h1> 
+<p>This script slays its object when it receives <u>TurnOn</u>.</p> 
+
+<h1><a name="NVSRContactTrap" id="NVSRContactTrap"></a>NVSRContactTrap <i> (NVTrap)</i></h1> 
+<p>This script initiates S &amp; R contact on its own object when it receives <u>TurnOn</u>.</p> 
+
+<h1><a name="NVStackOrDropTrap" id="NVStackOrDropTrap"></a>NVStackOrDropTrap <i> (NVTrap)</i></h1>
+<p>Upon receiving <u>TurnOn</u>, this script checks if the player is currently carrying an item of the type specified by <kbd><u>NVStackOrDropTrapObject</u></kbd>.  If he is, then the stack count of that object is increased by 1.<br/>
+If the player is not carrying an item of that type, then one will be created in the world.  The object will be placed at (0,0,0) unless the <kbd>NVStackOrDropTrapLoc</kbd> parameter is specified.  If that parameter is given, then it is an offset from the location of the script object, or else the object specified by the <kbd>NVStackOrDropTrapLocObj</kbd> parameter.  You can also use <kbd>NVStackOrDropTrapRot</kbd> to specify the rotation of the newly created object.
+</p>
+
+<h1><a name="NVStackTrap" id="NVStackTrap"></a>NVStackTrap  <i> (NVTrap)</i></h1> 
+<p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
+<p>This script  increases the stack count of its object by 1 when it receives <u>TurnOn</u>, and reduces the stack count by 1 when it recieves <u>TurnOff</u>.<br/>
+As of NVScript v1.2.0, you can use the <kbd>NVStackTrapQuantity</kbd> parameter to specify the amount that the stack should be modified by.  The default is 1.</p> 
+
+
+<h1><a name="NVTextureTrap" id="NVTextureTrap"></a>NVTextureTrap  <i> (NVTrap)</i></h1> 
+<p>This script can repeatedly replace textures on nearby brushes with other textures, with a specifiable delay in between, through a pre-defined list of textures. <br/>
+It will first replace any nearby instances of the texture specified in <kbd><u> NVTextureTrap0</u></kbd> with the texture specified in <kbd><u> NVTextureTrap1</u></kbd>, then waits for the number of milliseconds specified by <kbd>NVTextureTrapDelay</kbd>, then replace that texture with the one specified in <kbd>NVTextureTrap2</kbd>, and so on. It will repeat this process until it runs out of valid texture name parameters.<br/>Individual delays for each step can also be specified, by using the <kbd>NVTextureTrapDelay<i>#</i></kbd> parameter, where the <i>#</i> is replaced by the stage you wish to specify a time for.<br/>
+The trap will activate when it receives <u>TurnOn</u>, and will stop (at whatever texture it has reached) when it receives <u>TurnOff</u>.<br/>You specify the maximum distance at which textures will be replaced via the <b>Engine Features-&gt;Retexture Radius</b> property. If this property is ommited, the trap will not work.<br/>You can use the parameter <kbd>NVTextureTrapLoop=1</kbd> to have the trap loop back around to the first texture when it runs out, which will create an infinitely cycling loop.</p> 
+
+<div class="SS2">
+<h1><a name="NVTranslucentTextTrap" id="NVTranslucentTextTrap"></a>NVTranslucentTextTrap  <i> (NVTrap)</i></h1> 
+<p>Displays the specified text in an overlay at the centre of the screen.
+The text to display is read from a string file.  Use the <kbd><u>NVTranslucentTextTrapText</u></kbd> parameter to specify the string name, and the <kbd>NVTranslucentTextTrapFile</kbd> parameter to specify the filename (default is "misc" for "misc.str").
+You must also specify a number that will be appended to the specified string name via the <kbd>NVTranslucentTextTrapNumber</kbd> parameter.  This might be a good place to make use of the parameter dollar-sign functionality to read a quest variable instead of a number.  (This is a limiation of the translucent overlay function - all string names must end in a number. 0 will be used if none is specified).
+You can specify the time, in milliseconds, that the text is displayed via the <kbd>NVTranslucentTextTrapTime</kbd> parameter.  The default is five seconds (5000ms).
+</div>
+
+
+<h1><a name="NVTweqDevice" id="NVTweqDevice"></a>NVTweqDevice  <i> (NVTrap)</i></h1> 
+<p>On <u>TurnOn</u>, this script activates its object's joints tweq in a Forwards direction and plays schemas with tags <i>Event Activate</i>.<br/>
+On <u>TurnOff</u>, it activates its object's joints tweq in a Reverse direction and plays schemas with tags<i>Event Deactivate</i>.</p> 
+<p>It will generally only operate on the primary joint; to control more than one joint, specify each of the joints to control with <kbd>NVTweqDeviceControlJoint#=1</kbd>, where # is the joint number.<br/>
+For example, to control joints 1 and 2, use <kbd>NVTweqDeviceControlJoint1=1; NVTweqDeviceControlJoint2=1</kbd></p>
+
+<div class="T2">
+<h1><a name="NVSuspiciousTrap" id="NVSuspiciousTrap"></a>NVSuspiciousTrap <i>(NVTrap)</i><br/>
+<b>Not available for System Shock 2.</b></h1> 
+<p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
+<p>Upon receiving <u>TurnOn</u>, this script makes its object suspicious.<br/> 
+	The suspiciousness is removed via <u>TurnOff</u>.<br/> 
+If any AIs have an AISuspiciousLink to the object when it is turned off, then it is removed, along with an AIWatchObj links (in case you're using Telliamed's HighlySuspicious script). </p> 
+</div>
+
+<h1><a name="NVTrapConverse" id="NVTrapConverse"></a>NVTrapConverse <i>(NVTrap)</i></h1>
+ <p>Upon receiving <u>TurnOn</u>, this script triggers the conversation associated with its object.<br/>
+	Basically, this is a clone of the standard <b>TrapConverse</b> script.<br/>
+	Although you might find some use from the added flexibility of an <i>NVTrap</i>, this script is primarily for use with System Shock 2, which lacks <b>TrapConverse</b>.</p>
+
+<h1><a name="NVTrapSetQVar" id="NVTrapSetQVar"></a>NVTrapSetQVar <i>(NVTrap)</i></h1>
+ <p>An improved version of the standard TrapSetQVar script.<br/>
+Upon being triggered, it sets the value of a quest variable. A quest variable that does not exist will be created, and its previous value will be assumed as zero.</p>
+<p>For details of how to use the <span class="T2"><b>Trap-&gt;Quest Var</b> (Thief)</span> or <span class="SS2"><b>Script-&gt;QB Name</b> (SS2)</span> property, see Telliamed's excellent <a href="http://www.thiefmissions.com/telliamed/qvars.html">guide</a>. <br/>
+   		<a href="#NVTrapSetQVar">NVTrapSetQVar</a> and  <a href="#NVTrigQVar">NVTrigQVar</a> support a few new features, however.<br/>
+	Firstly, you can use the name of a quest variable (or a mathematical expression, see below) in place of the numerical argument, in which case the value of that variable will be used instead. For example, you could use <i>+QVar2:QVar1</i> to set <i>QVar1</i> to its current value plus that of <i>QVar2</i>. You can also place a question mark ('<b>?</b>') in front of the name of this qvar to give a random number between zero and its value - so <i>+?Qvar2:QVar1</i> would increase <i>QVar1</i> by a random value between zero and that of <i>QVar2</i>. </p>
+<p>By default, this script will write to the mission quest variable database.  If you want it to use the campaign database instead, use <kbd>NVTrapSetQVarCampaign=1</kbd>.  Quest variables saved in the campaign database will be persisted between missions.</p>
+<p>You can also use the <strong>r</strong> operator to set a qvar to a random value between zero and the specified number or qvar (as opposed to the <strong>?</strong> operator, which will add the random amount to the qvar's current value).  The <strong>^</strong> operator will raise the quest variable to the specified power.</p>
+<p>See also: <a href="#NVTrigQVar">NVTrigQVar</a></p>
+<p>As of NVScript v1.2.2, you can now use a mathematical expression in the place of the numerical argument.  The order of operators is respected, and terms in brackets are evaluated first.  All supported mathematical operations inside the expression will be evaluated, and quest variable names can be used in the expression.  The resulting number will be used in place of the numerical argument.<br/>
+For example, <i>=QVar2+(4-1)*2:QVar1</i> would set QVar1 to the value of QVar2 plus 6.  Note that the <strong>r</strong> and <strong>d</strong> operators will not work in an expression, for obvious reasons.  Spaces in the expression are ignored.</p>
+<p>A modified version of Telliamed's guide to the operators is included below, with the new operands supported by this script.
+<!-- start of Telliamed's table -->
+<p>These are the operators that are valid when used with <var>NVTrapSetQVar</var>.</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3">
+  <col width="25*">
+  <col width="105*">
+  <col width="64*">
+  <col width="62*">
+  <thead>
+    <tr valign="top">
+      <th width="10%">
+        <p>Operator</p>
+      </th>
+      <th width="41%">
+        <p>When Turned On</p>
+      </th>
+      <th width="25%">
+        <p>When Turned Off</p>
+      </th>
+      <th width="24%">
+        <p>Example: Variable = 102</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>=</code></p>
+      </td>
+      <td width="41%">
+        <p>Sets the variable to the argument.</p>
+      </td>
+      <td width="25%">
+        <p>Sets the variable to 0.</p>
+      </td>
+      <td width="24%">
+        <p><samp>=3 &rarr; 3</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>+</code></p>
+      </td>
+      <td width="41%">
+        <p>Adds the argument to the variable.</p>
+      </td>
+      <td width="25%">
+        <p>Subtracts the argument from the variable.</p>
+      </td>
+      <td width="24%">
+        <p><samp>+3 &rarr; 105</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>-</code></p>
+      </td>
+      <td width="41%">
+        <p>Subtracts the argument from the variable.</p>
+      </td>
+      <td width="25%">
+        <p>Adds the argument to the variable.</p>
+      </td>
+      <td width="24%">
+        <p><samp>-3 &rarr; 99</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>*</code></p>
+      </td>
+      <td width="41%">
+        <p>Multiplies the variable by the argument.</p>
+      </td>
+      <td width="25%">
+        <p>Divides the variable by the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>*3 &rarr; 306</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>/</code></p>
+      </td>
+      <td width="41%">
+        <p>Divides the variable by the argument. Discards the remainder.</p>
+      </td>
+      <td width="25%">
+        <p>Multiplies the variable by the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>/3 &rarr; 34</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>%</code></p>
+      </td>
+      <td width="41%">
+        <p>Sets the variable to the remainder of the variable divided by
+        the argument.</p>
+      </td>
+      <td width="25%">
+        <p>multiplies the variable by the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>%4 &rarr; 2</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>!<br>|</code></p>
+      </td>
+      <td width="41%">
+        <p>Sets the bits in the variable that are set in the argument.
+        (Bitwise 'or'.)</p>
+      </td>
+      <td width="25%">
+        <p>Clears the bits in the variable that are set in the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>!3 &rarr; 103</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>{</code></p>
+      </td>
+      <td width="41%">
+        <p>Shifts the bits in the variable left by argument bits.
+        (Multiplies by 2 to the power of argument.)</p>
+      </td>
+      <td width="25%">
+        <p>Shifts the bits in the variable right by argument bits.</p>
+      </td>
+      <td width="24%">
+        <p><samp>{3 &rarr; 816</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>}</code></p>
+      </td>
+      <td width="41%">
+        <p>Shifts the bits in the variable right by argument bits.
+        (Divides by 2 to the power of argument.)</p>
+      </td>
+      <td width="25%">
+        <p>Shifts the bits in the variable left by argument bits.</p>
+      </td>
+      <td width="24%">
+        <p><samp>}3 &rarr; 12</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>&#34;</code></p>
+      </td>
+      <td width="41%">
+        <p>Multiplies the variable by 10, then adds the least-significant
+        decimal digit of the argument (the &quot;ones&quot; place) to the
+        variable.  Only the last 8 digits are kept..</p>
+      </td>
+      <td width="25%">
+        <p>Divides the variable by 10.</p>
+      </td>
+      <td width="24%">
+        <p><samp>&#34;13 &rarr; 1023</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>?</code></p>
+      </td>
+      <td width="41%">
+        <p>Adds to the variable a random value greater than or equal to
+        zero and less than or equal to the argument.</p>
+      </td>
+      <td width="25%">
+        <p>Subtracts from the variable a random value greater than or
+        equal to zero and less than or equal to the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>?3 &rarr; 102&mdash;105</samp></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>d</code></p>
+      </td>
+      <td width="41%">
+        <p>Adds to the variable a random value greater than zero and less
+        than or equal to the argument.</p>
+      </td>
+      <td width="25%">
+        <p>Subtracts from the variable a random value greater than zero
+        and less than or equal to the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>d3 &rarr; 103&mdash;105</samp></p>
+      </td>
+    </tr>
+	
+	<tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>^</code></p>
+      </td>
+      <td width="41%">
+        <p>Raises the quest variable by the power of the argument.
+        NVTrapSetQVar only.</p>
+      </td>
+      <td width="25%">
+        <p>Calculates the root of the quest var, for  the powerf of th arguemt.
+		NVTrapSetQVar only.</p>
+      </td>
+      <td width="24%">
+        <p><samp>^2 &rarr; 10404</samp></p>
+      </td>
+    </tr>
+	
+	<tr valign="top">
+      <td width="10%" style="text-align: center">
+        <p><code>r</code></p>
+      </td>
+      <td width="41%">
+        <p>Sets the quest variable to a random number between 0 and the argument.
+        NVTrapSetQVar only.</p>
+      </td>
+      <td width="25%">
+        <p>Sets the quest variable to zero.</p>
+      </td>
+      <td width="24%">
+        <p><samp>r5 &rarr; 3&mdash;5</samp></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- end of Telliamed's table -->
+
+
+<h1><a name="NVWakePhysicsTrap" id="NVWakePhysicsTrap"></a>NVWakePhysicsTrap <i>(NVTrap)</i></h1> 
+<p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
+<p>When activated, nudges the object's physics slightly to reactive it.</p>
+</p> 
+
+<h1><a name="NVWatchMeTrap" id="NVWatchMeTrap"></a>NVWatchMeTrap <i>(NVTrap)</i></h1>
+<p><b>Targetable:</b> default: <kbd>@human</kbd></p>
+<p>A remake of the WatchMe script from Thief 1 / Gold, turned into an NVTrap.  On <u>TurnOn</u>, <b>AIWatchObj</b> links are created from all humans in the mission to this object.  You can use the <b>AI-&gt;Utility-&gt;Watch: Watch Link Defaults</b> property of the object to specify the configuration of the <b>AIWatchObj</b> links.  <u>TurnOff</u> will remove the links again.</p>
+<p>The object with the script should not have any <b>AIWatchObj</b> links attached to it other than those controlled by the script, or things may not work as expected.</p>
+
+<h1><a name="NVVOTrap" id="NVVOTrap"></a>NVVOTrap<i>(NVTrap)</i></h1> 
+<p>A replacement for the standard <b>VOSounds</b> script.<br/> 
+	Plays a different voiceover schema depending on the value of a quest variable. Use the parameter <kbd>NVVOQVar</kbd> to specify the quest variable to read, and create <b>ScriptParams</b> links to each schema. The schema will be played if the link data is equal to the value of the variable.<br/> 
+	If no link matches or the quest variable doesn't exist, then a <b>SoundDescription</b> link is used instead (if one exists).<br/> 
+	The script will only play one schema (the first matching link). If you can actually think of a reason to have it play multiple voiceovers at the same time, then I can easily change it. 
+	<br/>
+	Oh, and since Telliamed added a 'Polite' VOTrap in tnhScript v2.1 (which does nothing if it is triggered when there are <b>AIInvest</b> links to the player), you can use <kbd>NVPoliteVO=1</kbd> to achieve the same effect.
+</p> 
+
+
+<h2>- Triggers -</h2>
+<h1><a name="NVFrobToggle"></a>NVFrobToggle <i>(NVTrigger)</i></h1> 
+<p> When an object with this script is frobbed, either in the world or in inventory (<u>FrobWorldEnd</u> and <u>FrobInvEnd</u> messages), alternating <u>TurnOn</u> and <u>TurnOff</u> messages are sent along its <span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span> links.<br/> 
+	As this is an <i>NVTrigger</i> script, you can use <kbd>NVFrobToggleTDest=&quot;[Me]&quot;</kbd> to send the messages to the object itself, rather than along the links; this is of particular use in this case as it can allow you to cut down on objects. <br/> 
+	If you want the object to start 'on' (the first frob will send <u>TurnOff</u>, rather than the default <u>TurnOn</u>), use the <kbd>NVFrobToggleStart=1</kbd> parameter.</p> 
+<p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
+<br/>Example: you can use the following scripts:  NVFrobToggle, NVFrobToggle2, NVFrobToggle3, NVFrobToggle4, NVFrobToggle5, NVFrobToggle6, NVFrobToggle7, NVFrobToggle8, NVFrobToggle9, NVFrobToggle10.   In each case, replace the NVFrobToggle in the name of each parameter with the name and number of the script you are using.  e.g. <kbd>NVFrobToggle2Start</kbd> will specify the start state for NVFrobToggle2.</p>
+
+<h1><a name="NVHPTrigger" id="NVHPTrigger"></a>NVHPTrigger <i>(NVTrigger)</i></h1> 
+<p>Sends <u>TurnOn</u> when an object's hit points drop to or below the value specified by <kbd><u>NVHitPoints</u></kbd>. If the hit points raise above that value again, then <u>TurnOff</u> is sent.</p> 
+
+<h1><a name="NVTriggeringRoom" id="NVTriggeringRoom"></a>NVTriggeringRoom <i>(NVTrigger)</i></h1> 
+<p>When applied to a room, this script sends <u>EnteredRoom</u> and <u>ExitedRoom</u> message to any object which enters or exits it.<br/>
+(As an <i>NVTrigger</i> script, both the messages and the target object can be reconfigured.)</p>
+
+<h1><a name="NVTrigContained" id="NVTrigContained"></a>NVTrigContained  <i>(NVTrigger)</i></h1> 
+<p>This script sends <u>TurnOn</u> messages when its object is contained (picked up) by the player, and <u>TurnOff</u> messages when the item is no longer contained (dropped/thrown) by the player.</p>
+
+<h1><a name="NVTrigOBB" id="NVTrigOBB"></a>NVTrigOBB  <i> (NVTrigger)</i></h1> 
+<p>This script acts like the standard <b>TrigOBB</b> script: it sends <u>TurnOn</u> when someone enters its radius, and <u>TurnOff</u> when they leave. The object must have an OBB physics model with the 'Is Edge Trigger' flag set.<br/>
+By default, any object that inherits from <i>Creature (-8)</i> or <i>Avatar (-2098)</i> will activate the trigger. You can use <kdb>NVTrigOBBPlayer=1</kdb> to have the script ignore creatures and only trigger when the <i>Avatar</i> enters its radius.  Alternatively, you can use <kbd>NVTrigOBBArchetype</kbd> to specify an archetype to check for instead.  Only children of the specified (or objects with the specified metaproperty) will activate the trigger.<br/>
+A matching object which enters the trigger bounds will be sent the message specified by <kbd>NVTrigOBBEnterMessage</kbd> (default: <u>NVTrigOBBEnter</u>), and it will be sent the message specified by <kbd>NVTrigOBBExitMessage</kbd> once it leaves (default:  <u>NVTrigOBBExit</u>).<br/>
+The primary purpose of the script is to be a bounds trigger that supports the added functionality of the <i>NVTrigger</i> system.<br/>
+In System Shock 2, the <i>Creature (-8)</i> and <i>Avatar (-2098)</i> archetypes are replaced by the <i>Monsters (-162)</i> and <i>The Player (-384)</i> archetypes, respectively.</p>
+
+<h1><a name="NVTrigRoomPlayer" id="NVTrigRoomPlayer"></a>NVTrigRoomPlayer <i>(NVTrigger)</i></h1> 
+<p>This script is basically a duplicate of the standard <b>TrigRoomPlayer</b> script that uses the <i>NVTrigger</i> system.<br/>
+When applied to a room, it sends <u>TurnOn</u> when the player enters it, and <u>TurnOff</u> when the player leaves.</p>
+
+<h1><a name="NVTrigQVar" id="NVTrigQVar"></a>NVTrigQVar<i>(NVTrigger)</i></h1> 
+<p>An improved version of the standard TrigQVar script.<br/>
+Watches the state of a quest variable, and sends <u>TurnOn</u> when its value changes to satisfy the formula specified in the <b>Trap-&gt;Quest Var</b> property. If the value changes so that it no longer satisfies the formula, it sends <u>TurnOff</u> instead.</p>
+<p>For details of how to use  the <b>Trap-&gt;Quest Var</b> property, see Telliamed's excellent <a href="http://www.thiefmissions.com/telliamed/qvars.html">guide</a>. <br/>
+	<a href="#NVTrigQVar">NVTrigQVar</a> and <a href="#NVTrapSetQVar">NVTrapSetQVar</a> support a few new features, however.<br/>
+	Firstly, you can use the name of a quest variable in place of the numerical argument, in which case the value of that variable will be used instead. For example, you could use <i>&gt;QVar2:QVar1</i> to check if <i>Qvar1</i> is greater than <i>QVar2</i>. You can also place a question mark ('<b>?</b>') in front of the name of this qvar to give a random number between zero and its value.</p>
+<p>By default, NVTrigQVar will only send TurnOn once when its condition becomes true, and TurnOff once when it becomes false.   If you want it to send a TurnOn or TurnOff message every time the qvar is changed, use <kbd>NVTrigQVarAllowRepeats=1</kbd></p>
+
+<p>See also: <a href="#NVTrapSetQVar">NVTrapSetQVar</a></p>
+
+<p>A modified version of Telliamed's guide to the operators is included below, with the new operands supported by this script.
+<!-- start of Telliamed's table -->
+
+<p>These are the operators that are valid when used with <var>NVTrigQVar</var>.</p>
+<table border="1" cellpadding="4" cellspacing="3" style="page-break-inside: avoid">
+  <col width="28*">
+  <col width="166*">
+  <col width="62*">
+  <thead>
+    <tr valign="top">
+      <th width="11%">
+        <p>Operator</p>
+      </th>
+      <th width="65%">
+        <p>Description</p>
+      </th>
+      <th width="24%">
+        <p>Example: Variable = 102</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td width="11%" style="text-align: center">
+        <p><code>=</code></p>
+      </td>
+      <td width="65%">
+        <p>Is true if the variable is exactly equal to the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>=102</samp> is true.
+        <br><samp>=101</samp> is false.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="11%" style="text-align: center">
+        <p><code>&#60;</code></p>
+      </td>
+      <td width="65%">
+        <p>Is true if the variable is less than the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>&#60;102</samp> is false.
+        <br><samp>&#60;112</samp> is true.
+        <br><samp>&#60;101</samp> is false.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="11%" style="text-align: center">
+        <p><code>&#62;</code></p>
+      </td>
+      <td width="65%">
+        <p>Is true if the variable is greater than the argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>&#62;102</samp> is false.
+        <br><samp>&#62;112</samp> is false.
+        <br><samp>&#62;101</samp> is true.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="11%" style="text-align: center">
+        <p><code>&#38;</code></p>
+      </td>
+      <td width="65%">
+        <p>Is true if any of the bits in the argument are also set in the
+        variable. (Bitwise 'and'.)</p>
+      </td>
+      <td width="24%">
+        <p><samp>&#38;102</samp> is true.
+        <br><samp>&#38;2</samp> is true.
+        <br><samp>&#38;1</samp> is false.
+        <br><samp>&#38;8</samp> is false.
+        <br><samp>&#38;127</samp> is true.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="11%" style="text-align: center">
+        <p><code>&#34;</code></p>
+      </td>
+      <td width="65%">
+        <p>Is true if the lowest decimal digits in the variable, the same
+        number as there are in the argument, are the same as the
+        argument.</p>
+      </td>
+      <td width="24%">
+        <p><samp>&#34;102</samp> is true.
+        <br><samp>&#34;101</samp> is false.
+        <br><samp>&#34;2</samp> is true.
+        <br><samp>&#34;1102</samp> is false.</p>
+      </td>
+    </tr>
+	<tr valign="top">
+		<td width="11%" style="text-align: center"><p><code>+</code></p></td>
+		<td width="65%"><p>Is true if the variable has just increased by exactly the argument.  NVTrigQVar only.</p></td>
+		<td width="24%">(Assuming a previous value of 98)<br/>
+			<samp>+4</samp> is true.<br/>
+			<samp>+2</samp> is false.<br/>
+			<samp>+5</samp> is false. </td>
+	</tr>
+	<tr valign="top">
+		<td width="11%" style="text-align: center"><p><code>-</code></p></td>
+		<td width="65%"><p>Is true if the variable has just decreased by exactly the argument.  NVTrigQVar only.</p></td>
+		<td width="24%">(Assuming a previous value of 98)<br/>
+			<samp>}4</samp> is true.<br/>
+			<samp>}2</samp> is true.<br/>
+			<samp>}</samp>5 is false. </td>
+	</tr>
+	<tr valign="top">
+		<td width="11%" style="text-align: center"><p><code>}</code></p></td>
+		<td width="65%"><p>Is true if the variable has just increased by <i>at least</i> the argument.  NVTrigQVar only.</p></td>
+		<td width="24%">(Assuming a previous value of 98)<br/>
+			<strong>}4</strong> is true.<br/>
+			<strong>}2</strong> is true.<br/>
+			<strong>}5</strong> is false. </td>
+	</tr>
+	<tr valign="top">
+		<td width="11%" style="text-align: center"><p><code>{</code></p></td>
+		<td width="65%"><p>Is true if the variable has just decreased by <i>at least</i> the argument.  NVTrigQVar only.</p></td>
+		<td>(Assuming a previous value of 106)<br/>
+			<strong>{4</strong> is true.<br/>
+			<strong>{2</strong> is true.<br/>
+			<strong>{5</strong> is false. </td>
+	</tr>
+	<tr valign="top">
+		<td width="11%" style="text-align: center"><p><code>%</code></p></td>
+		<td width="65%"><p>Is true if the variable can be evenly divided by the argument.  NVTrigQVar only.</p></td>
+		<td width="24%">%10 is false. <br/>
+			<strong>%17</strong> is true <br/>			
+			<strong>%20</strong> is false.<br/>
+			<strong>%51</strong> is true. </td>
+	</tr>
+	<tr valign="top">
+		<td width="11%" style="text-align: center"><p><code>m</code></p></td>
+		<td width="65%"><p>Is true if the variable includes the same digit exactly the number of times specified by the argument.  NVTrigQVar only.</p></td>
+		<td width="24%"><strong>Example using <cite>m2:QVar</cite></strong><br/>
+			<strong>QVar = 1102</strong> is true <br/>
+			<strong>QVar = 1110</strong> is false.<br/>
+			<strong>QVar = 1234</strong> is false.<br/>
+			<strong>QVar = 1231</strong> is true. </td>
+	</tr>
+
+  </tbody>
+</table>
+
+<!-- end of Telliamed's table -->
+
+
+<h2>- AI Scripts -</h2>
+<h1><a name="NVConvEnhancer" id="NVConvEnhancer"></a>NVConvEnhancer</h1>
+<p>This script is designed solely for use in AI conversation-style pseudo-scripts, such as those used in Conversations, AIWatchObj links, AI responses, etc.<br/> 
+	It adds several new pseudo-script actions that an AI can perform via a conversation, response, etc.<br/>
+	To use these extra actions, you will need to add this script to the AI that you want to be able to perform these extra actions. </br>
+	In the case of conversations, the object with the conversation trap does not need any additional scripts; only the actor who is supposed to perform the actions needs the script.<br/>
+	The actions themselves can be triggered through any normal conversation-like system, by using the <b>Script Message</b> action.  Enter the name of the enhanced action into the <b>Argument 1</b> box, and use <b>Argument 2</b> and <b>Argument 3</b> to specify the action's parameters (which vary between each enhanced action, see below.)<br/>
+	
+	The following enhanced actions are supported:</p> 
+<p><b><u>DelayedFrob</u>:</b> Frob the object specified in <b>Argument 2</b> after the number of milliseconds specified in <b>Argument 3</b>. The pseudo-script will continue immediately. The object will be frobbed regardless of what happens to the AI during the delay (unless its object is deleted / destroyed).  You can also use the third parameter to specify an object (such as a key) with which the AI should frob the object.  Use the format <code>delay; tool</code> (for example, <code>2500; MyKey</code> will wait 2500ms, and then frob the object specified in <b>Argument 2</b> with the object named <i>MyKey</i>)<br/> </p>
+	<p><b><u>GiveItem</u>:</b> Place the object specified in <b>Argument 2</b> into the inventory of the Player object. You can use<b> Argument 3</b> to specify a delay (in milliseconds) before the item is given. You can also use <b>Argument 3</b> to specify the name of a destination object, if you do not want to give the object to the player. To specify both for the action, use the format <code>delay; destination</code> (for example, <code>2500; Footlocker3</code> will wait 2500ms, and then place the item into the object named <i>Footlocker3</i>). Don't specify the destination first.<br/>
+	If the object to give is abstract (an archetype) then a new object of that type will be created and given instead. Given objects will stack with other objects of that type where applicable.</p> 
+	<p><b><u>SendMessage</u>:</b> Sends the message specified by <b>Argument 2 </b> to the object specified in <b>Argument 3 </b>. You can also use<b> Argument 3</b> to specify a delay (in milliseconds) before the message is sent; use the format <code>delay; destination </code> (for example, <code>2500; Footlocker3 </code> will wait 2500ms, and then send the message to the object named <i>Footlocker3</i>. Don't specify the destination first.</p>
+	<p><b><u>CheckLock</u>:</b> Checks if the AI is able to open the door or other locked object specified by <b>Argument 2</b>, and aborts the pseudoscript (conversation/AIWatchObj link/response/etc.) if (s)he can.<br/>
+In other words, the remainder of the pseudoscript will only run if the AI cannot open the door.</p> 
+	<p><b><u>Follow</u>:</b> Tells the AI to start following the object specified in <b>Argument 2</b>, or the <i>Player</i> object if none is specified. The AI will navigate using the pathfinding database, and run to keep up if he or she gets too far behind. Please note that using this action will stop the AI from patrolling, and he or she will not return to the patrol or to his/her origin when the following stops. Of course, you can simply set the AI to patrol again manually, by setting the <b>AI-&gt;Ability Settings-&gt;Patrol: Does Patrol</b> property back to <b>True</b>.</p> 
+	<p><b><u>StopFollowing:</u></b> Tells the AI to stop following any objects he or she might be following. There are no arguments. The place that the AI is standing will become his or her new idling origin. If you absolutely must have the AI return to his or her original origins after following something, then give that AI a custom metaproperty with the <b>AI-&gt;State-&gt;Idling: Origins</b> property manually entered.</p> 
+	<p><b><u>SetQVar:</u></b>Sets a quest variable to a value.  The quest variable operations to perform use the same syntax as <a href="#NVTrapSetQVar">NVTrapSetQVar</a>, but the quest variable data is read from <b>Argument 2</b> rather than the quest variable property.</p> 
+
+<h1><a name="NVGhostingMessages"></a>NVGhostingMessages</h1> 
+<p>This script handles Ghosting Failed messages.<br/> 
+	An AI with this script will cause ghosting to fail if he is injured, killed, knocked out, or his <b>AI-&gt;State-&gt;Current Alertness</b> is raised to 2 or higher.<br/> 
+	Each time ghosting is failed, the mission-scope quest variable <cite>NVGhostingFailed</cite> is incremented by 1.<br/> 
+	The first time ghosting is failed, the message &quot;Ghosting Failed!&quot; is displayed. If the mission-scope quest variable <cite>NVGhostingMessages</cite> is set to <cite>1</cite>, then the message (and count) will be displayed every time ghosting is failed.<br/> 
+	You can also use the <kbd>NVGhostingMessages=1</kbd> parameter.</p> 
+<p>This script can also be applied to normal (non-AI) objects, which will then fail ghosting when damaged or slain.<br/> 
+	AIs who inherit from &quot;bow man&quot;, with an <b>AI-&gt;Ability Settings-&gt;Flee: Conditions for Flee</b> of <b>Never</b> and <b> AI-&gt;AI Core-&gt;Notices Bodies</b> = <b>False</b> (the archers in &quot;Life of the Party&quot;) will not trigger this script, nor will objects named &quot;Cavador&quot;, or anything with the parameter <kbd>NVGhostingIgnore=1</kbd>. </p>
+<p>You can change the default ghosting failed message by defining your own in <b>PlayHint.str</b>. The three strings used by the script are: <i>GhostingFailed</i> (displayed the first time ghosting is failed), <i>GhostingFailed2a</i> (the first part of the message displayed on subsequent failures - this goes before the count) and <i>GhostingFailed2b</i> (this goes after the count). Here is a sample of a <b>PlayHint.str</b> using the default messages:</p>
+<blockquote>GhostingFailed: &quot;Ghosting Failed!&quot;<br/>
+		GhostingFailed2a: &quot;Ghosting Failed!\n(Total: &quot;<br/>
+		GhostingFailed2b: &quot; times)&quot; </blockquote>
+<p>You will probably want to include a space at the end of <i>GhostingFailed2a</i> and one at the start of <i>GhostingFailed2b</i> when writing your own custom message.</p> 
+<p>As of NVScript v1.2.0, you can turn off the ghosting messages for a certain difficulty by using the <kbd>NVGhostingMessagesDifficulty#=0</kbd> parameter, where <kbd>#</kbd> is the difficulty level (0 = Normal, 1 = Hard, 2 = Expert).<br>You can also set the colour of the message via the <kbd>NVGhostingMessagesColour</kbd> parameter (default: #FFFFFF).</p>
+<h1><a name="NVIncapacitatedMessages" id="NVIncapacitatedMessages"></a>NVIncapacitatedMessages</h1>
+<p>An AI with this script will send an '<u>Incapacitated</u>' message to itself when it is knocked out or killed. The message is sent just after the AI finished his or her knockout/death motion.</p> 
+<!--
+<h1><a name="NVLookAtNoises" id="NVLookAtNoises"></a>NVLookAtNoises</h1>
+<p>An AI script. The AI with this script will throw a quick glance in the direction of any Alert One noises they hear. Currently incomplete.</p>
+--> 
+
+
+<h2>- Miscellaneous -</h2>
+<h1><a name="NVAlertMessages" id="NVAlertMessages"></a>NVAlertMessages </h1>
+<p>Listens for <u>Alertness</u> messages and sends more detailed messages with the alert levels.<br/>
+It will send two messages:
+<ul>
+<li>One with the new alertness level: <u>Alert0</u>, <u>Alert1</u>, <u>Alert2</u>, <u>Alert3</u></li>
+<li>One with both the old and the new alertness level: <u>Alert0To1</u>, <u>Alert0To2</u>, <u>Alert0To3</u>, <u>Alert1To0</u>, <u>Alert1To2</u>, <u>Alert1To3</u>, <u>Alert2To0</u>, <u>Alert2To1</u>, <u>Alert2To3</u>, <u>Alert3To0</u>, <u>Alert3To1</u>, <u>Alert3To2</u>.
+</ul>
+</p>
+
+
+<h1><a name="NVAttachMyObj" id="NVAttachMyObj"></a>NVAttachMyObj</h1>
+<p>On <u>Sim</u> start or when <u>Create</u>d ingame, this script crawls back through the inheritance of the object looking for the first ScriptParams link with a data of 'Attach'.<br/> 
+	It then creates an object of the type linked to and adds a CreatureAttachment link from the script's object to the newly created object.<br/>
+	You can specifiy the attachment joint via the <kbd>NVAttachMyObjJoint</kbd> paramter.</p>
+<p>As of v1.0.8, you can have this script use ParticleAttachement links to attach the created object, instead of CreatureAttachment links, by setting the parameter <kbd>NVAttachMyObjAsParticle=1</kbd>.
+
+<h1><a name="NVAttackMessages" id="NVAttackMessages"></a>NVAttackMessages</h1>
+<p>This script adds some more messages to AIs, which can be used to trigger NVTrap scripts.<br/>
+The messages are:
+<ul>
+	<li><u>StartAttackMelee</u> - AI is starting a mêlée attack</li>
+	<li><u>StartAttackRanged</u> - AI is starting a ranged attack</li>
+ 	<li><u>EndAttackMelee</u> - AI has finished a mêlée attack</li>
+ 	<li><u>EndAttackRanged</u> - AI has finished a ranged attack</li>
+ 	<li><u>StartWindupMelee</u> -  AI Starts winding up for a mêlée attack</li>
+ 	<li><u>StartWindupRanged</u> - AI Starts winding up for a ranged attack</li>
+</ul>
+</p>
+
+<div class="SS2">
+<h1><a name="NVBattery" id="NVBattery"></a>NVBattery <br/>
+    <b>System Shock 2 only.</b></h1>
+<p>Fixed Battery script for SS2.  This fixes the bug that would cause a battery to recharge a seemingly random amount of energy (rather than 100%) when used after moving it between levels.</p>
+</div>
+
+<h1><a name="NVCloneContactFrob" id="NVCloneContactFrob"></a>NVCloneContactFrob</h1>
+<p>When used in inventory, a clone of the object is made and a stimulus reaction is initiated between the clone and the frobber.<br/>
+  This script is designed to allow this system, used by Thief's healing potions, to be used in System Shock 2. </p>
+
+<div class="SS2">
+<h1><a name="NVComestible" id="NVComestible"></a>NVComestible <br/>
+    <b>System Shock 2 only.</b></h1>
+<p>When used in inventory, the object with this script will heal the player by one hit point and reduce its stack count by one.<br/>
+	It also plays a schema with the tags &quot;<i>Event Activate</i>&quot;.</p>
+<p>As of v1.0.8, you can specify the number of hit points by which the object will heal the player via the <kbd>NVComestibleHeal</kbd> parameter, and you can also specify an optional number of psi points to restore via the <kbd>NVComestiblePsi</kbd> parameter.</p>
+<p>As of v1.1.0, you can also specify a number of toxin or radtion points to heal, via the <kbd>NVComestibleDeTox</kbd> and <kbd>NVComestibleDeRad</kbd> parameters, respectively.  You can also specify that a certain trait will give a bonus to the amount of healing given by the item via the <kbd>NVComestibleTrait</kbd> trait, which defaults to 2 ("Pharmo-Friendly").  If the user has the trait, then the multiplier specified by <kbd>NVComestibleTraitBonus</kbd> will be applied.  This defaults to 1.20, or 120% effectiveness.<br/>
+An additional bonus of 1.50 (+50% effectiveness) will also be applied if the difficulty level is 0 or 1 (Easy or Normal).  This amount can be adjusted via the <kbd>NVComestibleDifficultyBonus</kbd> parameter. <br/>
+Finally, another additional bonus can be applied if the quest variable specified by <kbd>NVComestibleQVar</kbd> is non-zero.  This is another multiplier specified by <kbd>NVComestibleQVarBonus</kbd>, and defaults to 1.20 (+20%).</p>
+<p>You cannot use one of these items if it will kill you (it grants negative health greater than the player's current health.)</p>
+<p>By default, you cannot use the item if it will have no effect (full health, full psi, no radiation, no toxins.)  You can override this behaviour by using <kbd>
+NVComestibleNoCheck=1</kbd>.<br/>
+If the item cannot be used, the appropriate message will be displayed from Misc.str: "CantUseRadPatch", "ToxinNone", "PsiMaxed", "HPMaxed".
+In the last case, you can specify a custom message to display instead for when the player already has maximum health by using the <kbd>NVComestibleHPMaxedMessage</kbd> paramter.  Note that this parameter specifies the name of a string from Misc.str - you can't enter the message directly into the parameter.</p>
+</div>
+
+<h1><a name="NVCombineTypeSetter" id="NVCombineTypeSetter"></a>NVCombineTypeSetter </h1>
+<p>When the mission starts or its object is created (on <u>BeginScript</u>), this script sets the <b>Engine Features->Stack Count</b> property of its object to the value specified by <kbd>NVCombineType</kbd>, or to a value equal to the object number if none is specified (effectively giving each object a unique combine type).</p>
+
+<h1><a name="NVConsumeMessages" id="NVConsumeMessages"></a>NVConsumeMessages </h1>
+<p>Sends a "StackConsume" message to its object when its stack count decreased.</p>
+
+<h1><a name="NVContainedMessages" id="NVContainedMessages"></a>NVContainedMessages </h1>
+<p>Listens for <u>Contained</u> messages and sends a more detailed message with the contain event.<br/>
+<u>Contained2</u> is sent when the object is added to a container (e.g. picked up), and <u>Contained3</u> when it is removed from the container (e.g. dropped).
+</p>
+
+<div class="T2">
+<h1><a name="NVCursedObj" id="NVCursedObj"></a>NVCursedObj <br/>
+    <b>Not available for System Shock 2.</b></h1>
+<p>The object with this script will be permanently selected for as long as the player is carrying it.<br/>
+	It will be selected when the player picks it up, and will be immediately re-selected if the player tries to put it away or select another object of the same type.<br/>
+	When the player tries to deselect the object, the string specified by the <kbd>NVCurseMessage</kbd> parameter will be read from the string file <b>NVCursedObj.str</b> - if none is specified, the <i>Default</i> string is used. (If the file is not found, no message is displayed.)<br/>
+	Unless you want to drive the player mad, do not use more than one object of the same type (weapon, item) with this script. The objects will constantly be cycled every 100ms.</p>
+</div>
+
+<h1><a name="NVDoorStartsOpen" id="NVDoorStartsOpen"></a>NVDoorStartsOpen</h1>
+<p>When applied to a door, this script causes that door to open at great speed when the mission initially starts (or when its object is created ingame). Use it to make doors start open. </p>
+
+<h1><a name="NVDeathStageFix" id="NVDeathStageFix"></a>NVDeathStageFix</h1>
+<p>This script monitors objects in the mission for the DeathStage property, and automatically removes it if it deems it to be inappropriate (the only known legitimate use for the DeathStage property is on objects with zero hit points, so it is left alone in that case).  This should hopefully eliminate the DeathStage 12 bug.<br/>
+This script can be applied to any object single in the mission.  The player or starting point might be good choices.  Having the script on multiple objects in the same mission is untested.</p>
+
+<div class="SS2">
+<h1><a name="NVDeathCutscene" id="NVDeathCutscene"></a>NVDeathCutscene<br/>
+    <b>System Shock 2 only.</b></h1>
+<p>If the player object has this script, then the video specified by the <kbd><u>NVEndVideo</u></kbd> parameter will be played when he dies. The filename specified must include the file extension (typically, .avi) and the file should be located in the <b>cutscenes</b> folder.<br/>
+	Note that this script will not work unless the player object has the <i></i> <b>PlayerScript</b> script with a higher priority (in other words, it must be below <b>PlayerScript</b> in the script list, or on an ancestor of the object with <b>PlayerScript</b>).</p>
+</div>
+
+<div class="T2">
+<h1><a name="NVEmitWhileSelected"></a>NVEmitWhileSelected<br/>
+<b>Not available for System Shock 2.</b></h1>
+<p>The object with this script causes the player to emit objects while he has it selected in his inventory.<br/> 
+	Upon being selected in the player's inventory (<u>InvSelect</u>), the script copies the <b>Tweq-&gt;Emit</b> and <b>Tweq-&gt;EmitterState</b> properties (<i>CfgTweqEmit</i>, <i>StStweqEmit</i>) from the object to the player.<br/> 
+	The <b>AnimS</b> is then set to <b>On</b> to activate the emitter. </p> 
+<p>When the object is deselected (<u>InvDeselect</u>), then <b>AnimS</b> is set to <b>Off</b> to deactivate the emitter.<br/> 
+	<br/> 
+	The emitter is also stopped when the item is automatically hidden after being selected for too long (<u>InvDeFocus</u>), and restarted when the object is refocused (<u>InvFocus</u>). You can set the parameter <kbd>NVIgnoreDeFocus=1</kbd> if you want the emitter to continue while the object is hidden.</p> 
+<p>You can specify which of the five Tweq property sets should be used via the <kbd>NVTweqNum</kbd> parameter. (For example, use <kbd>NVTweqNum=3</kbd> to use <b>Tweq-&gt;Emit3</b> and <b>Tweq-&gt;Emitter3State</b>.)<br/> 
+	This script will only work if the item it is applied to has the FocusScript flag in it's <b>Engine Features-&gt;Frob Info</b>: <b>Inv Action</b>.</p> 
+</div>
+<h1><a name="NVExclusiveObject"></a>NVExclusiveObject</h1>
+<p> When this object is created, or at the beginning of the simulation (<u>Sim</u> and <u>Create</u> messages), all other objects that inherit from its direct archetype are destroyed, to ensure that there is only ever <b>ONE</b> of these objects.</p> 
+<p>You can also use the <kbd>NVExclusiveObjectCount</kbd> parameter (default: 1) to specify the maximum number of this tye of object that are allowed to exist at one time.  If you attempt to create a new one and it would exceed this limit, then the oldest object of this type is deleted.</p>
+
+<h1><a name="NVFakeWater"></a>NVFakeWater</h1>
+<p>This script simulates water.<br>
+	It is meant to be applied to a BoundsTrigger-type object - that is to say, an OBB physics model with the 'Is Edge Trigger' flag.<br>
+	When the player is inside the edges of the bounding box, then various effects are applied to give the impression of being in/under water.<br>
+	Other objects entering / exiting the bounding box will have their velocity and gravity reduced.<br>
+	This script will not work properly if its object is rotated.</p>
+
+<div class="SS2">
+<h1><a name="NVGuaranteedLoot" id="NVGuaranteedLoot"></a>NVGuaranteedLoot<br/>
+    <b>System Shock 2 only.</b></h1>
+<p>When the creature with this script dies, items will be added to its inventory with a 100% certainty.  The items are specified via the <kbd>NVGuaranteedLoot<i>#</i></kbd> parameters, where <i>#</i> is a number between 0 and 99.</p>
+</div>
+
+<div class="SS2">
+<h1><a name="NVHealingGland" id="NVHealingGland"></a>NVHealingGland<br/>
+    <b>System Shock 2 only.</b></h1>
+<p>A variant of <a href="#NVMedPatchScript">NVMedPatchScript</a> set up to default to the same values as used by the standard HealingGland script.  (15 hp, 1hp per 1500ms)<br/>
+See <a href="#NVMedPatchScript">NVMedPatchScript</a> for more details.</p>
+</div>
+
+<h1><a name="NVFirerHack" id="NVFirerHack"></a>NVFirerHack</h1>
+<p> When placed upon the archetype of a projectile or other movavble object, this script removes the <b>F-&gt;Firer</b> property shortly after being thrown or fired. In other words, the object will be able to collide with the player after he throws it. For example, if the player shoots an arrow with this script straight up into the air, it will injure him when it comes down on his head.</p> 
+
+<h1><a name="NVHolyH2OHack" id="NVHolyH2OHack"></a>NVHolyH2OHack <i>(NVInvTransform)</i></h1>
+<p> A companian script for the standard HolyH2O; if there are no water arrows in the player's inventory when it is frobbed, it will activate an <a href="#NVInvTransform">NVInvTransform</a>.<br/>
+	To use it, find the <i>HolyH2O (-2435)</i> archetype and add it to the <i>Script 1</i> field of <b>S-&gt;Scripts</b>, leaving <u>HolyH2o</u> as <i>Script 0</i>.<br/>
+	Now, add <b>Engine Features-&gt;FrobInfo</b> and remove the '<u>Use Ammo</u>' flag from <i>Inv Action</i>. If you fail to do this, and you use the <kbd>NVInvTransformStack</kbd> parameter of <a href="#NVInvTransform">NVInvTransform</a>, then you will always lose one item with each transformation.</p>
+
+<h1><a name="NVInvAssembly" id="NVInvAssembly"></a>NVInvAssembly <i>(NVTrap, NVTrigger) </i></h1> 
+<p> When the object with this script is frobbed in the player's inventory, it will first take one item off its stack (unless <kbd>NVSpendAssembler</kbd> is set to <kbd>0</kbd>), and one item from the stack of the object specified in <kbd><u>NVAssemblyPart</u></kbd>, and replace them with the object specified by <kbd><u>NVAssembledItem</u></kbd>. It also plays a schema with the tags <span class="T2">&quot;<i>Event Acquire</i>&quot; for Thief 2</span> or <span class="SS2">&quot;<i>Event Create</i>&quot; for System Shock 2</span>  (from NVScript v1.0.5 and upwards). If either of the components do not exist, a message is displayed and nothing else happens. The message is read from the string file <b>NVInvAssembly.str</b> - the specific string to read is defined by the <kbd>NVAssemblyError</kbd> parameter.<br/> 
+For example:</p> 
+<b class="inset40"><span class="T2Only">Design Note</span><span class="SS2Only">ObjList Args</span>: </b> 
+<blockquote>NVAssemblyPart=&quot;Broadhead&quot;; NVAssembledItem=&quot;Water&quot;; NVAssemblyError=&quot;shafts&quot;</blockquote> 
+<b class="inset40">NVInvAssembly.str:</b> 
+<blockquote>default: &quot;Not enough components.&quot; <br/> 
+	<b>shafts: &quot;Not enough shafts.&quot; </b><br/> 
+	gear: &quot;You don't have enough gears to repair that.&quot; </blockquote> 
+<p>Wih this setup, the object would combine itself and one broadhead into a water arrow, displaying the error 'shafts' (&quot;Not enough shafts&quot;) if no broadheads are available. Obviously enough, no error message is displayed if the object itself is not available - after all, what would the player be frobbing?</p>
+<p>As of NVScript v1.0.8, this script can be used as an <i>NVTrap</i> (allowing its trigger message to be specified). To do this, set the <kbd>NVAssemblyType</kbd> parameter, as follows:<br/>
+  <kbd>0</kbd> - Normal behaviour (listens for FrobInvEnd)<br/>
+ <kbd>1</kbd> - <i>NVTrap</i> behaviour (listens for configuarable message, FrobInvEnd is ignored)<br/>
+  <kbd>2</kbd> - Double behaviour (listens for both)</p>
+<p>Also as of NVScript v1.0.8, the script will send an <i>Assembled</i> (configurable via the <i>NVTrigger</i> system) message to the stack of the newly assembled object type in the player's inventory (again, the destination is configurable via the <i>NVTrigger</i> system).</p>
+<p><br/> 
+</p>
+
+<h1><a name="NVInvAssembly2" id="NVInvAssembly2"></a>NVInvAssembly2</h1>
+<p> When the object with this script is used on an object that inherits from the object specified by the <kbd><u>NVAssemblyPart</u></kbd> parameter, it will reduce the stack count of both objects by 1, and replace them by the object specified by <kbd><u>NVAssembledItem</u></kbd>. It also plays a schema with the tags <span class="T2">&quot;<i>Event Acquire</i>&quot;</span> <span class="SS2">(or &quot;<i>Event Create</i>&quot; in System Shock 2)</span>.   Alternatively, you can specify a sound to play by adding the <kbd>NVAssembledSchema</kbd> to the object that is the result of assembly.<br/>
+Although this script is primarily designed for System Shock 2's inventory system, it can also be used in Thief via <b>Inv</b> to <b>World</b> <i>Tool Frob</i>s - in which case the world object is <u>slain</u> when its stack count reaches zero (rather than simply being destroyed/deleted).<br/>
+You can specify multiple part/item combinations by simply appending a number to end of the appropriate parameter. For example, using the object with this script on an object that inherits from <kbd><u>NVAssemblyPart1</u></kbd> will replace the objects with the one specified by <kbd><u>NVAssembledItem1</u></kbd>; using it on one that inherits from <kbd><u>NVAssemblyPart2</u></kbd> will use <kbd><u>NVAssembledItem2</u></kbd>, and so on. Paremters numbers must be consecutive, for example, <kbd><u>NVAssemblyPart8</u></kbd> will be ignored if there is no <kbd><u>NVAssemblyPart7</u></kbd>, etc.<br/>
+You can use the appropriate <kbd>NVAssemblyPart<b>#</b>Stack</kbd> and <kbd>NVAssembly<b>#</b>Stack</kbd> parameters to specify how many of the target and script object, respectively, are needed and consumed in the assembly.  The number of objects returned by the assembly can be specified via <kbd>NVAssembledItem<b>#</b>Count</kbd>.  In each of these cases, the <b>#</b> is either the number of the assembly in question, or omitted.</p>
+
+<h1><a name="NVInvTransform" id="NVInvTransform"></a>NVInvTransform</h1>
+<p> A base for other scripts, but it can be used on its own as well - in which case it responds to <u>FrobInvEnd</u>.<br/>
+	Transforms itself in the player's inventory into another object.<br/>
+When triggered, it will transform itself into a new item of the type specified by the the <kbd><u>NVInvTransform</u></kbd> parameter.<br/>
+The default is to convert the entire stack in one go; you can use the <kbd>NVInvTransformStack</kbd> parameter to only transform a certain number of the objects.</p>
+
+
+<div class="T2">
+<h1><a name="NVInventoryMemory"></a>NVInventoryMemory<br/>
+<b>Not available for System Shock 2.</b></h1> 
+<p> If placed upon the Player object (starting point, Avatar archetype, etc.), this script will restore the player's inventory selections when a saved game is resumed.</p> 
+</div>
+<h1><a name="NVInvSound"></a>NVInvSound</h1>
+<p>Plays a sound with the schemas <i>Event Activate</i> when frobbed in inventory.</p> 
+
+<h1><a name="NVJointControl" id="NVJointControl"></a>NVJointControl</h1>
+<p>A script for controlling joints.<br/>
+This script can have up to 99 joint configuration sets, each of which is activated by a message specified by <kbd>NVJointControlOn<b>#</b></kbd> (where the <b>#</b> is the configuration set number, from 1-99; numbers must be sequential.)</br>
+Each configuration set can specify the desired position and speed of any of the 6 joints, using the <kbd>NVJointControlOn<b>#</b>Joint<b>#</b></kbd> and <kbd>NVJointControlOn<b>#</b>Joint<b>#</b>Speed</kbd> params, where the first <b>#</b> is the number of the configuration set, and the second <b>#</b> is the joint to control.  If no speed is specified, the curent value from the property is used.<br/>
+The joint will always take the shortest route to its destination.  You can specify extreme destination angles (such as -90 instead of 270) if you want to force it to take a different route.<br/>
+When a joint starts moving, a <u>JointStarted<b>#</b></u> message will be sent to the object, and when a joint reaches its destination, a <u>JointComplete<b>#</b></u> message is sent, where the <b>#</b> is the number of the joint whose movement has started or completed.</p>
+<p>Example <span class="T2Only">Design Note</span><span class="SS2Only">ObjList Args</span> params:
+<blockquote>NVJointControlOn1="TurnOn"; NVJointControlOn1Joint1=180; NVJointControlOn1Joint1Speed=30; NVJointControlOn1Joint2=90; NVJointControlOn1Joint2Speed=3; NVJointControlOn2="JointComplete2"; NVJointControlOn2Joint3=-180; NVJointControlOn2Joint3Speed=30; NVJointControlOn2Joint4=270; NVJointControlOn2Joint4Speed=3</blockquote>
+This example will activate joints 1 and 2 on <u>TurnOn</u>, moving joint 1 to 180 degrees at a speed of 30, and joint 2 to 90 degrees at a speed of 3.  Once joint 2 reaches its destination, the second set of joints will activate, moving joint 3 to -180 degrees at a speed of 30, and joint 4 to 270 degrees at a speed of 3.</p>
+
+<div class="T2">
+<h1><a name="NVKeyringKey" id="NVKeyringKey"></a>NVKeyringKey<br/>
+<b>Not available for System Shock 2.</b></h1> 
+<p> This script handles the combination of all keys into one single keyring object.<br/> 
+	Simply replace the <b>StdKey</b> script on your keys with this one, and they will merge into a single, undroppable keyring object. The keyring's <b>Stack Count</b> will indicate the number of keys the ring contains. <br/> 
+	You can create multiple keyring sets. Use the <kbd>NVKeyringId</kbd> parameter to specify the keyring ID that a specific key should be added to. The default ID is 192.<br/>
+	Note: Do not use any locks with a <i>RegionMask</i> of 1 and a <i>LockID</i> of any used keyring ID (by default, 192) in your mission, as they will be openable by ANY key.<br/>
+	You can also specify the model name of the keyring via the <kbd>NVKeyringModel</kbd> parameter; the default is <b>MKeyring</b>. You can also specify keyring's inventory label via the <kbd>NVKeyringName</kbd> parameter; the defaults is <b>name_keys</b>.<br/>
+	<br/>
+	In truth, this script changes the <b>Engine Features-&gt;KeyDst</b> property of any locked objects that would be opened by the key's <b>Engine Features-&gt;KeySrc</b> so that it can be opened by a single 'keyring' object (which is created if it doesn't exist). It then increases the keyring's stack count and destroys the key. <br/>
+The <b>KeySrc</b> of this keyring is to <i> MasterBit: False; RegionMask: 1; LockID: [As specified in <kbd>NVKeyringId</kbd>; default: 192].</i></p>
+</div>
+
+<h1><a name="NVMachineSlot" id="NVMachineSlot"></a>NVMachineSlot</h1>
+<p>See <a href="#NVMachine">NVMachine</a>.</p>
+
+<div class="SS2">
+<h1><a name="NVMultiplayerTrap" id="NVMultiplayerTrap"></a>NVMultiplayerTrap<br/>
+    <b>System Shock 2 only.</b></h1>
+<p>A special level-change script that activates multiplayer mode during the level transition.  This can be used to make fan missions multiplayer without using the default Earth / Station game startup.  The script also activates the players' HUDs during the level change.  As with any other level change marker, the destination level is specified via the <b>Multilevel-&gt;Dest Level</b> and <b>Multilevel-&gt;DestLoc</b> properties.<br/>
+This script need only be used once, at the initial transition between the single-player (e.g. character creation) part of the game and the multiplayer section (e.g. the rest of the game).  The result of using this script once multiplayer has already been initialised is unknown.</p>
+</div>
+
+<div class="SS2">
+<h1><a name="NVMedKitScript" id="NVMedKitScript"></a>NVMedKitScript<br/>
+    <b>System Shock 2 only.</b></h1>
+<p>A variant of <a href="#NVMedPatchScript">NVMedPatchScript</a> set up to default to the same values as used by the standard MedKitScript script. (200 hp, 5hp per 1500ms)<br/>
+See <a href="#NVMedPatchScript">NVMedPatchScript</a> for more details.</p>
+</div>
+
+
+<div class="SS2">
+<h1><a name="NVMedPatchScript" id="NVMedPatchScript"></a>NVMedPatchScript<br/>
+    <b>System Shock 2 only.</b></h1>
+<p>A improved and customisable medical hypo script.  Its effect can be adjusted with the following parameters:</p>
+<table>
+	<tr>
+		<th>Param name</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><kbd><i>NVMedPatchScript</i>HealTotal</kbd></td>
+		<td>( = 10 )</td>
+		<td>Total amount healed</td>
+	</tr>
+	<tr>
+		<td><kbd><i>NVMedPatchScript</i>HealTotal</kbd></td>
+		<td>( = 0 )</td>
+		<td>Total amount of psi points restored</td>
+	</tr>
+	<tr>
+		<td><kbd><i>NVMedPatchScript</i>Trait</kbd></td>
+		<td>( = 2  / 'Pharmo Friendly')</td>
+		<td>Trait that gives modifier</td>
+	</tr>
+	<tr>
+		<td><kbd><i>NVMedPatchScript</i>TraitBonus</kbd></td>
+		<td>( = 1.20 )</td>
+		<td>Multiplier for trait (e.g. Pharmo Friendly)</td>
+	</tr>
+	<tr>
+		<td><kbd><i>NVMedPatchScript</i>EasyBonus</kbd></td>
+		<td>( = 1.50 )</td>
+		<td>Multiplier for 'Easy' difficulty</td>
+	</tr>
+	<tr>
+		<td><kbd><i>NVMedPatchScript</i>HealInc</kbd></td>
+		<td>( = 2 )</td>
+		<td>HP healed per 1500ms</td>
+	</tr>
+	<tr>
+		<td><kbd><i>NVMedPatchScript</i>PsiInc</kbd></td>
+		<td>( = 2 )</td>
+		<td>Psi points restored per 1500ms</td>
+	</tr>
+</table>
+<p>For any of the derivitave scripts, replace '<i>NVMedPatchScript</i>' in each parameter name with the name of that script.</p>
+</div>
+
+
+<h1>NVNameOnCreation</h1>
+<p> When this object is created, or at the beginning of the simulation (<u>Sim</u> and <u>Create</u> messages), the object with this script is given the name specified by the <kbd><u>NVSymName</u></kbd> parameter, unless an object with that name already exists.<br/> 
+	If the name is already taken, nothing will happen unless you use the <kbd>NVSymNameIncrement=1</kbd> parameter; then a number will be appended to the end of the chosen name until an unused name is found, up to 99 attempts. (For example, if you created multiple objects all set to be automatically given the name &quot;NamedObject&quot;, then the first would be named &quot;NamedObject&quot;, the second would become &quot;NamedObject1&quot;, the next &quot;NamedObject2&quot;, and so on, up to &quot;NamedObject99&quot;.)</p> 
+<h1><a name="NVNewWeapon" id="NVNewWeapon"></a>NVNewWeapon</h1> 
+<p> This script allows the creation of new weapons.<br/> 
+	It adds the metaproperty specified by <kbd>NVWeaponMeta</kbd> to the player arm object which is created when the weapon is equipped.<br/> 
+	It also send the '<u>InitArm</u>' message to the player arm, after the metaprop has been added.<br/> 
+	One use for this script is to add a metaproperty with the <b>Motions-&gt;Actor Tag List</b> property, allowing you to have a weapon with its own motion set. You could also make the arm transparent or give it a script set up to trigger when it receives the <u>InitArm</u> message.</p>
+<p>If you want to use this script on a gun in SS2 (as of NVScript v1.1.0), you should use NVGun instead - it has all the functionality of this script, plus it sendss gun-related messages to the object when its state changes (ammo is used, condition degrades, weapon setting is changed).</p> 
+
+<h1><a name="NVObjectWatcher" id="NVObjectWatcher"></a>NVObjectWatcher</h1>
+<p>The object with this script will rotate to track the object specified by the <kbd>NVObjectToWatch</kbd> parameter.  Its rotation will be adjusted every 50ms to always face the target object.<br/>
+If you specify <kbd>NVObjectWatcherZOnly=1</kbd> then the object will only be tracked horizontally, and height differences will be ignored.
+The watching can be turned on and off via <u>NVActivate</u> and <u>NVDeactivate</u> messages (for some reason).  If you need to control it manually, you will need to send the appropriate messages (e.g. through an NVTrigger script.)</p>
+
+<h1><a name="NVParticleTrailProjectile" id="NVParticleTrailProjectile"></a>NVParticleTrailProjectile</h1>
+<p>This script is a workaround for a problem with projectiles that have particle trails: if the projectile object is slain, its particle is destroyed instantly. As such, the particle effect will not finish its path to the point of impact, but instantly disappear.<br/>
+When a projectile with this script hits something, its attached particles are turned off and its object is hidden, to be destroyed ten seconds later. The script also creates and then immediately slays a copy of the projectile, so any corpses or particle effects associated with its impact will be created properly.<br/>
+The object with this script must not have its <b>Physics-&gt;Misc-&gt;Collision Type</b> set to <i>Slay on Impact</i> or <i>Destroy on Impact</i> for this script to function.</p>
+
+<h1><a name="NVPhysMessages" id="NVPhysMessages"></a> NVPhysMessages</h1>
+<p>The object with this script will receive physics-related messages: <u>PhysMadeNonPhysical</u>, <u>PhysMadePhysical</u>, <u>PhysCollision</u>, <u>PhysContactCreate</u>, <u>PhysContactDestroy</u>, <u>PhysEnter</u>, <u>PhysExit</u>, <u>PhysFellAsleep</u>, <u>PhysWokeUp</u>.</p>
+
+<h1><a name="NVPickyProjectile" id="NVPickyProjectile"></a> NVPickyProjectile</h1>
+<p>For use on projectiles.  The object with this script will ignore collisions with any object that inherits from the archetype named in <kbd>
+NVPickyProjectileIgnore</kbd> (in other words, it will fly straight through it.)  The object will be slain if it collides with anything else.  Note that the object must not have its <b>Physics-&gt;Misc-&gt;
+Collision Type</b> set to <i>Slay On Impact</i> for this script to work.</p>
+
+<div class="SS2">
+<h1><a name="NVPlayerScript" id="NVPlayerScript"></a>NVPlayerScript<br/>
+    <b>System Shock 2 only.</b></h1>
+<p>This script fixes various bugs and issues in SS2.  These include:<p>
+<ul>
+	<li>The player's weapon becomes invisible when using Psi Invisibility (to use this, set a Transparency->Alpha on the Inviso metaproperty; this will be copied to the weapon arm models.)</li>
+	<li>Psi Burnout no longer wastes your psi points when you have the Power Psi trait (can be disabled with <kbd>NVRegainPsiFromBurnout=0</kbd>)</li>
+	<li>The security system no longer breaks and leaves security cameras being permanently offline if you hack security, save, and reload</li>
+	<li>You can no longer continue to research items if you lose the required skill (e.g. due to using a LabAssistant implant)</li>
+</ul>
+<p><b>This script must be added to the player under the standard PlayerScript script, so that it is loaded afterwards.</b></p>
+</div>
+
+<div class="SS2">
+<h1><a name="NVPsiKitScript" id="NVPsiKitScript"></a>NVPsiKitScript<br/>
+    <b>System Shock 2 only.</b></h1>
+<p>A variant of <a href="#NVMedPatchScript">NVMedPatchScript</a> set up to default to the same values as used by the standard psi hypo, except with a delayed psi point increase rather than adding the full bonus instantaneously.  (20 pp, 2pp per 1500ms)<br/>
+See <a href="#NVMedPatchScript">NVMedPatchScript</a> for more details.</p>
+</div>
+
+<div class="SS2">
+<h1><a name="NVPutInContainers" id="NVPutInContainers"></a>NVPutIntoContainers<br/>
+    <b>System Shock 2 only.</b></h1>
+<p> <i>	When asked to tidy your room, you stare back blankly and think &quot;But you CAN'T put things back in containers&quot;<br/> 
+	- d0om (1000 clues that you have been Dromeding too much, No. 92.) </i></p>
+<p>This script allows its item to be placed inside containers.<br/>
+	The object must have the <i>Tool Action</i> of it's <b>Engine Features-&gt;FrobInfo</b> set to <i>Script</i> for this to work.<br/>
+	Note that only objects that descend from the 'Usable Containers (-118)' archetype are treated as 'containers'.<br/>
+	Objects with unusual inventory dimensions will confuse the script (it will probably just tell the player they don't fit in the container). Also, the objects may sometimes appear in impossible arrangements inside the container when it's near its capacity.<br/>
+	The contents of the container should be limited to 4x4; before I placed this limit, extra contents would vanish completely from the world. It might still be possible to 'overstuff' the containers somehow -  by manually adding your own <i>Contains</i> links, for example - so be careful.</p>
+</div>
+
+<h1><a name="NVQVarName" id="NVQVarName"></a>NVQVarName</h1>
+<p>This script is used to make an object's name (or label) change based on the value of a qvar.  The qvar is specified via the <kbd><u>NVQVarNameQVar</u></kbd> parameter.<br/>
+The new name is assembled from three parts: two text strings read from ObjNames.str with the quest variable placed in the middle.  The first part is specified via the <kbd>NVQVarNamePart1</kbd> parameter, and the second part is specified by the <kbd>NVQVarNamePart2</kbd> parameter and the <kbd>NVQVarNamePart2Singular</kbd> parameter.  The singular value is only used if the value of the qvar is 1.  This should allow you to make the name grammatically correct.  The normal (plural) name will be used if this parameter is not specified.<br/>
+(Somewhat illogical) example:  Using the following <span class="T2Only">Design Note</span><span class="SS2Only">ObjList Args</span> will result in the item being named "Sword<b>#</b>Blackjack", where the <b>#</b> is the number of points of damage the player has dealt.  If the player has dealt exactly one point of damage, the label will be "Sword1Apple" instead:</p>
+<b class="inset40"><span class="T2Only">Design Note</span><span class="SS2Only">ObjList Args</span>: </b> 
+<blockquote>NVQVarNameQVar=&quot;DrSDmgDealt&quot;; NVQVarNamePart1=&quot;Name_Swords&quot;; NVQVarNamePart2=&quot;Name_Blackjack&quot;; NVQVarNamePart2Singular=&quot;Name_Apple&quot;</blockquote> 
+
+<div class="SS2">
+<h1><a name="NVRecycler" id="NVRecycler"></a>NVRecycler <br/>
+    <b>System Shock 2 only.</b></h1>
+<p>Fixed Recycler script for SS2.  This fixes the bug that would allow you to recycle an implant that was currently being worn, permanently applying its effect.</p>
+</div>
+
+<h1><a name="NVRotatable" id="NVRotatable"></a>NVRotatable</h1>
+<p>This script allows its object to be rotated by the player holding down the frob button on it. Its <b>TweqRotate</b> is activated when it receives <u>FrobWorldBegin</u>, and deactivated when it receives <u>FrobWorldEnd</u> or <u>WorldDeSelect</u>.<br/>
+The script will send the <u>StartRotate</u> message to itself when it starts to rotate, and the <u>StopRotate</u> message one second after it has finished rotating.<br/>The object needs to have the <i>Script</i> and <i>FocusScript</i> flags set in the <i>World Action</i> of its <b>Engine Features-&gt;Frob Info</b> property. If you forget the latter, then the object will not stop rotating if you look away from it while it is moving.</p>
+
+<h1><a name="NVSafeDoor" id="NVSafeDoor"></a>NVSafeDoor</h1>
+<p>This script allows you to easily create safe doors such as the one seen in my C5 entry &quot;The Haunting&quot;. Its use is fairly straightforward, but it assumes that the object it is applied to is a safe door.<br/> 
+	When frobbed, the safe door's first joint begins to rotate, and stops when the frob button is released. The joint will snap to the nearest 36 degrees (in other words, there are only ten positions where the joint can stop). To open the safe, it must stop once on each digit in the safe's code, in the correct order, with no mistakes in between.<br/> 
+	The combination is read from the mission-scope quest variable <cite>NVSafeDoor</cite> (you can specify a different variable via the <kbd>NVSafeQVar</kbd> parameter.)  The code must be 8 digits or less.<br/> 
+	If no combination is specified, then the safe will invent a random four-digit code when the mission starts and place that into the qvar.<br/> 
+	If a quest variable is shorter than the code length specified by <kbd>NVSafeDoorCodeLength</kbd> (default: 4), then the code will be assumed to be padded with leading zeroes to fill out the code length (this is because quest variables, as integers, cannot have leading zeroes.)  This means that if you want to use a code shorter than 4 digits, you will need to specify a shorter code length; also, if you want a code that starts with a leading zero and is longer than 4 digits , you will need a longer code length.  (You do not need to specify the code length if the code is longer than 4 digits and does not start with zero.)</br>
+	If the safe is frobbed by an AI, it will automatically advance to the next correct digit in the code, and then add an AIWatchObj link from the frobbing AI to the safe's object, unless the safe is opening, in which case the AIWatchObj link is created to the object specified by the <kbd>NVSafeOpenAction</kbd> parameter (optional).<br/> 
+	The <b>AI-&gt;Utility-&gt;Watch: Watch link defaults</b> property of the safe should contain a step to frob the object. See below for more specific instructions on how to set up the safe.<br/> 
+	To have an AI open the safe, however, you should not order that AI to frob the object, but simply goto its location and then add an AIWatchObj link to it.</p> 
+<p>To set up the safe, first, create a <b>SpecialDoors (-6181)</b><br/> 
+	Set its properties as follows: </p> 
+<p><b>Shape-&gt;Model Name:</b> NVSafeDoor<br/> 
+	<b>Schema-&gt;Class Tags:</b> BoxType Safe<br/> 
+	<b>Physics-&gt;Model-&gt;Attributes:</b><br/> 
+	<font class="inset">COG Offset: 0.00 -1.00 0.00</font><br/> 
+	<b>Physics-&gt;Models-&gt;Dimensions:</b><br/> 
+	<font class="inset">Offset: 0.075 0.00 0.00<br/> 
+	Size: 0.25 2.00 2.00</font><br/> 
+	<b>Engine Features-&gt;FrobInfo:</b> Script, FocusScript<br/> 
+	<b>Engine Features-&gt;Locked:</b> True<br/> 
+	Render-&gt;Transparency (alpha): 1.00<br/> 
+	<b>Door-&gt;Rotating:</b><br/> 
+	<font class="inset">Set up however you wish. The default values are okay.</font> </p> 
+<p><b>Tweq-&gt;Joints:</b><br/> 
+	<font class="inset"><b>Halt:</b> Stop Tweq<br/> 
+	<b>AnimC:</b> NoLimit, Sim<br/> 
+	<b>MiscC:</b> [None]<br/> 
+	<b>CurveC:</b> [None]<br/> 
+	<b>Primary Joint:</b> 1<br/> 
+	<b>Joint1AnimC:</b> NoLimit, Sim<br/> 
+	<b>Joint1CurveC:</b> [None]<br/> 
+	<b>Rate-Low-High:</b> 12 -360 360</font><br/> 
+	<br/> 
+	<b>S-&gt;Scripts:</b> (Please note that the order of these is important.)<br/> 
+	<font class="inset"><b>Script 0:</b> StdDoor<br/> 
+	<b>Script 1:</b> NVSafeDoor<br/> 
+	<b>Don't Inherit:</b> True</font></p> 
+<p> <br/> 
+	<b>AI-&gt;Utility-&gt;Watch: Watch link defaults</b><br/> 
+	<font class="inset"><b>Watch Kind:</b> Self Entry<br/> 
+	<b>Priority:</b> Normal<br/> 
+	<b>Trigger:</b> Radius 8<br/> 
+	<b>Height:</b> 8<br/> 
+	<b>Required Awareness:</b> 0<br/> 
+	<b>Line Requirement:</b> None<br/> 
+	<b>Minimum Alertness:</b> 0<br/> 
+	<b>Maximum Alertness:</b> 1<br/> 
+	<b>Exit: Link kill option:</b> After Trigger<br/> 
+	<b>Kill like links:</b> False<br/> 
+	<b>No test once triggered:</b> True<br/> 
+	<b>Response Step 1:</b> Play Sound/Motion<br/> 
+	<b>Argument 1:</b><br/> 
+	<b>Argument 2:</b><br/> 
+	<b>Argument 3:</b> Ghost 0, Safe 0<br/> 
+	<b>Response Step 2:</b> Frob Object<br/> 
+	<b>Argument 1:</b> [object name/number of the safe door]<br/> 
+	<b>Argument 2:</b><br/> 
+	<b>Argument 3:</b><br/> 
+	<b>Response Step 3:</b> Wait<br/> 
+	<b>Argument 1:</b> 10000<br/> 
+	<b>Argument 2:</b> Ghost 0, Safe 1<br/> 
+	<b>Argument 3:</b></font></p> 
+<p>In order for the safe to work properly, you need to have a custom motion database with the appropriate motions for the AIs, and you need to have the custom schema 'safe_loop' defined. All the files needed for the safe (including the motions, object, sounds, some example schemas and motion schemas) can be found in the 'NVSafeDoor' archive in the 3D Models section of The Nameless Tower.</p> 
+
+<h1><a name="NVShakePlayer" id="NVShakePlayer"></a>NVShakePlayer</h1>
+<p>This is a copy of a script from System Shock 2.  When applied to the player, it causes the screen to shake when the player is hit by a ShakeStim, with the severity of the shake being dependant upon the intensity of the stimulus.  The object needs to have a Send To Scripts receptron for the ShakeStim.  (You may also need to create a stimulus named ShakeStim - the stimulus name is not configurable.)<br/>
+The shaking takes the form of a series of jolts: one when the script is activated, and five more at 50ms intervals.  To increase the length of the shaking, send additional stims to re-activate the script once the effect has finished.</p>
+<p>This script requires NewDark to function in Thief 1/Gold.</p>
+
+<h1><a name="NVSpy" id="NVSpy"></a>NVSpy</h1> 
+<p>Writes every message that this script receives both to the screen and to the monolog.  Useful for seeing which script messages an object receives.</p>
+<p>You can set this script to ignore <b>Timer</b> messages y using the <kbd>NVSpyIgnoreTimer=1</kbd> param.</p>
+
+<h1><a name="NVStartUnrotated" id="NVStartUnrotated"></a>NVStartUnrotated</h1> 
+<p>An object with this script has its rotations set to 0.00° on <u>BeginScript</u>.</p>
+
+<div class="T2">
+<h1><a name="NVSwapSword" id="NVSwapSword"></a>NVSwapSword<br/>
+<b>Not available for System Shock 2.</b></h1> 
+<p>When the object with this script is frobbed in the world, it will remove the sword from the player's inventory and place it at its object's location, then add itself to the player's inventory, effectively swapping itself with the player's sword.<br/>
+	In order to use this script, the sword must have <i>World Action</i> of its <b>Engine Features-&gt;FrobInfo</b> set to <i>Script</i>.<br/>
+	Note that the player will be able to pick up the sword he was previously carrying, so you need to either give it this script or set it's <i>World Action</i> to <i>None</i> to stop the player from taking it back up.<br/>
+As of NVScript v1.1.0, you can use the <kbd>NVSwapSwordTarget</kbd> parameter to specify a weapon other than "Sword" to swap out.</p>
+</div>
+
+<h1><a name="NVTurningSquare" id="NVTurningSquare"></a>NVTurningSquare</h1>
+<p>Stepping inside this edge trigger will rotate the player by 180&deg;, and teleport him to the inverse of his position relative to the turning square's centre.</p>
+
+
+<h1><a name="NVTweqMessages" id="NVTweqMessages"></a>NVTweqMessages</h1>
+<p>Upon receiving a <u>TweqComplete</u> message, this script sends its object a more detailed tweq message, with the following format: &quot;<i>Tweq[Type]Complete[Direction]</i>&quot;.<br/> 
+	For example: <u>TweqScaleCompleteForward</u>, <u>TweqEmitterCompleteForward</u>, <u>TweqAllCompleteReverse</u>, or <u>TweqModelsCompleteReverse</u>. This is primarily for use with the various <i>NVTrap</i> scripts.</p> 
+<h1><a name="NVTwoSpeedDoor" id="NVTwoSpeedDoor"></a>NVTwoSpeedDoor</h1>
+<p>This script allows a door to have a different opening speed to its closing speed.<br/>Speeds are specified via the <kbd><u>NVDoorOpeningSpeed</u></kbd> and <kbd><u>NVDoorClosingSpeed</u></kbd> parameters.</p> 
+
+<h1><a name="NVUnusableUnlessQVar" id="NVUnusableUnlessQVar"></a>NVUnusableUnlessQVar</h1>
+<p>An object with this script will be unfrobbable in the player's inventory unless a certain quest variable, defined by <kbd>NVUnusableUnlessQVar</kbd>, is set (non-zero).<br/>
+  This script is primarily designed for making the player start without a bow; simply add this script to all arrows and he will not be able to shoot them until you set a quest variable indicating that the bow has been picked up.<br/> 
+  Note that this script takes over the <b>Engine Features-&gt;FrobInfo</b> property of any objects that have it, so any settings applied to the object itself (rather than to its archetype) will be lost. <br/> 
+As of the complete rewrite of this script in v1.0.8, the arrows <i>will</i> become usable if they are currently selected when the quest variable is changed.</p>
+
+<h1><a name="NVVisibilityToQVar" id="NVVisibilityToQVar"></a>NVVisibilityToQVar</h1>
+<p>When this script is placed upon the player, it maintains the mission-scope a qvar <cite>NVVisibilityQVar</cite>, constantly updating it to contains the player's current visibility level on a scale from 0 (invisible) to 100 (fully visible).<p>
+
+<h1><a name="NVWatchMe" id="NVWatchMe"></a>NVWatchMe</h1>
+<p><b>Targetable:</b> default: <kbd>@human</kbd></p>
+<p>A remake of the WatchMe script from Thief 1 / Gold.  When an object with this script is created, <b>AIWatchObj</b> links are automatically created from all humans in the mission to this object.  You can use the <b>AI-&gt;Utility-&gt;Watch: Watch Link Defaults</b> property of the object to specify the configuration of the <b>AIWatchObj</b> links.</p>
+
+<h1><a name="NVWhoKilledMe" id="NVWhoKilledMe"></a>NVWhoKilledMe</h1>
+<p>When the object with this script is <u>Slain</u>, it will display a message based on who killed it.  The message will take the format of "X was killed by Y", where the names of each party are taken from the <kbd>NVWhoKilledMeName</kbd> parameter on that object.  The message " was killed by " can be specified via the <kbd>NVWhoKilledMeMsg</kbd> parameter, and its colour can bew chosen with the <kbd>NVWhoKilledMeColour</kbd> parameter.</p>
+
+
+<h2>- Debug Scripts-</h2> 
+<p>These scripts are designed soley for use by mission desginers during the design and beta-testing proccess.<br/> 
+	They are not included in the main script module, but instead reside in NVDebug.osm - which you will need to temporarily load to use these in your mission You should make sure to remove the script module from your mission before release.</p> 
+<h1><a name="NVDifficultyDebug" id="NVDifficultyDebug"></a>NVDifficultyDebug</h1>
+<p> If the quest variable <cite>DebugDifficulty</cite> is set, then this script sets the difficulty to its value when the game starts, and then proccesses the difficulty.<br/> 
+	This script should only be used for playtesting purposes, and should be removed before the final mission is packaged.<br/> 
+	It doesn't matter which object you place this script on (you probably shouldn't use it on more than one object...)<br/> 
+	The player's hitpoints and vulnerabilities are not affected by this script, but that hardly matters. </p> 
+
+
+
+<h2><a name="VersionHistory"></a>- Version History -</h2>
+<h1>v1.3.4</h1>
+<ul>
+	<li><a href="#NVPlayerScript">NVPlayerScript</a> now correctly calculates the cost of psi powers, based on the relevant metaproperties, allowing the refund from Power Psi to work with customised psi power costs.</li>
+</ul>
+<h1>v1.3.3</h1>
+<ul>
+	<li><a href="#NVPlayerScript">NVPlayerScript</a> now doubles the psi points restored after a burnout when using the Recursive Psi power and having the fixed Power Psi trait.</li>
+</ul>
+<h1>v1.3.2</h1>
+<ul>
+	<li>Re-added support for Windows XP (was broken in 1.3.0</li>
+</ul>
+<h1>v1.3.1</h1>
+<ul>
+	<li><a href="#NVSetPropertyTrap">NVSetPropertyTrap now supports multiple versions.</li>
+	<li><a href="#NVSetPropertyTrap">NVSetPropertyTrap</a> will now recalc stats if used on a Player (SS2 only)</li>
+	<li><a href="#NVPlayerScript">NVPlayerScript</a> now sends GainedTrait# message when gaining a trait.</li>
+	<li>NVSecurityComputer can now specify schema to play when hacked via NVSecurityComputerHackedSchema.</li>
+</ul>
+<h1>v1.3.0</h1>
+<ul>
+	<li>Source code now on GitHub.</li>
+	<li>A few minor bugfixes and documentation updates.</li>
+</ul>
+<h1>v1.2.9</h1>
+<ul>
+	<li>Added full source code.</li>
+</ul>
+<h1>v1.2.8</h1>
+<ul>
+	<li>Fixed a bug where the script state (such as activation counts, capacitors, and timer handles) of multiple scripts on the same object could get scrambled upon save/load. This changes the way all scripts store their state, and so may cause glitches in saved games made in earlier versions of NVScript, as saved script state will be lost.</li>
+	<li>Fixed a bug with <a href="#NVKeyringKey">NVKeyringKey</a> where the keyring would not be selected in inventory upon picking up a key.</li>
+</ul>
+<h1>v1.2.7</h1>
+<ul>
+	<li>Fixed a bug with the <kbd>^</kbd> identifier used to refer to the closest object of a specified type not working if no minimum distance was specified.</li>
+</ul>
+<h1>v1.2.6</h1>
+<ul>
+	<li>Added the following scripts to the Thief 1 / Gold module. (Note that they will only work when running NewDark):
+	<ul>
+		<li><a href="#NVMapTrap">NVMapTrap</a></li>
+		<li><a href="#NVCameraTrap">NVCameraTrap<a></li>
+		<li><a href="#NVShakePlayer">NVShakePlayer</a></li>
+	</ul>
+	</li>
+</ul>
+<h1>v1.2.5</h1>
+<ul>
+	<li>Re-added the missing <kbd>NVPhantomRenderInvisible</kbd> and  <kbd>NVPhantomRenderType</kbd> parameters to <a href="#NVPhantomTrap">NVPhantomTrap</a>. (These were accidentally removed in v.1.2.0.</li>
+	<li>Added the ability to specify a specific trigger archetype for <a href="#NVTrigOBB">NVTrigOBB</a>, and also added sending of messages to the triggering object.  Finally, fixed a bug where the exit trigger functionality did not work correctly in System Shock 2.</li>
+	<li>New script: <a href="#NVRemovePropertyTrap">NVRemovePropertyTrap</a></li>
+</ul>
+<h1>v1.2.4</h1>
+<ul>
+	<li>Fixed several bugs in <a href="#NVSafeDoor">NVSafeDoor</a>.</li>
+	<li>The "source" target will now use the stim source for scripts activated via Send to Scripts receptrons.</li>
+	<li>New script: <a href="#NVAlertMessages">NVAlertMessages</a></li>
+	<li>New script: <a href="#NVWatchMeTrap">NVWatchMeTrap</a></li>
+	<li>New script: <a href="#NVWakePhysicsTrap">NVWakePhysicsTrap</a></li>
+	<li>Fixed a bug where <a href="#NVConvEnhancer">NVConvEnhancer</a>'s StopFollowing action was not correctly removing links created by the Follow action.</li>
+	<li>Fixed an error in the documentation for <a href="#NVComestible">NVConvEnhancer</a>.</li>
+	<li>Added an option to disable player controls and an automatic return timer to <a href="#NVCameraTrap">NVCameraTrap<a>.</li>
+	<li>Added an option to modify an existing link to <a href="#NVLinkBuilder">NVLinkBuilder<a>.</li>
+</ul>
+<h1>v1.2.3</h1>
+<ul>
+	<li>New script: <a href="#NVWatchJointControl">NVJointControl</a></li>
+	<li><a href="#NVConvEnhancer">NVConvEnhancer</a>: Added <i>SetQVar</i> action.</li>
+	<li>Fixed a bug in <a href="#NVGenericScalarTrap">NVGenericScalarTrap</a> which would make it never reach 0.00 in a property.</li>
+	<li>Fixed several bugs in <a href="#NVTrigQVar">NVTrigQVar</a>, including one where the <kbd>&quot;</kbd> operator was not working, and one where quest variable lookup was not working for quest variables with names starting with the letter 'r'.</li>
+	<li>Updated the documentation to reflect the fact that <a href="#NVLinkBuilder">NVLinkBuilder</a> supports multiple versions.</li>
+</ul>
+<h1>v1.2.2</h1>
+<ul>
+	<li>Major overhaul of <a href="#NVTrapSetQVar">NVTrapSetQVar</a> to allow the use of complex mathematical expressions in place of the numerical argument.</li>
+	<li>Fixed a bug where <a href="#NVTrigQVar">NVTrigQVar</a> might not work properly between reloads.</li>
+	<li>Fixed a bug in a content-getting function used by <a href="#NVInvAssembly">NVInvAssembly</a>, <a href="#NVHolyH2OHack">NVHolyH2OHack</a>, <a href="#NVSwapSword">NVSwapSword</a>, and <a href="#NVStackOrDropTrap">NVStackOrDropTrap</a>, which ought to have been causing a crash, but wasn't for some reason.</li>
+	<li>Added documentation for <a href="#NVCameraTrap">NVCameraTrap<a>.  Also updated it to better support SS2.</li>
+</ul>
+<h1>v1.2.1</h1>
+<ul>
+	<li>Fixed a bug in <a href="#NVRelayTrap">NVRelayTrap</a> where it would not fall back to <kbd>NVRelayDelayMax</kbd> if a specific maximum delay for on or off was not specified.  The order is now: <kbd>NVRelayTrapOnDelayMax</kbd>, then <kbd>NVRelayTrapDelayMax</kbd>, and finally <kbd>NVRelayDelayMax</kbd>.  The last variant will obviously not work with the multiple script feature.</li>
+	<li>Added documentation for <a href="#NVMachine">NVMachine<a>.</li>
+	<li>Fixed some errors in the documentation.</li>
+	<li>Removed a debug message accidentally left in <a href="#NVGenericScalarTrap">NVGenericScalarTrap</a>.</li>
+	<li>Fixed a bug in <a href="#NVGenericScalarTrap">NVGenericScalarTrap</a> which could make it go slightly above the max or slightly below the min before stopping.</li>
+</ul>
+<h1>v1.2.0</h1>
+<ul>
+	<li>Implemented a new targeting system for the following scripts:
+		<ul>
+			<li><a href="#NVMetaTrap">NVMetaTrap</a></li>
+			<li><a href="#NVDeleteTrap">NVDeleteTrap</a></li>
+			<li><a href="#NVGibTrap">NVGibTrap</a></li>
+			<li><a href="#NVParticleGroup">NVParticleGroup</a></li>
+			<li><a href="#NVPhantomTrap">NVPhantomTrap</a></li>
+			<li><a href="#NVStackTrap">NVStackTrap</a></li>
+			<li><a href="#NVSuspiciousTrap">NVSuspiciousTrap</a></li>
+			<li><a href="#NVGenericScalarTrap">NVGenericScalarTrap</a></li>
+			<li><a href="#NVGlowTrap">NVGlowTrap</a></li>
+			<li><a href="#NVWatchMe">NVWatchMe></li>
+		</ul>
+	</li>
+	<li>New script: <a href="#NVGenericScalarTrap">NVGenericScalarTrap</a><ul>
+		<li><a href="#NVPhantomTrap">NVPhantomTrap</a> and <a href="#NVGlowTrap">NVGlowTrap</a> are now subtypes of this script.</li>
+		</ul>
+	</li>
+	<li>New script: <a href="#NVWatchMe">NVWatchMe</a></li>
+	<li>New script: <a href="#NVVisibilityToQVar">NVVisibilityToQVar</a></li>
+	<li>New script: <a href="#NVTranslucentTextTrap">NVTranslucentTextTrap</a></li>
+	<li>New script: <a href="#NVShakePlayer">NVShakePlayer</a></li>
+	<li>Add difficulty levels and text colours to <a href="#NVGhostingMessages">NVGhostingMessages</a>.</li>
+	<li>Added Renderer-&gt;Self Illumination feature to <a href="#NVGlowTrap">NVGlowTrap</a></li>
+	<li>Added <cite>r</cite> operator to <a href="#NVTrapSetQVar">NVTrapSetQVar</a></li>
+	<li>Added <cite>m</cite> operator and <kbd>NVTrigQVarAllowRepeats</kbd> param to <a href="#NVTrigQVar">NVTrigQVar</a></li>
+	<li>Fixed a crash bug.</li>
+</ul>
+<h1>v1.1.0</h1>
+<ul>
+	<li>New script: <a href="#NVAITeamSetter">NVAITeamSetter</a></li>
+	<li>New script: <a href="#NVAttackMessages">NVAttackMessages</a></li>
+	<li>New script: <a href="#NVBattery">NVBattery</a> (SS2 only)</li>
+	<li>New script: <a href="#NVCombineTypeSetter">NVCombineTypeSetter</a></li>
+	<li>New script: <a href="#NVConsumeMessages">NVConsumeMessages</a></li>
+	<li>New script: <a href="#NVContainedMessages">NVContainedMessages</a></li>
+	<li>New script: <a href="#NVCutsceneTrap">NVCutsceneTrap</a></li>
+	<li>New script: <a href="#NVDeathStageFix">NVDeathStageFix</a></li>
+	<li>New script: <a href="#NVDetoxTrap">NVDetoxTrap</a> (SS2 only)</li>
+	<li>New script: <a href="#NVDoorSpeedTrap">NVDoorSpeedTrap</a></li>
+	<li>New script: <a href="#NVGlowTrap">NVGlowTrap</a></li>
+	<li>New script: <a href="#NVGibTrap">NVGibTrap</a></li>
+	<li>New script: <a href="#NVGuaranteedLoot">NVGuaranteedLoot</a> (SS2 only)</li>
+	<li>New script: <a href="#NVHealingGland">NVHealingGland</a> (SS2 only)</li>
+	<li>New script: <a href="#NVMapTrap">NVMapTrap</a> (T2 only)</li>
+	<li>New script: <a href="#NVMedKitScript">NVMedKitScript</a> (SS2 only)</li>
+	<li>New script: <a href="#NVMedPatchScript">NVMedPatchScript</a> (SS2 only)</li>
+	<li>New script: <a href="#NVMultiplayerTrap">NVMultiplayerTrap</a> (SS2 only)</li>
+	<li>New script: <a href="#NVPickyProjectile">NVPickyProjectile</a></li>
+	<li>New script: <a href="#NVPlayerScript">NVPlayerScript</a> (SS2 only)</li>
+	<li>New script: <a href="#NVQVarName">NVQVarName</a></li>
+	<li>New script: <a href="#NVRecycler">NVRecycler</a> (SS2 only)</li>
+	<li>New script: <a href="#NVPsiKitScript">NVPsiKitScript</a> (SS2 only)</li>
+	<li>New script: <a href="#NVRandomPropertyTrap">NVRandomPropertyTrap</a></li>
+	<li>New script: <a href="#NVSelectTrap">NVSelectTrap</a></li>
+	<li>New script: <a href="#NVSlayMeTrap">NVSlayMeTrap</a></li>
+	<li>New script: <a href="#NVSRContactTrap">NVSRContactTrap</a>
+	<li>New script: <a href="#NVStackOrDropTrap">NVStackOrDropTrap</a></li>
+	<li>New script: <a href="#NVStartUnrotated">NVStartUnrotated</a></li>
+	<li>New script: <a href="#NVWhoKilledMe">NVWhoKilledMe</a></li>
+	<li>Added new functionality to <a href="#NVComestible">NVComestible</a>.</li>
+	<li>Added <kbd>NVOnscreenTextFocusRead</kbd> parameter to <a href="#NVOnscreenText">NVOnscreenText</a>
+	<li>Added multiple copies of <a href="#NVRelayTrap">NVRelayTrap</a>, <a href="#NVMetaTrap">NVMetaTrap</a> and <a href="#NVCreateAndLink">NVCreateAndLink</a>.
+	<li>Updated <a href="#NVSwapSword">NVSwapSword</a> to allow swapping of other weapons, such as the blackjack.</li>
+	<li>Fixed a bug in <a href="#"NVUnusableUnlessQvar">NVUnusableUnlessQvar</a>
+</ul>
+<h1>v1.0.9</h1>
+<ul>
+	<li>Fixed a bug that had broken the <a href="#NVKeyringKey">NVKeyringKey</a> script.</li>
+</ul>
+<h1>v1.0.8</h1>
+<ul>
+  <li>New script: <a href="#NVAmbientSoundTrap">NVAmbientSoundTrap</a>  <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVCloneContactFrob">NVCloneContactFrob</a></li>
+  <li>New script: <a href="#NVDeleteTrap">NVDeleteTrap</a> <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVDifficultyRelay">NVDifficultyRelay</a> <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVDiminishingParticles">NVDiminishingParticles</a></li>
+  <li>New script: <a href="#NVInvSound">NVInvSound</a> <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVMetaTrap">NVMetaTrap</a> <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVParticleGroup">NVParticleGroup</a><i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVParticleTrailProjectile">NVParticleTrailProjectile</a></li>
+  <li>New script: <a href="#NVPhantomTrap">NVPhantomTrap</a> <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVRotatable">NVRotatable</a></li>
+  <li>New script: <a href="#NVSimpleDoor">NVSimpleDoor</a>  <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVSimpleSchemaPlayerTrap">NVSimpleSchemaPlayerTrap</a>  <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVStackTrap">NVStackTrap</a>  <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVTextureTrap">NVTextureTrap</a> <i>(NVTrap)</i></li>
+  <li>New script: <a href="#NVTrigOBB">NVTrigOBB</a> <i>(NVTrigger)</i></li>
+  <li>New script: <a href="#NVTrigContained">NVTrigContained</a> <i>(NVTrigger)</i></li>
+  <li>New script: <a href="#NVTrigRoomPlayer">NVTrigRoomPlayer</a> <i>(NVTrigger)</i></li>
+  <li>New script: <a href="#NVTwoSpeedDoor">NVTwoSpeedDoor</a> <i></i></li>
+  <li>New script: <a href="#NVTweqDevice">NVTweqDevice</a></li>
+  <li>Completely rewrote <a href="#NVUnusableUnlessQVar">NVUnusableUnlessQVar</a> - it will now respond to the quest variable changing while the player has its object selected in inventory. </li>
+  <li>Completely rewrote <a href="#NVSwapSword">NVSwapSword</a> - it should now be a lot more reliable.</i>
+  <li>Added new functionality to <a href="#NVInvAssembly">NVInvAssembly</a> - it can now be used as an <i>NVTrap</i>, and sends a message (via the <i>NVTrigger</i> system) to the assembled object's stack.</li>
+  <li><a href="#NVConvEnhancer">NVConvEnhancer</a>: Added <i>CheckLock</i> action. Also fixed a bug that would cause the <i>Follow</i> action to crash in SS2. </li>
+  <li>Fixed a nasty by in <a href="#NVNewWeapon">NVNewWeapon</a> that could crash the game when the script was unloaded.</li>
+  <li>Fixed a bug that was causing <a href="#NVCreateAndLinK">NVCreateAndLink</a> to not work anymore. Unsure when that bug crept in..
+   <li>Added FailChance functionality to all <i>NVTrigger</i> scripts.</li>.</li>
+</ul>
+<h1>v1.0.7</h1>
+<ul>
+	<li>The '<i>Event Acquire</i>' or '<i>Event Create</i>' schemas are now played correctly in <a href="#NVInvAssembly">NVInvAssembly</a> and <a href="#NVInvAssembly2">NVInvAssembly2</a>.</li>
+    <li><a href="#NVGhostingMessages">NVGhostingMessages</a>: Added support for custom 'ghosting failed' messages.</li>
+    <li>New script: <a href="#NVUnusableUnlessQVar">NVUnusableUnlessQVar</a> </li>
+    <li>New script: <a href="#NVCursedObj">NVCursedObj</a>.</li>
+    <li>New script: <a href="#NVTrapSetQVar">NVTrapSetQVar</a> <i>(NVTrap)</i></li>
+    <li>New script: <a href="#NVTrigQVar">NVTrigQVar</a></li>
+    <li>The various scripts that add items to the player's inventory now force an inventory refresh in SS2. </li>
+</ul>
+<h1>v1.0.6</h1>
+<ul>
+	<li>Added weighted random link support to <a href="#Triggers">NVTrigger</a> scripts. Added <kbd>KillLinks</kbd> parameter for random links. </li>
+    <li><a href="#NVKeyringKey">NVKeyringKey</a>: Added support for multiple keyrings, parameters for customising model and inventory names of keyrings, and improved the locked-obj finding algorithm to properly understand the <i>RegionMask</i>. </li>
+    <li>
+   	<a href="#NVInvAssembly2">NVInvAssembly2</a><i>:</i> Added multiple part/item support. </li>
+    <li>New script: <a href="#NVDeathCutscene">NVDeathCutscene</a> (SS2 only)</li>
+    <li>Added version history. (!) </li>
+</ul>
+<h1>v1.0.5</h1>
+<ul>
+	<li>New script: <a href="#NVEndTrap">NVEndTrap</a> (SS2 only)</li>
+    <li>New script: <a href="#NVInvAssembly2">NVInvAssembly2</a></li>
+    <li>New script: <a href="#NVPutIntoContainers">NVPutIntoContainers</a> (SS2 only) </li>
+    <li>New script: <a href="#NVRecalcTrap">NVRecalcTrap</a> (SS2 only)</li>
+</ul>
+<h1>v1.0.4</h1>
+<ul>
+	<li>New script: <a href="#NVAirlock">NVAirlock</a></li>
+    <li>New script: <a href="#NVDoorStartsOpen">NVDoorStartsOpen</a></li>
+    <li>New script: <a href="#NVTrapConverse">NVTrapConverse</a></li>
+</ul>
+<h1>v1.0.3</h1>
+<ul>
+	<li>Added full System Shock 2 support via SS2 version. </li>
+    <li>New script: <a href="#NVHPTrigger">NVHPTrigger</a> (Yes, this was <i>supposedly</i> in v1.0.0.) </li>
+    <li>New script: <a href="#NVComestible">NVComestible</a> (SS2 only). </li>
+    <li>Fixed some nasty bugs in <a href="#NVHolyH2O">NVHolyH2O</a> and <a href="#NVInvTransform">NVInvTransform</a>.</li>
+    <li><a href="#NVAttachMyObj">NVAttachMyObj</a>: Added attachment joint support.</li>
+    <li><a href="#NVCreateAndLink">NVCreateAndLink</a>: Added creation location paramters.</li>
+</ul>
+<h1>v1.0.2</h1>
+<ul>
+	<li>Added preliminary SS2 support via SS2 version.</li>
+    <li>New script: <a href="#NVItemGiver">NVItemGiver</a></li>
+    <li>New script: <a href="#NVInvTransform">NVInvTransform</a></li>
+    <li>New script: <a href="#NVInvAssembly">NVInvAssembly</a></li>
+    <li>New script: <a href="#NVHolyH2O">NVHolyH2O</a></li>
+</ul>
+<h1>v1.0.1</h1>
+<ul>
+	<li>New script: <a href="#NVKeyringKey">NVKeyringKey</a></li>
+    <li><a href="#NVConvEnhancer">NVConvEnhancer</a>: Changed the order of arguments for the <i>SendMessage</i> conv enhancer; they now follow the pattern of the other conv enhancers. </li>
+</ul>
+<h1>v1.0.0</h1>
+<ul>
+	<li>First official release.</li>
+    <li>New Script: <a href="#NVAttachMyObj">NVAttachMyObj</a> </li>
+    <li>New Script: <a href="#NVConvEnhancer">NVConvEnhancer</a></li>
+    <li>New Script: <a href="#NVCreateAndLink">NVCreateAndLink</a> <i>(NVTrap)</i></li>
+    <li>New Script: <a href="#NVDifficultyDebug">NVDifficultyDebug</a></li>
+    <li>New Script: <a href="#NVEmitWhileSelected">NVEmitWhileSelected</a> </li>
+    <li>New Script: <a href="#NVExclusiveObject">NVExclusiveObject</a> </li>
+    <li>New Script: <a href="#NVFrobToggle">NVFrobToggle</a> <i>(NVTrigger)</i></li>
+    <li>New Script: <a href="#NVGhostingMessages">NVGhostingMessages</a> </li>
+    <li>New Script: <a href="#NVHPTrigger">NVHPTrigger</a> <i>(NVTrigger)</i></li>
+    <li>New Script: <a href="#NVIncapacitatedMessages">NVIncapacitatedMessages</a></li>
+    <li>New Script: <a href="#NVInventoryMemory">NVInventoryMemory</a> </li>
+    <li>New Script: <a href="#NVKeyringKey">NVKeyringKey</a> </li>
+    <li>New Script:	<a href="#NVLinkBuilder">NVLinkBuilder</a> <i>(NVTrap)</i></li>
+    <li>New Script: <a href="#NVNameOnCreation">NVNameOnCreation</a></li>
+    <li>New Script: <a href="#NVOnscreenText">NVOnscreenText</a> <i>(NVTrap)</i></li>
+    <li>New Script:  <a href="#NVRelayTrap">NVRelayTrap</a> <i>(NVTrap) (NVTrigger)</i></li>
+    <li>New Script: <a href="#NVSafeDoor">NVSafeDoor</a> </li>
+    <li>New Script:	<a href="#NVScaleDims">NVScaleDims</a> <i>(NVTrap)</i></li>
+    <li>New Script:	<a href="#NVSuspiciousTrap">NVSuspiciousTrap</a> <i>(NVTrap)</i></li>
+    <li>New Script: <a href="#NVTweqMessages">NVTweqMessages</a> </li>
+    <li>New Script:	<a href="#NVVOTrap">NVVOTrap</a> <i>(NVTrap)</i><b><u><br/>
+	</u></b></li>
+</ul>
+</body>
+</html>

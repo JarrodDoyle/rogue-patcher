@@ -33,6 +33,7 @@ Name: "newdark"; Description: "NewDark"; Types: custom; Flags: fixed;
 Name: "dromed"; Description: "DromEd"; 
 Name: "dromed\toolkit"; Description: "DromEd Basic Toolkit";
 Name: "multiplayer"; Description: "Multiplayer (Experimental)";
+Name: "comscripts"; Description: "Common FM Scripts (NVScript, LGScript, PublicScripts)";
 Name: "dmm"; Description: "Dark Mod Manager";
 Name: "mods"; Description: "Mods";
 Name: "mods\fmdml"; Description: "Fan Mission DML fixes";
@@ -58,6 +59,7 @@ Source: "Resources\Missing\*"; DestDir: "{app}"; Components: newdark; Flags: onl
 Source: "Resources\DromEd\*"; DestDir: "{app}"; Components: dromed; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Basic Toolkit\*"; DestDir: "{app}"; Components: dromed\toolkit; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Multiplayer\*"; DestDir: "{app}"; Components: multiplayer; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Resources\Common Scripts\*"; DestDir: {app}; Components: comscripts; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\DMM\*"; DestDir: {app}; Components: dmm; Flags: ignoreversion
 Source: "Resources\Mods\TGFMDML\*"; DestDir: "{app}\MODS\TGFMDML"; Components: mods\fmdml; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\AM16s Thief1 Fixed\*"; DestDir: "{app}\MODS\AM16s Thief1 Fixed"; Components: mods\am16sfixed; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -126,6 +128,7 @@ end;
 procedure PerformTasks();
 var
   Mods: String;
+  ScriptPaths: String;
 begin
   // Make sure things work properly with T1
   EditConfigLine('cam.cfg', 'dark1', 'dark1');
@@ -136,10 +139,14 @@ begin
   EditConfigLine('cam.cfg', GetLineContaining('cam.cfg', 'fogging'), 'fogging 1');
 
   // Fix up install.cfg to use relative paths
+  ScriptPaths := '.\';
+  if WizardIsComponentSelected('comscripts') then
+    AddPath(ScriptPaths, '.\OSM');
+
   EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'install_path'), 'install_path .\');
   EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'resname_base'), 'resname_base .\RES');
   EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'load_path'), 'load_path .\');
-  EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'script_module_path'), 'script_module_path .\');
+  EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'script_module_path'), 'script_module_path' + ScriptPaths);
   EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'movie_path'), 'movie_path .\MOVIES');
 
   if WizardIsTaskSelected('dromedhw') then
