@@ -128,7 +128,6 @@ end;
 procedure PerformTasks();
 var
   Mods: String;
-  ScriptPaths: String;
 begin
   // Make sure things work properly with T1
   EditConfigLine('cam.cfg', 'dark1', 'dark1');
@@ -139,14 +138,10 @@ begin
   EditConfigLine('cam.cfg', GetLineContaining('cam.cfg', 'fogging'), 'fogging 1');
 
   // Fix up install.cfg to use relative paths
-  ScriptPaths := '.\';
-  if WizardIsComponentSelected('comscripts') then
-    AddPath(ScriptPaths, '.\OSM');
-
   EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'install_path'), 'install_path .\');
   EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'resname_base'), 'resname_base .\RES');
   EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'load_path'), 'load_path .\');
-  EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'script_module_path'), 'script_module_path' + ScriptPaths);
+  EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'script_module_path'), 'script_module_path .\+.\OSM');
   EditConfigLine('install.cfg', GetLineContaining('install.cfg', 'movie_path'), 'movie_path .\MOVIES');
 
   if WizardIsTaskSelected('dromedhw') then
