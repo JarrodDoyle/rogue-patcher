@@ -50,10 +50,11 @@ all  bind : "edit_command"                          ; open console
 edit bind + "zoom_all 0.5"                          ; zoom in
 edit bind , "cycle_face -1"                         ; reverse through above
 edit bind - "zoom_all 2.0"                          ; zoom out
-edit bind . "cycle_face 1"                          ; select a different brush face
-edit bind < "global_scale 0"                        ; zoom in
 edit bind = "zoom_all 0.5"                          ; zoom in
-edit bind > "global_scale 1"                        ; zoom out
+edit bind . "cycle_face 1"                          ; select a different brush face
+edit bind < "run .\cmds\GridDown.cmd"               ; decrease grids
+edit bind > "run .\cmds\GridUp.cmd"                 ; increase grids
+edit bind ? "run .\cmds\GridReset.cmd"              ; reset grids
 ;edit bind [ "cycle_view 0"                         ; make previous camera current
 ;edit bind ] "cycle_view 1"                         ; make next camera current
 ;edit bind \ "toggle_3d"                            ; toggle selected camera 2d/3d edit
