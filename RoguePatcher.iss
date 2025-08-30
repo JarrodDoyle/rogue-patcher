@@ -38,7 +38,7 @@ Name: "dmm"; Description: "Dark Mod Manager";
 Name: "mods"; Description: "Mods";
 Name: "mods\fixedres"; Description: "Fixed Resources";
 Name: "mods\fmdml"; Description: "Fan Mission DML fixes";
-Name: "mods\am16sfixed"; Description: "AM16's Bugfixed Original Missions";
+Name: "mods\tgremastered"; Description: "Remastered Original Missions";
 Name: "mods\objectivedings"; Description: "Thief 2 Style Objective Notifications";
 
 [Tasks]
@@ -64,7 +64,7 @@ Source: "Resources\Common Scripts\*"; DestDir: {app}; Components: comscripts; Fl
 Source: "Resources\DMM\*"; DestDir: {app}; Components: dmm; Flags: ignoreversion
 Source: "Resources\Mods\Fixed Resources\*"; DestDir: "{app}\MODS\Fixed Resources"; Components: mods\fixedres; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\TGFMDML\*"; DestDir: "{app}\MODS\TGFMDML"; Components: mods\fmdml; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "Resources\Mods\AM16s Thief1 Fixed\*"; DestDir: "{app}\MODS\AM16s Thief1 Fixed"; Components: mods\am16sfixed; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Resources\Mods\TG Remastered Missions\*"; DestDir: "{app}\MODS\TG Remastered Missions"; Components: mods\tgremastered; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\Objective Notifications\*"; DestDir: "{app}\MODS\Objective Notifications"; Components: mods\objectivedings; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "darkicon.ico"; DestDir: "{app}"; AfterInstall: PerformTasks
 
@@ -189,8 +189,8 @@ begin
         AddPath(Mods, '.\MODS\Fixed Resources');
       if WizardIsComponentSelected('mods\fmdml') then
         AddPath(Mods, '.\MODS\TGFMDML');
-      if WizardIsComponentSelected('mods\am16sfixed') then
-        AddPath(Mods, '.\MODS\AM16s Thief1 Fixed');
+      if WizardIsComponentSelected('mods\tgremastered') then
+        AddPath(Mods, '.\MODS\TG Remastered Missions');
       if WizardIsComponentSelected('mods\objectivedings') then
         AddPath(Mods, '.\MODS\Objective Notifications');
 

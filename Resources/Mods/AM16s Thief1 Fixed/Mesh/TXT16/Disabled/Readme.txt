@@ -1,1 +1,0 @@
-Disabled by default, in case someone is using a texture replacement mod. The original "unthief2.gif" has an incorrect palette arrangement, which causes black pixels to render as transparent. This updated version fixes that.

@@ -1,0 +1,162 @@
+This changelog is relative to AM16's original 1.00d release, not to the base game. See "Original Readme.rtf" for information on what changes AM16 made.
+
+Version 1.1:
+- General
+  - All missions have been updated to NewDark 1.28
+  - All missions have had complete processing performed
+  - All missions used KCTools 1.2.3 for lighting
+  - Renamed gamesys to "goldr.gam" to avoid any potential issues with FM compatibility
+  - Removed mantling block on trees
+- Keepers Training
+  - Starting room
+    - Fixed texture alignment on pillars, wooden panels, and domed ceiling
+  - Corridor to shadows training room
+    - Fixed texture alignment on ceiling, pillars, beams, and holding pen
+    - Slightly adjusted positions of hanging lanterns to be centered
+  - Shadows training room
+    - Added metal support beams for floating spotlights
+    - Fixed minor roombrushing deadspots
+  - Corridor to shadows training room
+    - Fixed texture alignment on ceiling, walls, existing pillars, and holding pen
+    - Added additional pillars and adjusted light hole positions to support texture changes
+  - Shadows training room
+    - Slightly improved texturing on stairs wall in front of the keeper
+    - Slightly adjusted hanging lantern positions to be centered in their wooden panels
+  - Corridor to weapons training courtyard
+    - Fixed texture alignment on ceiling, pillars, and beams
+    - Moved hanging lanterns to be more centered
+  - Weapons training courtyard
+    - Removed red rock trim inside porch and aligned floor tile texture
+    - Replaced red rock porch stairs with white stone texture
+    - Added stone trim to blustn roof
+    - Added small tower and bstnwal scenery brushwok behind archery zone for a more consistent level of detail
+    - Replaced balcony floor texture with mosaic
+  - Corridor to basketball court
+    - Fixed texture alignment on ceiling, pillar walls, and wood panel walls
+  - Corridor to parkour training
+    - Fixed texture alignment on upper arches in exit room and pillars on the exterior of the exit
+  - Parkour training courtyard
+    - Filled hole you could get stuck in behind wall of red brick building
+    - Fixed texturing of top and sides of parkour platforms, and arches underneath
+    - Fixed roombrushing of waterway
+  - End area
+    - Added door frame to entrance
+    - Fixed texture alignment in doorway floors
+    - Removed hitpoints from doors so they can't be bashed open
+- Lord Bafford's Manor
+  - Roombrushing
+    - Completely redid roombrushing (only untouched areas are exit streets to the north and east) (this was extremely painful)
+    - Fixed all sound deadzones and leaks (legitimately nearly every roombrush was bad)
+    - Fixed sound cutoffs/jank in complex areas
+  - Texturing
+    - Fixed alignment on floors of corridors leading from foyer
+    - Fixed alignment on floors and walls of ground floor lounges
+  - Brushwork/Objects
+    - Fixed gaps on ceilings of corridors leading from foyer
+    - Added trims to doorways of ground floor lounges to hide texture transitions
+    - Fixed torches and associated alcoves being hidden behind a the walls in upper floor corridor by entrance staircase
+    - Lowered radius of ambient object 679 to avoid triggering it inside the manor
+    - Fixed ElecWallLight 883 in the basement being detached from the wall
+    - Removed semi-broken addition of a secret behind Painting6 97 in the north lounge
+    - Added Runtime Object Shadows property to IDs 23, 24, 115, 154, 161, 163, 164, 165, 200, 201, 202, 203, 204, 205, 782, 785
+  - AI
+    - Fixed basement guard conversation restarting on load
+- Break from Cragscleft Prison
+  - Lighting
+    - Removed colouring from sunlight
+  - Brushwork/Objects
+    - Added Immobile property to IDs 569, 571, 615, 690, 691, 697, 717, 762, 962, 1156, 1205
+    - Added Location/Rotation flags to IDs 690, 691 (also both floored)
+  - Ambients
+    - Removed object 384 which was causing environmental sounds to be cutoff
+    - Increased radius of object 403 to avoid harsh cutoff on roombrush transition
+- Down in the Bonehoard
+  - Texturing
+    - Fixed alignment on ceiling in corridor at (50, 75, 10)
+    - Fixed alignment on pink brick walls in chambers around (10, 10, 10)
+    - Fixed alignment and seams on yellow brick corridor at (-70, -45, 5)
+  - Brushwork/Objects
+    - Adjusted brushwork around rope drop at (150, 50, 65)
+- Assassins
+  - Roombrushing
+    - Fixed sound propagation issue in streets by object 1259
+  - Texturing
+    - Fixed some minor instances of exposed jorge
+  - Brushwork/Objects
+    - Removed the unfinished non-vanilla addition of a hammerite temple near the start of the mission
+    - Added double doors to Ramirez' bedroom with same lockpicking setup as the main bedroom doors
+    - Improve roofing brushwork in the city. Added eaves, removed blubrik, etc.
+  - AI
+    - Fixed conversations 1659, 1662, 1682, 1757, 1759, 1773 restarting on load
+- Thieves' Guild
+  - Brushwork/Objects
+    - Fixed double doors 639 and 651 not blocking vision or sound
+- The Sword
+  - Brushwork/Objects
+    - Removed non-vanilla connection between fireplaces in region of (275, 120, -175)
+    - Moved gold nugget 402 to be centered within the plant
+    - Reverted bugswarm changes in diamond chest room
+  - Texturing
+    - Fixed jorge in stars room and exteriors of little big world
+    - Fixed other more minor instances of exposed jorge
+    - Fixed alignment in fireplace in region of (275, 120, -175)
+- The Haunted Cathedral
+  - Roombrushing
+    - Fixed minor issues in torc building
+  - Brushwork/Objects
+    - Fix clipping of object 38 so that it doesn't cause rendering issues
+    - Removed self-illumination and attached particles for overturned street lamp 11
+    - Fixed EarthCrystal 258 being hidden in a wall
+  - Texturing
+    - Fixed alignment on pillars in torc building
+    - Fixed texturing on stairs in torc building
+- The Mage Towers
+  - Roombrushing
+    - Redid roombrushing for exterior starting area (north grounds) to fix major dead spots
+    - Redid roombrushing for entrance hall to fix propagation issues, dead spots, and leaks
+    - Redid roombrushing for the entirety of the fire tower to fix dead spots and major leaks
+  - Texturing
+    - Fixed alignment on exterior of main central tower
+    - Fixed minor exposed jorge texture
+- The Lost City
+  - Texturing
+    - Fixed usage of un-ropeable texture in area by (-200, 25, 175)
+    - Added windows for shutters that produced light in area by (-200, 25, 175)
+    - Changed roof texture by (325, -325, 40)
+    - Fixed minor exposed jorge textures
+  - Brushwork/Objects
+    - Fixed manhole 458 being frobbable
+    - Cleaned up roof brushwork by (325, -325, 40)
+    - Fixed sunken objects 1168, 11699, 1171
+- Song of the Caverns
+  - Lighting
+    - Fixed non-functioning light gem in upper corridor of frog cellar
+  - Roombrushing
+    - Redid roombrushing for frog cellar to fix dead spots and leaks
+    - Redid roombrushing for all blue wallpaper corridors and connected rooms to fix major dead spots
+    - Redid roombrushing for rooms/corridors by doors 783 and 784
+    - Redid roombrushing for secret staircase to Valerius' room (and surrounding rooms)
+  - Brushwork/Objects
+    - Fixed doors 783 and 784 being sunk into the ground
+- Undercover
+  - Brushwork/Objects
+    - Fixed rotation/position of alarmlites 683, 667, 675, 677, 678, 679, 681
+    - Added trees outside north windows to block view
+    - Raised some exterior walls to remove some of the easier out-of-bounds mantling opportunities
+- Return to the Cathedral
+  - Roombrushing
+    - Fixed flowbrushing in basement
+- Escape!
+  - Roombrushing
+    - Redid roombrushing in starting room and stairs to fix dead spots
+- Strange Bedfellows
+  - Texturing
+    - Fix jorge in air room
+    - Fixed other more minor instances of exposed jorge
+  - Brushwork/Objects
+    - Fixed rotation/position of alarmlites 1236, 1231, 1228, 1224, 1225
+    - Added trees outside north windows to block view
+    - Raised some exterior walls to remove some of the easier out-of-bounds mantling opportunities
+- Into the Maw of Chaos
+  - Texturing
+    - Fix jorge in particle ladders of big tree
