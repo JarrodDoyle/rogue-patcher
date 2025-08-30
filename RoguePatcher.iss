@@ -1,5 +1,5 @@
 #define Name "RoguePatcher"
-#define Version "1.28.2"
+#define Version "1.28.3"
 #define Publisher "Jarrod Doyle"
 #define URL "https://jayrude.dev/"
 
@@ -15,6 +15,7 @@ DirExistsWarning=no
 DisableDirPage=no
 DisableProgramGroupPage=yes
 DisableWelcomePage=no
+InfoBeforeFile=info.txt
 OutputDir=Z:\work\Build
 OutputBaseFilename={#Name}_{#Version}
 PrivilegesRequired=lowest

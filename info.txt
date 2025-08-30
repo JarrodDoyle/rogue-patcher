@@ -1,0 +1,38 @@
+RoguePatcher 1.28.3 includes the following resources. For further information
+and support, see the release thread on TTLG.
+https://www.ttlg.com/forums/showthread.php?t=152977
+
+
+NewDark 1.28-20250515 (including DromEd and Multiplayer)
+https://www.ttlg.com/forums/showthread.php?t=152974
+
+Modified DromEd Basic Toolkit 1.14 originally by AntiMatter_16
+https://www.ttlg.com/forums/showthread.php?t=141708
+https://github.com/JarrodDoyle/dromed-basic-toolkit
+
+NVScript v1.3.4 by NamelessVoice
+https://www.ttlg.com/forums/showthread.php?t=134166
+https://github.com/NamelessVoice/NVScript
+
+Public Scripts v2.2-20250803 by Telliamed and Jax64/Xanfre
+https://dromed.whoopdedo.org/public_scripts/index
+https://github.com/Xanfre/publicscripts
+
+LgScript v1.0-20250803 by Telliamed and Jax64/Xanfre
+https://dromed.whoopdedo.org/lgscript/index
+https://github.com/Xanfre/lgscript
+
+Dark engine Mod Manager v1.1.1 by Marvin/pshjt
+https://pshjt.github.io/dmm/
+https://github.com/pshjt/dmm
+
+T1GFMDML 258d3ed by various community members
+https://www.ttlg.com/forums/showthread.php?t=149949
+https://github.com/Xanfre/T2FMDML
+
+Thief: Gold Remastered Missions v1.1 originally by AntiMatter_16
+https://www.ttlg.com/forums/showthread.php?t=150803
+https://github.com/JarrodDoyle/tg-remastered-missions
+
+Objective Notifications from Tfix
+https://www.ttlg.com/forums/showthread.php?t=134733
