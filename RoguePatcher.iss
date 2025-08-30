@@ -36,6 +36,7 @@ Name: "multiplayer"; Description: "Multiplayer (Experimental)";
 Name: "comscripts"; Description: "Common FM Scripts (NVScript, LGScript, PublicScripts)";
 Name: "dmm"; Description: "Dark Mod Manager";
 Name: "mods"; Description: "Mods";
+Name: "mods\fixedres"; Description: "Fixed Resources";
 Name: "mods\fmdml"; Description: "Fan Mission DML fixes";
 Name: "mods\am16sfixed"; Description: "AM16's Bugfixed Original Missions";
 Name: "mods\objectivedings"; Description: "Thief 2 Style Objective Notifications";
@@ -61,6 +62,7 @@ Source: "Resources\Basic Toolkit\*"; DestDir: "{app}"; Components: dromed\toolki
 Source: "Resources\Multiplayer\*"; DestDir: "{app}"; Components: multiplayer; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Common Scripts\*"; DestDir: {app}; Components: comscripts; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\DMM\*"; DestDir: {app}; Components: dmm; Flags: ignoreversion
+Source: "Resources\Mods\Fixed Resources\*"; DestDir: "{app}\MODS\Fixed Resources"; Components: mods\fixedres; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\TGFMDML\*"; DestDir: "{app}\MODS\TGFMDML"; Components: mods\fmdml; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\AM16s Thief1 Fixed\*"; DestDir: "{app}\MODS\AM16s Thief1 Fixed"; Components: mods\am16sfixed; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\Objective Notifications\*"; DestDir: "{app}\MODS\Objective Notifications"; Components: mods\objectivedings; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -183,6 +185,8 @@ begin
   if WizardIsComponentSelected('mods') then
     begin
       Mods := '';
+      if WizardIsComponentSelected('mods\fixedres') then
+        AddPath(Mods, '.\MODS\Fixed Resources');
       if WizardIsComponentSelected('mods\fmdml') then
         AddPath(Mods, '.\MODS\TGFMDML');
       if WizardIsComponentSelected('mods\am16sfixed') then
