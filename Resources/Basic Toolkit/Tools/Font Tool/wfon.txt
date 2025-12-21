@@ -1,0 +1,38 @@
+WFON
+----
+
+Font BMP Generator, for use with Thief Font Converter.
+Created by Telliamed. Bugfixes by vfig.
+
+Generates a "pink box" .BMP image file from a bitmap or TrueType/OpenType font installed in windows. This .BMP is suitable for use with thieffon.exe to make a font file for use in the game.
+
+Options:
+
+- Foreground, Background: Colors for the font. Fonts that are to be antialiased in-game should use white on black (the default colors).
+- Antialias: Draw the font with windows grayscale antialiasing if enabled; otherwise chunky pixel edges. Only valid for TrueType/OpenType fonts.
+- Read Characters from file: Select a UTF-16 text file containing the characters to be drawn. See 'Custom Character Sets' below.
+- Script: Script dropdown selector does nothing, ignore it.
+
+
+Custom Character Sets
+---------------------
+
+By default, characters from CP850 will be drawn; this is suitable for English/French/German editions of Thief. To support other languages, you should have a UTF-16 text file containing up to 224 codepoints (line breaks are ignored) to draw instead. This will normally be the characters corresponding to bytes 32-255 in some codepage.
+
+The Python script "wfonchars.py" can generate a suitable text file from any of the encodings that Python supports on your computer. Three sample files are included for convenience:
+
+- "cp850.txt" (codepage 850, DOS Western)
+- "win1252.txt" (windows-1252, Western)
+- "win1251.txt" (windows-1251, Cyrillic)
+
+
+Change log
+----------
+
+Version 1.3
+===========
+
+- Fixed Antialias option producing ClearType-antialiased output (not suitable for in-game use).
+- Fixed glyphs overflowing pink box edges
+- Fixed pink box sides not being drawn when Antialias option selected.
+- Added wfonchars.py and sample charset .txt files.

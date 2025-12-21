@@ -19,6 +19,7 @@
  *    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  *****************************************************************************/
+#include <math.h>
 #define UNICODE 1
 #define WIN32_LEAN_AND_MEAN
 #define WINVER 0x0400
@@ -29,7 +30,7 @@
 
 #include "wfon-dlg.h"
 
-static const TCHAR szAppName[] = TEXT("WFont");
+static const TCHAR szAppName[] = TEXT("WFont 1.3");
 
 static const COLORREF	_ctable[] = {
 	0x000000, 0xDDDDDD, 0xB6B6B6, 0x969696, 0x7C7C7C, 0x666666, 0x545454, 0x454545,
@@ -71,36 +72,57 @@ static const COLORREF	_ctable[] = {
 #define FCTL_AA	ctlLast+5
 #define FCTL_FILE ctlLast+6
 
-typedef struct tagCHOOSEFONT_EX
-{
-	DWORD	lStructSize;
-	HWND	hwndOwner;
-	HDC 	hDC;
-	LPLOGFONT	lpLogFont;
-	INT 	iPointSize;
-	DWORD	Flags;
-	COLORREF	rgbForeground;
-	COLORREF	rgbBackground;
-	LPCFHOOKPROC	lpfnHook;
-	LPCTSTR	lpTemplateName;
-	HINSTANCE	hInstance;
-	LPTSTR	lpszStyle;
-	WORD	nFontType;
-	WORD	___MISSING_ALIGNMENT__;
-	INT 	nSizeMin;
-	INT		nSizeMax;
-} CHOOSEFONT_EX,*LPCHOOSEFONT_EX;
-#define CFEX_READCHARSFROMFILE	0x10000000L
-
 TCHAR _msg[1024];
 
-HDC ghDC = NULL;
+#define PPM_72DPI 2835
+
+TCHAR gFaceName[LF_FACESIZE];
+int gPointSize;
+BOOL gAntialiased;
+COLORREF gForegroundColor;
+COLORREF gBackgroundColor;
+BOOL gReadFromFile;
+
+HBITMAP gBitmap;
+BITMAPINFO gBitmapInfo;
+void *gBitmapBits;
 int gWidth, gHeight;
 
 LONG WINAPI MainWndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
 
+static void _LogV(const TCHAR *format, va_list args)
+{
+	TCHAR buffer[4096];
+	DWORD count = FormatMessage(
+		FORMAT_MESSAGE_FROM_STRING, format, 0, 0,
+		buffer, sizeof(buffer), &args);
+	if (count>=0) {
+		OutputDebugString(buffer);
+	}
+}
+
+void Log(const TCHAR *format, ...)
+{
+	va_list args;
+	va_start(args, format);
+	_LogV(format, args);
+	va_end(args);
+}
+
+__declspec(noreturn) void FatalError(const TCHAR *format, ...)
+{
+	va_list args;
+	va_start(args, format);
+	_LogV(format, args);
+	va_end(args);
+	DebugBreak();
+	ExitProcess(1);
+}
+
+
+
 #define SWAPCHAR(x)	((WCHAR) ( (((WCHAR)(x)&(WCHAR)0x00FFU) << 8) | \
-				    (((WCHAR)(x)&(WCHAR)0xFF00U) >> 8) ))
+					(((WCHAR)(x)&(WCHAR)0xFF00U) >> 8) ))
 
 int readchars(LPCTSTR f, LPWSTR d)
 {
@@ -176,17 +198,14 @@ int readchars(LPCTSTR f, LPWSTR d)
 	return 256 - count;
 }
 
-HANDLE selectbmp(HWND w, HDC d)
+HANDLE selectbmp(HWND w, TCHAR *fontName, int fontSize)
 {
 	HANDLE h;
 	TCHAR f[1024];
 	OPENFILENAME of;
 	DWORD err;
 
-	if (!GetTextFace(d, 1024, f))
-	{
-		lstrcpy(f,TEXT("fon.bmp"));
-	}
+	wsprintf(f, TEXT("%s %d.bmp"), fontName, fontSize);
 	ZeroMemory(&of, sizeof(OPENFILENAME));
 	of.lStructSize = sizeof(OPENFILENAME);
 	of.hwndOwner = w;
@@ -310,9 +329,8 @@ int selectcolor(HWND parent, COLORREF *color)
 
 UINT WINAPI fontproc(HWND dlg, UINT msg, WPARAM wp, LPARAM lp)
 {
-	static LPCHOOSEFONT_EX cf = NULL;
+	static LPCHOOSEFONT cf = NULL;
 	static COLORREF tc = 0, bc = 0;
-	static LONG ok = 0;
 	COLORREF c;
 	HDC dc;
 	RECT rc;
@@ -324,46 +342,25 @@ UINT WINAPI fontproc(HWND dlg, UINT msg, WPARAM wp, LPARAM lp)
 	switch (msg)
 	{
 	case WM_INITDIALOG:
-		cf = (LPCHOOSEFONT_EX)lp;
+		cf = (LPCHOOSEFONT)lp;
 		CheckDlgButton(dlg, FCTL_AA, 
 				(cf->lpLogFont->lfQuality == NONANTIALIASED_QUALITY) ? BST_UNCHECKED : BST_CHECKED);
-		tc = cf->rgbForeground;
-		bc = cf->rgbBackground;
+		tc = cf->rgbColors;
+		bc = gBackgroundColor;
+		// Set the (hidden) color dropdown to our foreground color.
 		SendDlgItemMessage(dlg, cmb4, CB_SETITEMDATA,
 				SendDlgItemMessage(dlg, cmb4, CB_GETCURSEL, 0,0), tc);
+		// Default to 24 point.
 		//SetDlgItemInt(dlg, cmb3, 24, FALSE);
 		SendDlgItemMessage(dlg, cmb3, CB_SELECTSTRING, -1, (LPARAM)(TEXT("24")));
-		ok = 0;
 		return TRUE;
-	case WM_DESTROY:
-		/* This fucking sucks. */
-		if (ok)
-		{
-			if (ok < 0)
-			{
-				cf->lpLogFont->lfQuality = NONANTIALIASED_QUALITY;
-				cf->lpLogFont->lfHeight = -ok;
-			}
-			else
-			{
-				cf->lpLogFont->lfHeight = ok;
-			}
-			dc = GetDC(dlg);
-			cf->iPointSize = MulDiv(cf->lpLogFont->lfHeight, 720, GetDeviceCaps(dc, LOGPIXELSY));
-			ReleaseDC(dlg,dc);
-		}
-		break;
 	case WM_COMMAND:
 		switch (wp)
 		{
 		case IDOK:
-			cf->rgbForeground = tc;
-			cf->rgbBackground = bc;
-			ok = GetDlgItemInt(dlg, cmb3, NULL, FALSE);
-			if (IsDlgButtonChecked(dlg,FCTL_AA) == BST_UNCHECKED)
-				ok = -ok;
-			if (IsDlgButtonChecked(dlg,FCTL_FILE) == BST_CHECKED)
-				cf->Flags |= CFEX_READCHARSFROMFILE;
+			gAntialiased = (IsDlgButtonChecked(dlg,FCTL_AA) == BST_CHECKED);
+			gBackgroundColor = bc;
+			gReadFromFile = (IsDlgButtonChecked(dlg,FCTL_FILE) == BST_CHECKED);
 			return FALSE;
 		case FCTL_FG:
 			c = tc;
@@ -371,6 +368,7 @@ UINT WINAPI fontproc(HWND dlg, UINT msg, WPARAM wp, LPARAM lp)
 			{
 				tc = c;
 				InvalidateRect(GetDlgItem(dlg, FCTL_FG), NULL, TRUE);
+				// Set the (hidden) color dropdown to our foreground color.
 				SendDlgItemMessage(dlg, cmb4, CB_SETITEMDATA,
 						SendDlgItemMessage(dlg, cmb4, CB_GETCURSEL, 0,0), c);
 				GetWindowRect(GetDlgItem(dlg, stc5), &rc);
@@ -440,22 +438,31 @@ HANDLE fonttemplate()
 HFONT selectfont(HWND w, COLORREF *tc, COLORREF *bc, LPTSTR fn)
 {
 	OPENFILENAME of;
-	CHOOSEFONT_EX cf;
+	CHOOSEFONT cf;
 	LOGFONT lf;
 	DWORD err;
 	
 	ZeroMemory(&lf, sizeof(LOGFONT));
-	ZeroMemory(&cf, sizeof(CHOOSEFONT_EX));
-	cf.lStructSize = sizeof(CHOOSEFONT_EX);
+	ZeroMemory(&cf, sizeof(CHOOSEFONT));
+	cf.lStructSize = sizeof(CHOOSEFONT);
 	cf.hwndOwner = w;
 	cf.lpLogFont = &lf;
 	cf.Flags = CF_SCREENFONTS | CF_EFFECTS | CF_NOVERTFONTS
-			| CF_ENABLEHOOK | CF_ENABLETEMPLATEHANDLE;
+			| CF_ENABLEHOOK | CF_ENABLETEMPLATEHANDLE | CF_FORCEFONTEXIST;
 	cf.lpfnHook = fontproc;
 	cf.hInstance = (HINSTANCE)fonttemplate();
 	lf.lfQuality = ANTIALIASED_QUALITY;
-	cf.rgbForeground = RGB(255,255,255);
-	cf.rgbBackground = RGB(0,0,0);
+	cf.rgbColors = RGB(255,255,255);
+
+	// NOTE: The 'proper' way to access custom data from within the ChooseFont
+	//       dialog is to pass in a struct pointer in cf.lCustData, and then
+	//       in WM_INITDIALOG, store the CHOOSEFONT pointer agains the window
+	//       with SetWindowLong(). But we know we only have the one font dialog
+	//       ever, and we are waiting for it on our main thread. So we just
+	//       use global variables for our extra font parameters.
+	gAntialiased = TRUE;
+	gBackgroundColor = RGB(0,0,0);
+	gReadFromFile = FALSE;
 	
 	err = ChooseFont((LPCHOOSEFONT)&cf);
 	GlobalFree(cf.hInstance);
@@ -468,9 +475,26 @@ HFONT selectfont(HWND w, COLORREF *tc, COLORREF *bc, LPTSTR fn)
 		}
 		return NULL;
 	}
-	*tc = cf.rgbForeground;
-	*bc = cf.rgbBackground;
-	if (cf.Flags & CFEX_READCHARSFROMFILE)
+
+	lstrcpy(gFaceName, lf.lfFaceName);
+	gPointSize = cf.iPointSize/10;
+	gForegroundColor = cf.rgbColors;
+	// NOTE: gAntialiased and gBackgroundColor have been set by fontproc().
+
+	// NOTE: ChooseFont() returns lfHeight in logical units, converted from
+	//       the point size selection in the dialog. But we need the point
+	//       size in 72 ppi (i.e. 36pt = 36 pixel), regardless of what the
+	//       DC logical units are. We don't have to convert; we get the point
+	//       size already from cf.iPointSize.
+	lf.lfHeight = gPointSize;
+
+	// NOTE: ChooseFont() overwrites lf.lfQuality with whatever it wants when
+	//       returning. So, we set it to what we need to render with.
+	lf.lfQuality = gAntialiased? ANTIALIASED_QUALITY : NONANTIALIASED_QUALITY;
+
+	*tc = cf.rgbColors;
+	*bc = gBackgroundColor;
+	if (gReadFromFile)
 	{
 		ZeroMemory(&of, sizeof(OPENFILENAME));
 		of.lStructSize = sizeof(OPENFILENAME);
@@ -494,88 +518,68 @@ HFONT selectfont(HWND w, COLORREF *tc, COLORREF *bc, LPTSTR fn)
 	return CreateFontIndirect(&lf);
 }
 
-void writebmp(HWND parent, HDC dc)
+void writebmp(HWND parent, HBITMAP bm, BITMAPINFOHEADER *bih, void *bmbits)
 {
-	HANDLE fh;
-	HBITMAP bm;
-	BITMAPINFO *bi;
-	BITMAPINFOHEADER *bmi;
+	HANDLE fh = INVALID_HANDLE_VALUE;
 	BITMAPFILEHEADER bmf;
-	unsigned char *bits;
 	DWORD n;
-	
-	bm = GetCurrentObject(dc, OBJ_BITMAP);
-	bi = (BITMAPINFO*)LocalAlloc(LMEM_FIXED, sizeof(BITMAPINFOHEADER)+1024);
-	if (!bi)
-	{
-		wsprintf(_msg, TEXT("No memory: %d\n"), GetLastError());
-		MessageBox(NULL, _msg, TEXT("Error"), MB_ICONERROR | MB_OK);
-		return;
-	}
-	bmi = (BITMAPINFOHEADER*)bi;
-	bmi->biSize = sizeof(BITMAPINFOHEADER);
-	bmi->biBitCount = 0;
-	if (!GetDIBits(dc, bm, 0, 0, NULL, bi, DIB_RGB_COLORS))
-	{
-		wsprintf(_msg, TEXT("No bitmap: %d\n"), GetLastError());
-		MessageBox(NULL, _msg, TEXT("Error"), MB_ICONERROR | MB_OK);
-		LocalFree(bi);
-		return;
-	}
-	bits = LocalAlloc(LPTR, bmi->biHeight * (((bmi->biWidth * 3)+3)&~3));
-	if (bits)
-	{
-		bmi->biPlanes = 1;
-		bmi->biBitCount = 24;
-		bmi->biCompression = BI_RGB;
-		bmi->biSizeImage = 0;
-		bmi->biXPelsPerMeter = 0xB13;
-		bmi->biYPelsPerMeter = 0xB13;
-		bmi->biClrUsed = 0;
-		bmi->biClrImportant = 0;
-		GetDIBits(dc, bm, 0, bmi->biHeight, bits, bi, DIB_RGB_COLORS);
-		bmf.bfType = 0x4D42;
-		bmf.bfReserved1 = bmf.bfReserved2 = 0;
-		bmf.bfOffBits = sizeof(BITMAPINFOHEADER) + sizeof(BITMAPFILEHEADER);
-		bmf.bfSize = bmi->biSizeImage + bmf.bfOffBits;
-		fh = selectbmp(parent, dc);
-		if (fh != INVALID_HANDLE_VALUE)
-		{
-			WriteFile(fh, &bmf, sizeof(BITMAPFILEHEADER), &n, NULL);
-			WriteFile(fh, bi, sizeof(BITMAPINFOHEADER), &n, NULL);
-			WriteFile(fh, bits, bmi->biSizeImage, &n, NULL);
-			CloseHandle(fh);
-		}
-		LocalFree(bits);
-	}
-	else
-	{
-		wsprintf(_msg, TEXT("No memory: %d\n"), GetLastError());
-		MessageBox(NULL, _msg, TEXT("Error"), MB_ICONERROR | MB_OK);
+	LPTSTR errorMessage = TEXT("Unknown error");
+
+	if (!bm || !bih || !bmbits || bih->biBitCount!=24) {
+		errorMessage = TEXT("Bad bitmap");
+		goto error;
 	}
 	
-	LocalFree(bi);
+	bmf.bfType = 0x4D42;
+	bmf.bfReserved1 = bmf.bfReserved2 = 0;
+	bmf.bfOffBits = sizeof(BITMAPINFOHEADER) + sizeof(BITMAPFILEHEADER);
+	bmf.bfSize = bih->biSizeImage + bmf.bfOffBits;
+	fh = selectbmp(parent, gFaceName, gPointSize);
+	if (fh==INVALID_HANDLE_VALUE) {
+		// if an error occurred, selectbmp() already showed an error message.
+		goto cleanup;
+	}
+	WriteFile(fh, &bmf, sizeof(BITMAPFILEHEADER), &n, NULL);
+	WriteFile(fh, bih, sizeof(BITMAPINFOHEADER), &n, NULL);
+	WriteFile(fh, bmbits, bih->biSizeImage, &n, NULL);
+
+	goto cleanup;
+
+error:
+	wsprintf(_msg, TEXT("%s: %d\n"), errorMessage, GetLastError());
+	MessageBox(NULL, _msg, TEXT("Error"), MB_ICONERROR | MB_OK);
+	goto cleanup;
+
+cleanup:
+	if (fh!=INVALID_HANDLE_VALUE) CloseHandle(fh);
 }
 
 int dofont(HWND parent)
 {
 	HDC screen, dc;
 	HBITMAP bm;
+	BITMAPINFO bmi;
+	void *bmbits;
 	HBRUSH br;
 	COLORREF tc, bc;
 	HFONT tf;
 	TEXTMETRIC mx;
-	RECT rc;
+	RECT rc, boxrc;
 	int x,y;
 	int width,height;
-	DWORD n,c;
+	DWORD rowSize;
+	int pad;
+	int i;
+	DWORD c;
 	char cp850[4];
 	WCHAR uni[256];
 	TCHAR charfile[1024];
 	WCHAR *p;
+	ABCFLOAT abcf;
 	int numchars;
 
 	ZeroMemory(uni, 256 * sizeof(WCHAR));
+	ZeroMemory(&bmi, sizeof(BITMAPINFO));
 	
 	screen = GetDC(parent);
 	if (!screen)
@@ -608,7 +612,21 @@ int dofont(HWND parent)
 		numchars = readchars(charfile, uni);
 	}
 	else
-		numchars = 0;
+	{
+		// Get CP850 wchars, skipping control characters the 0-31.
+		for (i=0; i<(256-32); ++i)
+		{
+			wsprintfA(cp850, "%c", (char)(i+32));
+			c = MultiByteToWideChar(850,
+				MB_PRECOMPOSED | MB_ERR_INVALID_CHARS | MB_USEGLYPHCHARS,
+				cp850, 1, &uni[i], 1);
+			if (c == 0)
+			{
+				uni[i] = 0x2593; //32; // Substitute a space.
+			}
+		}
+		numchars = i;
+	}
 	
 	if (!GetTextMetrics(dc, &mx))
 	{
@@ -618,10 +636,22 @@ int dofont(HWND parent)
 		ReleaseDC(parent,screen);
 		return 1;
 	}
-	
+
 	width = (mx.tmMaxCharWidth + 8) * 18;
 	height = (mx.tmHeight + 8) * 16;
-	bm = CreateCompatibleBitmap(screen, width, height);
+	rowSize = (((width * 3)+3)&~3);
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+	bmi.bmiHeader.biWidth = width;
+	bmi.bmiHeader.biHeight = height;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biBitCount = 24;
+	bmi.bmiHeader.biCompression = BI_RGB;
+	bmi.bmiHeader.biSizeImage = rowSize*height;
+	bmi.bmiHeader.biXPelsPerMeter = PPM_72DPI;
+	bmi.bmiHeader.biYPelsPerMeter = PPM_72DPI;
+	bmi.bmiHeader.biClrUsed = 0;
+	bmi.bmiHeader.biClrImportant = 0;
+	bm = CreateDIBSection(screen, &bmi, DIB_RGB_COLORS, &bmbits, NULL, 0);
 	ReleaseDC(parent,screen);
 	if (!bm)
 	{
@@ -631,7 +661,10 @@ int dofont(HWND parent)
 		return 1;
 	}
 	DeleteObject(SelectObject(dc, bm));
+
+	ZeroMemory(bmbits, bmi.bmiHeader.biSizeImage);
 	
+	SetBkMode(dc, TRANSPARENT);
 	rc.left = 0; rc.top = 0;
 	rc.right = width; rc.bottom = height;
 	br = CreateSolidBrush(bc);
@@ -645,66 +678,55 @@ int dofont(HWND parent)
 	x = 2;
 	y = mx.tmHeight/2;
 	p = uni;
-	for (n = (numchars) ? 0 : 0x20; n <= 0xFF; n++)
+	for (i = 0; i < numchars; i++)
 	{
 		rc.left = x;
 		rc.top = y;
 		rc.bottom = y + mx.tmHeight + 2;
-		if (numchars)
-		{
-			rc.right = rc.left;
-			rc.bottom = rc.top;
-			DrawTextW(dc, p, 1, &rc, DT_CALCRECT | DT_NOCLIP | DT_EXTERNALLEADING | DT_SINGLELINE | DT_NOPREFIX);
-			rc.right += GetTextCharacterExtra(dc) + 2;
-			rc.bottom += 2;
-			FrameRect(dc, &rc, br);
-			rc.left += 1;
-			rc.top += 1;
-			DrawTextW(dc, p, 1, &rc, DT_NOCLIP | DT_SINGLELINE | DT_NOPREFIX);
-			x = rc.right + 4;
-			p++;
-			if (--numchars == 0)
-				break;
-		}
-		else
-		{
-			wsprintfA(cp850, "%c", (char)n);
-			c = MultiByteToWideChar(850, MB_PRECOMPOSED | MB_ERR_INVALID_CHARS | MB_USEGLYPHCHARS,
-					cp850, 1, uni, 3);
-			if (c == 0)
-			{
-				uni[0] = 0;
-				rc.right = x + 3;
-				FrameRect(dc, &rc, br);
-				x += 7;
+		rc.right = rc.left;
+		rc.bottom = rc.top;
+		DrawTextW(dc, p, 1, &rc, DT_CALCRECT | DT_NOCLIP | DT_EXTERNALLEADING | DT_SINGLELINE | DT_NOPREFIX);
+		rc.right += GetTextCharacterExtra(dc) + 2;
+		rc.bottom += 2;
+		boxrc = rc;
+		if (GetCharABCWidthsFloat(dc, p[0], p[0], &abcf)) {
+			// Check if the glyph underhangs the start.
+			if (abcf.abcfA<0.0) {
+				pad = (int)ceil(fabs(abcf.abcfA));
+				rc.left += pad;
+				rc.right += pad;
+				boxrc.right += pad;
 			}
-			else
-			{
-				rc.right = rc.left;
-				rc.bottom = rc.top;
-				DrawTextW(dc, uni, c, &rc, DT_CALCRECT | DT_NOCLIP | DT_EXTERNALLEADING | DT_SINGLELINE | DT_NOPREFIX);
-				rc.right += GetTextCharacterExtra(dc) + 2;
-				rc.bottom += 2;
-				FrameRect(dc, &rc, br);
-				rc.left += 1;
-				rc.top += 1;
-				DrawTextW(dc, uni, c, &rc, DT_NOCLIP | DT_SINGLELINE | DT_NOPREFIX);
-				x = rc.right + 4;
+			// Check if the glyph overhands the end.
+			if (abcf.abcfC<0.0) {
+				pad = (int)ceil(fabs(abcf.abcfC));
+				rc.right += pad;
+				boxrc.right += pad;
 			}
 		}
-		if ((n&0xF) == 0xF)
+		rc.left += 1;
+		rc.top += 1;
+		DrawTextW(dc, p, 1, &rc, DT_NOCLIP | DT_SINGLELINE | DT_NOPREFIX);
+		FrameRect(dc, &boxrc, br);
+		x = rc.right + 4;
+		p++;
+
+		if ((i&0xF) == 0xF)
 		{
 			x = 2;
 			y = rc.bottom + 5;
 		}
 	}
 	DeleteObject(br);
+	DeleteDC(dc);
 
-	if (ghDC)
-		DeleteDC(ghDC);
-	ghDC = dc;
+	gBitmap = bm;
+	gBitmapInfo = bmi;
+	gBitmapBits = bmbits;
 	gWidth = width;
 	gHeight = height;
+
+	GdiFlush();
 
 	return 0;
 }
@@ -767,7 +789,7 @@ LONG WINAPI MainWndProc(HWND wnd, UINT msg, WPARAM wp, LPARAM lp)
 		if (!first && ((LPWINDOWPOS)lp)->flags & SWP_SHOWWINDOW)
 		{
 			first = TRUE;
-			writebmp(wnd, ghDC);
+			writebmp(wnd, gBitmap, &gBitmapInfo.bmiHeader, gBitmapBits);
 		}
 		break;
 	case WM_SIZE:
@@ -775,15 +797,21 @@ LONG WINAPI MainWndProc(HWND wnd, UINT msg, WPARAM wp, LPARAM lp)
 		break;
 	case WM_PAINT:
 		dc = BeginPaint(wnd, &ps);
-		if (ghDC)
+		if (gBitmap)
 		{
-			BitBlt(dc, 0, 0, gWidth, gHeight, ghDC, 0, 0, SRCCOPY);
+			StretchDIBits(dc,
+				0, 0, gWidth, gHeight,
+				0, 0, gWidth, gHeight,
+				gBitmapBits, &gBitmapInfo, DIB_RGB_COLORS, SRCCOPY);
 		}
 		EndPaint(wnd, &ps);
 		break;
 	case WM_CLOSE:
-		if (ghDC)
-			DeleteDC(ghDC);
+		if (gBitmap) {
+			DeleteObject(gBitmap);
+			gBitmap = 0;
+			gBitmapBits = NULL;
+		}
 		DestroyWindow(wnd);
 		return TRUE;
 	case WM_DESTROY:

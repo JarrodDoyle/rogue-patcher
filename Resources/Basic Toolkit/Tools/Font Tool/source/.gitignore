@@ -1,0 +1,8 @@
+*.o
+*.obj
+*.res
+*.exe
+*.pdb
+
+# Generated source files:
+wfon-dlg.h

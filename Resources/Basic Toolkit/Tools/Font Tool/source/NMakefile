@@ -1,0 +1,96 @@
+##############################################################################
+#    NMake makefile for thieffon
+#
+#    This file is part of DarkUtils
+#    Copyright (C) 2013 Tom N Harris <telliamed@whoopdedo.org>
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+##############################################################################
+.SUFFIXES:
+.SUFFIXES: .c .obj .exe
+
+CC = cl -nologo
+# -Wno-strict-aliasing equivalent?
+
+CFLAGS = /Zi /W3 -I/usr/local/include -D_CRT_SECURE_NO_WARNINGS
+!IFNDEF DEBUG
+CFLAGS = $(CFLAGS) -O2
+!ENDIF
+
+LDFLAGS = /Zi /MT
+
+LIBS = /usr/local/lib/libungif.a /usr/local/lib/libpng.a /usr/local/lib/libz.a
+RC = rc
+RCFLAGS = /r
+RM = del /Q
+EXEDIR = ..
+
+.c.obj:
+	$(CC) $(CFLAGS) -c -Fo$@ $<
+
+.obj.exe:
+	$(CC) $(CFLAGS) -Fe$@ $<
+
+# TODO: restore thieffon build+clean
+# all: thieffon wfon
+all: wfon
+
+clean: clean-mkresinc clean-wfon
+
+thieffon: $(EXEDIR)\thieffon.exe
+
+$(EXEDIR)\thieffon.exe: thieffon.obj file.obj bmp.obj pcx.obj gif.obj png.obj pal.obj
+	$(CC) $(LDFLAGS) -Fe$@ $** $(LIBS)
+
+thieffon.obj: thieffon.c defs.h
+file.obj: file.c defs.h
+bmp.obj: bmp.c defs.h
+pcx.obj: pcx.c defs.h
+gif.obj: gif.c defs.h
+png.obj: png.c defs.h
+pal.obj: pal.c defs.h
+
+clean-thieffon:
+	$(RM) $(EXEDIR)\thieffon.exe
+	$(RM) thieffon.obj
+
+mkresinc.exe: mkresinc.obj
+	$(CC) $(LDFLAGS) -Fe$@ mkresinc.obj /link /INCREMENTAL:NO
+
+clean-mkresinc:
+	$(RM) mkresinc.exe
+	$(RM) mkresinc.obj
+
+wfon.res: wfon.rc
+	$(RC) $(RCFLAGS) /fo$@ wfon.rc 
+
+wfon-dlg.h: wfon.res mkresinc.exe
+	.\\mkresinc.exe wfon.res wfon-dlg.h
+
+wfon.obj: wfon.c wfon-dlg.h
+	$(CC) $(CFLAGS) -c wfon.c
+
+wfon: $(EXEDIR)\wfon.exe
+
+$(EXEDIR)\wfon.exe: wfon.obj
+	$(CC) $(LDFLAGS) -I. advapi32.lib comdlg32.lib gdi32.lib user32.lib -Fe$@ wfon.obj /link /INCREMENTAL:NO
+
+clean-wfon:
+	$(RM) $(EXEDIR)\wfon.exe
+	$(RM) $(EXEDIR)\wfon.pdb
+	$(RM) wfon.obj
+	$(RM) wfon.res
+	$(RM) wfon-dlg.h
