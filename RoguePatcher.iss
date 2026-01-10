@@ -31,7 +31,7 @@ Name: "custom"; Description: "Custom"; Flags: iscustom
 
 [Components]
 Name: "newdark"; Description: "NewDark"; Types: custom; Flags: fixed;
-Name: "dromed"; Description: "DromEd"; 
+Name: "dromed"; Description: "DromEd";
 Name: "dromed\toolkit"; Description: "DromEd Basic Toolkit";
 Name: "multiplayer"; Description: "Multiplayer (Experimental)";
 Name: "comscripts"; Description: "Common FM Scripts (NVScript, LGScript, PublicScripts)";
@@ -45,6 +45,10 @@ Name: "mods\objectivedings"; Description: "Thief 2 Style Objective Notifications
 [Tasks]
 Name: "dromedhw"; Description: "Enable hardware rendering mode"; GroupDescription: "DromEd:"; Components: dromed;
 Name: "objids"; Description: "Use increased ObjID ranges"; GroupDescription: "DromEd:"; Components: dromed;
+
+Name: "cleanupsteam"; Description: "Remove conflicting Steam template files"; GroupDescription: "Cleanup:"; Check: IsSteamInstall;
+Name: "cleanuptfix"; Description: "Remove conflicting Tfix/Tfix Lite files"; GroupDescription: "Cleanup:"; Check: IsTfixInstall;
+Name: "cleanupgog"; Description: "Remove GOG files"; GroupDescription: "Cleanup:"; Check: IsGogInstall;
 
 Name: "newmantle"; Description: "Enable NewDark mantling"; GroupDescription: "General Tweaks:";
 Name: "fmsel"; Description: "Enable built-in fan mission launcher"; GroupDescription: "General Tweaks:";
@@ -77,6 +81,21 @@ WelcomeLabel1=Welcome to the {#Name} Wizard
 WelcomeLabel2=This will install the latest NewDark patch for Thief: The Dark Project and Thief: Gold. A full installation of either game is required and a fresh unmodded install is assumed.%n%nThis patcher keeps the game as close to vanilla as possible and attempts to ensure maximum compatibility with fan mission projects.%n%nNote: Many changes made by this installer are irreversible. It is recommended you backup your game before continuing with the installation.
 
 [Code]
+function IsSteamInstall: Boolean;
+begin
+  Result := FileExists(ExpandConstant('{app}\Steam_install.cfg'));
+end;
+
+function IsTfixInstall: Boolean;
+begin
+  Result := FileExists(ExpandConstant('{app}\miss1.mis.dml'));
+end;
+
+function IsGogInstall: Boolean;
+begin
+  Result := FileExists(ExpandConstant('{app}\gog.ico'));
+end;
+
 procedure EditConfigLine(File, TargetLine, NewLine: String);
 var
   LineIndex: Integer;
@@ -128,6 +147,66 @@ begin
   end;
 end;
 
+procedure SteamCleanUp();
+begin
+    if IsSteamInstall() then begin
+      DeleteFile(ExpandConstant('{app}\Steam_install.cfg'));
+      DeleteFile(ExpandConstant('{app}\211600_install.vdf'));
+      DeleteFile(ExpandConstant('{app}\unins000.exe'));
+      DeleteFile(ExpandConstant('{app}\unins000.dat'));
+      DeleteFile(ExpandConstant('{app}\innosetup_license.txt'));
+    end;
+end;
+
+procedure TfixCleanUp();
+begin
+    if IsTfixInstall() then begin
+      DeleteFile(ExpandConstant('{app}\gamesys.dml'));
+      DeleteFile(ExpandConstant('{app}\miss1.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss2.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss3.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss4.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss5.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss6.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss7.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss9.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss10.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss11.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss12.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss13.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss14.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss15.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss16.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\miss17.mis.dml'));
+      DeleteFile(ExpandConstant('{app}\release_notes.txt'));
+      DeleteFile(ExpandConstant('{app}\TFix_readme.txt'));
+      DeleteFile(ExpandConstant('{app}\!FMselect.lnk'));
+      DeleteFile(ExpandConstant('{app}\enhanced.bat'));
+      DeleteFile(ExpandConstant('{app}\safemode.bat'));
+      DelTree(ExpandConstant('{app}\doc'), true, true, true);
+      DelTree(ExpandConstant('{app}\patches'), true, true, true);
+    end;
+end;
+
+procedure GogCleanUp();
+begin
+  if IsGogInstall() then begin
+    DeleteFile(ExpandConstant('{app}\gog.ico'));
+    DeleteFile(ExpandConstant('{app}\goggame-1207658997.hashdb'));
+    DeleteFile(ExpandConstant('{app}\goggame-1207658997.ico'));
+    DeleteFile(ExpandConstant('{app}\goggame-1207658997.info'));
+    DeleteFile(ExpandConstant('{app}\goggame-galaxyFileList.ini'));
+    DeleteFile(ExpandConstant('{app}\goglog.ini'));
+    DeleteFile(ExpandConstant('{app}\Launch Thief Gold.lnk'));
+    DeleteFile(ExpandConstant('{app}\webcache.zip'));
+    DeleteFile(ExpandConstant('{app}\support.ico'));
+    DeleteFile(ExpandConstant('{app}\unins000.dat'));
+    DeleteFile(ExpandConstant('{app}\unins000.exe'));
+    DeleteFile(ExpandConstant('{app}\unins000.ini'));
+    DeleteFile(ExpandConstant('{app}\unins000.msg'));
+  end;
+end;
+
 procedure PerformTasks();
 var
   Mods: String;
@@ -159,6 +238,15 @@ begin
       EditConfigLine('dark.cfg', GetLineContaining('dark.cfg', 'obj_max'), 'obj_max 8184');
       EditConfigLine('dark.cfg', GetLineContaining('dark.cfg', 'max_refs'), 'max_refs 47740');
     end;
+
+  // Cleanup prior installs. Note that we delete Squirrel.osm from the root because we now install it to the OSMs folder
+  DeleteFile(ExpandConstant('{app}\squirrel.osm'));
+  if WizardIsTaskSelected('cleanupsteam') then
+    SteamCleanUp();
+  if WizardIsTaskSelected('cleanuptfix') then
+    TfixCleanUp();
+  if WizardIsTaskSelected('cleanupgog') then
+    GogCleanUp();
 
   if WizardIsTaskSelected('newmantle') then
     EditConfigLine('cam_ext.cfg', ';new_mantle', 'new_mantle');
