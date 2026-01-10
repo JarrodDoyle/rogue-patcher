@@ -52,12 +52,14 @@ Name: "cleanupgog"; Description: "Remove GOG files"; GroupDescription: "Cleanup:
 
 Name: "newmantle"; Description: "Enable NewDark mantling"; GroupDescription: "General Tweaks:";
 Name: "fmsel"; Description: "Enable built-in fan mission launcher"; GroupDescription: "General Tweaks:";
-Name: "fpsfix"; Description: "Fix physics issues at high framerates"; GroupDescription: "General Tweaks:";
-Name: "swgamma"; Description: "Enable gamma correct screenshots and windowed mode"; GroupDescription: "General Tweaks:";
-Name: "stutterfix"; Description: "Reduce micro stutter and mouse lag (Not recommended on CrossFire/SLI setups)"; GroupDescription: "General Tweaks:";
-Name: "smallportal"; Description: "Reduce camera jolt near complex geometry and doorways"; GroupDescription: "General Tweaks:";
-Name: "texfilter"; Description: "Disable texture filtering for a retro look"; GroupDescription: "General Tweaks:"; Flags: unchecked
-Name: "windowed"; Description: "Enable windowed mode"; GroupDescription: "General Tweaks:"; Flags: unchecked
+
+Name: "swgamma"; Description: "Fix gamma in screenshots and windowed mode"; GroupDescription: "Graphics:";
+Name: "windowed"; Description: "Enable windowed mode"; GroupDescription: "Graphics:"; Flags: unchecked
+Name: "texfilter"; Description: "Disable texture filtering for a retro look"; GroupDescription: "Graphics:"; Flags: unchecked
+
+Name: "fpsfix"; Description: "Fix physics issues at high framerates"; GroupDescription: "Performance:";
+Name: "stutterfix"; Description: "Reduce micro stutter and mouse lag (Not recommended on CrossFire/SLI setups)"; GroupDescription: "Performance:";
+Name: "smallportal"; Description: "Reduce camera jolt near complex geometry and doorways"; GroupDescription: "Performance:";
 
 [Files]
 Source: "Resources\NewDark\*"; DestDir: "{app}"; Components: newdark; Flags: ignoreversion recursesubdirs createallsubdirs
