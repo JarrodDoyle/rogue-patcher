@@ -53,6 +53,7 @@ Name: "cleanupgog"; Description: "Remove GOG files"; GroupDescription: "Cleanup:
 Name: "newmantle"; Description: "Enable NewDark mantling"; GroupDescription: "General Tweaks:";
 Name: "fmsel"; Description: "Enable built-in fan mission launcher"; GroupDescription: "General Tweaks:";
 
+Name: "res"; Description: "Set game resolution to current display resolution"; GroupDescription: "Graphics:";
 Name: "swgamma"; Description: "Fix gamma in screenshots and windowed mode"; GroupDescription: "Graphics:";
 Name: "msaa"; Description: "Enable Multisample Anti-Aliasing"; GroupDescription: "Graphics:";
 Name: "windowed"; Description: "Enable windowed mode"; GroupDescription: "Graphics:"; Flags: unchecked
@@ -84,6 +85,13 @@ WelcomeLabel1=Welcome to the {#Name} Wizard
 WelcomeLabel2=This will install the latest NewDark patch for Thief: The Dark Project and Thief: Gold. A full installation of either game is required and a fresh unmodded install is assumed.%n%nThis patcher keeps the game as close to vanilla as possible and attempts to ensure maximum compatibility with fan mission projects.%n%nNote: Many changes made by this installer are irreversible. It is recommended you backup your game before continuing with the installation.
 
 [Code]
+{ Primary monitor resolution. See: https://stackoverflow.com/questions/5461674/inno-setup-how-to-get-the-primary-monitors-resolution }
+function GetSystemMetrics (nIndex: Integer): Integer;
+  external 'GetSystemMetrics@User32.dll stdcall setuponly';
+Const
+    SM_CXSCREEN = 0;
+    SM_CYSCREEN = 1;
+
 function IsSteamInstall: Boolean;
 begin
   Result := FileExists(ExpandConstant('{app}\Steam_install.cfg'));
@@ -212,6 +220,8 @@ end;
 
 procedure PerformTasks();
 var
+  ResX: Integer;
+  ResY: Integer;
   Mods: String;
 begin
   // Make sure things work properly with T1
@@ -275,6 +285,12 @@ begin
     EditConfigLine('cam_ext.cfg', ';force_windowed', 'force_windowed');
   if WizardIsTaskSelected('msaa') then
     EditConfigLine('cam_ext.cfg', ';multisampletype 8', 'multisampletype 8');
+  if WizardIsTaskSelected('res') then
+    begin
+      ResX := GetSystemMetrics(SM_CXSCREEN);
+      ResY := GetSystemMetrics(SM_CYSCREEN);
+      EditConfigLine('cam.cfg', GetLineContaining('cam.cfg', 'game_screen_size'), 'game_screen_size ' + IntToStr(ResX) + ' ' + IntToStr(ResY));
+    end;
 
   if WizardIsComponentSelected('mods') then
     begin
