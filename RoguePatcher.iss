@@ -52,6 +52,7 @@ Name: "cleanupgog"; Description: "Remove GOG files"; GroupDescription: "Cleanup:
 
 Name: "newmantle"; Description: "Enable NewDark mantling"; GroupDescription: "General Tweaks:";
 Name: "fmsel"; Description: "Enable built-in fan mission launcher"; GroupDescription: "General Tweaks:";
+Name: "sfxchannels"; Description: "Set max audio channels"; GroupDescription: "General Tweaks:";
 
 Name: "res"; Description: "Set game resolution to current display resolution"; GroupDescription: "Graphics:";
 Name: "swgamma"; Description: "Fix gamma in screenshots and windowed mode"; GroupDescription: "Graphics:";
@@ -291,6 +292,8 @@ begin
       ResY := GetSystemMetrics(SM_CYSCREEN);
       EditConfigLine('cam.cfg', GetLineContaining('cam.cfg', 'game_screen_size'), 'game_screen_size ' + IntToStr(ResX) + ' ' + IntToStr(ResY));
     end;
+    if WizardIsTaskSelected('sfxchannels') then
+      EditConfigLine('cam.cfg', GetLineContaining('cam.cfg', 'sfx_channels'), 'sfx_channels 48');
 
   if WizardIsComponentSelected('mods') then
     begin
