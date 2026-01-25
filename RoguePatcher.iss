@@ -54,6 +54,7 @@ Name: "newmantle"; Description: "Enable NewDark mantling"; GroupDescription: "Ge
 Name: "fmsel"; Description: "Enable built-in fan mission launcher"; GroupDescription: "General Tweaks:";
 
 Name: "swgamma"; Description: "Fix gamma in screenshots and windowed mode"; GroupDescription: "Graphics:";
+Name: "msaa"; Description: "Enable Multisample Anti-Aliasing"; GroupDescription: "Graphics:";
 Name: "windowed"; Description: "Enable windowed mode"; GroupDescription: "Graphics:"; Flags: unchecked
 Name: "texfilter"; Description: "Disable texture filtering for a retro look"; GroupDescription: "Graphics:"; Flags: unchecked
 
@@ -272,6 +273,8 @@ begin
     EditConfigLine('cam_ext.cfg', 'tex_filter_mode 16', 'tex_filter_mode 0');
   if WizardIsTaskSelected('windowed') then
     EditConfigLine('cam_ext.cfg', ';force_windowed', 'force_windowed');
+  if WizardIsTaskSelected('msaa') then
+    EditConfigLine('cam_ext.cfg', ';multisampletype 8', 'multisampletype 8');
 
   if WizardIsComponentSelected('mods') then
     begin
