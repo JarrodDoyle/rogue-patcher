@@ -35,6 +35,7 @@ Name: "dromed"; Description: "DromEd";
 Name: "dromed\toolkit"; Description: "DromEd Basic Toolkit";
 Name: "multiplayer"; Description: "Multiplayer (Experimental)";
 Name: "comscripts"; Description: "Common FM Scripts (NVScript, LGScript, PublicScripts)";
+Name: "binds"; Description: "Modern Key Bindings";
 Name: "dmm"; Description: "Dark Mod Manager";
 Name: "mods"; Description: "Mods";
 Name: "mods\fixedres"; Description: "Fixed Resources";
@@ -71,6 +72,7 @@ Source: "Resources\DromEd\*"; DestDir: "{app}"; Components: dromed; Flags: ignor
 Source: "Resources\Basic Toolkit\*"; DestDir: "{app}"; Components: dromed\toolkit; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Multiplayer\*"; DestDir: "{app}"; Components: multiplayer; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Common Scripts\*"; DestDir: {app}; Components: comscripts; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Resources\Binds\*"; DestDir: "{app}"; Components: binds; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\DMM\*"; DestDir: {app}; Components: dmm; Flags: ignoreversion
 Source: "Resources\Mods\Fixed Resources\*"; DestDir: "{app}\MODS\Fixed Resources"; Components: mods\fixedres; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\TGFMDML\*"; DestDir: "{app}\MODS\TGFMDML"; Components: mods\fmdml; Flags: ignoreversion recursesubdirs createallsubdirs
