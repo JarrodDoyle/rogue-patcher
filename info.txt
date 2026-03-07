@@ -1,4 +1,4 @@
-RoguePatcher 1.28.3 includes the following resources. For further information
+RoguePatcher 1.28.4 includes the following resources. For further information
 and support, see the release thread on TTLG.
 https://www.ttlg.com/forums/showthread.php?t=152977
 
