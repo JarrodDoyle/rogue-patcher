@@ -290,6 +290,22 @@
 			<Overload retVal="BOOL" descr="service ShockGame">
 			</Overload>
 		</KeyWord>
+		<KeyWord name="ChangeAllTextures" func="yes">
+			<Overload retVal="HRESULT" descr="service AnimTexture [API 13+]">
+				<Param name="string fam1" />
+				<Param name="string tx1" />
+				<Param name="string fam2" />
+				<Param name="string tx2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ChangeSingleTexture" func="yes">
+			<Overload retVal="HRESULT" descr="service AnimTexture [API 13+]">
+				<Param name="int cellid" />
+				<Param name="int polyid" />
+				<Param name="string fam" />
+				<Param name="string tx" />
+			</Overload>
+		</KeyWord>
 		<KeyWord name="ChangeTexture" func="yes">
 			<Overload retVal="HRESULT" descr="service AnimTexture">
 				<Param name="object refobj" />

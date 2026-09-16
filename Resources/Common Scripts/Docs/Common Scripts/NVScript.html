@@ -71,6 +71,31 @@ tr .No
 	color: red;
 }
 
+li {
+	margin-bottom: 0.5em;
+}
+
+.Parameters
+{
+	
+	text-align: left;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.Parameters td 
+{
+	padding: 1px 8px 1px 4px;
+	border: 1px solid #aaa;
+}
+
+.Parameters th
+{
+	border: 1px solid black;
+	padding: 1px 4px 1px 4px;
+	background-color: #a0a0a0;
+}
+
 /* For T2 version */
 /*T2Version-Start*/
 .T2			{ }
@@ -130,18 +155,31 @@ SS2Version-End*/
 <p><kbd>[ScriptName]FailChance</kbd><br/> 
 	Use this parameter to specify a % chance that the trigger will fail (do nothing) when it is activated. For example: <kbd>[ScriptName]FailChance=35</kbd> will give the trigger a 35% chance to fail when activated.</p> 
 <p><kbd>[ScriptName]TDest</kbd><br/> 
-	Use this parameter to specify the object that the trigger should send messages to. Either specify a single object or archetype (see below), or use the name of a link type to broadcast the message along, preceded by an <kbd>&amp;</kbd> symbol. The default is <kbd>[ScriptName]TDest=&quot;&amp;<span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span>&quot;</kbd>. To have the message sent along a single random link of the specified type (rather than all links of that type), put a question mark (<kbd>?</kbd>) between the <kbd>&amp;</kbd> and the link type.<br/> 
-	Example: <kbd>[ScriptName]TDest=&quot;&amp;?<span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span>&quot;</kbd> will send the message down a random <span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span> link.<br/>
-	If you want the randomly chosen link to be deleted, then use <kbd>[ScriptName]KillLinks=1</kbd>.<br/>
-	You can also use weighted random links via <kbd>[ScriptName]TDest=&quot;&amp;Weighted&quot;</kbd>. This will examine <b>ScriptParams</b> links and treat their data (must be an integer) as the chance of that link being chosen. (A link with data of <b>2</b> will be chosen twice as often as one with data of <b>1</b>). Weighted random only work with <b>ScriptParams</b> links. <br/> 
-	Finally, you can use either <kbd>*</kbd> or <kbd>@</kbd> to affect <i>all </i>objects that inherit from a specific archetype: <kbd>*</kbd> will only affect objects which are direct descendants, and <kbd>@</kbd> will affect all descendants.<br/> 
-	For example: <kbd>[ScriptName]TDest=&quot;*Chest&quot;</kbd> would affect all <i>Chest (-2571)</i> objects in the mission, but will not affect objects based on its descendant archetypes of <i>Safe (-5986)</i>, <i>VicHopeChest (-5773)</i>, <i>LC_Chest (-4067)</i>, and <i>SeaChest (-2817)</i>. <kbd>[ScriptName]TDest=&quot;@Chest&quot;</kbd> would affect all of these objects. <br>
-	In addition, you can affect all objects within a specific radius.  First enter a less-than symbol (&lt;), then the radius, followed by a colon (:) and then the archetype name.  For example:   <kbd>[ScriptName]TDest=&quot;<5.00:Chest&quot;</kbd>  will affect all <i>Chest</i> objects or descendants withing a radius of 5.00 DromEd units.  Note that the radius function will affect objects in the same way as <kbd>@</kbd> - in other words, all descendant archetypes will also be affected.  By default, the radius is only calculated on the X and Y axis.  To measure distance in 3-dimensional space, use the <kbd>{</kbd> symbol instead of the less-than symbol.</p> 
+	Use this parameter to specify the object that the trigger should send messages to.<br/>
+	The messages can be sent to:
+	</p>
+	<ol>
+	<li>A single object or archetype, by name or object ID, for the message to be sent to.</li>
+	<li>All objects linked to with a given type of link. The link name should be preceded by an <kbd>&amp;</kbd> symbol, such as <kbd>&ControlDevice</kbd>.</li>
+	<li>A single object selected from a random link of a given type. The link name should be preceded by <kbd>&amp;?</kbd>.  For example, <kbd>&?ControlDevice</kbd> will select the target of one random ControlDevice link.<br/><b>Note:</b> If you want the randomly chosen link to be deleted after being used, then use <kbd>[ScriptName]KillLinks=1</kbd>.<br/></li>
+	<li>A single object selected from a random weighted link.  Use the special target <kbd>&quot;&amp;Weighted</kbd>.<br/>
+		This will examine <b>ScriptParams</b> links and treat their data (must be an integer) as the chance of that link being chosen. (A link with data of <b>2</b> will be chosen twice as often as one with data of <b>1</b>). Weighted random only work with <b>ScriptParams</b> links.</li>
+	<li>All objects linked to with links that match the value of a given quest variable.  Use the format <kbd>&QVar <i>&lt;VariableName&gt;</i></kbd>, where <i>&lt;VariableName&gt;</i> is the name of the quest variable.<br/>
+		When triggered, all ScriptParams links will be checked, and the message will be sent to only those whose Data matches the value of the quest variable.</li>
+	<li>All objects in the level that inherit from a specific archetype. Prefix the archetype name with <kbd>*</kbd> to affect only objects which are direct descendants, or with <kbd>@</kbd> to affect all descendants.<br/>
+	For example: <kbd>*Chest</kbd> would affect all <i>Chest (-2571)</i> objects in the mission, but will not affect objects based on its descendant archetypes of <i>Safe (-5986)</i>, <i>VicHopeChest (-5773)</i>, <i>LC_Chest (-4067)</i>, and <i>SeaChest (-2817)</i>. <kbd>@Chest</kbd> would affect all of these objects. <br></li>
+	<li>All objects that inherit from a specific archetype and are within a specified radius. First enter a less-than symbol (&lt;), then the radius, followed by a colon (:) and then the archetype name.<br/>
+		For example: <kbd><5.00:Chest</kbd> will affect all <i>Chest</i> objects or descendants within a radius of 5.00 DromEd units.<br/>
+		Note that the radius function will affect objects in the same way as <kbd>@</kbd> - in other words, all descendant archetypes will also be affected.<br/>
+		By default, the radius is only calculated on the X and Y axis.  To measure distance in 3-dimensional space, use the <kbd>{</kbd> symbol instead of the less-than symbol.</p> 
+	</ol>
 	
+	The default target is <kbd>[ScriptName]TDest=&quot;&amp;<span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span>&quot;</kbd>.<br/>
+
 	<p>Below is a table with examples of each way that objects can be targeted:<p>
-	<table width="850" border="1">
+	<table width="950" border="1">
 	<tr bgcolor="#CCCCCC">  
-		<th>Parameter value</th>
+		<th width="200">Parameter value</th>
 		<th>Object(s) to target</th>
 		<th width="250">Applies to</th>
 	</tr>
@@ -193,6 +231,11 @@ SS2Version-End*/
 	<tr>
 		<td>&amp;Weighted</td>
 		<td>One random object that this object has a ScriptParams link to.  The link is using a weighted random using the value of the ScriptParams link, with a link with a value of 2 being twice as likely to be chosen as one with a value of 1.</td>
+		<td>An NVTrigger script's TDest</td>
+	</tr>
+	<tr>
+		<td>&amp;QVar myvariable</td>
+		<td>Any objects that this object has a ScriptParams link to, where the script data matches the current value of the "<b>myvariable</b>" quest variable.</td>
 		<td>An NVTrigger script's TDest</td>
 	</tr>
 	<tr>
@@ -995,8 +1038,8 @@ You should also give one of the doors the <a href="#NVDoorStartsOpen">NVDoorStar
 
 <h1><a name="NVCreateAndLink"></a>NVCreateAndLink <i>(NVTrap-&gt;NVLinkBuilder)</i></h1>
 <p> A derivative of <a href="#NVLinkBuilder">NVLinkBuilder</a>.<br/> 
-	Upon receiving <u>TurnOn</u>, this script creates the object specified by <kbd><u>NVCreateAndLinkCreate</u></kbd>.<br/> 
-	It then creates a link to the new object, with the flavour specified by <kbd><u>NVCreateAndLinkLinkType</u></kbd>.<br/> 
+	Upon receiving <u>TurnOn</u>, this script creates the object specified by <kbd><u>NVCreateAndLinkCreate</u></kbd>.<br/>
+	It then creates a link to the new object, with the flavour specified by <kbd><u>NVCreateAndLinkLinkType</u></kbd>.  Note that you can instead create a link in the opposite direction by preceding the link type with a tilde (~).<br/>
 	By default, it links from the object with the script, but you can specify a source object via the <kbd>NVCreateAndLinkLinkSource</kbd> parameter. <br/> 
 	A <u>TurnOff</u> message will destroy the object if it still exists and is still linked. Alternatively, you can specify <kbd>NVSlayCreated=1</kbd> to have the object slain rather than destroyed.<br/>
 	You can use the <kbd>NVCreateAndLinkLoc</kbd> parameter to specify the location at which to create the object and <kbd>NVCreateAndLinkRot</kbd> to specify the rotation. (Specify both values as a string with three numbers separated by comas, eg: <kbd>NVCreateAndLinkLoc=&quot;1.0,0.0,0.0&quot;; NVCreateAndLinkRot=&quot;360,0,0&quot;</kbd>)<br/>
@@ -1127,8 +1170,13 @@ The metaproperty is removed on <u>TurnOff</u>.</p>
 	Page_1: &quot;. Thank you for asking.&quot;</blockquote> 
 <p>would be displayed as &quot;At present, the qvar is 54. Thank you for asking.&quot;<br/> 
 You can also use <span class="T2Only">Design Note</span><span class="SS2Only">ObjList Args</span> parameters instead of a string file. Use the parameters <kbd>NVPage_0</kbd>, <kbd>NVQVar</kbd>, and <kbd>NVPage_1</kbd>. You can also use <kbd>NVText</kbd> instead of <kbd>NVPage_0</kbd> for simple onscreen texts.</p> 
-<p>As of NVScript v1.1.0, you can specify a colour via the <kbd>NVOnscreenTextColour</kbd> parameter. Colours can be specified as either basic colour names (e.g. "red" or "blue"), or as a HTML-style colour code (e.g. #ff0000 or #0000ff).<br/>
-Also as of NVScript v1.1.0, you can use the <kbd>NVOnscreenTextFocusRead=0</kbd> parameter to make the object not automatically display its text when focused.  This can be extremely useful when used in combination with <b>Script, FocusScript</b> FrobInfo, as this will make the text appear on screen when the object is frobbed, and remain there for as long as the player is looking at the object.</p>
+<p>As of NVScript v1.1.0, you can specify a colour via the <kbd>NVOnscreenTextColour</kbd> parameter. Colours can be specified as either basic colour names (e.g. "red" or "blue"), or as a HTML-style colour code (e.g. #ff0000 or #0000ff).</p>
+
+<p>By default, the text will be displayed as soon as the player focuses the readable object (this requires the object's world FrobInfo to be set to <b>Script, FocusScript</b>); to instead have the text only displayed when the object is frobbed, set <kbd>NVOnscreenTextFocusRead=0</kbd><br/>
+If the text is displayed as a result of being focused, it will stay on-screen indefinitely, until the object is no longer in focus.  If the text is instead displayed by being frobbed, it will be displayed for an amount of time calculated by as half a second per word, with a minimum time of 5 seconds.  In both cases, the text duration can be overridden by using <kbd>NVOnscreenTextDuration</kbd> to specify a duration in milliseconds.<br/>
+If you want the text to always disappear when the object is de-focused, even if it was triggered by a frob, use <kbd>AlwaysClearOnDefocus=1</kbd>.  (Note that this was the default behaviour before NVScript v1.3.7.)</p>
+
+
 <h1><a name="NVParticleGroup" id="NVParticleGroup"></a> NVParticleGroup  <i>(NVTrap)</i></h1>
 <p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
 <p> Upon receiving <u>TurnOn</u>, this script activates its object's particles. <u>TurnOff</u> will deactivate them.</p>
@@ -1151,12 +1199,16 @@ Note that an object with 0.00 alpha is normally still (faintly) visible.  To mak
 The property to modify is specified via the <kbd><u>NVSetPropertyTrapProperty</u></kbd>.  This is the internal name of the property as used by the Set Property receptron (amongst other things).<br/>
 You must specify the subproperty to modify via the <kbd>NVSetPropertyTrapSubProperty</kbd> parameter, unless the property has no subproperties, in which case this parameter must be omitted.<br/>
 The property will be set to the value specified in <kbd>NVSetPropertyTrapValue</kbd>. <br/>
-Use the <kbd>NVSetPropertyTrapType</kbd> property to specify the type of property being set.  Valid values are <b>int</b> and <b>string</b>.  The default is <b>int</b>.  Using the wrong type will probably result in a crash.</p>
+Use the <kbd>NVSetPropertyTrapType</kbd> property to specify the type of property being set.  Valid values are <b>int</b>, <b>string</b>, and <b>vector</b>.  The default is <b>int</b>.<br/>
+Using the wrong type will probably result in a crash.</p>
 <p>
 <h3>string</h3>
-The property value with be treated as a string.
+The property value will be treated as a string.
+<h3>vector</h3>
+<p>The property value will be treated as a vector.  The value should be represented by a string in the following format: <kbd>"1.0, 2.0, 3.0"</kbd>, where X is set to 1.0, Y to 2.0, and Z to 3.0 in this example.</p>
+
 <h3>int</h3>
-When setting an integer-type property, the value can instead be set to a random value between <kbd>NVSetPropertyTrapMin</kbd> and <kbd>NVSetPropertyTrapMax</kbd>.  If the property is a flags value (multiple selections are possible), then use the <kbd>NVSetPropertyTrapIsFlags=1</kbd> parameter to randomly set those flags.  Note that if a single value is set (via <kbd>NVSetPropertyTrapValue</kbd>), then the Min and Max will be ignored.<br/>
+<p>When setting an integer-type property, the value can instead be set to a random value between <kbd>NVSetPropertyTrapMin</kbd> and <kbd>NVSetPropertyTrapMax</kbd>.  If the property is a flags value (multiple selections are possible), then use the <kbd>NVSetPropertyTrapIsFlags=1</kbd> parameter to randomly set those flags.  Note that if a single value is set (via <kbd>NVSetPropertyTrapValue</kbd>), then the Min and Max will be ignored.<br/>
 If you would like to prefix a string of text in front of the number, use the <kbd>NVSetPropertyTrapPrefix</kbd> parameter - the Type must be set to int, an the type of the property or subproperty being set must be a string.<br/>
 <b>Warning:</b> attempting to use this property to put the wrong type of data into a property will probably result in a crash, e.g. putting a string (via the prefix option) into a numeric property.</b><br/>
 The script does not currently work for floating point values or vectors. It only works for integers.<br/>
@@ -1169,6 +1221,7 @@ This script has only been minimally tested.</p>
     <b>System Shock 2 only.</b></h1>
 <p>Upon receiving <u>TurnOn</u>, this script will recalculate the player's derived statistics, such as Psi points, max Psi points, inventory capacity, etc., based on the player's current stats. </p>
 </div>
+
 <h1><a name="NVRelayTrap" id="NVRelayTrap"></a>NVRelayTrap<i>(NVTrap, NVTrigger)</i></h1> 
 <p>Relays <u>TurnOn</u> and <u>TurnOff</u> messages along its <span class="T2Only">ControlDevice</span><span class="SS2Only">SwitchLink</span> links. Why? Because this can be used with the various options available to <i>NVTrap</i> and <i>NVTrigger</i> scripts. You can use <kbd>NVRelayTrapDelay</kbd> to delay the message by the specified number of milliseconds. If you specify <kbd>NVRelayTrapDelayMax</kbd>, then a random delay between the time specified by <kbd>NVRelayTrapDelay</kbd> and that specified by <kbd>NVRelayTrapDelayMax</kbd> will be used.  You can also use different timings for on and off messages, by using <kbd>NVRelayTrapOnDelay</kbd> and <kbd>NVRelayTrapOnDelayMax</kbd>, and <kbd>NVRelayTrapOffDelay</kbd> and <kbd>NVRelayTrapOffDelayMax</kbd>, respectively.   Specific on or off delays will supersede the generic delay parameters.<br/> 
 	If you want to abort any messages that are still waiting to be sent when the trap is triggered again, use <kbd>NVRelayTrapExclusiveDelay=1</kbd>.<br/> 
@@ -1178,6 +1231,23 @@ This script has only been minimally tested.</p>
 <p>(Theoretically, this should work for both patched and unpatched versions of Thief 2, but I haven't tested it. If it does, then it could be used instead of <b>TrapTimedRelay</b>.)</p> 
 <p><b>Multiple copies:</b> This script has multiple copies, allowing you to apply it multiple times with different parameters to the same object.  Add a number after the script name to use another instance of the script, and adjust the name of the script used in the script's parameters accordingly.<br/>
 <br/>Example: you can use the following scripts:  NVRelayTrap, NVRelayTrap2, NVRelayTrap3, ... up to NVRelayTrap10.   In each case, replace the NVRelayTrap in the name of each parameter with the name and number of the script you are using.  e.g. <kbd>NVRelayTrap2On</kbd> will specify the message to trigger NVRelayTrap2.</p>
+
+<h1><a name="NVRequireItemTrap" id="NVRequireItemTrap"></a>NVRequireItemTrap<i>(NVTrap, NVTrigger)</i></h1> 
+<p>When activated, this script will check if the player (or other object) owns one or more of a specified type of item.<br/>
+It will send <u>TurnOn</u> if the check passes, or <u>TurnOff</u> if the check fails.<br/>
+Optionally, it can remove the item(s) from the player's inventory if the check passes.</p>
+<table class="Parameters">
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+<tr><td><kbd>NVRequireItemTrapItem</kbd></td><td>The archetype of the type of item to check for.</td><td>(None)</td></tr>
+<tr><td><kbd>NVRequireItemTrapQuantity</kbd></td><td>The quantity of the item to check for.</td><td>1.</td></tr>
+<tr><td><kbd>NVRequireItemTrapOwner</kbd></td><td>The owning object to check.</td><td>Player</td></tr>
+<tr><td><kbd>NVRequireItemTrapConsume</kbd></td><td>If set to 1, the item(s) will be consumed after a successful check.</td><td>0</td></tr>
+</table>
+
 
 <h1><a name="NVRemovePropertyTrap" id="NVRemovePropertyTrap"></a>NVRemovePropertyTrap <i>(NVTrap)</i></h1> 
 <p><b>Targetable:</b> default: <kbd>[me]</kbd></p>
@@ -1515,12 +1585,13 @@ For example, <i>=QVar2+(4-1)*2:QVar1</i> would set QVar1 to the value of QVar2 p
 
 <h1><a name="NVVOTrap" id="NVVOTrap"></a>NVVOTrap<i>(NVTrap)</i></h1> 
 <p>A replacement for the standard <b>VOSounds</b> script.<br/> 
-	Plays a different voiceover schema depending on the value of a quest variable. Use the parameter <kbd>NVVOQVar</kbd> to specify the quest variable to read, and create <b>ScriptParams</b> links to each schema. The schema will be played if the link data is equal to the value of the variable.<br/> 
+	Plays a different voiceover schema depending on the value of a quest variable.<br/>Use the parameter <kbd>NVVOTrapQVar</kbd> to specify the quest variable to read, and create <b>ScriptParams</b> links to each schema. The schema will be played if the link data is equal to the value of the variable.<br/> 
 	If no link matches or the quest variable doesn't exist, then a <b>SoundDescription</b> link is used instead (if one exists).<br/> 
-	The script will only play one schema (the first matching link). If you can actually think of a reason to have it play multiple voiceovers at the same time, then I can easily change it. 
+	The script will only play one schema (the first matching link).
 	<br/>
-	Oh, and since Telliamed added a 'Polite' VOTrap in tnhScript v2.1 (which does nothing if it is triggered when there are <b>AIInvest</b> links to the player), you can use <kbd>NVPoliteVO=1</kbd> to achieve the same effect.
-</p> 
+	If the parameter <kbd>NVVOTrapPolite=1</kbd> is set, then the VOTrap will ignore activations if it is triggered when there are <b>AIInvest</b> links to the player.  In other words, it will not play while the player is currently being searched for.
+</p>
+<p>Note that versions before NVScript v1.3.7 used the <kbd>NVVOQVar</kbd> and <kbd>NVPoliteVO=1</kbd> parameters instead of <kbd>NVVOTrapQVar</kbd> and <kbd>NVVOTrapPolite=1</kbd>; those old parameter names still work in newer versions, but the newer ones are preferred for consistency.</p>
 
 
 <h2>- Triggers -</h2>
@@ -2216,6 +2287,28 @@ As of the complete rewrite of this script in v1.0.8, the arrows <i>will</i> beco
 
 
 <h2><a name="VersionHistory"></a>- Version History -</h2>
+<h1>v1.3.7</h1>
+<ul>
+	<li>New Script:	<a href="#NVRequireItemTrap">NVRequireItemTrap</a> <i>(NVTrap) (NVTrigger)</i><br/>
+	<li>Adjusted <a href="#NVOnscreenText">NVOnscreenText</a> as follows:
+		<ol>
+			<li>If the text is activated by being focused, it will be displayed forever until you look away.</li>
+			<li>If the text is activated by a frob, the text will be displayed for a time equal to half a second for each word (with a minimum of 5 seconds), and won't be cleared if you look away.</li>
+			<li>You can set <kbd>NVOnscreenTextAlwaysClearOnDefocus=1</kbd> to make it clear when defocused even when frobbed.</li>
+			<li>You can override the duration with <kbd>NVOnscreenTextDuration</kbd>.</li>
+		</ol>
+	</li>
+	<li>Added support for vector properties to <a href="#NVSetPropertyTrap">NVSetPropertyTrap</a></li>
+	<li>Renamed <a href="#NVVOTrap">NVVOTrap</a> parameters <kbd>NVVOQVar</kbd> to <kbd>NVVOTrapQVar</kbd>, and <kbd>NVPoliteVO</kbd> to <kbd>NVVOTrapPolite</kbd>, for consistency.  The old parameter names will still work if the new ones are not specified.<br/>
+</ul>
+<h1>v1.3.6</h1>
+<ul>
+	<li>Added the ability to trigger along links based on the value of a quest variable, using <kdb>[ScriptName]TDest=&quot;&QVar VariableName&quot;</kbd></li>
+</ul>
+<h1>v1.3.5</h1>
+<ul>
+	<li>Fixed NVSimpleRepair's repair interface not opening if another panel was already open.</li>
+</ul>
 <h1>v1.3.4</h1>
 <ul>
 	<li><a href="#NVPlayerScript">NVPlayerScript</a> now correctly calculates the cost of psi powers, based on the relevant metaproperties, allowing the refund from Power Psi to work with customised psi power costs.</li>
@@ -2230,7 +2323,7 @@ As of the complete rewrite of this script in v1.0.8, the arrows <i>will</i> beco
 </ul>
 <h1>v1.3.1</h1>
 <ul>
-	<li><a href="#NVSetPropertyTrap">NVSetPropertyTrap now supports multiple versions.</li>
+	<li><a href="#NVSetPropertyTrap">NVSetPropertyTrap</a> now supports multiple versions.</li>
 	<li><a href="#NVSetPropertyTrap">NVSetPropertyTrap</a> will now recalc stats if used on a Player (SS2 only)</li>
 	<li><a href="#NVPlayerScript">NVPlayerScript</a> now sends GainedTrait# message when gaining a trait.</li>
 	<li>NVSecurityComputer can now specify schema to play when hacked via NVSecurityComputerHackedSchema.</li>
@@ -2483,7 +2576,7 @@ As of the complete rewrite of this script in v1.0.8, the arrows <i>will</i> beco
     <li>New Script:	<a href="#NVScaleDims">NVScaleDims</a> <i>(NVTrap)</i></li>
     <li>New Script:	<a href="#NVSuspiciousTrap">NVSuspiciousTrap</a> <i>(NVTrap)</i></li>
     <li>New Script: <a href="#NVTweqMessages">NVTweqMessages</a> </li>
-    <li>New Script:	<a href="#NVVOTrap">NVVOTrap</a> <i>(NVTrap)</i><b><u><br/>
+    <li>New Script:	<a href="#NVVOTrap">NVVOTrap</a> <i>(NVTrap)</i><br/>
 	</u></b></li>
 </ul>
 </body>

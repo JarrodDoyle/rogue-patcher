@@ -222,8 +222,9 @@ fog_mode_exp
 
 tex_filter_mode <0 - 16> [<0 - 16>]
     set texture filtering mode: 0 no filtering, 1 linear, 2,4,8,16 anisotropic (number is sample size)
-    The optional second parameter is for the minification filter if it should be distinct from the maxification
-    filter.
+    The optional second parameter is for the minification filter if it should be distinct from the magnification
+    filter. Note that specifying filters with different levels of anisotropy is unsupported, though using, for
+    example, a point filter and an anisotropic filter is supported.
     console command: set_tex_filter <0 - 16> [<0 - 16>]
 
 tex_filter_trilinear
@@ -234,8 +235,9 @@ tex_filter_trilinear
 lm_filter_mode <0 - 16> [<0 - 16>]
     set lightmap (the second texture stage) filtering mode, same modes as "tex_filter_mode" above
     if this config var isn't defined then lightmaps will have get same filtering as "tex_filter_mode"
-    The optional second parameter is for the minification filter if it should be distinct from the maxification
-    filter.
+    The optional second parameter is for the minification filter if it should be distinct from the magnification
+    filter. Note that specifying filters with different levels of anisotropy is unsupported, though using, for
+    example, a point filter and an anisotropic filter is supported.
     console command: set_lm_filter <0 - 16> [<0 - 16>]
 
 disable_lightmap_aniso
@@ -868,15 +870,15 @@ raw_mouse_sens_scale <xscale> [<yscale>]
     400/mouse_dpi. For example if you have an 800 dpi mouse, you can try a sensitivity scale of 0.5 (= 400/800).
 
 ui_scale_keep_ar
-    do not correct the aspect ratio when scaling UI. The UI will be stretched to fit the screen.
+    correct the aspect ratio when scaling UI. If disabled, the UI will instead be stretched to fit the screen.
     The default is 1 (enabled).
 
 script_aliases <list>
     specify script aliases to act as substitues when loading script modules
     These should take the form of "script:substitute" and are separated by "+", as is done with paths.
 
-player_camera_limit_x <x_angle, y_angle, z_angle>, player_camera_limit_y <x_angle, y_angle, z_angle>,
-player_camera_limit_z <x_angle, y_angle, z_angle>
+player_camera_limit_x <low_angle, high_angle, margin>, player_camera_limit_y <low_angle, high_angle, margin>,
+player_camera_limit_z <low_angle, high_angle, margin>
     specify the player camera's angle limits
 
 allow_physics_toggle
@@ -889,8 +891,20 @@ trans_door_block_fix
     allow translating doors to enter the blocking state when obstructed. This feature is incompatible with some
     missions, so it should only be enabled for missions that do not rely on the original behavior.
 
+ignore_dif
+    ignore loading DIF files during the mission load process
+
+file_panel_pages <1 - 100>
+    specify the number of available pages in file panels
+    Default is 10.
+
 no_auto_relight
     (DromEd only) do not automatically relight the level during level processing
+    The default is 0 (disabled).
+
+no_auto_remap_brushes
+    (DromEd only) do not automatically remap brushes after level processing. Remapping brushes prevents
+    fragmentation of the brush ID space and saved mission sizes from growing.
     The default is 0 (disabled).
 
 edit_status_invert
@@ -926,7 +940,7 @@ highlight_color <red> <green> <blue>
     (Thief only) specify the color to be used for the currently highlighted object
 
 hpbar_timeout <float>
-    (Thief only) specify the time after which the HP bar should be hidden
+    (Thief only) specify the time (in milliseconds) after which the HP bar should be hidden
     The default is no timeout.
 
 inv_status_top <0 - 3>
@@ -963,6 +977,9 @@ inv_weap_ang <x_angle> <y_angle> <z_angle>
 
 inv_item_ang <x_angle> <y_angle> <z_angle>
     (Thief only) specify the angle at which the item object in the HUD should be positioned
+
+inv_font <fontname>
+    (Thief only) specify a custom font for the inventory UI
 
 dark_no_script_save
     (Thief only) do not allow scripts to make saved games

@@ -86,6 +86,17 @@ DML1
 //      CFG <cfg_var>                             // The specified configuration variable must be defined.
 //      !CFG <cfg_var>                            // The specified configuration variable must not be defined.
 //      ...
+//
+//   Rules available in T2 v1.29+ / SS2 v2.50+:
+//      MOD <mod_name>                            // A mod must exist.
+//      !MOD <mod_name>                           // A mod must not exist.
+//      [!]MOD <mod_name> ("==" | "!=" | ">" | "<" | ">=" | "<=") <version>
+//                                                // A mod version must be equal / not equal / greater / less /
+//                                                // greater or equal / less or equal to a value.
+//                                                // In the normal MOD form (no "!" prefix) the mod must exist.
+//                                                // In the !MOD form the rule will also match if the mod doesn't
+//                                                // doesn't exist.
+//      ...
 //   }
 //
 // If prefixed with a '!' (i.e. "!FINGERPRINT") it means that the dml file will only be loaded if the
@@ -485,6 +496,10 @@ FINGERPRINT
    -QuestVar <quest var name>
 
 
+   Texture <src texture archetype ObjID> <dest texture archetype ObjID>
+   TextureAll <cell id> <poly id> <dest texture archetype ObjID>
+
+
    (NOTE: "<field name> <value>" pairs (or "= <value>") must always be on the same line)
 
 
@@ -561,7 +576,7 @@ ObjProp -174 "MAX_HP" = 30
 
 
 // Set a specialized name for an existing object.
-// 
+//
 ObjName -4643 "MyNamedObj"
 
 // To remove name prefix ObjName with a -

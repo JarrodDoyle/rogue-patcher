@@ -1,0 +1,855 @@
+Thief II: The Metal Age v1.29 update
+====================================
+
+1.29 Notes
+----------
+This is a maintenance patch that acts as a hotfix for 1.28 and introduces a few additional features.
+See list below. Consider all prior versions obsolete and do not use them any more.
+
+It also introduces the HWTL variant. See separate notes inside "new_dark_hwtl.zip".
+
+
+1.28 Notes
+----------
+This is a maintenance patch that fixes a couple of things.
+See list below. Consider all prior versions obsolete and do not use them any more.
+
+
+1.27 Notes
+----------
+This is a maintenance patch that fixes a couple of things.
+See list below. Consider all prior versions obsolete and do not use them any more.
+
+It also introduces the multiplayer beta. See separate release notes inside "mp.zip".
+
+
+1.26 Notes
+----------
+This is a maintenance patch that fixes a couple of things and adds a few new ones.
+See list below. Consider all prior versions obsolete and do not use them any more.
+
+
+1.25 Notes
+----------
+This is a hotfix for v1.24 that fixes a couple of things. It also includes a new script OSM (squirrel.osm).
+
+
+1.24 Notes
+----------
+This is a hotfix for v1.23 that fixes a couple of things.
+
+In particular the broken "sun_runtime_obj_shadows" has been fixed. In DromEd the crashes related to DXT
+textures have also been fixed (if "dxt_to_rgb32" was enabled as a workaround for those crashes then it
+can be removed again).
+
+
+1.23 Notes
+----------
+Like the previous update, this is a maintenance patch with bug fixes and some new additions.
+See list below. Consider all prior versions obsolete and do not use them any more.
+
+Files saved (by either the game or DromEd) with v1.23 are not compatible with older versions.
+Older DromEd versions may appear to be able to load the files, but some things will be severely broken.
+
+
+1.22 Notes
+----------
+This is a maintenance patch that fixes a number of things and adds a few new ones.
+See list below. Consider all prior versions obsolete and do not use them any more.
+
+
+1.21 Notes
+----------
+This is a hotfix for v1.20 to fix broken multi-monitor support (which was made worse by the multi-
+GPU and display fix in v1.20) and a pair of minor glitches. Otherwise this is identical to v1.20.
+
+
+1.20 Notes
+----------
+This is a maintenance patch for v1.19. It fixes a handful of mostly smaller, but also some more
+serious, issues. See list below. Consider v1.19 obsolete and do not use it any more.
+
+Various documentation has been updated and extended; it's recommended that you browse through them
+again even if you're already familiar with them from a previous update.
+
+Note to anyone who adjusted vertical mouse sensitivity ("mouse_sensitivity_y_scale" in user.bnd):
+  As of v2.41 the vertical and horizontal sensitivity is the same so you have to change
+  "mouse_sensitivity_y_scale" back to the default value of 1. The old behavior can be enabled with
+  "mouse_sensitivity_use_aspect 1".
+
+Note to anyone with multiple GPUs or display devices:
+  Due to a bug fix the game may now end up using the "wrong" device (again), or rather the correct
+  device because it previously used the wrong one. Go to the Video options menu and change the device
+  under "Hardware Driver". Alternatively edit "cam.cfg" and remove the line "d3d_driver_index"
+  to restore default device usage.
+
+
+Overview
+--------
+This is an unofficial patch for Thief II: The Metal Age (T2) which updates the game from either v1.18
+or newer to v1.29, providing improved support for modern hardware and correcting many known bugs. T2
+can be purchased digitally from GOG (www.gog.com) and Steam (store.steampowered.com). If you prefer a
+boxed copy, it can usually be found on Mastertronic and Amazon (or similar).
+
+This patch is made available "as is" and without warranty of any kind. It was not developed by
+Eidos/Square Enix, Looking Glass Studios, GOG, Steam, Mastertronic, or Amazon, and is neither
+supported nor endorsed by them or anyone else. The aforementioned parties cannot be held responsible
+for any problems or damages incurred by this software. If you do not agree with these terms then do
+not apply the update.
+
+T2 and its resources/executables are the property of Eidos/Square Enix.
+
+Permission is granted to any party that has obtained the legal rights to sell the original (v1.18 or
+earlier) game, such as GOG and Steam, to include this update, as long as they also have been granted
+permission by Eidos/Square Enix to do so.
+
+
+Installation
+------------
+Requires Windows 2000 or later.
+
+You must have a valid install of either T2 v1.18 or newer. If you have an old CD/DVD version of the
+game, which is older than v1.18, then you need to update it to v1.18 first.
+
+Extract the contents of the "new_dark.zip" and "contrib.zip" archives into your T2 directory, and you
+are done. If you are updating an install that has already been patched to v1.19 or newer, then you
+are well advised to make backup copies of the configuration files "cam_ext.cfg", "cam_mod.ini" and
+"lg.ini" (and "DromEd.cfg" for editor users) before installing the new update.
+
+v1.20 or newer should be able to load savegames made with v1.18, but this is best avoided. Savegames
+made with v1.20 or newer are however NOT compatible with v1.18. Generally loading savegames saved with
+an older version of the game should work, but loading savegames saved with a newer version into an older
+version of the game should always be avoided.
+
+If OpenAL is available on your system, it can be enabled in the Audio options menu through the option
+"Hardware Acceleration", which will toggle between "ON", "OFF" and "OpenAL". If you don't have OpenAL
+but you want to use it, you will have to install the OpenAL libraries first (link provided below).
+
+IMPORTANT: The "Visual Studio 2008 SP1 C++" and "DirectX End-User Runtimes (June 2010)" runtime
+           DLLs are required to run (the DirectX ones are only required when running with DX9,
+           which is default). While most systems probably already have them installed, by default
+           or through other applications and games, they can be missing on some. Below are the
+           official download links.
+
+Visual Studio 2008 SP1 C++ runtimes:
+  http://www.microsoft.com/downloads/en/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2&displaylang=en
+
+DirectX End-User Runtimes (June 2010):
+  http://www.microsoft.com/download/en/details.aspx?id=8109
+
+OpenAL Installer:
+  No longer maintained by Creative, google for alternate download locations
+  or get "OpenAL Soft" from http://kcat.strangesoft.net/openal.html
+
+
+Disclaimer
+----------
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+Changes and fixes for v1.29
+---------------------------
+
+General:
+ - added support for TTF/OTF fonts
+ - added support for UTF-8 text
+ - Added Texture[All] DML command for changing world textures
+ - added "[!]MOD" DML fingerprinting method for determining whether a mod exists and is the appropriate version
+ - added new AnimTexture script service routines: ChangeAllTextures, ChangeSingleTexture
+ - added "ignore_dif" configuration variable for skipping the processing of DIF files
+ - added "inv_font" configuration variable for defining a custom inventory UI font
+ - added "file_panel_pages" configuration variable for defining the number of pages in file panels
+ - support animations in the new game screen
+ - fixed movie file name extensions not being stripped when being played from scripts
+ - fixed script module name retrieval sometimes failing for buggy OSMs
+ - fixed sound resource lookup being very slow for missions with many custom resources
+ - fixed sounds from scripts playing from a random object after a briefcase load
+ - fixed player damage schemas sometimes playing for incorrect objects
+ - fixed room object IDs sometimes becoming stale after load and causing problems with sound playback
+ - fixed a crash that could occur when viewing the multiplayer server list
+ - fixed a crash that could occur when viewing readables in multiplayer
+ - fixed the DS3D backend crashing with some sound drivers
+ - footstep sounds are now played when attaching to climbable objects
+ - allow mod configurations to override the configured game language
+ - change multiplayer in-game player names to be centered
+
+DromEd:
+ - added "hilight_def_texture" command for highlighting terrain with a particular default texture set
+ - fixed original issue involving songs continuing to play after moving between edit and game mode
+ - fixed original issue causing overlapping rooms to not always be detected and linked
+ - fixed object renaming not working when the new name differs only by case
+ - fixed swapped textures still being visible when returning to edit mode
+ - step structure editors are now annotated with the step number where appropriate
+
+Other:
+ - fixed LinkNotify messages being bound incorrectly in Squirrel
+ - updated the Squirrel OSM to account for new scripting features
+
+
+Changes and fixes for v1.28
+---------------------------
+
+Renderer:
+ - added support for specifying separate minification and magnification filters when supplying the
+   "tex_filter_mode" configuration variable and related commands
+ - the window position will no longer be reset in windowed mode when entering or exiting a menu
+ - the game will no longer crash when a DDS texture is rendered on the loadout screen
+
+General:
+ - added support for additional sound encoding formats: MP3, Opus, FLAC, PCM (big endian samples, IEEE
+   floating-point samples)
+ - added support for additional sound file formats: AIFF, W64, MP1, MP2, MP3, OPUS, FLAC, OGA
+ - added "[-]ObjName" DML command for changing object names
+ - added "ObjArch" DML command for reparenting objects
+ - added "Destroy", "DestroyArch", and "DestroyArchAll" DML commands for removing objects, archetypes, and
+   archetypes with descendants, respectively
+ - added "[+][-]QuestVar" DML command for manipulating quest variables
+ - added "#!script" DML command for dropping script modules
+ - added "#schema" DML command for loading schema definitions in gamesys DMLs
+ - added "[!]EXIST" DML fingerprinting method for determining whether an object exists
+ - added "[!]ARCH" DML fingerprinting method for determining whether an object has a particular parent archetype
+ - added "[!]SCR" DML fingerprinting method for determining whether a script module is loaded
+ - added "[!]CFG" DML fingerprinting method for determining whether a configuration variable is defined
+ - added support for loading additional video file types: MP4, WEBM, MKV, OGV, MOV, WMF
+ - added script manager methods for scripts to generically get parameters from objects: GetAllScriptParams,
+   HasScriptParam, GetScriptParam
+ - added script manager methods for scripts to get the currenctly active script modules: GetModuleCount, GetModule
+ - added support for using all previously unavailable script service routines in T1
+ - added new AI script service routines: SetFaceVisage
+ - added new AnimTexture script service routines: ChangeTextureLoc
+ - added new Camera script service routines: LockMovement
+ - added new DarkGame script service routines: NoMove, PlayerMode, GetPlayerMode, Frob, SaveGame
+ - added new DarkUI script service routines: TextMessageFormatted
+ - added new Engine script service routines: SetTagBlock, GetTagBlock
+ - added new Link script service routines: BroadcastOnAllLinksMany
+ - added a new Listener script service for installing hooks into certain subsystems: SubscribeProperty,
+   UnsubscribeProperty, SubscribeObject, UnsubscribeObject, SubscribeLink, UnsubscribeLink, SubscribeHierarchy,
+   UnsubscribeHierarchy
+ - added new Object script service routines: SetArchetype, FindDescendantsSpatial, FindScriptDonor, AnyExist, GetAll,
+   GetOne
+ - added new Property script service routines: GetIndexed, SetIndexed, SetLocalIndexed
+ - added new Quest script service routines: GetFirst, GetNext
+ - added new Sound script service routines: SongChange, SongSetTheme
+ - added new Version script service routines: GetModPath
+ - added "Script" link flavor to permit easily adding an arbitrary number of supplemental scripts to an object
+ - added support for 24-bit and 32-bit audio playback in the OpenAL backend
+ - added support for the sound spatialization extension in the OpenAL backend
+ - added support for nested script module initialization
+ - added support for replacing textures assigned to "SKY_HACK" in AnimTexture.ChangeTexture
+ - added automap support for arbitrary mission numbers
+ - added "e", "Q", and "T" debrief formatting specifiers for displaying enumerations, quantiles, and millisecond-precise
+   time, respectively, on the debriefing screen
+ - added "use_obj" command from Shock to Thief
+ - added "inv_reset" command to reset the inventory UI
+ - added "hpbar_clear_timer" command to clear the HP bar hide timer
+ - added "script_ping" command for sending a message to an object or an archetype's descendants and optionally providing
+   three data parameters. This works in both DromEd and the game executable
+ - added "goto_mission" command for immediately ending the current mission and going to the mission with the provided
+   number
+ - added "dark_map_style" configuration variable for selecting either the new automap style or the old T1 automap style
+ - added "dark_menu_training" configuration variable for selecting whether the training button appears on the new game
+   screen
+ - added "debrief_font_stats" configuration variable for selecting the font used on the statistics panel in the
+   debriefing screen
+ - added "highlight_color" configuration variable for selecting the frob highlight color
+ - added "hpbar_timeout" configuration variable for hiding the HP bar after a certain amount of time has passed since
+   the last time the player received damage
+ - added "inv_obj_margin" configuration variable for specifying the margin of the rendered inventory items with respect
+   to the edge of the screen
+ - added "inv_status_mirror" configuration variable for mirroring the horizontal placement of elements of the status HUD
+ - added "inv_status_top" configuration variable for displaying the status HUD aligned to the top of the screen
+ - added "inv_weap_spin" and "inv_item_spin" configuration variables for configuring whether rendered inventory weapon
+   and item models rotate while selected
+ - added "player_camera_limit_x", "player_camera_limit_y", and "player_camera_limit_z" configuration variables for
+   specifying the player camera's angle limits
+ - added "text_message_alignment" configuration variable for selecting the default on-screen message alignment
+ - added "text_message_font" configuration variable for selecting the default on-screen message font
+ - added "force_filtered_aol" configuration variable for forcing texture filtering on alpha overlays
+ - added "trans_door_block_fix" configuration variable for selecting whether the fix to allow translating doors to enter
+   the halted state is enabled
+ - added "crouch_norepeat" bind variable for preventing holding down the toggle-crouch key from rapidly crouching and
+   standing the player
+ - added support for undefining configuration variables by prepending "!" to them
+ - added proper support for configuring inventory capabilities
+ - added "Mission Game" field to the "DARKMISS" tag block for hinting which game the current mission is for
+ - added "Motion DB Res" field to the "RENDPARAMS" tag block for specifying a custom motion database filename
+ - added "Star Orientation" field to the "STAROBJVAR" tag block for specifying a custom orientation of the starfield
+   about the world's Z axis
+ - added support for dynamically specifying supplemental keybinding definitions in "bnd.ini"
+ - added support for scrolling in the hardware devices options menu
+ - added sound when interacting with UI sliders and changed their behavior to snap to even intervals
+ - added support for supplying additional formatting to panels with "<panel_name>F.BIN"
+ - added support for paging in the save and load screens with the arrow or page keys
+ - added support for deleting saves by alt-clicking a slot or selecting a slot and using the delete key
+ - added "Push MetaProperty" reaction for adding a metaproperty only if it does not already exist on the target
+ - added "FromSelf" trap flag for trap-like scripts to determine whether self-referential triggers are allowed
+ - added support for loading an optional "mod.cfg" file to allow mods to change the game configuration
+ - added "Renderer/Face Str" property for specifying the face strings that AIs should use
+ - added support for the "physics", "fly", and "flytoggle" commands in the standard game executable, which can be
+   enabled using the "allow_physics_toggle" and "allow_fly" configuration variables
+ - fixed loading of malformed object models that older versions of the game supported
+ - fixed a crash when a data path exceeded the maximum buffer size
+ - fixed an original issue with the debriefing screen showing the incorrect time in certain cases
+ - fixed an original issue that allowed frobbing world objects near a scouting orb immediately after exiting it
+ - fixed an original bug that caused a reference to the currently nocked arrow to not be discarded when loading a saved
+   game
+ - fixed an original bug that sometimes caused physics calculations to be incorrect if there was a non-OBB door in the
+   mission, which would cause arrows and other projectiles to hang in place
+ - fixed an original bug that caused the player head speed to not be reset when unequipping the sword while charged
+ - fixed some UI sliders in the options menu still being selectable when entering a submenu
+ - fixed an issue involving a crash that sometimes occurs if a quicksave and quickload occur too quickly in succession
+ - fixed a crash that could occur if a fingerprinted object in a DML has an ID that is too large
+ - fixed an original bug that caused incapacitated bodies to stick to moving terrain objects
+ - fixed an issue that prevented the "Pore Size" field of the "Physics/Model/Attributes" property from being set by 
+   scripts or dbmods
+ - fixed the player camera appearing to get stuck at its limits
+ - fixed an original bug that caused looping speech schemas to not work properly with face animations
+ - fixed an original bug that prevented face visage priorities from working
+ - fixed an original oversight that prevented an "InvFocus" message from being relayed when an inventory item is focused
+   under some circumstances
+ - fixed an original bug that caused a visible movement discontinuity when spinning doors become fully open or closed
+ - fixed an issue that caused a black portal to remain if a closed and vision-blocking door was teleported or otherwise
+   displaced
+ - fixed a crash when attempting to use the "script_test" command in the game executable
+ - fixed an issue causing ambient sounds to sometimes persist when opening a menu when using the OpenAL backend
+ - increased the maximum number of keybindings in the options menu to 256
+ - turrets now respect the "AI/Utility/AI Fires Through" property like other ranged AIs
+ - UI buttons no longer make sounds when they are disabled or already depressed
+ - there is no longer a noticeable delay when clearing or focusing an inventory item
+ - configuration variables defined in fm.cfg will no longer be written back to cam.cfg
+ - improved command line argument processing to support an arbitrary number of parameters
+ - added "datadir" command line option to specify in which directory the root game data is located
+ - improved logging to show additional CPU information and properly displays the Windows version number for modern
+   Windows versions
+ - the game now uses the system shell font for dialog text and the modern common controls style
+ - the close button is now disabled, as it did not function before
+ - and more...
+
+DromEd:
+ - added "edit_status_invert" configuration variable for inverting the color of the status bar
+ - added "edit_color_select" configuration variable to allow choosing DromEd's selection color
+ - added "no_auto_relight" configuration variable to prevent relighting automatically during portalization
+ - added "ifeq", "ifneq", and "toggle" command directives for accessing and manipulating configuration variables
+ - added "check_scripts" command for determining if any object has multiple instances of a script
+ - added "script_spy_obj" and "script_unspy_obj" commands for toggling script message spying on an object
+ - added "flytoggle" command for toggling whether the player is in fly mode
+ - added "set_room_arch" command for assigning room archetypes to the current brush or multibrush
+ - added "run_sys" command for running commands in batch files
+ - added "run_sys_wait" command for running commands in batch files and waiting for them to finish
+ - added support for explicitly specifying a strings table in gamestrings properties, which now takes the form
+   "<string>@<table>:<default>"
+ - added compatibility option to allow the search functionality of the filter dialogs to work in Wine
+ - added support for loading primary editor UI rects and coordinates from "GFHR.BIN" and "GFHC.BIN", respectively
+ - fixed the "mesh_segs_display" command so that it works without crashing
+ - fixed the following commands interfering with DromEd in edit mode: "automap", "debrief", "endgame", "loadout",
+   "objectives", "metagame"
+ - fixed buttons and sliders such that they no longer appear depressed after releasing them
+ - fixed jitter that would occur when flying into solid terrain with player physics disabled
+ - fields of the "Scripts" property are now cleared when it is initially added
+ - unreachable lights are now culled from each cell at the end of the lighting stage during processing
+ - DromEd can now load without requiring any old resource system (RES) files
+ - the texture gadget will no longer exceed the total number of loaded textures
+ - DromEd now uses the system shell font for dialog text and the modern common controls style
+ - the close button is now disabled when in game mode, where it did not previously function
+ - and more...
+
+Other:
+ - added "sq_include" and "sq_exclude" configuration variables for explicitly including or excluding Squirrel script
+   files
+ - added SetPeriodicTimer and LinkSource methods for Squirrel scripts
+ - added a statistically superior and faster random number generator
+ - updated the Squirrel OSM to account for new scripting features
+ - and more...
+
+
+Changes and fixes for v1.27
+---------------------------
+
+General:
+ - fixed an issue with wrong texture palette being used on world textures, from families without a full.pcx,
+   after loading savegames
+ - fixed original bug where under some circumstances random objects started playing voices from a recently
+   destroyed AI
+ - fixed an original bug in some loading code that could on occasion cause trouble when loading savegames or
+   during level transitions in SS2
+ - updated "doc\T1.7z" package with a motiondb patch to fix a small issue in T1 mode (see the contained readme)
+ - added "hide_maxed_hpbar" config var that will hide the health bar when player has full health
+
+DromEd:
+ - fixed room(/EAX) type not being copied when cloning room brush
+ - added incremental save support (see "incremental_save_dir" in "doc\new_config_vars.txt" and the supplied
+   sample "dromed.cfg")
+ - added "load_world_gam" command that tries to load a cow (or mis) file, but will prompt user to load a
+   gamesys file, might be useful for rescue or debugging (the loaded result must be carefully inspected
+   as gamesys data will likely differ from what was in the cow)
+ - added "load_terrain" command that tries to load only terrain, no objects, from a mis/cow, might be useful
+   for rescue or debugging
+ - added "reload_motion_info" command, to reload data from a mi-file without having to rebuild entire motiondb
+ - added "dump_motions_schemas" command (see "doc\motion_schema_syntax.txt")
+ - added CTRL and ALT modifiers when clicking in solid view while the texture palette is open
+   (CTRL allows changing selected surface without assigning a texture, ALT picks the texture from the clicked
+   surface and sets it as the current selection in the texture palette)
+ - added positional info to some portalization merge errors
+
+Other:
+ - fixed a bug in SQUIRREL.OSM with SendMessage function and the data3 param
+ - fixed incorrectly documented game/API version for a couple of functions in the DarkGame script service
+ - updated a parameter for the ObjRaycast function in the Engine script service (should be backward compatible
+   with existing code that uses it)
+ - Notepad++ files for Squirrel updated to reflect latest fixes
+ - added PossessedSimple function to the Property script service
+ - added stun an freeze functions to the AI script service
+ - added Create and CreateArch commands to DMLs
+ - added multiplayer beta (separate executable)
+
+
+Changes and fixes for v1.26
+---------------------------
+
+General:
+ - hopefully fixed the DLL load problems that some have with ffmpeg.dll
+ - added support for mouse smoothing (see "doc\new_config_vars.txt")
+ - added ATOC support for intel GPUs (that are capable of it)
+ - added custom shader support for software gamma and color processing, see "doc\sw_cc\sw_cc_notes.txt"
+   (can for example be used to add subtle noise to reduce banding/posterization)
+ - replaced "disable_lightmap_aniso" with "lm_filter_mode" that gives full control over texture filtering
+   mode used for lightmaps (makes it possible to have filtering disabled for regular textures but enabled
+   for lightmaps)
+
+DromEd:
+ - fixed potential crash when minimizing the texture palette window
+ - fixed issue with cached texture archetypes temporarily getting mixed up after compressing family textures
+   (previsouly solved itself after going back and forth to game mode once, but should now work right away)
+ - restored "kCallbackEntryMax" (speech callback) limit from 1 to 4 to avoid "i < kCallbackEntryMax" asserts
+ - made stimulus drop-list sorted in add/edit receptron dialogs (with lg.ini option for old unsorted behavior)
+ - fixed support for referencing concrete objects by name in mission DMLs
+ - extended DML fingerprint functionality (see "dbmod-sample.dml" doc)
+ - added ability to specify an archetype obj ID instead of name for tweq emitters
+ - added ability for scripts to subscribe messages for all qvars by subscribing to the name "*"
+ - added "spew_script_msg" command that will output mono info about all messages sent to scripts (may be useful to
+   pinpoint a problematic script)
+ - added ability to clear filters in various darkdlgs dialogs by mouse click (by clicking on the filter count info
+   text to the right of the filter input controls)
+ - added status bar info about number of brushes hilighted by hilight commands
+ - added campaign bin data store available to scripts (see "doc\script\Quest.txt" for details)
+
+Other:
+ - fixed a bug in SQUIRREL.OSM with "string &" arguments not returning any values
+ - fixed PostMessage function when SQUIRREL.OSM is used with dark in Thief1 mode
+ - fixed incorrect value in nMaxRootLen passed to FM Selectors
+ - added Quest.GetAllVars service function to SQUIRREL.OSM
+ - changed the included DarkMapGen.jpg from a simple screenshot to a mini-tutorial for creating automap
+   data with DarkMapGen (located in "contrib_editor_demos.zip")
+ - fixed bug when deleting map locations in DarkMapGen, that could cause issues with snapping and other
+   subsequent editing operations
+
+
+Changes and fixes for v1.25
+---------------------------
+
+General:
+ - fixed initialization issue that in some situations could cause anim light lightmaps to be wrongly turned on after loading a savegame or starting game
+ - fixed a subtitle loading crash when sub file has a certain type of syntax error
+ - fixed DML loading bugs for files located in "dbmods"
+
+DromEd:
+ - fixed bug where 32-bit lightmaps could have spots of slight miscoloration when lm32_params sets a saturation other than 1.0
+ - fixed a crash that could happening when using a receptron with effect set to "None"
+ - increased max model handles (see modders_notes.txt)
+ - increased max application data handles (see modders_notes.txt)
+
+Other:
+ - added SQUIRREL.OSM, an OSM that provides the ability to write custom scripts using the Squirrel script language
+   (see documentation doc\squirrel_script)
+
+
+Changes and fixes for v1.24
+---------------------------
+
+General:
+ - fixed broken "sun_runtime_obj_shadows" (worked in DromEd but not the game exe)
+ - fixed path priority order bug with subtitle files (was accidentally reversed)
+ - reduced risk of the door drifting bug that can happen in some occasional FMs (door-based objects that should
+   rotate but instead of rotating just float away into infinity)
+ - added "no_unload_fmsel" option to cam_mod.ini (can be useful if experiencing crash with FMSel, especially on Win10)
+
+DromEd:
+ - fixed DXT related crash (when running editor in HW mode)
+ - fixed crash accidentally re-introduced in the previous version when loading (old) missions with bad door objects
+   (objects internally flagged as doors despite not being doors)
+ - fixed ambient sounds disappearing after playing in-game movie
+ - fixed link data for certain link types (AIWatchObj) getting reset when reordering them (in link list dialog)
+ - fixed original glitch in vhot evaluation that could under some circumstances affect "show_vhots", coronas and
+   particle attachment links using vhots
+ - fixed DML syntax error bug when working with links that have no data set
+ - fixed missing field indexing in DML export (for properties that contain multiple fields with the same name)
+ - fixed a bug that could occur under certain circumstances with StimSource and Receptron commands in DMLs
+ - fixed a few crashes that could happen in rare situations
+ - fixed buggy transform for vhot and subobj detail attachment links when parent object is scaled
+ - added mono warning for ObjTxtReplace properties with textures that couldn't be found/loaded
+ - added "spew_stimulations" command to toggle mono output for stim events
+
+
+Changes and fixes for v1.23
+---------------------------
+
+General:
+ - fixed render state bug that could randomly disable texture filtering on something if DXT1 distant art
+   was present in the mission
+ - fixed an occasional memory corrupting bug
+ - fixed mouse wheel even generating false left button double click events in some situations
+ - changed material override rules so a material file is required to be at the same path level or higher priority
+   than the loaded image, in order to be considered
+ - enabled simple show_stats command for game exe (fps and pos)
+ - documented the previously undocumented "small_portal_repel" config var (helps reduce jittter when walking across portals)
+ - added "highlight_level" and "head_focus_speed_tol" config vars (which previously were only available in DromEd)
+ - added support for mouse buttons 4 and 5
+ - added support for raw mouse input (see "use_raw_mouse_input" in "new_config_vars.txt")
+ - added config var for setting custom speaker config (if supported by device/system)
+ - added support for adding/removing meta properties via DML
+ - added subtitles_max_dist options (to allow skipping of subtitles for sounds that are beyond a certain distance)
+ - included a Large Address Aware patcher (EnableLAA) for convenience (for more info search "troubleshooting.txt"
+   for "Large Address Aware")
+ - and more...
+
+DromEd:
+ - fixed bug with hierarchy export not exporting some link types
+ - fixed bug with rotation not getting updated for coronas with "Track Moving Object" and "Use Spotlight Cone"
+ - fixed update issue when adding Creature Scale through a metaprop
+ - fixed issues with intermittent particle launch rates for continuous particle groups that are (re-)activated during game
+ - fixed issue with negative Extra Light property when "Additive?" was unchecked
+ - fixed original bug with rotating doors sometimes flipping between open and close instead of rotating smoothly (depending on axis and center of gravity)
+ - fixed issue with some popups in the DromEd window partially ending up below the screen (which would crash DromEd in software mode)
+ - fixed drawing issue in the new texture palette when Windows desktop is in 16-bit mode
+ - fixed non-updated and/or flickering of inventory display 3D icon when it uses tweq models
+ - fixed neck/head joint transform issue with attachements and AI head tracking, attaching objects to neck and
+   head should now properly move with head even when the AI is head tracking
+ - fixed original tweq joints halt-logic bug (only primary joint controls when tweq halts as intended now,
+   instead of semi-undefined behavior, and when primary is 0 the last joint that ends performs halt action)
+ - fixed object lighting sometimes messing up when using negative lights
+ - fixed find_obj command (F3) so it works with concrete room types and flow groups
+ - fixed some crash bugs with some functionality of the custom overlay/HUD script services
+ - fixed script_notes.txt snafu in previous update, wrong class was used for the sample string class
+ - fixed v1.22 bug where the 1 and 2 return values for the IsEditor function in the Version script service were reversed
+ - made book decal images get reloaded when book .STR file is reloaded
+ - added editor/viewer to view some script system related data (see "Script-state Data Editor/Inspector" in modders_notes.txt)
+ - added "test_message" command that works similar to "test_book_ex" but for on-screen texts
+ - added a "Quadratic" dispersion option to Radius propagators (see modders_notes.txt)
+ - added middle mouse button working like "teleport camera"/"scroll here" in 2D viewports
+ - added mouse wheel viewport zoom
+ - added missing documentation for EYE_ZOOM_DISABLE qvar
+ - added "check_flowbrushes" config var for mono output on problematic flow brushes (see doc\dromed.cfg)
+ - added "Export Single as DML" function in the hierarchy dialog (exports a single object in DML format)
+ - added "show_cell_flow" command
+ - added "test_message" command that works similar to "test_book_ex" but is for on-screen messages using book STR files
+ - added property Renderer->"Never Block Coronas"
+ - added script param edit dialog to the "Design Note" property dialog (invoked with middle mouse button)
+ - added object picker dialog functionality for object input controls in darkdlgs (CTRL+F or middle mouse button)
+ - added filter support to Add/Query property popup menus in darkdlgs
+ - added inheritable scripts info to Scripts property dialog (edit controls also always start empty when adding the property)
+ - added "[All]" category in hierarchy dialog, allows filtering and querying on all abstracts and concretes (see modders_notes.txt)
+ - added "Lean Blocks Sound %" option to door properties, for control on how much sound is blocked when leaning into doors (see modders_notes.txt)
+ - added texture resolution/mipmap debug visuals, can help find over-sized textures (see modders_notes.txt)
+ - added simple object LOD support (see new Shape->"Model LOD" property in modders_notes.txt)
+ - added option for Add/Remove MetaProperty actions to use defined target object (see "Misc Dark Settings" in
+   modders_notes.txt)
+ - added edit_lcolor command for quick and easy color picker based editing of light color for currently selected
+   object or brush light
+ - added multi-edit function to the query results window (allows mass-editing individual property data fields)
+ - added align_object command (like floor_object/wall_object etc. except the direction it moves the object in
+   is taken from the direction the editor camera is pointing)
+ - added support for Runtime Object Shadows affecting sun light
+ - added link/receptron/source reordering support in respective editor dialog
+ - added "No Joint Rot" flag to detail attachment links
+ - added support for editor running in HW mode to natively use DXT compressed textures, without decompressing
+   them on load, this should drastically reduce editor memory use for DXT-heavy missions (in case of problems
+   the load-conversion can be re-enabled with the config var dxt_to_rgb32)
+ - added "force" button next to the "multi-brush me" button, which multibrushes all objects in an area brush,
+   even if they've previously been assigned to a different multibrush
+ - added auto_dissolve_unnamed_groups_on_deselect config var to enable auto-dissolve when deselecting unnamed
+   multibrushes
+ - added dissolve_unnamed_groups and dissolve_all_groups commands for quick and easy multibrush removal
+   and remove_empty_groups to delete any named groups that no longer have brushes
+ - added ability to append custom commands to the viewport context menus (see "doc\dromed.cfg" for description)
+ - added quick-link functionality for easier chain-linking of objects (such as patrol routes), see
+   modders_notes.txt for details
+ - added synch_to_playcam command that moves editor cam to current player cam position when in game mode
+ - added "No Auto-Delete" flag to detail attachment links
+ - added some transform helper functions to Camera script service interface
+ - added some more transform helper functions to Object script service
+ - and more...
+
+Other:
+ - added a new tool, DarkMapGen (in contrib_editor_demos.zip), to make it easier to define locations on map images and generate location images and BIN files
+
+Sources:
+ - new FMSel version with bugfix for not correctly restoring descending column sort modes from ini file
+
+Updated various documentation so it doesn't hurt to browse through it again even if you're familiar with it.
+
+
+Changes and fixes for v1.22
+---------------------------
+
+General:
+ - fixed various smaller issues that could potentially affect stability
+ - fixed light radius from dynamic lights on other objects so it matches light radius on terrain (instead of infinite)
+ - fixed (or at least reduced) issue where on rare occasions it could turn AIs invulnerable and non-collidable after loading or level transition (fix may not apply to existing savegames where this already happened)
+ - fixed bug with archive extraction failure not being detected properly in FMSel, at least for archives with unsupported compression method (like old zips using "Implode")
+ - fixed some bugs in FMSel with localization, paths containing umlauts and other special characters, and added OGG to WAV conversion option
+ - fixed line-of-sight check between player and flashbombs so it properly checks if the player's eyes are getting blinded and not the crotch
+ - fixed DML parsing bug with link IDs
+ - fixed bug with "d3d_disp_enable_atoc 1" on nVidia where it ended up using SSAA (if available) instead of ATOC
+ - fixed bug where filtering was applied to even pixel scaled UI in DX9 on most resolutions even when it shouldn't have
+ - fixed a crash that could happen during loading of larger (somewhere above 100MB) mis files
+ - added subtitle support
+ - added support for mission DMLs to include so called fingerprints, data that can link a DML to a particular mission (because mission filenames are often the same for different OMs/FMs)
+ - added support for mission DMLs to be bundled in dbmods subdirectories
+ - added support for DMLs to request additional OSMs and to reference objects by name
+ - added support to navigate book pages with left/right arrow and page up/down keys
+ - and more...
+
+DromEd:
+ - fixed bug that reversed the OSM load order each time a mission was saved
+ - fixed editor lockup when setting Texture Anim Data rate to 0
+ - fixed updates after changing Texture Anim Data property in edit mode so it doesn't require reportalization
+ - fixed bug with reconstruct_lights command, it falsely created a brush light for the first anim light object
+ - fixed inconsistencies with "AI->Utility->Pathable object", it used the property value in some places but not others, now it always uses it
+ - fixed bug with "Particle Launch Info" that caused "Loc unrotated?" to end up unchecked after each load
+ - fixed bug with "Medium 5-pt" lightmaps that could cause additional artifacts/seams under certain circumstances
+ - fixed inadequate handling of room EAX types where deleting/editing room brushes could mess up EAX assignments of a lot of rooms
+ - fixed issue with pendulum tweq freezing with lower rotational speeds
+ - fixed "skybox" and "envbox" commands when running in widescreen resolutions
+ - fixed uvmap_cylinder bug when lightmap scale was not 1 and added option for automatic V tiling calculation
+ - fixed bug with self-illum water (i.e. lava) not working when lightmapped water was enabled
+ - fixed bug with mousewheel not working in mono console
+ - fixed bug with darkdlgs Export function, it didn't always export all links
+ - increased max map pages per mission to 32
+ - increased MAX_GLOBAL_RENDER, MAX_GLOBAL_PLANES and MAX_GLOBAL_POINTS
+ - cleaned up metaproperty sub-menus in darkdlgs property popup menus
+ - cleaned up the metaproperties tree dialog resolving some issues with delete, drag-and-drop and not being able to distinguish between metaproperties and regular archetypes using metaproperties
+ - changed so object name properties in the obj properties dialog are displayed in bold if the object has an explicit name assigned (and not automatic parent name applied)
+ - changed "lm32_params" defaults to 1 1 when creating new missions (see new_config_vars.txt)
+ - added resize support for some dialogs
+ - added a separate icon for metaproperties in dialogs
+ - added Dynamic Light Radius property
+ - added "object X is partially or completely out of world, physics deactivated" mono warnings for objects with physics shape not entirely inside world (only the message is new, the underlying deactivation has always happened)
+ - added support for rotational tweqs to affect a DetailAttachement link's rotation
+ - added option to CreatureAttachment links to select rotation behavior
+ - added right-click support for filter buttons to quickly select solo filters
+ - added HIDE_UI_ELEMENTS qvar to allow game to hide HUD elements
+ - added more functions to Camera script service interface
+ - added "CameraAttach" and "CameraDetach" script messages when player camera attachment changes
+ - added support for text based book decals and ability to hide/show book decals with a qvar
+ - added option to customize the light intensity cutoff for anim lights
+ - added functionality to "set_room_type" command so it displays selection dialog when no arguments are supplied
+ - added support for down-tiling with material file param "tile_factor"
+ - added "mono_quickedit" config var to enable QuickEdit in mono console
+ - added "spew_relations" and "spew_metaprops" commands to monitor link and metaproperty add/remove events, useful to catch feedback loops that slow down framerate
+ - added "rebuild" command that runs "build_dlg" with last used settings without displaying dialog
+ - and more...
+
+Sources:
+ - updated lgvid source with an added function to the decoder API to aid subtitle synchronization
+ - new FMSel version with the latest fixes and additions (including some missed strings and an addition in localization file fmsel.po, do a diff for details)
+
+Updated various documentation so it doesn't hurt to browse through it again even if you're familiar with it.
+
+
+Changes and fixes for v1.21
+---------------------------
+
+General:
+ - fixed handling for multiple displays and GPUs
+ - fixed a small non-critical glitch in FMSel
+
+DromEd:
+ - fixed issue that caused wireframe drawing in 2D viewports to go nuts on some video cards/drivers, when running DromEd with hardware rendering
+ - fixed bug when saving Rendering Parameters in T1 mode (would cause ambient light to lose color info and all other parameters not originally in T1 to get reset)
+
+Sources:
+ - added missing file to FMSel source package (fltk patch)
+ - updated sources to build referencing the latest CRT DLLs (VS08 SP1 9.0.30729.1) so the private assembly fallback works
+
+
+Changes and fixes for v1.20
+---------------------------
+
+General:
+ - fixed sky (non-)rendering bug when texture palette contained more than 246 textures
+ - fixed crash when using movie_disable/fm_movie_disable/movie_crop_exclude/fm_movie_crop_exclude config vars
+ - fixed bug with game dir write access test (gave false positives if game directory was assigned a custom icon in Windows)
+ - fixed issue with garbled HUD text on some older video cards
+ - fixed issue with crouching on crates
+ - fixed alpha calculation bug on scaled bitmap particles
+ - fixed bug with pendulum tweq stopping for angles larger than 32 degrees
+ - fixed issue with duplicate receptrons when added by a DML file
+ - fixed bug with force_ani_settings material flag not having any effect
+ - fixed crash when Corona property has no texture name specified
+ - fixed crash bug with "ForceCameraOverlayNormal" config var
+ - fixed song sound load failure if other format than in specified song file (i.e. if file is ogg but song file has wav)
+ - fixed crash when song sound file was not found
+ - fixed bug with display device selection on multi-device systems (probably picked the opposite device than the default/selected)
+ - fixed crash related to 4096 sized textures
+ - fixed reversed gamma bindings and walk forward bind in options menu (requires re-bind to take effect) in the T1 INTRFACE.CRF patch (T1.7z)
+ - minor corrections to some HUD placement/size calculations for widescreen resolutions
+ - changed so horizontal and vertical mouse sensitivity is equal when "mouse_sensitivity_y_scale" is 1
+ - added config var "force_correct_rope_lengths" that enables correct rope length calculations (1.18 and older are incorrect), especially useful for T1 missions with problems to reach ropes
+ - added "mouse_sensitivity_use_aspect" bind var to enable old behavior where horizontal/vertical mouse sensitivity differ based on resolution aspect ratio
+ - added support for RLE compressed BMP images (RLE4/RLE8)
+ - added localization support to FMSel (so FMSel UI can be translated)
+ - added FM language support to game and updated FMSel to make use of it
+ - added support for the original indeo5 codec (ir50_32.dll), may improve movie playback on slower CPUs
+ - added option to use enhanced ray trace for AI body/suspicious obj detection ("enhanced_aidetect_trace")
+ - added option to disable light gem ("vismeter_hide")
+
+DromEd:
+ - fixed rare mono console related bug that caused editor to hang (was remedied by enabling monolog, no longer necessary)
+ - fixed a less common crash when compiling rooms, caused by newly created room brushes that were excluded from compile usually by a me-only area brush (crash was preceded by a "Attempt to get room 0 of 0" assert)
+ - fixed crash bug when selecting sky surface if texture palette contains more than 246 textures and editor is using software rendering
+ - fixed a couple of crash bugs related to editing the Creature Type property
+ - fixed bug where loading a stripped mission could result in wrong texture assignments on terrain surfaces
+ - fixed bug in reconstruct_rooms that it assigned default room instead of reconstructing the original room types
+ - fixed crash that could occur during extensive UV editing when running editor with HW rendering
+ - fixed so creating a new stimulus archetype doesn't require editor restart for propagators to work
+ - fixed sunlight object shadow bug
+ - fixed crash that under certain circumstances could occur during UV align editing
+ - fixed crash when loading file at editor startup through "file" config var
+ - fixed crash with Scaled bitmap particles when invalid bitmap and added mono warnings
+ - fixed issue with precision select and tiny point sized brushes
+ - fixed issue with uvmap_cylinder when using non-symmetric textures and rot 90 (and allowed it to be used on pyramid brushes)
+ - fixed prim_special command to only allow setting valid types, to prevent more or less obvious bad things from happening (even if it appeared to work in previous versions, it could cause memory overwrites which are very bad)
+ - added prim_cylinder/pyramid/cpyramid commands for quick type set and sides
+ - added proper support for negative Extra Light property again (worked in T1 but was removed after), this also fixes the hot plates bug in TG Mage Towers
+ - added option in Rope property to use correct rope length calculations (see modders_notes.txt)
+ - added "Use Model 5" flag for random model tweqs, so randomization includes Model 5 (1.19 falsely always included it, which could break existing content)
+ - added support for "Bitmap disk" particles to use the default disk texture if no bitmap name is specified
+ - added support for mission (and location) defined env maps
+ - added viewport bg image support
+ - added lg.ini option to enable word wrapping for Editor Comments property
+ - added "default_tx_scale" config var for user defined default brush texture scale
+ - added option to show texture index in texture palette
+ - added hilight brushes using texture command to texture palette context menu
+ - added support for user configurable precision of sdesc formatted floats ("sdesc_decimals")
+ - added extended option for sunlight to allow all shadowed/unshadowed quad/non-quad combinations
+ - added config option "show_world_limits" to draw world limits in 2D viewports (line color can be changed with "edit_color_grid_lim")
+ - increased max length for "bitmap\" images (with ani frames) from 6 to 28
+ - changed room building so room brushes with invalid room types still get used, with the default room type, instead of being ignored
+
+
+A small sample of changes and fixes for v1.19
+---------------------------------------------
+
+Renderer:
+ - Added windowed mode
+ - Added single display mode option - no resolution change between menus and game
+ - Added ingame support for all common resolutions, including widescreen
+ - Added support for 32-bit color
+ - Textures can now be automatically promoted to 32-bit, improving quality and effectively eliminating the palette limit
+ - Added UI framerate cap option to avoid GPU fan spinning up in UI
+ - Added DDS/PNG image support
+ - Added full 24/32-bit TGA/BMP image support
+ - Increased the maximum number of frames allowed in animated textures from 20 to 99, and increased the allowable filename length for animated textures (before the underscore) to support more than 7
+ - Animated texture rate can now be specified via a material file for that texture
+ - Fixed a bug where Transparency property didn't (correctly) apply on objects that contain transparent polys
+
+General:
+ - Replaced video player lib with an FFMpeg based one to play cutscenes. LGVid.ax or other codecs are no longer required
+ - Option to use OpenAL (if available) instead of DirectSound. Includes support for audio effects in Windows 7 without an EAX-enabled driver (e.g. ALchemy)
+ - Added "head_bob" config var to control amount of head bob
+ - Added mousewheel support to options menu
+ - Fixed player ground contact tracking when walking off an object (caused footstep sounds to get "stuck" on previous material)
+ - Fixed sound cap per schema type bug and upped max sound channels to 48
+ - Changed screenshot output format to BMP and also added support for PNG screenshots
+ - Changed mouselook sensitivity to be resolution independent
+ - Added check to avoid trying to open files with reserved system name like com ports
+ - AIs now breathe from their head instead of their stomachs. They will no longer drown when up to their waist in water.
+ - Lowered player crouch height by a tiny fraction so he's less likely to get stuck on 4 unit tall spaces
+ - Added better support for binding actions to the mouse wheel (can bind wheel up and wheel down as separate actions, with modifier key support)
+ - Fixed star rendering
+ - Added "log_player_pos" command that dumps current player pos to log file (when enabled)
+ - Added the ability to detach from ladders by crouching
+ - Improved mantling a bit and added optional new mantling algorithm with lower failure rate
+ - Fixed a bug which limited number of sound channels to 16 even if more were selected
+ - Fixed a bug that sometimes caused doors to float away into infinity
+ - Fixed (or at least greatly improved) a bug with edge triggered OBBs sometimes failing to detect collision (in particular for slow moving objects)
+ - Fixed framerate dependent speed issue for camvators/moving terrain (with collision type: none)
+ - Added "fixed_star_size" option for resolution independent star size
+ - Fixed some bugs when attaching to a ladder from water.
+ - AIs who are facing very close to a wall will no longer turn to face south when the game begins
+ - Health bar drawing adjusted in widescreen
+ - Added option to fix arm rendering
+ - Added AA to rendering of loadout screen items
+ - Fixed pickpocket count bug that would always show 1 more maximum pickpocket than there actually was.
+ - Added "Blocks frobs" property, allowing objects to block frobs of objects behind them (e.g. to stop frobbing items through safe doors)
+ - Added option to left-align map notes text
+ - Made navigation of map/objectives screen a little bit more in-game friendly (screen can also be closed with space, arrow key navigation and return to switch map/obj)
+
+DromEd:
+ - Lightmaps are now properly displayed in the editor 3D view
+ - Added support for HW rendering in editor viewports
+ - Increased the maximum number of visible on-screen terrain polies from 1024 to 20480
+ - Increased the maximum number of visible on-screen objects from 128 to 1280
+ - Added some safety checks to object scaling operations to prevent objects with 1.#INF scale
+ - Fixed a crash when computing pathfinding with an improperly linked moving terrain object in the mission. An ignorable assert is thrown and the object is skipped gracefully instead of crashing.
+ - Prevented a crash if you apply a model of one creature type to an object assigned a different creature type
+ - Fixed "Attempt to mark from invalid room id 0" assertion to actually show the room id that is invalid, instead of always showing 0.
+ - Integrated csgmerge tool into editor exe
+ - Added support for 32-bit lightmaps
+ - Fixed the bug where cloning a multibrush with particles would duplicate every object in the mission
+ - Fixed a bug where the game would crash when deleting a large multibrush
+ - Added fallback check to find Motiondb.bin in resource paths
+ - Fixed resource lock errors when loading TGA images (for object textures and distance art)
+ - Fixed solo view editor issues when going back to edit mode from game mode
+ - Added ability to change the brush colors in DromEd via values in DromEd.cfg.
+ - Added light-based transparency property
+ - Added ability to enable/disable eye zoom in Thief 2
+ - Vast improvements to editor dialogs, including crash fixes and improved functionality
+ - Increased brush limit from 7068 to 16384
+ - Increased rooms limit from 1024 to 4096
+ - Increased ambient sound limit from 256 to 1024
+ - Increased cell limit from 28672 to 32760
+ - Increased the maximum number of sides in a cylinder from 10 to 26.
+ - Increased automap location limit from 64 to 256 locations per page
+ - The texture rotation control can now interpret negative values
+ - Fixed a crash while generating reports
+ - Added a warning dialog when attempting to save one filetype (mis/gam/cow) as another
+ - Added new Windows-style texture palette (which also supports more than 256 textures)
+ - Added support for all editor window sizes
+ - Added Pendulum (/sinusoidal) curve type to tweqs
+ - Added DetailAttachement link type
+ - Added Distance Alpha property
+ - Added Bitmap Color property for custom modulation color on bitmap objects
+ - Added "Face camera (axial)" setting to Bitmap Worldspace
+ - Added color param, additive blending and spotlight cone falloff support to coronas
+ - Added "Editor Comments" property
+ - Added "show_vhots" command for debug visuals of vhot placement and numbering on objects
+ - Manually deleting links in the link view dialog no longer deletes attached object for ParticleAttachement/DetailAttachement links
+ - Added the ability to place graphical decals on book pages
+ - Corpses with Contains links no longer count as pickpockets
+ - The Auto-Multibrush property no longer crashes DromEd if the .vbr file was not found.
+ - The stimulus on existing receptrons can now be changed
+ - The intensity for sources is no longer reset when changing the propagator
+ - The receptrons list now correctly shows the max intensity value for existing receptrons
+ - Meshes can now be scaled with the Scale property
+ - Scaled objects now cast properly scaled shadows
+ - Objects can now obscure coronas
+ - Bitmap Worldspace objects can now be locally lit
+ - Precipitation will now collide with OBB objects as well as terrain
+ - The brush_to_room command can now be given a negative number, to be interpreted as an absolute size instead of a percentage (e.g. brush_to_room -0.1 would create a room brush 0.1 units larger than the selected brush.)
+ - It is no longer necessary to explicitly add the Hidden property to a secret object for the secret to be properly counted
+ - Added numeric keypad input support
+ - DromEd will no longer stop working after 03:14:07 on Tuesday, 19 January 2038
+ - Added "scroll here" option to the right-click menu for solo views, similar to the "teleport camera" option for non-solo views
+ - Fixed some issues with calculating which room cells are in (which might have caused problems with precipitation and fogging)
+ - Increased the time range of Tweqs to 0-65535
+ - The same property can no longer be added to an object multiple times
+ - Fixed a crash when adding the Texture Anim Data property to a concrete object
+
+ - See the included modders_notes.txt for more details on editor changes

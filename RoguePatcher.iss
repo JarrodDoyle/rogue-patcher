@@ -1,5 +1,5 @@
 #define Name "RoguePatcher"
-#define Version "1.28.4"
+#define Version "1.29.0"
 #define Publisher "Jarrod Doyle"
 #define URL "https://jayrude.dev/"
 
@@ -31,6 +31,8 @@ Name: "custom"; Description: "Custom"; Flags: iscustom
 
 [Components]
 Name: "newdark"; Description: "NewDark"; Types: custom; Flags: fixed;
+Name: "hwtl"; Description: "Hardware Transforms and Lighting (Experimental)";
+Name: "hwtl\mod"; Description: "Example HWTL Mod";
 Name: "dromed"; Description: "DromEd";
 Name: "dromed\toolkit"; Description: "DromEd Basic Toolkit";
 Name: "multiplayer"; Description: "Multiplayer (Experimental)";
@@ -61,12 +63,14 @@ Name: "msaa"; Description: "Enable Multisample Anti-Aliasing"; GroupDescription:
 Name: "windowed"; Description: "Enable windowed mode"; GroupDescription: "Graphics:"; Flags: unchecked
 Name: "texfilter"; Description: "Disable texture filtering for a retro look"; GroupDescription: "Graphics:"; Flags: unchecked
 
-Name: "fpsfix"; Description: "Fix physics issues at high framerates"; GroupDescription: "Performance:";
+Name: "hifps"; Description: "Increase framerate limit"; GroupDescription: "Performance:";
+Name: "physcap"; Description: "Cap physics update frequency (Fixes some issues at high framerate, but can look/feel odd)"; GroupDescription: "Performance:"; Flags: unchecked
 Name: "stutterfix"; Description: "Reduce micro stutter and mouse lag (Not recommended on CrossFire/SLI setups)"; GroupDescription: "Performance:";
 Name: "smallportal"; Description: "Reduce camera jolt near complex geometry and doorways"; GroupDescription: "Performance:";
 
 [Files]
 Source: "Resources\NewDark\*"; DestDir: "{app}"; Components: newdark; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Resources\NewDark HWTL\*"; DestDir: "{app}"; Components: hwtl; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Missing\*"; DestDir: "{app}"; Components: newdark; Flags: onlyifdoesntexist
 Source: "Resources\DromEd\*"; DestDir: "{app}"; Components: dromed; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Basic Toolkit\*"; DestDir: "{app}"; Components: dromed\toolkit; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -74,6 +78,7 @@ Source: "Resources\Multiplayer\*"; DestDir: "{app}"; Components: multiplayer; Fl
 Source: "Resources\Common Scripts\*"; DestDir: {app}; Components: comscripts; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Binds\*"; DestDir: "{app}"; Components: binds; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\DMM\*"; DestDir: {app}; Components: dmm; Flags: ignoreversion
+Source: "Resources\Mods\hwtl\*"; DestDir: "{app}\MODS\HWTL"; Components: hwtl\mod; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\Fixed Resources\*"; DestDir: "{app}\MODS\Fixed Resources"; Components: mods\fixedres; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\TGFMDML\*"; DestDir: "{app}\MODS\TGFMDML"; Components: mods\fmdml; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Resources\Mods\TG Remastered Missions\*"; DestDir: "{app}\MODS\TG Remastered Missions"; Components: mods\tgremastered; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -268,11 +273,11 @@ begin
     EditConfigLine('cam_ext.cfg', ';new_mantle', 'new_mantle');
   if WizardIsTaskSelected('fmsel') then
     EditConfigLine('cam_mod.ini', ';fm', 'fm');
-  if WizardIsTaskSelected('fpsfix') then
-    begin
+
+  if WizardIsTaskSelected('hifps') then
       EditConfigLine('cam_ext.cfg', 'framerate_cap 100.0', 'framerate_cap 240.0');
+  if WizardIsTaskSelected('physcap') then
       EditConfigLine('cam_ext.cfg', ';phys_freq 60', 'phys_freq 60');
-    end;
   if WizardIsTaskSelected('swgamma') then
     EditConfigLine('cam_ext.cfg', ';d3d_disp_sw_cc', 'd3d_disp_sw_cc');
   if WizardIsTaskSelected('stutterfix') then
@@ -297,9 +302,11 @@ begin
     if WizardIsTaskSelected('sfxchannels') then
       EditConfigLine('cam.cfg', GetLineContaining('cam.cfg', 'sfx_channels'), 'sfx_channels 48');
 
-  if WizardIsComponentSelected('mods') then
+  if WizardIsComponentSelected('mods') or WizardIsComponentSelected('hwtl\mod') then
     begin
       Mods := '';
+      if WizardIsComponentSelected('hwtl\mod') then
+        AddPath(Mods, '.\MODS\HWTL');
       if WizardIsComponentSelected('mods\fixedres') then
         AddPath(Mods, '.\MODS\Fixed Resources');
       if WizardIsComponentSelected('mods\fmdml') then

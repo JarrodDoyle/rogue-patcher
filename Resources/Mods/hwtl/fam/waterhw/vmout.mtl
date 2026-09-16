@@ -1,0 +1,6 @@
+.ifdef HWTL
+include waterout.inc
+// original texture color, desaturated 75% and normalized
+//shader water out 1.000 0.693 0.653 700 1 1 1.33
+shader water out 255 177 167 700 1 1 1.33
+.endif

@@ -16,6 +16,7 @@ Table of contents
     * Cubemaps
     * DXT Texture Compression
     * 8-bit Anti-Aliased Fonts
+    * TTF/OTF Fonts and UTF-8 Support
     * Texture Resolution/Mipmap Visualization
     * Additions to Books/Readables (T2)
     * Script Service Updates
@@ -319,6 +320,16 @@ elements use software rendering/drawing functions which can't handle DXT.
 A font format, that uses the full 8 bits (for 256 shades), for anti-aliased fonts was added. For better quality,
 especially with 32-bit rendering, where the old 16 shades might be too limited. The file format/type value is 2,
 otherwise they work like format/type 1 AA fonts.
+
+
+TTF/OTF Fonts and UTF-8 Support
+-------------------------------
+
+Vector TTF/OTF fonts can be used instead of the bespoke bitmap fonts previously required for all text. When these
+new fonts are used, all text is decoded as UTF-8 to facilitate text localization to non-ASCII languages and the use
+of special characters. These fonts are configured with a separate font definition resource, which is used to
+provide the settings with which the font is rendered. See separate font documentation "font-sample.fon" for more
+information.
 
 
 Texture Resolution/Mipmap Visualization
@@ -1964,6 +1975,19 @@ This is a new gamesys var/parameter to control misc engine behavior.
       The receptron actions "Add MetaProperty" and "Remove MetaProperty" normally ignore the selected target
       object and always add the meta property to "Me". Enabling this gamesys option will make the actions
       use the actual selected target object.
+
+    * "Disable Link.DestroyMany 0-fix"
+
+      The script service function Link.DestroyMany is supposed to allow specifying "0" as wildcard to/from
+      parameters, but that never worked. T2 v1.27 / SS2 v2.48 introduced the fixed behavior.
+      Because it turned out that some T2 FMs rely on the buggy behavior - which prevents the TrapTeleporter
+      script from destroying all AICurrentPatrol links - and pre-set patrol links on inactive AIs that are
+      later teleported, this option was added to allow reverting to the old behavior.
+      There are multiple instances in original T2 OSM scripts that assume that wildcards working, which is
+      why the fix remains enabled by default.
+
+      Like other gamesys variables, this can also be set through a DML, allowing for simple patching
+      of such FMs.
 
 
 New QVar: "DISABLE_EYE_ZOOM" (T2)

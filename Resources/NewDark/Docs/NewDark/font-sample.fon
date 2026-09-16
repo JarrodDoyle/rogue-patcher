@@ -1,0 +1,20 @@
+FON1
+
+// a font definition file must always start with above FON1 header at the very beginning (no empty space in
+// front) and it must be all uppercase
+
+// the body of a font definition file is a list of parameters for describing the font's appearance
+
+// TTF/OTF Resource
+resource fonts/serif
+// Antialias font (optional; enabled by default)
+antialias 1
+// Font size
+height 8
+// Font width (optional; useful if requesting a bitmap font of a certain size)
+//width 8
+// Font DPI (optional)
+//dpi 75
+// Scale font proportionally to current overlay (optional; disabled by default)
+//dynamic 1
+

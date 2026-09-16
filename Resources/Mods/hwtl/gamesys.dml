@@ -1,0 +1,187 @@
+DML1
+
++ObjProp "LitFlare" "SelfLitRad" = 20.0
+
++ObjProp "LitFlare" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		1
+	"volume exponent"	1.5
+	"softness"		1
+	"radius"		2
+	"rays"			.5
+	"rays scale"		1
+	"rays speed"		200
+	"jitter"		.06
+	"jitter speed"		200
+}
+
++ObjProp "Flame" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		1
+	"volume exponent"	1.5
+	"softness"		4
+	"radius"		1
+	"rays"			0
+	"rays scale"		1
+	"rays speed"		0
+	"jitter"		.2
+	"jitter speed"		100
+}
+
++ObjProp "torches" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		1
+	"volume exponent"	1.5
+	"softness"		1
+	"radius"		1
+	"rays"			0
+	"rays scale"		1
+	"rays speed"		0
+	"jitter"		.16
+	"jitter speed"		100
+}
+
++ObjProp "gaslights" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		.5
+	"volume exponent"	1.7
+	"softness"		2
+	"radius"		1
+	"rays"			0
+	"rays scale"		1
+	"rays speed"		0
+	"jitter"		0
+	"jitter speed"		0
+}
+
++ObjProp "chandelier" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		0
+	"volume exponent"	1
+	"softness"		4
+	"radius"		1
+	"rays"			0
+	"rays scale"		1
+	"rays speed"		0
+	"jitter"		0
+	"jitter speed"		0
+}
+
++ObjProp "lanterns" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		.5
+	"volume exponent"	1.7
+	"softness"		1
+	"radius"		1
+	"rays"			0
+	"rays scale"		1
+	"rays speed"		0
+	"jitter"		0
+	"jitter speed"		0
+}
+
++ObjProp "AlarmLights" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		.3
+	"volume exponent"	1.9
+	"softness"		1
+	"radius"		1
+	"rays"			0
+	"rays scale"		1
+	"rays speed"		0
+	"jitter"		0
+	"jitter speed"		0
+}
+
++ObjProp "HangingLamp" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		.3
+	"volume exponent"	1.5
+	"softness"		1
+	"radius"		1
+	"rays"			0
+	"rays scale"		1
+	"rays speed"		0
+	"jitter"		.08
+	"jitter speed"		100
+}
+
++ObjProp "WispBody" "SelfLitRad" = 20.0
+
++ObjProp "WispBody" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		2
+	"volume exponent"	1.5
+	"softness"		1
+	"radius"		4
+	"rays"			.6
+	"rays scale"		.6
+	"rays speed"		300
+	"jitter"		0
+	"jitter speed"		0
+}
+
++ObjProp "MechArchFrogman" "HwtlLight"
+{
+	"selection weight"	0
+	"volume"   		1
+	"volume exponent"	1.5
+	"softness"		1
+	"radius"		1
+	"rays"			0
+	"rays scale"		0
+	"rays speed"		0
+	"jitter"		0
+	"jitter speed"		0
+}
+
++ObjProp "lhousebeacon" "HwtlLight"
+{
+	"selection weight"	.2
+	"volume"   		.5
+	"volume exponent"	1.5
+	"softness"		5
+	"radius"		1
+	"rays"			0
+	"rays scale"		0
+	"rays speed"		0
+	"jitter"		0
+	"jitter speed"		0
+}
+
++ObjProp "Font" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		.3
+	"volume exponent"	1
+	"softness"		5
+	"radius"		1
+	"rays"			0
+	"rays scale"		0
+	"rays speed"		0
+	"jitter"		0
+	"jitter speed"		0
+}
+
++ObjProp "HealingFont" "HwtlLight"
+{
+	"selection weight"	1
+	"volume"   		.3
+	"volume exponent"	1
+	"softness"		5
+	"radius"		1
+	"rays"			0
+	"rays scale"		0
+	"rays speed"		0
+	"jitter"		0
+	"jitter speed"		0
+}

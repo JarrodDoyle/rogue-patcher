@@ -1,0 +1,489 @@
+Newdark HWTL variant
+====================
+
+The HWTL (hardware transform & lighting) variant of newdark performs vertex transforms on the GPU
+instead of the CPU. This enables a range of new pixel-shader effects, such as soft shadows and
+normal mapping. The SWTL path is still used for newsky and inventory models, so both rendering
+paths remain available in the engine. You can switch between them at runtime with the
+`toggle_hwtl_enable` command. SWTL is broadly similar to mainline newdark, but it's not the same,
+and may be incomplete and less performant.
+
+Hardware requirements are naturally higher for HWTL rendering. Many early DX9-era GPUs do not meet
+the minimum requirements. For good performance, a relatively modern CPU and GPU, with solid DX9
+support is recommended. The HWTL variant may run on Windows 7 or later, but Windows 10 or later is
+recommended.
+
+This variant includes a `mods/hwtl` mod with a few small T2-specific tweaks that balance
+certain lights in the OMs. It also provides normal-mapped reflective water, which works with T1,
+T2, and SS2. The mod must be activated by the usual means, and it is recommended that it be
+given the highest priority. The new effects may appear exaggerated without additional tuning.
+Modders are encouraged to experiment with the new config variables and DML parameters to find the
+best settings.
+
+Only dynamic lights and anim lights are supported as HWTL lights. For a better HWTL experience,
+many OMs and FMs need to be relit after the AnimLight property has been added to selected lights.
+
+
+
+New features
+------------
+
+- Percentage-Closer Soft Shadows (PCSS)
+- Normal mapping
+- Parallax Occlusion Mapping (POM)
+- Screen Space Ambient Occlusion (SSAO)
+- Dynamic environment mapping
+- Soft particles
+- Materials: normal map, height map (for POM), specular map: intensity, glossiness, environment
+  reflection, self-illumination
+- Water: normal map, environment reflection, incidence alpha, air-to-water refraction
+- Volumetric effects: fog, light volumes, underwater light shafts
+- Underwater distance blur
+- Post-processing
+    - Light streaks (star)
+    - Luminance adaptation
+- Hardware-rendered loadout in Thief
+- Alternative object highlight (outline) in Thief
+- Experimental / hack
+    - Player shadow
+    - AI awareness of player shadow
+
+
+
+New config variables
+--------------------
+
+ai_aware_of_shadow <0, 1>
+    AI aware of player shadow. Default is 0.
+
+alt_highlight <0, 1>
+    Use alternative object highlight in Thief. Default is 0.
+
+alt_highlight_color <0 - 255> <0 - 255> <0 - 255> <0 - 255>
+    Alternative object highlight color (RGBA). Default is 255 255 255 255. Alpha is also affected
+    by highlight_level.
+
+alt_highlight_width <0.0 - 2.0>
+    Alternative object highlight line width. Default is 1.5.
+
+env_enable <0, 1, 2, 3, 6>
+    Enable environment. 0: Disable. Other values set the number of frames it takes to update all
+    six cube map faces. Default is 1.
+
+env_min_particle_size <0.0 - >
+    Minimum particle size when rendering environment. Larger values make small particles appear
+    larger. Default is 1.0.
+
+env_mtl_enable <0, 1>
+    When rendering environment, enable rendering material layers. Default is 1.
+
+env_obj_size <0.0 - >
+    When rendering environment, render objects above this apparent size. Default is 0.2.
+
+env_selfillum_mult <1.0 - >
+    Multiply brightness of self-illuminating object polygons when rendering environment. Can be
+    used, for example, to boost reflections of lamps and other light sources. Default is 1.0.
+
+env_size <1 - >
+    Environment map size. Default is 256.
+
+fog_density <0.0 - >
+    Fog density. Default is 1.0.
+
+light_fade_sharpness <0.0 - >
+    How sharply lights crossfade between hardware and software implementations. Default is 1.0.
+
+hwtl_enable <0 - 9>
+    HWTL rendering. Default is 1.
+    0: disable
+    1: enable
+    2-9: debug
+
+hwtl_lights <0, 2, 4, 6>
+    Number of HWTL lights.
+
+hwtl_quality <0, 1, 2>
+    HWTL quality presets. Default is 1.
+    0: low
+        env_enable 2
+        env_obj_size 0.3
+        hwtl_lights 2
+        env_size 128
+        sm_size 256
+        shader_quality 0
+        shadow_obj_size 0.08
+    1: medium
+        env_enable 1
+        env_obj_size 0.2
+        hwtl_lights 4
+        env_size 256
+        sm_size 512
+        shader_quality 1
+        shadow_obj_size 0.04
+    2: high
+        env_enable 1
+        env_obj_size 0.1
+        hwtl_lights 6
+        env_size 512
+        sm_size 1024
+        shader_quality 2
+        shadow_obj_size 0.02
+
+overbright <0.0 - 1.0>
+    Overbright diffuse. Controls light intensity clamping at small distances. The value 0.0
+    emulates original behavior: light is clamped so that lit surfaces do not appear overbright.
+    The value 1.0 means no clamping. Default is 0.0.
+
+pcss_noise <0.0 - >
+    Percentage-closer soft shadow noise. This randomness is applied to the PCSS sample positions.
+    Default is 1.0.
+
+parallax_scale <0.0 - >
+    Scale, or depth, of parallax occlusion mapping effect. 0: Disable. Default is 1.0.
+
+parallax_flattening <0.0 - >
+    Parallax horizon flattening. Parallax depth is reduced at small angles according to this
+    parameter. 0: Disable. Default is 0.2.
+
+player_shadow <0, 1>
+    Enable player shadow. Default is 0.
+
+player_shadow_scale <0.0 - >
+    Player shadow scale. Default is 0.95 for Thief, 0.75 for SS2.
+
+player_shadow_offset <0.0 - >
+    Player shadow vertical offset. Default is 0.3 for Thief, 0.75 for SS2.
+
+selfillum_mult <1.0 - >
+    Multiply brightness of self-illuminating object polygons. Can be used, for example, to boost
+    post processing effects on lamps and other light sources. Default is 1.0.
+
+shader_quality <0, 1, 2>
+    Shader quality. Default is 1.
+
+shadow_bias <0.0 - >
+    Shadow bias. Default is 1.
+
+shadow_enable <0, 1>
+    Dynamic shadows. Default is 1.
+
+shadow_obj_size <0.0 - >
+    When rendering shadow maps, render objects above this apparent size. Default is 0.04.
+
+sm_size <1 - >
+    Shadow map size. Default is 512.
+
+underwater_enable <0, 1>
+    Underwater effects, such as distance blur and light shafts. Default is 1.
+
+vis_hw_light <0, 1>
+    Improved calculation of player visibility (light gem) based on hardware lights. Also see
+    extended_player_lighting. Default is 1.
+
+vol_enable <0, 1>
+    Volumetric shader. Default is 1.
+
+vol_near_radius <0.0 - >
+    Fade out volumetric effect near the player. Volume density is zero from radius zero to
+    vol_near_radius/2, and a smooth interpolation from zero to full in the range from
+    vol_near_radius/2 to vol_near_radius. When player shadow is enabled, this can be set to e.g. 2
+    to avoid artifacts caused by shadows cast by the player's head. Default is 0.
+
+vb_size <4 - >
+    Vertex buffer size in kilobytes. Default is 200.
+
+window_round_corners <0 - 3>
+    Round window corners (Windows 11). Default is 0.
+    0: system default
+    1: do not round
+    2: round
+    3: round small
+
+adapt <0.0 - 1.0>
+    Luminance adaptation. Default is 0.1.
+
+adapt_decay <0.0 - 1.0>
+    Luminance adaptation reaction speed. Default is 0.5.
+
+adapt_threshold <0.0 - 1.0>
+    Luminance adaptation threshold. Default is 0.1.
+
+barrel <0.0 - 1.0>
+    Barrel distortion. Default is 0.0.
+
+bloom_range <0.0 - 100.0>
+    Bloom range. Default is 10.0.
+
+bloom_saturation <0.0 - 1.0>
+    Bloom saturation. Default is 0.7.
+
+bloom_threshold <0.0 - >
+    Bloom threshold. Default is 0.6.
+
+bloomscale <0.0 - >
+    Bloom intensity. Default is 1.0.
+
+blueshift <0.0 - 1.0>
+    Blue shift due to low luminance. Default is 0.2.
+
+noise <0.0 - >
+    Noise intensity. Default is 1.0.
+
+star_attenuation <0.0 - 1.0>
+    Star attenuation. Default is 0.96.
+
+star_chromatic <0.0 - 1.0>
+    Star chromatic aberration. Default is 1.0.
+
+star_inclination <0.0 - 360.0>
+    Star inclination. Default is 20.0.
+
+star_lines <0 - 8>
+    Number of star lines. Default is 4.
+
+star_saturation <0.0 - 1.0>
+    Star saturation. Default is 0.7.
+
+star_threshold <0.0 - >
+    Star threshold. Default is 0.8.
+
+starscale <0.0 - >
+    Star intensity. Default is 0.4.
+
+
+
+Changes to config variables
+---------------------------
+
+extended_player_lighting [<0 - 3>]
+    New mode 3, which uses the brightest of the lighting samples. Default is 3.
+    Console command: set_extended_plr_lighting <0 - 3>
+
+postprocess <0 - 2>
+    Postprocess enable. Default is 0.
+    0: disable
+    1: enable
+    2: debug
+
+screenshot_format <type>
+    Valid values are bmp, png, dds, and jpg. Default is bmp.
+
+Forced
+    d3d_disp_2d_surf_mode 3
+    d3d_disp_enable_hdr 16 or higher, default is 16
+    d3d_disp_no_rgb10_buf
+    mipmap_mode 1
+    pixel_parts_as_disks
+    single_display_mode 2 or higher, default is 2
+    square_parts_as_disks
+    use_d3d_display
+    vsync_mode for menus is the same as for in-game
+
+Not supported / not applicable
+    bloomprescale
+    d3d_disp_allow_a8l8_atex
+    d3d_disp_enable_distortionfx
+    d3d_disp_force_rgba_atex
+    d3d_disp_forcevalid
+    d3d_disp_hw2d_cachesize*
+    d3d_disp_limit_gpu_frames
+    d3d_disp_managed_textures
+    d3d_disp_sw_cc*
+    disable_table_fog
+    fog_mode_exp
+    max_hw_textures
+    texel_center_adjust
+    user_mode*
+    widescreen_lock_hfov
+
+
+
+New commands
+------------
+
+set_adapt           :  luminance adaptation
+set_adapt_decay     :  luminance adaptation reaction speed
+set_adapt_threshold :  luminance adaptation threshold
+set_barrel          :  barrel distortion
+set_blueshift       :  blue shift due to low luminance
+set_noise           :  noise intensity
+set_star_attenuation:  star attenuation
+set_star_chromatic  :  star chromatic aberration
+set_star_inclination:  star inclination
+set_star_lines      :  number of star lines
+set_star_saturation :  star saturation
+set_star_threshold  :  star threshold
+set_starscale       :  star intensity
+toggle_postprocess  :  post process enable
+set_env_min_particle_size:  environment minimum particle size
+set_env_obj_size    :  environment object apparent size threshold
+set_env_selfillum_mult:  environment self illumination multiplier
+set_env_size        :  environment map size
+set_fog_density     :  fog density
+set_light_fade_sharpness:  light hardware/software crossfade sharpness
+set_hwtl_lights     :  number of hardware lights
+set_hwtl_quality    :  set hwtl quality
+set_overbright      :  overbright diffuse
+set_parallax_scale  :  parallax displacement scale
+set_parallax_flattening:  parallax horizon flattening
+set_pcss_noise      :  percentage-closer soft shadow noise
+set_pcss_size       :  percentage-closer soft shadow size
+set_selfillum_mult  :  self illumination multiplier
+set_shader_quality  :  shader quality
+set_shadow_bias     :  shadow bias
+set_shadow_obj_size :  shadow object apparent size threshold
+set_sm_size         :  shadow map size
+set_vb_size         :  vertex buffer size in kilobytes
+set_vol_near_radius :  volume near radius
+toggle_ai_aware_of_shadow:  ai aware of player shadow
+toggle_env_enable   :  environment map
+toggle_env_mtl_enable:  render material layers when rendering environment
+toggle_hwtl_enable  :  hardware transform & lighting
+toggle_shadow_enable:  dynamic shadows
+toggle_ssao_enable  :  screen space ambient occlusion
+toggle_underwater_enable:  underwater effects
+toggle_vis_hw_light :  improved player visibility calculation
+toggle_vol_enable   :  volumetric shader
+
+
+
+Removed commands
+----------------
+
+set_bloomprescale
+set_colorfilter
+
+
+
+New material parameters
+-----------------------
+
+The predefined preprocessor argument "HWTL" may be used with preprocessor commands. ".ifdef HWTL"
+evaluates to true.
+
+Default value for numerical parameters is 0, unless otherwise specified.
+
+Using newdark material layers and HWTL material parameters in the same material is not supported.
+
+shader map normal <texture_path>
+    The first three channels (RGB) are used as a normal map, using DX normal format (green or
+    (128, 255, 128) points up). The optional fourth channel (A) is used as height and rendered
+    using parallax occlusion mapping.
+
+shader normal <tex_factor>
+    Resulting normal is normalize(lerp(float3(0, 0, 1), tex_sample, <tex_factor>)), where
+    tex_sample is the renormalized vector from normal map.
+
+shader height <scale> <center>
+    Height is taken from the normal map alpha channel. <scale> of 1.0 means that the distance
+    between minimum and maximum height map values corresponds to one game unit. <center>
+    specifies the height value that matches the position of the polygon being rendered, i.e.
+    does not cause any displacement of the surface. Height values below <center> make the
+    surface appear to be below the polygon surface, and values above <center> make the surface
+    appear to be protruding out of the polygon.
+
+shader map specular <texture_path>
+    The four channels (RGBA) of this texture are used as specular intensity (R), gloss (G),
+    environment reflection intensity (B), and self illumination intensity (A).
+
+shader specular <intensity> <tex_factor> <metal>
+    Specular intensity is <intensity> * lerp(1, tex_sample, <tex_factor>), where tex_sample is
+    taken from the first channel (R) of the specular map. Specular highlights are based on the
+    Blinn-Phong reflection model, normalized with the factor (s + 8) / (8 * pi), where s is the
+    specular exponent. The result is modulated by the diffuse color according to the amount
+    indicated by <metal>.
+
+shader gloss <intensity> <tex_factor>
+    Gloss value is <intensity> * lerp(1, tex_sample, <tex_factor>), where tex_sample is taken from
+    the second channel (G) of the specular map. The resulting specular exponent is
+    2 / pow(saturate(1 - gloss), 4) - 2. The purpose of this formula is to map finite gloss values
+    to the infinite range of the specular exponent in a way that makes gloss values perceptually
+    somewhat linear.
+
+shader map environment <texture_path>
+    Use the specified texture as an environment map, instead of the dynamically generated one. The
+    texture must be a cube map.
+
+shader environment <intensity> <tex_factor> <incidence> <blur>
+    Environment reflection intensity is <intensity> * lerp(1, tex_sample, <tex_factor>), where
+    tex_sample is taken from the third channel (B) of the specular map. This value is modulated by
+    lerp(1, 1 - dot(N, V), <incidence>) and is affected by the shader specular <metal> parameter
+    in the same way as specular highlights. Environment reflection is blurred based on the
+    material's glossiness and <blur>.
+
+shader use_location_envtex [0-2]
+    Same as the material layer parameter with the same name.
+
+shader illumination <intensity> <tex_factor>
+    Self illumination intensity is <intensity> * lerp(1, tex_sample, <tex_factor>), where
+    tex_sample is taken from the fourth channel (A) of the specular map.
+
+shader diffuse <intensity> <tex_factor>
+    Diffuse color is <intensity> * lerp(1, tex_sample, <tex_factor>), where tex_sample is taken
+    from the diffuse texture. Default is 1.0 1.0.
+
+shader water <in|out> <r> <g> <b> <speed> <alpha_low> <alpha_high> <ior>
+    Water "in" is reflective. Water "out" is reflective (total internal reflection) and refractive.
+    Reflection and refraction are modulated by the color specified by <r> <g> <b>. <speed> is the
+    animation speed. Water "in" alpha is lerp(<alpha_high>, <alpha_low>, NoV). For water "out",
+    <alpha_high> and <alpha_low> are ignored. <ior> is the index of refraction. Normal map for
+    water is specified using the "map normal" and "normal" shader directives. The other shader
+    parameters are ignored. For example, reasonable values for water with a bluish tint could be
+    195 225 255 700 0.5 1.0 1.33.
+
+
+
+New dml parameters
+------------------
+
+"DMH1" header is accepted in addition to the "DML1" header.
+
+TagBlock "HWTLPARVAR"
+{
+                                    //  sky parameters
+    "sky dist horizontal"   100.0   //      distance to horizon
+    "sky dist vertical"     50.0    //      distance to zenith
+    "sky fog dist"          1.5     //      fog distance multiplier, can be used to reduce sky
+                                    //      fogging so that it's not too heavy when combined with
+                                    //      volumetric fog
+
+                                    //  screen space ambient occlusion parameters
+    "ssao intensity"        1.0     //      intensity
+    "ssao radius"           1.0     //      radius in screen space
+    "ssao range"            20.0    //      range in world space
+
+                                    //  underwater effects parameters
+    "underwater absorption" 1.0     //      how quickly light shafts decay as a function of
+                                    //      distance from the surface
+    "underwater blur"       1.0     //      distance blur
+    "underwater latitude"   20.0    //      latitude of light shaft source
+    "underwater longitude"  30.0    //      longitude of light shaft source
+    "underwater light"      1.0     //      light shaft intensity
+    "underwater range"      10.0    //      light shaft effect range (from camera)
+    "underwater saturation" 0.3     //      light shaft saturation
+    "underwater scale"      1.0     //      light shaft scale
+    "underwater speed"      200     //      light shaft animation speed
+
+                                    //  volumetric effects parameters
+    "vol range"             40.0    //      effect range (from camera)
+    "vol saturation"        0.7     //      saturation
+    "vol speed"             200     //      texture animation speed
+    "vol scale"             1.0     //      texture scale
+    "vol scatter"           1.0     //      amount of light scatter
+    "vol texture"           0.1     //      texture intensity
+}
+
++ObjProp <ObjID> "HwtlLight"
+{
+    "selection weight"  1       // HW lights are selected based on distance and this weight
+                                // dynamic lights have an additional weight multiplier of 10
+    "volume"            1       // light volume intensity
+    "volume exponent"   1.5     // exponent for volume decay
+    "softness"          1       // shadow softness (penumbra size)
+    "radius"            1       // radius multiplier
+    "rays"              0       // light rays, 0 is uniform light
+    "rays scale"        0       // light rays scale
+    "rays speed"        0       // light rays animation speed
+    "jitter"            0       // light position jitter range
+    "jitter speed"      0       // light position jitter speed
+}

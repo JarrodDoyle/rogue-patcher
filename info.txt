@@ -1,18 +1,18 @@
-RoguePatcher 1.28.4 includes the following resources. For further information
+RoguePatcher 1.29.0 includes the following resources. For further information
 and support, see the release thread on TTLG.
 https://www.ttlg.com/forums/showthread.php?t=152977
 
 
-NewDark 1.28-20250515 (including DromEd and Multiplayer)
-https://www.ttlg.com/forums/showthread.php?t=152974
+NewDark 1.29 (including HWTL, DromEd and Multiplayer)
+https://www.ttlg.com/forums/showthread.php?t=153456
 
 Modified DromEd Basic Toolkit 1.14 originally by AntiMatter_16
 https://www.ttlg.com/forums/showthread.php?t=141708
 https://github.com/JarrodDoyle/dromed-basic-toolkit
 
-NVScript v1.3.5 by NamelessVoice
+NVScript v1.3.7 by NamelessVoice
 https://www.ttlg.com/forums/showthread.php?t=134166
-https://github.com/NamelessVoice/NVScript
+https://codefloe.com/NamelessVoice/NVScript
 
 Public Scripts v2.2-20250803 by Telliamed and Jax64/Xanfre
 https://dromed.whoopdedo.org/public_scripts/index

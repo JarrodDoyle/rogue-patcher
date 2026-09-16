@@ -327,6 +327,10 @@ AnimTexture
 
 	// **** Available only in API version 12+ ****
 	HRESULT ChangeTextureLoc(vector pos, float rad, string fam1, string tx1, string fam2, string tx2);
+
+	// **** Available only in API version 13+ ****
+	HRESULT ChangeAllTextures(string fam1, string tx1, string fam2, string tx2);
+	HRESULT ChangeSingleTexture(int cellid, int polyid, string fam, string tx);
 }
 
 PGroup

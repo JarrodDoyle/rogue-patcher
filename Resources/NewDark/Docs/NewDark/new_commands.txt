@@ -152,6 +152,7 @@ set_ignore_filters       : ignore filters when portalizing/processing
 world_size               : set world extents (default 1000)
 force_wr_up2date         : force WR to be flagged as unmodified (use only with stripped missions)
 hilight_by_name          : hilight all objects whose names contains specified string
+hilight_def_texture      : highlight terrain w/ default texture id <arg>
 rotspeed_fac             : set rotation speed factor of camera rotation in editor
 cam_reset                : level, unroll and snap rotation of current camera
 show_texres              : [<mode>]: mode 1: visualize over-/under-sized textures, mode 2: visualize max on-screen texture resolution
